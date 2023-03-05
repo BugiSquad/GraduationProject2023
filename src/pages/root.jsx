@@ -1,8 +1,9 @@
-import {Link, Outlet, useLoaderData} from "react-router-dom";
-import {getContacts} from "../contacts";
+import {Form, Link, NavLink, Outlet, redirect, useLoaderData, useNavigation,} from "react-router-dom";
+import {createContact, getContacts} from "../contacts";
 
 export const Root = () => {
     const {contacts} = useLoaderData();
+    const navigation = useNavigation();
     return (
         <>
             <div id="sidebar">
@@ -26,9 +27,14 @@ export const Root = () => {
                             aria-live="polite"
                         ></div>
                     </form>
+                    {/*
                     <form method="post">
-                        <button type="submit">New</button>
+                    <button type="submit">New</button>
                     </form>
+                    */}
+                    <Form method="post">
+                        <button type="submit">New</button>
+                    </Form>
                 </div>
                 <nav>
                     {/*
@@ -54,16 +60,27 @@ export const Root = () => {
                         <ul>
                             {contacts.map((contact) => (
                                 <li key={contact.id}>
-                                    <Link to={`contacts/${contact.id}`}>
-                                        {contact.first || contact.last ? (
-                                            <>
-                                                {contact.first} {contact.last}
-                                            </>
-                                        ) : (
-                                            <i>No Name</i>
-                                        )}{" "}
-                                        {contact.favorite && <span>★</span>}
-                                    </Link>
+                                    <NavLink
+                                        to={`contacts/${contact.id}`}
+                                        className={({isActive, isPending}) =>
+                                            isActive
+                                                ? "active"
+                                                : isPending
+                                                    ? "pending"
+                                                    : ""
+                                        }
+                                    >
+                                        <Link to={`contacts/${contact.id}`}>
+                                            {contact.first || contact.last ? (
+                                                <>
+                                                    {contact.first} {contact.last}
+                                                </>
+                                            ) : (
+                                                <i>No Name</i>
+                                            )}{" "}
+                                            {contact.favorite && <span>★</span>}
+                                        </Link>
+                                    </NavLink>
                                 </li>
                             ))}
                         </ul>
@@ -76,7 +93,11 @@ export const Root = () => {
             </div>
 
 
-            <div id="detail">
+            <div id="detail"
+                 className={
+                     navigation.state === "loading" ? "loading" : ""
+                 }
+            >
                 <Outlet/>
             </div>
         </>
@@ -86,4 +107,9 @@ export const Root = () => {
 export async function loader() {
     const contacts = await getContacts();
     return {contacts};
+}
+
+export async function action() {
+    const contact = await createContact();
+    return redirect(`/contacts/${contact.id}/edit`);
 }

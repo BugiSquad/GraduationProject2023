@@ -1,4 +1,5 @@
-import {Form, useParams} from "react-router-dom";
+import {Form, useLoaderData, useParams} from "react-router-dom";
+import {getContact} from "../contacts";
 
 type contact = {
     first: string,
@@ -10,18 +11,21 @@ type contact = {
 };
 export default function Contact() {
 
+    let contact: any;
+    // @ts-ignore
+    ({contact} = useLoaderData());
     //파라메터를 사용하는 법
     const param = useParams();
     console.log(`param is ${param.contactId}`)
 
-    const contact: contact = {
-        first: "Your",
-        last: "Name",
-        avatar: "https://placekitten.com/g/200/200",
-        twitter: "your_handle",
-        notes: "Some notes",
-        favorite: true,
-    };
+    // const contact: contact = {
+    //     first: "Your",
+    //     last: "Name",
+    //     avatar: "https://placekitten.com/g/200/200",
+    //     twitter: "your_handle",
+    //     notes: "Some notes",
+    //     favorite: true,
+    // };
 
     return (
         <div id="contact">
@@ -100,4 +104,10 @@ function Favorite({contact}: { contact: contact }) {
             </button>
         </Form>
     );
+}
+
+// @ts-ignore
+export async function loader({params}) {
+    const contact = await getContact(params.contactId);
+    return {contact};
 }

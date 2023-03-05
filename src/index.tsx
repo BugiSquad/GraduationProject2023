@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
 import App from './App';
-import {loader as rootLoader, Root} from "./pages/root";
+import {action as rootAction, loader as rootLoader, Root} from "./pages/root";
+import Contact, {loader as contactLoader,} from "./pages/contact";
 import reportWebVitals from './reportWebVitals';
-import Contact from "./pages/contact"
 import {ErrorPage} from "./error-page";
+import EditContact, {action as editAction,} from "./routes/edit";
 
 
 const router = createBrowserRouter([
@@ -16,10 +17,18 @@ const router = createBrowserRouter([
         element: <Root/>,
         errorElement: <ErrorPage/>,
         loader: rootLoader,
+        action: rootAction,
         children: [
             {
                 path: "contacts/:contactId",
                 element: <Contact/>,
+                loader: contactLoader,
+            },
+            {
+                path: "contacts/:contactId/edit",
+                element: <EditContact/>,
+                loader: contactLoader,
+                action: editAction,
             },
         ]
     },
@@ -29,7 +38,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage/>,
     }
     //<Route path="/" element={<Home />} />
-
 ]);
 
 const root = ReactDOM.createRoot(
