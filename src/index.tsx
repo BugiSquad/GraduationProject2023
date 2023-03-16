@@ -8,6 +8,7 @@ import Contact, {loader as contactLoader,} from "./pages/contact";
 import reportWebVitals from './reportWebVitals';
 import {ErrorPage} from "./error-page";
 import EditContact, {action as editAction,} from "./routes/edit";
+import {Matching} from "./pages/Matching";
 
 
 const router = createBrowserRouter([
@@ -33,8 +34,18 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: "/App",
+        path: "/app",
         element: <App/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/cart",
+        element: <App/>,
+        errorElement: <ErrorPage/>,
+    }
+    , {
+        path: "/community",
+        element: <Matching/>,
         errorElement: <ErrorPage/>,
     }
     //<Route path="/" element={<Home />} />
