@@ -10,6 +10,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import data from './data/SampleFood.json'
+import {CartItemList} from "./components/Cart";
 
 
 const foods: Food[] = data
@@ -152,6 +153,7 @@ function App() {
                     <BottomNavigationAction label="커뮤니티" icon={<DashboardIcon/>}/>
                     <BottomNavigationAction label="마이페이지" icon={<PersonIcon/>}/>
                 </BottomNavigation>
+                <CartItemList foods={foods}></CartItemList>
             </div>
         </>
     );
