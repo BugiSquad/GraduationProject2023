@@ -2,9 +2,8 @@ import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
 import {Food} from "../components/Food";
 import '../App.css'
-import {Avatar, BottomNavigation, BottomNavigationAction, Card, Typography} from "@mui/material";
+import {Avatar, Card, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import {CartItemList} from "../components/Cart";
 import data from '../data/SampleFood.json'
 
 const foods: Food[] = data
@@ -102,7 +101,6 @@ export const MainPage:React.FC = ()=>{
                 <FoodCardSlider foods={foods}/>
             </div>
             <br/>
-            <CartItemList foods={foods}></CartItemList>
 
     </>
     )

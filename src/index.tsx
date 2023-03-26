@@ -10,6 +10,7 @@ import {ErrorPage} from "./error-page";
 import EditContact, {action as editAction,} from "./routes/edit";
 import {Matching} from "./pages/Matching";
 import {NavBarTest} from "./pages/NavBarTest";
+import {Cart} from "./pages/Cart";
 
 
 const router = createBrowserRouter([
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/cart",
-        element: <App/>,
+        element: <Cart/>,
         errorElement: <ErrorPage/>,
     },
     {

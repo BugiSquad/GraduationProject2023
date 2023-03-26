@@ -1,10 +1,11 @@
 import React from "react";
 import {BottomNavigation, BottomNavigationAction} from "@mui/material";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
-import Diversity1Icon from "@mui/icons-material/Diversity1";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import PeopleIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
-import {Link, useNavigate} from "react-router-dom";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {useNavigate} from "react-router-dom";
 
 export const BottomNavigationGroup:React.FC = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const BottomNavigationGroup:React.FC = () => {
                     navigate("/community");
                     break;
                 case 2:
-
+                    navigate("/cart")
                     break;
                 case 3:
 
@@ -29,8 +30,8 @@ export const BottomNavigationGroup:React.FC = () => {
         }}
     >
         <BottomNavigationAction label="주문하기" icon={<LocalDiningIcon/>}/>
-        <BottomNavigationAction label="같이 먹기" icon={<Diversity1Icon/>}/>
-        <BottomNavigationAction label="커뮤니티" icon={<DashboardIcon/>}/>
+        <BottomNavigationAction label="같이 먹기" icon={<PeopleIcon/>}/>
+        <BottomNavigationAction label="장바구니" icon={<ShoppingCartIcon/>}/>
         <BottomNavigationAction label="커뮤니티" icon={<DashboardIcon/>}/>
         <BottomNavigationAction label="마이페이지" icon={<PersonIcon/>}/>
     </BottomNavigation>;
