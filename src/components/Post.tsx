@@ -1,9 +1,13 @@
 import React from "react";
 import {Avatar, Card, Typography} from "@mui/material";
-import {PostItem} from "../types/PostItem";
 
+interface PostDetail {
+    postName: string;
+    avatarUrl: string;
+    postTime: string;
+}
 
-export const Post: React.FC<PostItem> = (detail: PostItem) => {
+export const Post: React.FC<PostDetail> = (detail: PostDetail) => {
     return (<>
         <Card sx={{display: "flex", margin: "10px", flex: "1", justifyContent: "space-between", alignItems: "center",}}>
             <Avatar src={detail.avatarUrl}/>
