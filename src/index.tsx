@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import './index.css';
+// import './index.css';
 import App from './App';
 import {action as rootAction, loader as rootLoader, Root} from "./pages/root";
 import Contact, {loader as contactLoader,} from "./pages/contact";
@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import {ErrorPage} from "./error-page";
 import EditContact, {action as editAction,} from "./routes/edit";
 import {Matching} from "./pages/Matching";
+import {NavBarTest} from "./pages/NavBarTest";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
     {
         path: "/cart",
         element: <App/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/navbartest",
+        element: <NavBarTest/>,
         errorElement: <ErrorPage/>,
     }
     , {

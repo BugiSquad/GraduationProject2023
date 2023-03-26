@@ -3,8 +3,14 @@ import {faker} from "@faker-js/faker"
 import {Post} from "../components/Post";
 import {Avatar, IconButton, Typography} from "@mui/material";
 import {AddCircle, FilterAlt} from "@mui/icons-material";
+import {PageTemplate} from "./PageTemplate";
 
 export const Matching: React.FC = () => {
+    return (<PageTemplate>
+        <Contents/>
+    </PageTemplate>)
+}
+const Contents: React.FC = () => {
     return (<>
         <div style={{display: "flex", flexDirection: "column", width: "90%"}}>
             <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
