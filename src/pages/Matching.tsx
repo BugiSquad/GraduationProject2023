@@ -6,7 +6,7 @@ import {AddCircle, FilterAlt} from "@mui/icons-material";
 import {PageTemplate} from "./PageTemplate";
 
 export const Matching: React.FC = () => {
-    return (<PageTemplate>
+    return (<PageTemplate param={{variant: "WithName", pageHeaderName: "매칭", showBackButton: true}}>
         <Contents/>
     </PageTemplate>)
 }
