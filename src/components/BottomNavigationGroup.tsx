@@ -25,6 +25,8 @@ export const BottomNavigationGroup:React.FC = () => {
                     break;
                 case 3:
 
+                case 4:
+                    navigate("/mypage")
                     break;
             }
         }}

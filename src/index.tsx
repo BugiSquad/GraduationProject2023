@@ -11,6 +11,8 @@ import EditContact, {action as editAction,} from "./routes/edit";
 import {Matching} from "./pages/Matching";
 import {NavBarTest} from "./pages/NavBarTest";
 import {Cart} from "./pages/Cart";
+import {Mypage} from "./pages/Mypage";
+
 
 
 const router = createBrowserRouter([
@@ -43,6 +45,11 @@ const router = createBrowserRouter([
     {
         path: "/cart",
         element: <Cart/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/mypage",
+        element: <Mypage/>,
         errorElement: <ErrorPage/>,
     },
     {
