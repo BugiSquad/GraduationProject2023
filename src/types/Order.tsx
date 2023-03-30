@@ -1,11 +1,12 @@
 export enum OrderStatus {
-    Request = 'request',
-    Receive = 'receive',
-    Finish = 'finish'
+    Request = '요청됨',
+    Receive = '접수됨',
+    Finish = '완료됨'
 }
 
 export type Order = {
-    order_id: number;
+    order_id: string;
+    order_detail: string;
     order_time: Date;
     order_status: OrderStatus;
     total_price: number;

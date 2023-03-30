@@ -21,7 +21,7 @@ export const MainPageHeader: React.FC<PageHeaderParam>
             paddingRight: '1rem'
         }}>
             <MenuIcon></MenuIcon>
-            <Typography variant={"h5"} fontFamily={"serif"}>한성맛남</Typography>
+            <Typography variant={"h5"} fontWeight={'bold'} fontFamily={"sans-serif"}>한성맛남</Typography>
             <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg"/>
         </div>)
 }
