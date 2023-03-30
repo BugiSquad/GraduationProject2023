@@ -17,59 +17,65 @@ export const Mypage: React.FC = () => {
             <div style={{
 
             }}>
-                <Card style={{
-                    display: 'flex',
-                    width: '100%',
-                    height: '100%',
-                    padding: '15px',
+                <Card sx={{
+                    maxWidth: 2000,
+                    minHeight: 560,
+                    padding: '15px'
                 }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                        <div>
-                            <Typography style={{ fontSize: 15 }} variant={"h6"}>최근 주문 내역</Typography>
+                    <Card style={{
+                        display: 'flex',
+                        width: '100',
+                        height: '100%',
+                        padding: '15px',
+                    }}>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                            <div>
+                                <Typography style={{ fontSize: 15 }} variant={"h6"}>최근 주문 내역</Typography>
+                            </div>
                         </div>
-                    </div>
-                </Card>
-                <br />
+                    </Card>
+                    <br />
 
-                <Card style={{
-                    display: 'flex',
-                    width: '100%',
-                    height: '100%',
-                    padding: '15px',
-                }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                        <div>
-                            <Typography style={{ fontSize: 15 }} variant={"h6"}>최근 만남</Typography>
+                    <Card style={{
+                        display: 'flex',
+                        width: '100%',
+                        height: '100%',
+                        padding: '15px',
+                    }}>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                            <div>
+                                <Typography style={{ fontSize: 15 }} variant={"h6"}>최근 만남</Typography>
+                            </div>
                         </div>
-                    </div>
-                </Card>
-                <br />
+                    </Card>
+                    <br />
 
-                <Card style={{
-                    display: 'flex',
-                    width: '100%',
-                    height: '100%',
-                    padding: '15px',
-                }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                        <div>
-                            <Typography style={{ fontSize: 15 }} variant={"h6"}>나의 모임</Typography>
+                    <Card style={{
+                        display: 'flex',
+                        width: '100%',
+                        height: '100%',
+                        padding: '15px',
+                    }}>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                            <div>
+                                <Typography style={{ fontSize: 15 }} variant={"h6"}>나의 모임</Typography>
+                            </div>
                         </div>
-                    </div>
-                </Card>
-                <br />
+                    </Card>
+                    <br />
 
-                <Card style={{
-                    display: 'flex',
-                    width: '100%',
-                    height: '100%',
-                    padding: '15px',
-                }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                        <div>
-                            <Typography style={{ fontSize: 15 }} variant={"h6"}>나의 쪽지함</Typography>
+                    <Card style={{
+                        display: 'flex',
+                        width: '100%',
+                        height: '100%',
+                        padding: '15px',
+                    }}>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                            <div>
+                                <Typography style={{ fontSize: 15 }} variant={"h6"}>나의 쪽지함</Typography>
+                            </div>
                         </div>
-                    </div>
+                    </Card>
                 </Card>
             </div>
         </PageTemplate>
