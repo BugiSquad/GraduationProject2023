@@ -3,6 +3,7 @@ import { PageTemplate } from "./PageTemplate";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Card, Typography } from "@mui/material";
 import { RecentOrders } from "../components/RecentOrders";
+import { MypageCards } from "../components/MypageCards";
 
 
 export const Mypage: React.FC = () => {
@@ -24,63 +25,10 @@ export const Mypage: React.FC = () => {
                     minHeight: 490,
                     padding: '15px'
                 }}>
-                    <Card style={{
-                        display: 'flex',
-                        width: '100',
-                        height: '100%',
-                        padding: '15px',
-                    }}>
-                        <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" }}>
-                            <div>
-                                <Typography style={{ fontSize: 20, fontWeight: 'bold' }} variant={"h6"}>최근 주문 내역</Typography>
-                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                                    <RecentOrders />
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                    <br />
-
-                    <Card style={{
-                        display: 'flex',
-                        width: '100%',
-                        height: '100%',
-                        padding: '15px',
-                    }}>
-                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                            <div>
-                                <Typography style={{ fontSize: 15 }} variant={"h6"}>최근 만남</Typography>
-                            </div>
-                        </div>
-                    </Card>
-                    <br />
-
-                    <Card style={{
-                        display: 'flex',
-                        width: '100%',
-                        height: '100%',
-                        padding: '15px',
-                    }}>
-                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                            <div>
-                                <Typography style={{ fontSize: 15 }} variant={"h6"}>나의 모임</Typography>
-                            </div>
-                        </div>
-                    </Card>
-                    <br />
-
-                    <Card style={{
-                        display: 'flex',
-                        width: '100%',
-                        height: '100%',
-                        padding: '15px',
-                    }}>
-                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                            <div>
-                                <Typography style={{ fontSize: 15 }} variant={"h6"}>나의 쪽지함</Typography>
-                            </div>
-                        </div>
-                    </Card>
+                    <MypageCards title="최근 주문 내역" content={<RecentOrders />} />
+                    <MypageCards title="최근 만남" content={<RecentOrders />} />
+                    <MypageCards title="나의 모임" content={<RecentOrders />} />
+                    <MypageCards title="나의 쪽지함" content={<RecentOrders />} />
                 </Card>
             </div>
         </PageTemplate>
