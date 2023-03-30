@@ -1,8 +1,6 @@
 import React from "react";
 import {Card, Typography} from "@mui/material";
 import { Order, OrderStatus } from "../types/Order";
-import { orange } from "@mui/material/colors";
-
 
 const randomStatus = () => {
     const statuses = Object.values(OrderStatus); // OrderStatus 열거형 값 배열
@@ -12,7 +10,7 @@ const randomStatus = () => {
   
 export const RecentOrder: React.FC<Order> = (detail:Order) => {
     return (<>
-        <Card sx={{paddingLeft:'10px', paddingRight:'10px',display: "flex", margin: "20px", flex: "1", justifyContent: "space-between", alignItems: "center", minWidth: 270, maxWidth:400}}>
+        <Card sx={{paddingLeft:'10px', paddingRight:'10px',display: "flex", margin: "20px", flex: "1", justifyContent: "space-between", alignItems: "center", minWidth: 280, maxWidth:400}}>
             <Typography variant={"subtitle2"}>{detail.order_id}</Typography>
             <Typography variant={"subtitle2"}>{detail.order_detail}</Typography>
             <Typography variant={"subtitle2"} fontWeight='bold' style={{color: "#FE724C"}}>{randomStatus()}</Typography>
