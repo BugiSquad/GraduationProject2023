@@ -12,6 +12,10 @@ import {Matching} from "./pages/Matching";
 import {NavBarTest} from "./pages/NavBarTest";
 import {Cart} from "./pages/Cart";
 import {Mypage} from "./pages/Mypage";
+import { RecentOrderDetail } from './pages/Detail/RecentOrderDetail';
+import { RecentMeetDetail } from './pages/Detail/RecentMeetDetail';
+import { MyMeetingsDetail } from './pages/Detail/MyMeetingsDetail';
+import { MyMessageDetail } from './pages/Detail/MyMessageDetail';
 
 
 
@@ -50,7 +54,7 @@ const router = createBrowserRouter([
     {
         path: "/mypage",
         element: <Mypage/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorPage/>, 
     },
     {
         path: "/navbartest",
@@ -61,7 +65,27 @@ const router = createBrowserRouter([
         path: "/community",
         element: <Matching/>,
         errorElement: <ErrorPage/>,
-    }
+    },
+    {
+        path: "/mypage/recentorderdetail",
+        element:<RecentOrderDetail />,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/mypage/recentmeetdetail",
+        element:<RecentMeetDetail />,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/mypage/mymeetingsdetail",
+        element:<MyMeetingsDetail />,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/mypage/mymessagedetail",
+        element:<MyMessageDetail />,
+        errorElement: <ErrorPage/>,
+    },
     //<Route path="/" element={<Home />} />
 ]);
 
