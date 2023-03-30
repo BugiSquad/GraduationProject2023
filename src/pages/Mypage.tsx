@@ -18,9 +18,10 @@ export const Mypage: React.FC = () => {
 
             }}>
                 <Card sx={{
-                    maxWidth: 2000,
-                    minHeight: 560,
-                    padding: '15px'
+                    minWidth: 200,
+                    maxWidth: 1000,
+                    minHeight: 490,
+                    padding: '20px'
                 }}>
                     <Card style={{
                         display: 'flex',
