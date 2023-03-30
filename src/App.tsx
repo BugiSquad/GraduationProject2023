@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import data from './data/SampleFood.json'
+import {Food} from "./components/Food";
+import './App.css'
+import {PageTemplate} from "./pages/PageTemplate";
+import {MainPage} from "./pages/MainPage";
+
+const foods: Food[] = data
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    useEffect(()=>{
+        console.log("페이지를 로딩했음")
+    })
+    return (
+        <>
+            <PageTemplate >
+                <MainPage/>
+            </PageTemplate>
+        </>
+    );
 }
 
 export default App;
