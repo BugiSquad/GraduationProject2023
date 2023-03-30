@@ -13,7 +13,7 @@ function App() {
     })
     return (
         <>
-            <PageTemplate >
+            <PageTemplate param={{variant: "MainPage", pageHeaderName: "", showBackButton: false}}>
                 <MainPage/>
             </PageTemplate>
         </>
