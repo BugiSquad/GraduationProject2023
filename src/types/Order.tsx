@@ -1,10 +1,10 @@
 export enum OrderStatus {
-    Request = 'request',
-    Receive = 'receive',
-    Finish = 'finish'
+    Request = '요청됨',
+    Receive = '접수됨',
+    Finish = '완료됨'
 }
 
-export interface Order {
+export type Order = {
     order_id: string;
     order_detail: string;
     order_time: Date;

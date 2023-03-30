@@ -1,11 +1,10 @@
 import React from "react";
-import {faker} from "@faker-js/faker"
-import {Post} from "../components/Post";
 import {IconButton, Typography} from "@mui/material";
 import {AddCircle, FilterAlt} from "@mui/icons-material";
 import {PageTemplate} from "./PageTemplate";
 import {MatchingFilter} from "./MatchingFilter";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import { Posts } from "../components/Posts";
 
 export const Matching: React.FC = () => {
     return (<PageTemplate param={{variant: "WithName", pageHeaderName: "매칭", showBackButton: true}}>
@@ -31,27 +30,4 @@ const Contents: React.FC = () => {
             </div>
         </div>
     </>)
-}
-export const Posts: React.FC = () => {
-    const list: Array<Post> = [];
-    for (let i = 0; i < 100; i++) {
-        list.push({
-            "name": faker.name.fullName(),
-            "avatar": faker.image.avatar(),
-            "postTime": Math.trunc(Math.random() * 60) + "분 전"
-        })
-    }
-    return (<>
-        <div style={{width: "100%"}}>
-            {list.map((user, idx) =>
-                <Post key={idx} postName={user.name} avatarUrl={user.avatar} postTime={user.postTime}/>)
-            }
-        </div>
-    </>)
-}
-
-interface Post {
-    name: string;
-    avatar: string;
-    postTime: string;
 }

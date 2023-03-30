@@ -2,15 +2,16 @@ import React from "react";
 import { PageTemplate } from "./PageTemplate";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Card, Typography } from "@mui/material";
+import { RecentOrders } from "../components/RecentOrders";
 
 
 export const Mypage: React.FC = () => {
     return (
-        <PageTemplate param={{variant: "WithName", pageHeaderName: "마이페이지", showBackButton: true}}>
+        <PageTemplate param={{ variant: "WithName", pageHeaderName: "마이페이지", showBackButton: true }}>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                <Typography variant={"h6"}>
+                <Typography variant={"h6"} fontWeight={'bold'}>
                     <ArrowBackIosNewIcon fontSize="small" /> 마이페이지</Typography>
-                <div style={{ display: "inherit", alignItems: "center", color: "grey" }}>
+                <div style={{ display: "inherit", alignItems: "center" }}>
                     <a href="">내 정보 수정</a>
                 </div>
             </div>
@@ -21,7 +22,7 @@ export const Mypage: React.FC = () => {
                     minWidth: 200,
                     maxWidth: 1000,
                     minHeight: 490,
-                    padding: '20px'
+                    padding: '15px'
                 }}>
                     <Card style={{
                         display: 'flex',
@@ -29,9 +30,12 @@ export const Mypage: React.FC = () => {
                         height: '100%',
                         padding: '15px',
                     }}>
-                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" }}>
                             <div>
-                                <Typography style={{ fontSize: 15 }} variant={"h6"}>최근 주문 내역</Typography>
+                                <Typography style={{ fontSize: 20, fontWeight: 'bold' }} variant={"h6"}>최근 주문 내역</Typography>
+                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                                    <RecentOrders />
+                                </div>
                             </div>
                         </div>
                     </Card>
