@@ -4,8 +4,9 @@ export enum OrderStatus {
     Finish = 'finish'
 }
 
-export type Order = {
-    order_id: number;
+export interface Order {
+    order_id: string;
+    order_detail: string;
     order_time: Date;
     order_status: OrderStatus;
     total_price: number;

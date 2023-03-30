@@ -6,9 +6,9 @@ import { Card, Typography } from "@mui/material";
 
 export const Mypage: React.FC = () => {
     return (
-        <PageTemplate>
+        <PageTemplate param={{variant: "WithName", pageHeaderName: "마이페이지", showBackButton: true}}>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                <Typography variant={"h6"} fontWeight={"bold"}>
+                <Typography variant={"h6"}>
                     <ArrowBackIosNewIcon fontSize="small" /> 마이페이지</Typography>
                 <div style={{ display: "inherit", alignItems: "center", color: "grey" }}>
                     <a href="">내 정보 수정</a>
