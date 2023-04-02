@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import './index.css';
+import './index.css';
 import App from './App';
 import { action as rootAction, loader as rootLoader, Root } from "./pages/root";
 import Contact, { loader as contactLoader, } from "./pages/contact";

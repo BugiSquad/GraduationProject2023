@@ -24,7 +24,7 @@ const getRandomFood = () => {
 export const RecentOrder: React.FC<Order> = (detail: Order) => {
     return (<>
         <Card sx={{ paddingLeft: '10px', paddingRight: '10px', display: "flex", margin: "20px", flex: "1", justifyContent: "space-between", alignItems: "center", minWidth: 280, maxWidth: 400 }}>
-            <Typography variant={"subtitle2"}>{detail.order_id}</Typography>
+            <Typography variant={"subtitle2"} fontWeight='bold'>{detail.order_id}</Typography>
             <Typography variant={"subtitle2"}>{getRandomFood()}</Typography>
             <Typography variant={"subtitle2"} fontWeight='bold' style={{ color: "#FE724C" }}>{randomStatus()}</Typography>
         </Card> </>)
