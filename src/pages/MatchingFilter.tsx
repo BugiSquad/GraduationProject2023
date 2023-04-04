@@ -7,21 +7,16 @@ export interface MatchingOptions {
 }
 
 export const MatchingFilter: React.FC = () => {
-
     return (
         <>
-            <Card>
+            <Card sx={{
+                display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "center"
+                , height: "60vh", borderRadius: 5
+            }}>
                 {/*위로 추가하는 바 필요*/}
                 <Typography variant={"h6"} fontWeight={"bold"}>필터</Typography>
-                <Button sx={{}}>
-                    <Card sx={{
-                        display: "flex",
-                        background: "orange",
-                        width: "80px",
-                        height: "35px",
-                        alignItems: "center",
-                        justifyContent: "center"
-                    }}>
+                <Button>
+                    <Card sx={{display: "flex", background: "orange",}}>
                         <Typography sx={{color: "white"}}>적용</Typography>
                     </Card>
                 </Button>

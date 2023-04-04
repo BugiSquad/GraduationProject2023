@@ -4,7 +4,7 @@ import {FaStar} from "react-icons/fa";
 import {Food} from "./Food";
 import 'react-swipeable-list/dist/styles.css';
 
-const FoodCard: React.FC<Food> = ({name, price, image, description}) => {
+const FoodCard: React.FC<Food> = ({name, price, image, description}, key: number) => {
     //처음에는 하드코딩된 에셋 사용 추후에 객체를 받아서 동적으로 렌더링
 
     return <>

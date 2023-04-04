@@ -19,8 +19,9 @@ const FoodCardSlider: React.FC<FoodCardSliderItems> = ({foods}) => {
     return (
         <>
             <CustomGrid>
-                {foods.map((food) =>
-                    (<FoodCard name={food.name} price={food.price} image={food.image} description={food.description}/>)
+                {foods.map((food, idx) =>
+                    (<FoodCard name={food.name} price={food.price} image={food.image} description={food.description}
+                               key={idx}/>)
                 )};
             </CustomGrid>
         </>

@@ -1,6 +1,7 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import {Avatar, Typography} from "@mui/material";
 import React from "react";
+import {Link} from "react-router-dom";
 
 interface PageHeaderParam {
     pageHeaderName: String;
@@ -21,7 +22,7 @@ export const MainPageHeader: React.FC<PageHeaderParam>
             paddingRight: '1rem'
         }}>
             <MenuIcon></MenuIcon>
-            <Typography variant={"h5"} fontFamily={"serif"}>한성맛남</Typography>
+            <Link to={"/app"}> <Typography variant={"h5"} fontFamily={"serif"}>한성맛남</Typography></Link>
             <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg"/>
         </div>)
 }
