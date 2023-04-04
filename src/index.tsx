@@ -16,6 +16,7 @@ import { RecentOrderDetail } from './pages/Detail/RecentOrderDetail';
 import { RecentMeetDetail } from './pages/Detail/RecentMeetDetail';
 import { MyMeetingsDetail } from './pages/Detail/MyMeetingsDetail';
 import { MyMessageDetail } from './pages/Detail/MyMessageDetail';
+import { Message } from './pages/Message';
 
 
 
@@ -84,6 +85,12 @@ const router = createBrowserRouter([
     {
         path: "/mypage/mymessagedetail",
         element: <MyMessageDetail />,
+        errorElement: <ErrorPage />,
+    },
+
+    {
+        path: "/mypage/message",
+        element: <Message />,
         errorElement: <ErrorPage />,
     },
     //<Route path="/" element={<Home />} />

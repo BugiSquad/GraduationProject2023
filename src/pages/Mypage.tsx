@@ -1,19 +1,21 @@
 import React from "react";
 import { PageTemplate } from "./PageTemplate";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Card, Typography } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import { RecentOrders } from "../components/RecentOrders";
 import { MypageCards } from "../components/MypageCards";
 import { RecentMeets } from "../components/RecentMeets";
 import { MyMeetings } from "../components/MyMeetings";
 import { MyMessagebox } from "../components/MyMessagebox";
+import { handleGoBack } from "./Detail/MyMessageDetail";
 
 export const Mypage: React.FC = () => {
     return (
         <PageTemplate param={{ variant: "WithName", pageHeaderName: "마이페이지", showBackButton: true }}>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>
-                    <ArrowBackIosNewIcon fontSize="small" /> 마이페이지</Typography>
+                <Button onClick={handleGoBack} disableElevation>
+                        <ArrowBackIosNewIcon /></Button> 마이페이지</Typography>
                 <div style={{ display: "inherit", alignItems: "center" }}>
                     <a href="">내 정보 수정</a>
                 </div>
