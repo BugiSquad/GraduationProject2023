@@ -43,7 +43,7 @@ export const Message: React.FC = () => {
             
             <Card sx={{
                 minWidth: 200,
-                minHeight: 300,
+                minHeight: 500,
                 padding: '10px 5',
                 marginTop: '10px',
                 backgroundColor: '#F0F0F0',
