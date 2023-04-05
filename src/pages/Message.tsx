@@ -7,6 +7,7 @@ import { PageTemplate } from "./PageTemplate";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import { BottomNavigationGroup } from "../components/BottomNavigationGroup";
+import { faker } from "@faker-js/faker";
 
 interface Message {
     id: number;
@@ -30,12 +31,13 @@ export const Message: React.FC = () => {
         setMessageList([...messageList, newMessage]);
         setMessageInput("");
     };
+    var sub_name = faker.name.firstName();
     return (
         <div className="App container">
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop:"15px" }}>
             <Typography variant={"h6"} fontWeight={'bold'}>
                     <Button onClick={handleGoBack} disableElevation>
-                        <ArrowBackIosNewIcon /></Button> @@@님과의 쪽지</Typography>
+                        <ArrowBackIosNewIcon /></Button> {sub_name}님과의 쪽지</Typography>
                 <div style={{ display: "inherit", alignItems: "center", paddingRight: "10px" }}>
                     <Link to="/mypage/message/makeappointment" ><IconButton ><HandshakeIcon /></IconButton></Link>
                 </div>
@@ -52,7 +54,7 @@ export const Message: React.FC = () => {
             }}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <div style={{ alignSelf: 'flex-start', backgroundColor: '#E5E5EA', borderRadius: '10px', padding: '10px', margin: '5px' }}>
-                        <div style={{ display: "flex", fontWeight: "bold", fontSize: "7px", alignSelf: 'flex-end' }}>@@@님</div>
+                        <div style={{ display: "flex", fontWeight: "bold", fontSize: "7px", alignSelf: 'flex-end' }}>{sub_name}님</div>
                         <div>안녕하세요! 반갑습니다.</div></div>
                 </div>
 

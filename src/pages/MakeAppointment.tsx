@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from "@mui/material";
+import { Avatar, Button, Card, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { BottomNavigationGroup } from "../components/BottomNavigationGroup";
 import { handleGoBack } from "./Detail/MyMessageDetail";
@@ -6,11 +6,13 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import { ko } from "date-fns/esm/locale";
+import { Places } from "../components/Places";
 
 export const MakeAppointment: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
+    const [selectedTime, setSelectedTime] = useState<Date | null>(null);
 
     const handleChange = (date: Date | null) => {
         setSelectedDate(date);
@@ -19,17 +21,15 @@ export const MakeAppointment: React.FC = () => {
 
     return (
         <div className="App container">
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: "25px" }}>
+            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: "20px" }}>
                 <Typography variant={"h5"} fontWeight={'bold'}>
                     <Button onClick={handleGoBack} disableElevation>
                         <ArrowBackIosNewIcon sx={{ color: 'orange' }} /></Button> 약속잡기</Typography>
             </div>
-            <div style={{ display: "flex", flexDirection: "row", marginLeft: "20px", marginTop: "30px" }}>
+            <div style={{ display: "flex", flexDirection: "row", marginLeft: "20px", marginTop: "20px" }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>언제 볼래요?</Typography>
             </div>
             <Card sx={{
-                minWidth: 200,
-                minHeight: 90,
                 padding: '10px 5',
                 marginTop: '10px',
                 borderRadius: '15px',
@@ -39,14 +39,33 @@ export const MakeAppointment: React.FC = () => {
                     <Button disableElevation disableRipple style={{ color: 'black', fontWeight: 'bold', marginLeft: "60px" }}>
                         <AccessTimeIcon />날짜 설정
                     </Button>
-                    <Button disableElevation disableRipple style={{ color: 'black', fontWeight: 'bold', marginRight: "10px" }}>알림 추가</Button>
+                    <Button disableElevation disableRipple style={{ color: 'black', fontWeight: 'bold', marginRight: "10px" }}><AccessAlarmIcon />알림 추가</Button>
                 </div>
-                <div style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between', marginBottom: "5px" }}>
-                    <div style={{ marginLeft: "10px" }}><DatePicker selected={selectedDate} onChange={handleChange} dateFormat="yyyy년 MM월 dd일" /></div>
-                    <Button>sss</Button>
+                <div style={{ display: "flex", flexDirection: "row", marginBottom: "5px", justifyContent: "space-between" }}>
+                    <div style={{ margin: "10px", }}>
+                        <DatePicker
+                            locale={ko}
+                            selected={selectedDate}
+                            onChange={handleChange}
+                            dateFormat="yyyy년 MM월 dd일" /></div>
+                    <div style={{ margin: "10px", maxInlineSize: "110px" }}>
+                        <DatePicker
+                            selected={selectedTime}
+                            onChange={(date) => setSelectedTime(date)}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={5}
+                            timeCaption="시간 설정"
+                            dateFormat="h:mm aa"
+                        />
+                    </div>
                 </div>
 
             </Card>
+            <div style={{ display: "flex", flexDirection: "row", marginLeft: "20px", marginTop: "20px" }}>
+                <Typography variant={"h6"} fontWeight={'bold'}>어디서 볼래요?</Typography>
+            </div>
+            <Places />
             <BottomNavigationGroup />
         </div>
     )
