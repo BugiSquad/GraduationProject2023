@@ -1,11 +1,13 @@
 import React from "react";
-import {PageTemplate} from "../PageTemplate";
+import { SimpleTemplate} from "../PageTemplate";
+import { RecentOrders } from "../../components/RecentOrders";
 
 export const RecentOrderDetail: React.FC = () => {
     return (
-        <PageTemplate param={{variant: "WithName", pageHeaderName: "최근 주문 내역", showBackButton: true}}>
+        <SimpleTemplate param={{ pageHeaderName: "최근 주문 내역"}}>
             <div>
+                <RecentOrders />
             </div>
-        </PageTemplate>
+        </SimpleTemplate>
     )
 }

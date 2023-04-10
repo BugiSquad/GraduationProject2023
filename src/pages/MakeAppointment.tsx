@@ -9,24 +9,23 @@ import 'react-datepicker/dist/react-datepicker.css';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import { ko } from "date-fns/esm/locale";
 import { Places } from "../components/Places";
+import { SimpleTemplate } from "./PageTemplate";
 
 export const MakeAppointment: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<Date | null>(null);
+    const [selectedPlaceName, setSelectedPlaceName] = useState<string | null>(null);
 
     const handleChange = (date: Date | null) => {
         setSelectedDate(date);
     };
-
+  
 
     return (
         <div className="App container">
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: "20px" }}>
-                <Typography variant={"h5"} fontWeight={'bold'}>
-                    <Button onClick={handleGoBack} disableElevation>
-                        <ArrowBackIosNewIcon sx={{ color: 'orange' }} /></Button> 약속잡기</Typography>
-            </div>
-            <div style={{ display: "flex", flexDirection: "row", marginLeft: "20px", marginTop: "20px" }}>
+            <SimpleTemplate param={{ pageHeaderName: "약속잡기" }}>
+            </SimpleTemplate>
+            <div style={{ display: "flex", flexDirection: "row", marginLeft: "10px", marginTop: "20px" }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>언제 볼래요?</Typography>
             </div>
             <Card sx={{
@@ -62,12 +61,12 @@ export const MakeAppointment: React.FC = () => {
                 </div>
 
             </Card>
-            <div style={{ display: "flex", flexDirection: "row", marginLeft: "20px", marginTop: "20px" }}>
+            <div style={{ display: "flex", flexDirection: "row", marginLeft: "10px", marginTop: "20px" }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>어디서 볼래요?</Typography>
             </div>
             <Places />
-            <BottomNavigationGroup />
-        </div>
+            {/*  */}
+             </div>
     )
 }
 

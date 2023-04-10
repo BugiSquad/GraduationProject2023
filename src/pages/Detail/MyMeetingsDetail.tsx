@@ -1,11 +1,13 @@
 import React from "react";
-import {PageTemplate} from "../PageTemplate";
+import {PageTemplate, SimpleTemplate} from "../PageTemplate";
+import { MyMeetings } from "../../components/MyMeetings";
 
 export const MyMeetingsDetail: React.FC = () => {
     return (
-        <PageTemplate param={{variant: "WithName", pageHeaderName: "나의 모임", showBackButton: true}}>
+        <SimpleTemplate param={{ pageHeaderName: "나의 모임" }}>
             <div>
+                <MyMeetings />
             </div>
-        </PageTemplate>
+        </SimpleTemplate>
     )
 }

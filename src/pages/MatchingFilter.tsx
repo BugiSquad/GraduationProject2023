@@ -16,7 +16,7 @@ export const MatchingFilter: React.FC = () => {
                 <Button sx={{}}>
                     <Card sx={{
                         display: "flex",
-                        background: "orange",
+                        background: '#FE724C',
                         width: "80px",
                         height: "35px",
                         alignItems: "center",

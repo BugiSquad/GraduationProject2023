@@ -12,7 +12,7 @@ const places: PlaceItem[] = [
 
 export const Places: React.FC = () => {
     return (<>
-        <div style={{ width: "100%" }}>
+        <div>
             <Place places={places} />
         </div>
        </>

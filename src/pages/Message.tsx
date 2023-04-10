@@ -3,7 +3,7 @@ import { Button, Card, IconButton, Typography } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { handleGoBack } from "./Detail/MyMessageDetail";
 import HandshakeIcon from '@mui/icons-material/Handshake';
-import { PageTemplate } from "./PageTemplate";
+import { PageTemplate, SimpleTemplate } from "./PageTemplate";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import { BottomNavigationGroup } from "../components/BottomNavigationGroup";
@@ -34,15 +34,16 @@ export const Message: React.FC = () => {
     var sub_name = faker.name.firstName();
     return (
         <div className="App container">
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop:"15px" }}>
-            <Typography variant={"h6"} fontWeight={'bold'}>
-                    <Button onClick={handleGoBack} disableElevation>
+
+            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: "15px" }}>
+                <Typography variant={"h6"} fontWeight={'bold'}>
+                    <Button onClick={handleGoBack} disableElevation sx={{ color: '#FE724C' }}>
                         <ArrowBackIosNewIcon /></Button> {sub_name}님과의 쪽지</Typography>
                 <div style={{ display: "inherit", alignItems: "center", paddingRight: "10px" }}>
                     <Link to="/mypage/message/makeappointment" ><IconButton ><HandshakeIcon /></IconButton></Link>
                 </div>
             </div>
-            
+
             <Card sx={{
                 minWidth: 200,
                 minHeight: 500,

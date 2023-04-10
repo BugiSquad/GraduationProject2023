@@ -1,11 +1,13 @@
 import React from "react";
-import {PageTemplate} from "../PageTemplate";
+import { PageTemplate, SimpleTemplate } from "../PageTemplate";
+import { RecentMeets } from "../../components/RecentMeets";
 
 export const RecentMeetDetail: React.FC = () => {
     return (
-        <PageTemplate param={{variant: "WithName", pageHeaderName: "최근 만남", showBackButton: true}}>
+        <SimpleTemplate param={{ pageHeaderName: "최근 만남" }}>
             <div>
+                <RecentMeets />
             </div>
-        </PageTemplate>
+        </SimpleTemplate>
     )
 }

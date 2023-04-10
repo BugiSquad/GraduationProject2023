@@ -18,6 +18,7 @@ import { MyMeetingsDetail } from './pages/Detail/MyMeetingsDetail';
 import { MyMessageDetail } from './pages/Detail/MyMessageDetail';
 import { Message } from './pages/Message';
 import { MakeAppointment } from './pages/MakeAppointment';
+import { EditMyInfo } from './pages/EditMyInfo';
 
 
 
@@ -69,6 +70,17 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
+        path: "/mypage/editmyinfo",
+        element: <EditMyInfo userInfo={{
+            name: '',
+            email: '',
+            profilePic: null
+        }} onSave={function (userInfo: { name: string; email: string; profilePic: string | null; }): void {
+            throw new Error('Function not implemented.');
+        } } />,
+        errorElement: <ErrorPage />,
+    },
+    {
         path: "/mypage/recentorderdetail",
         element: <RecentOrderDetail />,
         errorElement: <ErrorPage />,
@@ -99,6 +111,7 @@ const router = createBrowserRouter([
         element: <MakeAppointment />,
         errorElement: <ErrorPage />,
     },
+    
     //<Route path="/" element={<Home />} />
 ]);
 
