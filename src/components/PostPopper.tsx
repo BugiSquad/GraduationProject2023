@@ -35,7 +35,7 @@ export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, on
                                             return;
                                         }}>
                                     쪽지 보내기</Button>
-                                <Button sx={{background: "orange", color: "white"}} onClick={(event) => {
+                                <Button sx={{background: "orange", color: "white"}} onClick={() => {
                                     onClose(false)
                                 }}> 취소</Button>
                             </div>

@@ -34,7 +34,7 @@ export const Write: React.FC = () => {
                                 ...params.InputProps,
                                 type: 'search',
                             }}/>)}
-                    onChange={(event, value, reason, details) => {
+                    onChange={(event, value) => {
                         console.log(value)
                         if (value != null)
                             setInterests([value, ...interests])
