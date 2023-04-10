@@ -1,11 +1,13 @@
 import React, {FC} from "react";
 import {Avatar, Button, Fade, Paper, Popper, PopperPlacementType, Typography} from "@mui/material";
 import {useAppSelector} from "../store/hooks";
+import {useNavigate} from "react-router-dom";
 
 export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, onClose: (s: boolean) => void, placement: PopperPlacementType }>
     = ({open, placement, onClose, anchorEl}) => {
 
     const items = useAppSelector((state) => state.postItems.selected)
+    const navigate = useNavigate()
     return (
         <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
             {({TransitionProps}) => (
@@ -31,6 +33,7 @@ export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, on
                                 <Button sx={{background: "orange", color: "white"}}
                                         onClick={() => {
                                             alert(`${items.postName}\n ${items.postTime}\n`);
+                                            navigate("/mypage/message")
                                             return;
                                         }}>
                                     쪽지 보내기</Button>
