@@ -6,3 +6,7 @@ export interface PageHeaderParam {
     showBackButton: Boolean;
 }
 
+export interface SimpleHeaderParam {
+    pageHeaderName: String;
+}
+
