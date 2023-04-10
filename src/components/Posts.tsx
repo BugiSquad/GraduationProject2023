@@ -1,19 +1,18 @@
-import React from "react";
-import {PostItem} from "../types/PostItem";
-import {faker} from "@faker-js/faker";
+import React, {useEffect} from "react";
 import {Post} from "./Post";
 import {PopperPlacementType} from "@mui/material";
 import {PostPopper} from "./PostPopper";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {getPostsFromRemote} from "../store/matching/posts";
 
 export const Posts: React.FC = () => {
-    const list: Array<PostItem> = [];
-    for (let i = 0; i < 100; i++) {
-        list.push({
-            "postName": faker.name.fullName(),
-            "avatarUrl": faker.image.avatar(),
-            "postTime": Math.trunc(Math.random() * 60) + "분 전"
-        })
-    }
+    const items = useAppSelector((state) => state.postItems)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getPostsFromRemote())
+    })
+
     const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
     const [open, setOpen] = React.useState(false);
     const [placement, setPlacement] = React.useState<PopperPlacementType>("auto");
@@ -31,11 +30,11 @@ export const Posts: React.FC = () => {
                         onClose={(b: boolean) => {
                             setOpen(b)
                         }} placement={placement}/>
-            {list.map((user, idx) =>
+            {Array.from(items.posts).map((user, idx) =>
                 <Post key={idx} postName={user.postName}
                       avatarUrl={user.avatarUrl}
                       postTime={user.postTime}
-                      onClick={handleClick}
+                      onClick={handleClick} index={idx}
                 />)
             }
         </div>

@@ -3,15 +3,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import {BottomNavigation, BottomNavigationAction} from "@mui/material";
 
 export const NavBarTest:React.FC =  ()=>{
-
-
-
     return (<>
         <BottomNavigation
             showLabels
             // sx = {{position: 'fixed', bottom: 0, left: 0, right: 0}}
             value={1}
-            onChange={(event, newValue) => {
+            onChange={() => {
             }}
         >
             <BottomNavigationAction label="Recents" icon={<PersonIcon/>} />
