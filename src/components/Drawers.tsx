@@ -1,8 +1,8 @@
 import React from "react";
-import {DrawerContainer, DrawerType} from "../../components/DrawerContainer";
+import {DrawerContainer, DrawerType} from "./DrawerContainer";
 import {Filter} from "./Filter";
-import {closeDrawer, closeFilter, openDrawer, openFilter} from "./states";
-import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matching/drawer";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {Write} from "./Write";
 
 export const FilterDrawer: React.FC = () => {

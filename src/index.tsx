@@ -8,12 +8,12 @@ import Contact, {loader as contactLoader,} from "./pages/contact";
 import reportWebVitals from './reportWebVitals';
 import {ErrorPage} from "./error-page";
 import EditContact, {action as editAction,} from "./routes/edit";
-import {Matching} from "./pages/matching/Matching";
+import {Matching} from "./pages/Matching";
 import {NavBarTest} from "./pages/NavBarTest";
 import {Cart} from "./pages/Cart";
 import {Mypage} from "./pages/Mypage";
 import {Provider} from 'react-redux';
-import {store} from "./hooks/store";
+import {store} from "./store/store";
 
 
 const router = createBrowserRouter([

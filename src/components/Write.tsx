@@ -3,17 +3,15 @@ import {Autocomplete, Button, Card, TextField, Typography} from "@mui/material";
 import {DatePicker, MobileTimePicker} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from "dayjs";
 import 'dayjs/locale/ko';
-import {LocaleProvider} from "../../components/LocaleProvider";
-import data from '../../data/SampleFood.json'
-import {Food} from "../../components/Food";
+import {LocaleProvider} from "./LocaleProvider";
+import data from '../data/SampleFood.json'
+import {Food} from "./Food";
 
 const foods: Food[] = data
 
 export const Write: React.FC = () => {
     const [time, setTime] = useState<Dayjs | null>(dayjs());
     const [interests, setInterests] = useState<string[]>([]);
-    // @ts-ignore
-    // @ts-ignore
     return (
         <>
             <Card id={"createMatch"} sx={{
@@ -27,7 +25,7 @@ export const Write: React.FC = () => {
                            defaultValue="Hello World" margin={"normal"}
                 />
                 <Autocomplete
-                    options={[...foods.map((item, idx) => item.name)]}
+                    options={[...foods.map((item) => item.name)]}
                     renderInput={(params) => (
                         <TextField
                             label="관심사"

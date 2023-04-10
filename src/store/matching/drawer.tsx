@@ -1,10 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-export const matchPosts = createSlice({
-    name: 'matchPosts',
-    initialState: {posts: []},
-    reducers: {}
-})
 export const matchOption = createSlice({
     name: 'matchUI',
     initialState: {filter: false, add: false},

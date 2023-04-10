@@ -1,12 +1,12 @@
 import React from "react";
 import {IconButton, Typography} from "@mui/material";
 import {AddCircle, FilterAlt} from "@mui/icons-material";
-import {PageTemplate} from "../PageTemplate";
+import {PageTemplate} from "./PageTemplate";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
-import {Posts} from "../../components/Posts";
-import {useAppDispatch} from "../../hooks/hooks";
-import {closeDrawer, closeFilter, openDrawer, openFilter} from "./states";
-import {AddDrawer, FilterDrawer} from "./Drawers";
+import {Posts} from "../components/Posts";
+import {useAppDispatch} from "../store/hooks";
+import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matching/drawer";
+import {AddDrawer, FilterDrawer} from "../components/Drawers";
 
 
 export const Matching: React.FC = () => {
