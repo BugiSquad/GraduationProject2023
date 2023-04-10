@@ -1,11 +1,8 @@
 import React from "react";
 import {IconButton, Typography} from "@mui/material";
 import {AddCircle, FilterAlt} from "@mui/icons-material";
-import {PageTemplate, SimpleTemplate} from "./PageTemplate";
-import {MatchingFilter} from "./MatchingFilter";
-import {PageTemplate} from "./PageTemplate";
+import {SimpleTemplate} from "./PageTemplate";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
-import { Posts } from "../components/Posts";
 import {Posts} from "../components/Posts";
 import {useAppDispatch} from "../store/hooks";
 import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matching/drawer";
@@ -16,10 +13,6 @@ export const Matching: React.FC = () => {
     return (<SimpleTemplate param={{ pageHeaderName: "매칭"}}>
         <Contents/>
     </SimpleTemplate>)
-    return (
-        <PageTemplate param={{variant: "WithName", pageHeaderName: "매칭", showBackButton: true}}>
-            <Contents/>
-        </PageTemplate>)
 }
 
 const Contents: React.FC = () => {
