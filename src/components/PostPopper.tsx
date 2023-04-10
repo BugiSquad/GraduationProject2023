@@ -6,7 +6,6 @@ export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, on
     = ({open, placement, onClose, anchorEl}) => {
 
     const items = useAppSelector((state) => state.postItems.selected)
-    console.log(items)
     return (
         <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
             {({TransitionProps}) => (

@@ -5,7 +5,7 @@ import {PostItem} from "../../types/PostItem";
 export const getPostsFromRemote = createAsyncThunk(
     'getPostsFromRemote', () => {
         const arr = []
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 30; i++) {
             arr.push({
                 "postName": faker.name.fullName(),
                 "avatarUrl": faker.image.avatar(),
