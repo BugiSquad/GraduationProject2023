@@ -8,11 +8,12 @@ import Contact, {loader as contactLoader,} from "./pages/contact";
 import reportWebVitals from './reportWebVitals';
 import {ErrorPage} from "./error-page";
 import EditContact, {action as editAction,} from "./routes/edit";
-import {Matching} from "./pages/Matching";
+import {Matching} from "./pages/matching/Matching";
 import {NavBarTest} from "./pages/NavBarTest";
 import {Cart} from "./pages/Cart";
 import {Mypage} from "./pages/Mypage";
-
+import {Provider} from 'react-redux';
+import {store} from "./hooks/store";
 
 
 const router = createBrowserRouter([
@@ -65,12 +66,16 @@ const router = createBrowserRouter([
     //<Route path="/" element={<Home />} />
 ]);
 
+// @ts-ignore
+
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <Provider store={store}>
+            <RouterProvider router={router}/>
+        </Provider>
     </React.StrictMode>
 );
 

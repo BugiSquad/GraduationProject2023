@@ -1,15 +1,11 @@
 import React from "react";
 import {Button, Card, Typography} from "@mui/material";
 
-//매칭에 대한 옵션
-export interface MatchingOptions {
 
-}
-
-export const MatchingFilter: React.FC = () => {
+export const Filter: React.FC = () => {
     return (
         <>
-            <Card sx={{
+            <Card id={"matchingFilter"} sx={{
                 display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "center"
                 , height: "60vh", borderRadius: 5
             }}>

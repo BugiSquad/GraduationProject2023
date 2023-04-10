@@ -3,20 +3,20 @@ import {Autocomplete, Button, Card, TextField, Typography} from "@mui/material";
 import {DatePicker, MobileTimePicker} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from "dayjs";
 import 'dayjs/locale/ko';
-import {LocaleProvider} from "../components/LocaleProvider";
-import data from '../data/SampleFood.json'
-import {Food} from "../components/Food";
+import {LocaleProvider} from "../../components/LocaleProvider";
+import data from '../../data/SampleFood.json'
+import {Food} from "../../components/Food";
 
 const foods: Food[] = data
 
-export const CreateMatch: React.FC = () => {
+export const Write: React.FC = () => {
     const [time, setTime] = useState<Dayjs | null>(dayjs());
     const [interests, setInterests] = useState<string[]>([]);
     // @ts-ignore
     // @ts-ignore
     return (
         <>
-            <Card sx={{
+            <Card id={"createMatch"} sx={{
                 display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "center"
                 , height: "70vh"
             }}>
