@@ -72,13 +72,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/mypage/editmyinfo",
-        element: <EditMyInfo userInfo={{
-            name: '',
-            email: '',
-            profilePic: null
-        }} onSave={function (userInfo: { name: string; email: string; profilePic: string | null; }): void {
-            throw new Error('Function not implemented.');
-        }}/>,
+        element: <EditMyInfo />,
         errorElement: <ErrorPage/>,
     },
     {
