@@ -8,10 +8,10 @@ interface FoodList {
     foods: Food[]
 }
 
-export const CartItem: React.FC<Food> = ({name, price, image, description}) => {
+export const CartItem: React.FC<Food> = ({name, price, image, description}, key: number) => {
 
     return (
-        <SwipeableListItem trailingActions={trailingActions()}>
+        <SwipeableListItem trailingActions={trailingActions()} key={key}>
             <Avatar src={image}/><Typography>{name}</Typography>
         </SwipeableListItem>
     );
@@ -20,7 +20,7 @@ export const CartItem: React.FC<Food> = ({name, price, image, description}) => {
 export const CartItemList: React.FC<FoodList> = (list) => {
     return (<SwipeableList>
         {list.foods.map((food, idx) =>
-            CartItem(food)
+            CartItem(food, idx)
         )}
     </SwipeableList>);
 }

@@ -27,7 +27,7 @@ export const MainPage:React.FC = ()=>{
                     background: 'orange'
                 }}>
                     <Typography style={{textAlign: 'center'}} variant={"subtitle2"}>
-                        혼자 화장실에서 밥 먹지 말아요
+                        혼밥 방지!
                     </Typography>
                 </Card>
             </div>
