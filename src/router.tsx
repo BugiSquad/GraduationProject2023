@@ -15,8 +15,8 @@ import {MyMeetingsDetail} from "./pages/Detail/MyMeetingsDetail";
 import {MyMessageDetail} from "./pages/Detail/MyMessageDetail";
 import {Message} from "./pages/Message";
 import {MakeAppointment} from "./pages/MakeAppointment";
-import React from "react";
 import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -68,6 +68,11 @@ export const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/signup",
+        element: <Signup />,
         errorElement: <ErrorPage/>,
     },
     {
