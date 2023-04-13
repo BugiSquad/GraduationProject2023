@@ -1,8 +1,5 @@
 import { Avatar, Button, Card, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { BottomNavigationGroup } from "../components/BottomNavigationGroup";
-import { handleGoBack } from "./Detail/MyMessageDetail";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
