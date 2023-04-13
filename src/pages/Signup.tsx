@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import { SimpleTemplate } from "./PageTemplate";
 import { SignupContents } from "../components/SignupContents";
 
 export const Signup: React.FC = () => {
-    useEffect(()=>{
-        console.log("signup page is loaded")
-    })
     return (
-        <div className="App container" style={{  }}>
+        <div className="App container">
             <SimpleTemplate param={{ pageHeaderName: "회원가입" }}>
                 <SignupContents />
             </SimpleTemplate>

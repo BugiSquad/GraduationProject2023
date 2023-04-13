@@ -1,7 +1,6 @@
 import React from "react";
-import { PageTemplate, SimpleTemplate } from "./PageTemplate";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Button, Card, Typography } from "@mui/material";
+import { SimpleTemplate } from "./PageTemplate";
+import { Card} from "@mui/material";
 import { RecentOrders } from "../components/RecentOrders";
 import { MypageCards } from "../components/MypageCards";
 import { RecentMeets } from "../components/RecentMeets";

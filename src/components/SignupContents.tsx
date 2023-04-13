@@ -1,7 +1,8 @@
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { Autocomplete, Button, FormControl, IconButton, Input, InputAdornment, InputLabel, NativeSelect, OutlinedInput, TextField, Typography } from "@mui/material"
-import React, { useState } from "react";
+import { Autocomplete, Button, FormControl, Input, InputAdornment, InputLabel, NativeSelect, TextField, Typography } from "@mui/material"
+import React from "react";
 import 'react-datepicker/dist/react-datepicker.css';
+import { Link } from "react-router-dom";
 
 const Departments = [
     { label: '한국어문학부' },
@@ -17,16 +18,11 @@ const Departments = [
 
 export const SignupContents: React.FC = () => {
     const [showPassword, setShowPassword] = React.useState(false);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-    };
-
-    const handleChange = (date: Date | null) => {
-        setSelectedDate(date);
     };
 
 
@@ -35,14 +31,14 @@ export const SignupContents: React.FC = () => {
             {/*이름*/}
             <div style={{ display: "flex", alignContent: "flex-start", flexDirection: "column" }}>
                 <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px", paddingRight: "80px" }}>이름＊</Typography>
-                <TextField sx={{ minWidth: "40px", paddingRight: "20px" }} variant="standard" color="warning" />
+                <TextField required sx={{ minWidth: "40px", paddingRight: "20px" }} variant="standard" color="warning" />
 
             </div>
             {/*아이디*/}
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px", paddingRight: "120px" }}>아이디＊</Typography>
                 <div style={{ display: "flex", flexDirection: "row" }}>
-                    <TextField sx={{ minWidth: "40px", paddingRight: "20px" }} variant="standard" color="warning" />
+                    <TextField required sx={{ minWidth: "40px", paddingRight: "20px" }} variant="standard" color="warning" />
                     <Button disableElevation disableRipple >
                         <Typography sx={{
                             minWidth: "70px", height: "30px", backgroundColor: '#FE724C', color: "white", fontWeight: "bold", fontSize: "12px", borderRadius: "1rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
@@ -57,13 +53,13 @@ export const SignupContents: React.FC = () => {
                     <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px" }}>닉네임</Typography>
                     <div></div>
                 </div>
-                <TextField sx={{ minWidth: "265px", paddingRight: "20px" }} variant="standard" color="warning" />
+                <TextField required sx={{ minWidth: "265px", paddingRight: "20px" }} variant="standard" color="warning" />
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginLeft: "10px", marginTop: "10px" }}>
                     <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px" }}>새 비밀번호＊</Typography>
                     <div></div>
                 </div>
                 <FormControl variant="standard" sx={{ paddingRight: "20px", minWidth: "265px", }}>
-                    <Input sx={{ minWidth: "265px", }}
+                    <Input required sx={{ minWidth: "265px", }}
                         type={showPassword ? 'text' : 'password'}
                         color="warning"
                         endAdornment={
@@ -85,7 +81,7 @@ export const SignupContents: React.FC = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                     <FormControl variant="standard">
-                        <Input sx={{ minWidth: "265px" }}
+                        <Input  required sx={{ minWidth: "265px" }}
                             type={showPassword ? 'text' : 'password'}
                             color="warning"
                             endAdornment={
@@ -109,13 +105,13 @@ export const SignupContents: React.FC = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginLeft: "10px", marginTop: "5px" }}>
                     <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px" }}>학과＊</Typography>
-                    <Autocomplete
+                    <Autocomplete 
                         sx={{ minWidth: "280px", paddingRight: "20px" }}
                         disablePortal
                         options={Departments}
                         disableCloseOnSelect
                         renderInput={(params) => (
-                            <TextField {...params} variant="standard" color="warning" />
+                            <TextField  required {...params} variant="standard" color="warning" />
                         )}
                     />
                 </div>
@@ -233,20 +229,20 @@ export const SignupContents: React.FC = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginLeft: "10px", marginTop: "10px" }}>
                     <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px" }}>전화번호＊</Typography>
-                    <TextField sx={{ minWidth: "265px", paddingRight: "20px" }} variant="standard" color="warning" />
+                    <TextField required sx={{ minWidth: "265px", paddingRight: "20px" }} variant="standard" color="warning" />
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginLeft: "10px", marginTop: "10px" }}>
 
                     <Button disableElevation disableRipple sx={{ paddingLeft: "80px" }}>
                         <Typography sx={{
-                            minWidth: "70px", height: "40px", backgroundColor: '#FE724C', color: "white", fontWeight: "bold", fontSize: "15px", borderRadius: "1rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
+                            minWidth: "70px", height: "40px", backgroundColor: '#FE724C', color: "white", fontWeight: "bold", fontSize: "14px", borderRadius: "1rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
                         }}>회원가입하기</Typography>
                     </Button>
-                    <Button disableElevation disableRipple sx={{ paddingRight: "80px" }}>
+                    <Link to="/login"><Button disableElevation disableRipple sx={{ paddingRight: "80px" }} >
                         <Typography sx={{
-                            minWidth: "70px", height: "40px", backgroundColor: 'white', color: "#FE724C", fontWeight: "bold", fontSize: "15px", borderRadius: "1rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
+                            minWidth: "70px", height: "40px", backgroundColor: 'white', color: "#FE724C", fontWeight: "bold", fontSize: "14px", borderRadius: "1rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
                         }}>취소</Typography>
-                    </Button>
+                    </Button></Link>
                 </div>
             </div>
         </div >
