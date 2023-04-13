@@ -12,7 +12,7 @@ export const Mypage: React.FC = () => {
     return (
         <div className="App contaier">
         <SimpleTemplate param={{ pageHeaderName: "마이페이지" }}>
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginRight:"10px" }}>
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginRight:"10px" }}>
                 <div></div>
                 <a href="/mypage/editmyinfo" style={{color: 'black'}}>내 정보 수정</a>
             </div>

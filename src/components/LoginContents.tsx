@@ -1,5 +1,5 @@
 import { VisibilityOff, Visibility } from "@mui/icons-material"
-import { InputLabel, OutlinedInput, InputAdornment, IconButton, FormControl, Button, Typography, Link } from "@mui/material"
+import { InputLabel, OutlinedInput, InputAdornment, IconButton, FormControl, Button, Typography, Link, TextField } from "@mui/material"
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from "react"
 import { LoginDialog } from "./LoginDialog"
@@ -40,14 +40,10 @@ export const LoginContents: React.FC = () => {
                 <Typography variant="h5" sx={{ paddingTop: "30px", fontWeight: "bold" }}> 환영합니다!</Typography>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingTop: "10px" }}>
-                <FormControl variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-id">아이디</InputLabel>
-                    <OutlinedInput id="outlined-adornment-id" value={username} onChange={handleUsernameChange} />
-                </FormControl>
+                <TextField label="아이디" variant="outlined" value={username} onChange={handleUsernameChange} />
                 <FormControl variant="outlined" >
-                    <InputLabel htmlFor="outlined-adornment-password">비밀번호</InputLabel>
+                    <InputLabel>비밀번호</InputLabel>
                     <OutlinedInput
-                        id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
                         value={password}
                         onChange={handlePasswordChange}
@@ -67,7 +63,7 @@ export const LoginContents: React.FC = () => {
                 </FormControl>
 
                 <Button onClick={handleLogin} style={{
-                    backgroundColor: '#FE724C', color: "white", fontWeight: "bold", borderRadius: "0.5rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.5)"
+                    backgroundColor: '#FE724C', color: "white", fontWeight: "bold", borderRadius: "0.5rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
                 }}>
                     로그인
                 </Button>
@@ -80,7 +76,7 @@ export const LoginContents: React.FC = () => {
                         fontWeight: "bold",
                         borderRadius: "0.5rem",
                         padding: "0.5rem",
-                        boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.5)"
+                        boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)"
                     }}
                 >
                     회원가입 하러가기
