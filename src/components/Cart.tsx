@@ -1,14 +1,14 @@
-import {Food} from "../types/Food";
+import {MenuItem} from "../types/MenuItem";
 import React from "react";
 import {SwipeableList, SwipeableListItem, SwipeAction, TrailingActions} from "react-swipeable-list";
 import {Avatar, Typography} from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 interface FoodList {
-    foods: Food[]
+    foods: MenuItem[]
 }
 
-export const CartItem: React.FC<Food> = ({name, price, imageUrl, /*description*/}, key: number) => {
+export const CartItem: React.FC<MenuItem> = ({name, price, imageUrl, /*description*/}, key: number) => {
 
     return (
         <SwipeableListItem trailingActions={trailingActions()} key={key}>

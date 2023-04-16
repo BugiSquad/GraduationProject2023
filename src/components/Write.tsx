@@ -5,9 +5,10 @@ import dayjs, {Dayjs} from "dayjs";
 import 'dayjs/locale/ko';
 import {LocaleProvider} from "./LocaleProvider";
 import data from '../data/SampleFood.json'
-import {Food} from "../types/Food";
+import {MenuItem} from "../types/MenuItem";
 
-const foods: Food[] = data
+// @ts-ignore
+const foods: MenuItem[] = data
 
 export const Write: React.FC = () => {
     const [time, setTime] = useState<Dayjs | null>(dayjs());

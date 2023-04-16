@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid} from '@mui/material';
 import {styled} from '@mui/system';
 import FoodCard from "./FoodCard";
-import {Food} from "../types/Food";
+import {MenuItem} from "../types/MenuItem";
 
 export const CustomGrid = styled(Grid)({
     position: 'relative',
@@ -12,7 +12,7 @@ export const CustomGrid = styled(Grid)({
 });
 
 interface FoodCardSliderItems {
-    foods: Food[];
+    foods: MenuItem[];
 }
 
 const FoodCardSlider: React.FC<FoodCardSliderItems> = ({foods}) => {
@@ -20,7 +20,8 @@ const FoodCardSlider: React.FC<FoodCardSliderItems> = ({foods}) => {
         <>
             <CustomGrid>
                 {foods.map((food, idx) =>
-                    (<FoodCard id={0} name={food.name} price={food.price} imageUrl={food.imageUrl} /*description={food.description}*/
+                    (<FoodCard id={0} name={food.name} price={food.price} imageUrl={food.imageUrl}
+                               description={food.description}
                                key={idx}/>)
                 )};
             </CustomGrid>

@@ -1,0 +1,366 @@
+[
+  {
+    "name": "된장찌개",
+    "imageUrl": "https://www.example.com/doenjang-jjigae.jpg",
+    "price": 8000,
+    "totalRating": 4.0,
+    "category": "koreanFood"
+  },
+  {
+    "name": "쫄면",
+    "imageUrl": "https://www.example.com/jjolmyeon.jpg",
+    "price": 5000,
+    "totalRating": 4.4,
+    "category": "noodle"
+  },
+  {
+    "name": "짜장면",
+    "imageUrl": "https://www.example.com/jajangmyeon.jpg",
+    "price": 6000,
+    "totalRating": 4.6,
+    "category": "chinaFood"
+  },
+  {
+    "name": "돈까스",
+    "imageUrl": "https://www.example.com/donkkaseu.jpg",
+    "price": 9000,
+    "totalRating": 4.2,
+    "category": "westernFood"
+  },
+  {
+    "name": "우동",
+    "imageUrl": "https://www.example.com/udon.jpg",
+    "price": 10000,
+    "totalRating": 4.8,
+    "category": "japanFood"
+  },
+  {
+    "name": "마라탕",
+    "imageUrl": "https://www.example.com/mala-tang.jpg",
+    "price": 9000,
+    "totalRating": 4.1,
+    "category": "chinaFood"
+  },
+  {
+    "name": "김치볶음밥",
+    "imageUrl": "https://www.example.com/kimchi-bokkeum-bap.jpg",
+    "price": 4000,
+    "totalRating": 4.4,
+    "category": "rice"
+  },
+  {
+    "name": "불고기",
+    "imageUrl": "https://www.example.com/bulgogi.jpg",
+    "price": 10000,
+    "totalRating": 4.7,
+    "category": "koreanFood"
+  },
+  {
+    "name": "새우튀김",
+    "imageUrl": "https://www.example.com/saeu-twigim.jpg",
+    "price": 9000,
+    "totalRating": 4.8,
+    "category": "japanFood"
+  },
+  {
+    "name": "우동",
+    "imageUrl": "https://www.example.com/udon.jpg",
+    "price": 7000,
+    "totalRating": 4.3,
+    "category": "japanFood"
+  },
+  {
+    "name": "짜장밥",
+    "imageUrl": "https://www.example.com/jjajang-bap.jpg",
+    "price": 6000,
+    "totalRating": 3.9,
+    "category": "chinaFood"
+  },
+  {
+    "name": "라면",
+    "imageUrl": "https://www.example.com/ramen.jpg",
+    "price": 8000,
+    "totalRating": 4.5,
+    "category": "noodle"
+  },
+  {
+    "name": "해물파전",
+    "imageUrl": "https://www.example.com/haemul-pajeon.jpg",
+    "price": 8000,
+    "totalRating": 4.0,
+    "category": "koreanFood"
+  },
+  {
+    "name": "김밥",
+    "imageUrl": "https://www.example.com/kimbap.jpg",
+    "price": 4000,
+    "totalRating": 4.2,
+    "category": "koreanFood"
+  },
+  {
+    "name": "돈부리",
+    "imageUrl": "https://www.example.com/donburi.jpg",
+    "price": 9000,
+    "totalRating": 4.1,
+    "category": "japanFood"
+  },
+  {
+    "name": "팔보채",
+    "imageUrl": "https://www.example.com/palbochae.jpg",
+    "price": 10000,
+    "totalRating": 3.7,
+    "category": "chinaFood"
+  },
+  {
+    "name": "팟타이",
+    "imageUrl": "https://www.example.com/pad-thai.jpg",
+    "price": 8000,
+    "totalRating": 4.4,
+    "category": "thaiFood"
+  },
+  {
+    "name": "샐러드",
+    "imageUrl": "https://www.example.com/salad.jpg",
+    "price": 10000,
+    "totalRating": 4.5,
+    "category": "westernFood"
+  },
+  {
+    "name": "굴짬뽕",
+    "imageUrl": "https://www.example.com/gul-jjamppong.jpg",
+    "price": 7000,
+    "totalRating": 4.6,
+    "category": "koreanFood"
+  },
+  {
+    "name": "짬뽕",
+    "imageUrl": "https://www.example.com/jjamppong.jpg",
+    "price": 5000,
+    "totalRating": 4.2,
+    "category": "chinaFood"
+  },
+  {
+    "name": "라볶이",
+    "imageUrl": "https://www.example.com/ra-bokki.jpg",
+    "price": 6000,
+    "totalRating": 4.0,
+    "category": "koreanFood"
+  },
+  {
+    "name": "꼬막비빔밥",
+    "imageUrl": "https://www.example.com/kkomak-bibimbap.jpg",
+    "price": 8000,
+    "totalRating": 4.3,
+    "category": "rice"
+  },
+  {
+    "name": "우육면",
+    "imageUrl": "https://www.example.com/u-yuk-myeon.jpg",
+    "price": 7000,
+    "totalRating": 4.4,
+    "category": "noodle"
+  },
+  {
+    "name": "오징어덮밥",
+    "imageUrl": "https://www.example.com/ojingeo-deopbap.jpg",
+    "price": 10000,
+    "totalRating": 4.1,
+    "category": "koreanFood"
+  },
+  {
+    "name": "꿔바로우",
+    "imageUrl": "https://www.example.com/guobaorou.jpg",
+    "price": 9000,
+    "totalRating": 4.6,
+    "category": "chinaFood"
+  },
+  {
+    "name": "삼겹살",
+    "imageUrl": "https://www.example.com/samgyeopsal.jpg",
+    "price": 10000,
+    "totalRating": 4.8,
+    "category": "koreanFood"
+  },
+  {
+    "name": "탄탄면",
+    "imageUrl": "https://www.example.com/tantanmen.jpg",
+    "price": 8000,
+    "totalRating": 4.5,
+    "category": "japanFood"
+  },
+  {
+    "name": "스팸구이",
+    "imageUrl": "https://www.example.com/spam-gui.jpg",
+    "price": 6000,
+    "totalRating": 4.2,
+    "category": "koreanFood"
+  },
+  {
+    "name": "해물파전",
+    "imageUrl": "https://www.example.com/haemul-pajeon.jpg",
+    "price": 10000,
+    "totalRating": 4.3,
+    "category": "koreanFood"
+  },
+  {
+    "name": "마파두부",
+    "imageUrl": "https://www.example.com/mapa-dubu.jpg",
+    "price": 8000,
+    "totalRating": 4.4,
+    "category": "chinaFood"
+  },
+  {
+    "name": "냉면",
+    "imageUrl": "https://www.example.com/naengmyeon.jpg",
+    "price": 7000,
+    "totalRating": 4.0,
+    "category": "koreanFood"
+  },
+  {
+    "name": "연어덮밥",
+    "imageUrl": "https://www.example.com/salmon-deopbap.jpg",
+    "price": 10000,
+    "totalRating": 4.7,
+    "category": "japanFood"
+  },
+  {
+    "name": "짜장면",
+    "imageUrl": "https://www.example.com/jjajangmyeon.jpg",
+    "price": 5000,
+    "totalRating": 4.0,
+    "category": "chinaFood"
+  },
+  {
+    "name": "갈비탕",
+    "imageUrl": "https://www.example.com/galbitang.jpg",
+    "price": 10000,
+    "totalRating": 4.6,
+    "category": "koreanFood"
+  },
+  {
+    "name": "김치찌개",
+    "imageUrl": "https://www.example.com/kimchi-jjigae.jpg",
+    "price": 6000,
+    "totalRating": 4.5,
+    "category": "koreanFood"
+  },
+  {
+    "name": "카레라이스",
+    "imageUrl": "https://www.example.com/curry-rice.jpg",
+    "price": 8000,
+    "totalRating": 4.2,
+    "category": "japanFood"
+  },
+  {
+    "name": "치킨텐더",
+    "imageUrl": "https://www.example.com/chicken-tenders.jpg",
+    "price": 9000,
+    "totalRating": 4.3,
+    "category": "westernFood"
+  },
+  {
+    "name": "알리오올리오",
+    "imageUrl": "https://www.example.com/spaghetti-aioli-olio.jpg",
+    "price": 10000,
+    "totalRating": 4.8,
+    "category": "westernFood"
+  },
+  {
+    "name": "양꼬치",
+    "imageUrl": "https://www.example.com/yangkkochi.jpg",
+    "price": 8000,
+    "totalRating": 4.5,
+    "category": "chinaFood"
+  },
+  {
+    "name": "쌀국수",
+    "imageUrl": "https://www.example.com/pho.jpg",
+    "price": 9000,
+    "totalRating": 4.2,
+    "category": "noodle"
+  },
+  {
+    "name": "불고기버거",
+    "imageUrl": "https://www.example.com/bulgogi-burger.jpg",
+    "price": 7500,
+    "totalRating": 4.1,
+    "category": "koreanFood"
+  },
+  {
+    "name": "돈까스",
+    "imageUrl": "https://www.example.com/donkatsu.jpg",
+    "price": 9000,
+    "totalRating": 4.3,
+    "category": "japanFood"
+  },
+  {
+    "name": "새우튀김",
+    "imageUrl": "https://www.example.com/fried-shrimp.jpg",
+    "price": 10000,
+    "totalRating": 4.4,
+    "category": "japanFood"
+  },
+  {
+    "name": "제육덮밥",
+    "imageUrl": "https://www.example.com/jeyuk-deopbap.jpg",
+    "price": 7000,
+    "totalRating": 4.0,
+    "category": "koreanFood"
+  },
+  {
+    "name": "마라샹궈",
+    "imageUrl": "https://www.example.com/mala-shanguo.jpg",
+    "price": 8500,
+    "totalRating": 4.5,
+    "category": "chinaFood"
+  },
+  {
+    "name": "팟타이",
+    "imageUrl": "https://www.example.com/pad-thai.jpg",
+    "price": 8000,
+    "totalRating": 4.6,
+    "category": "thaiFood"
+  },
+  {
+    "name": "소고기덮밥",
+    "imageUrl": "https://www.example.com/beef-deopbap.jpg",
+    "price": 10000,
+    "totalRating": 4.7,
+    "category": "koreanFood"
+  },
+  {
+    "name": "햄버거",
+    "imageUrl": "https://www.example.com/hamburger.jpg",
+    "price": 6000,
+    "totalRating": 4.0,
+    "category": "westernFood"
+  },
+  {
+    "name": "스테이크",
+    "imageUrl": "https://www.example.com/steak.jpg",
+    "price": 10000,
+    "totalRating": 4.8,
+    "category": "westernFood"
+  },
+  {
+    "name": "라멘",
+    "imageUrl": "https://www.example.com/ramen.jpg",
+    "price": 8000,
+    "totalRating": 4.2,
+    "category": "japanFood"
+  },
+  {
+    "name": "양념치킨",
+    "imageUrl": "https://www.example.com/yangnyeom-chicken.jpg",
+    "price": 8500,
+    "totalRating": 4.3,
+    "category": "koreanFood"
+  },
+  {
+    "name": "김밥",
+    "imageUrl": "https://www.example.com/gimbap.jpg",
+    "price": 4000,
+    "totalRating": 3.9,
+    "category": "koreanFood"
+  }
+]

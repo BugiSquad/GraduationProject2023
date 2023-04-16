@@ -17,8 +17,6 @@ export const Matching: React.FC = () => {
 
 const Contents: React.FC = () => {
     const dispatch = useAppDispatch()
-
-    console.log("Page is re-rendered")
     const toggleDrawer = (open: boolean, name: String) =>
         (event: React.KeyboardEvent | React.MouseEvent) => {
             if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' ||

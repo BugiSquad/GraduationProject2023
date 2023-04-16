@@ -7,7 +7,6 @@ import {Provider} from 'react-redux';
 import {store} from "./store/store";
 import {router} from "./router";
 // @ts-ignore
-
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

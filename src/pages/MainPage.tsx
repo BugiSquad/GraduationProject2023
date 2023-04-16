@@ -1,12 +1,12 @@
 import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
-import {Food} from "../types/Food";
+import {MenuItem} from "../types/MenuItem";
 import '../App.css'
 import {Avatar, Card, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import data from '../data/SampleFood.json'
 
-const foods: Food[] = data
+const foods: MenuItem[] = data
 
 export const MainPage:React.FC = ()=>{
     return (
