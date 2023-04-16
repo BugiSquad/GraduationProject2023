@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import data from './data/SampleFood.json'
-import {Food} from "./components/Food";
+import {Food} from "./types/Food";
 import './App.css'
 import {PageTemplate} from "./pages/PageTemplate";
 import {MainPage} from "./pages/MainPage";

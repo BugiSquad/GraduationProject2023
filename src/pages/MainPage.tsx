@@ -1,6 +1,6 @@
 import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
-import {Food} from "../components/Food";
+import {Food} from "../types/Food";
 import '../App.css'
 import {Avatar, Card, Typography} from "@mui/material";
 import {Link} from "react-router-dom";

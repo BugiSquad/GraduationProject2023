@@ -5,7 +5,7 @@ import dayjs, {Dayjs} from "dayjs";
 import 'dayjs/locale/ko';
 import {LocaleProvider} from "./LocaleProvider";
 import data from '../data/SampleFood.json'
-import {Food} from "./Food";
+import {Food} from "../types/Food";
 
 const foods: Food[] = data
 

@@ -1,4 +1,4 @@
-import {Food} from "./Food";
+import {Food} from "../types/Food";
 import React from "react";
 import {SwipeableList, SwipeableListItem, SwipeAction, TrailingActions} from "react-swipeable-list";
 import {Avatar, Typography} from "@mui/material";
@@ -8,11 +8,11 @@ interface FoodList {
     foods: Food[]
 }
 
-export const CartItem: React.FC<Food> = ({name, price, image, description}, key: number) => {
+export const CartItem: React.FC<Food> = ({name, price, imageUrl, /*description*/}, key: number) => {
 
     return (
         <SwipeableListItem trailingActions={trailingActions()} key={key}>
-            <Avatar src={image}/><Typography>{name}</Typography>
+            <Avatar src={imageUrl}/><Typography>{name}</Typography>
         </SwipeableListItem>
     );
 }

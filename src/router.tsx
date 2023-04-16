@@ -16,6 +16,7 @@ import {MyMessageDetail} from "./pages/Detail/MyMessageDetail";
 import {Message} from "./pages/Message";
 import {MakeAppointment} from "./pages/MakeAppointment";
 import React from "react";
+import {APITest} from "./pages/APITest";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -107,5 +108,10 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage/>,
     },
 
+    {
+        path: "/api",
+        element: <APITest/>,
+        errorElement: <ErrorPage/>,
+    }
     //<Route path="/" element={<Home />} />
 ]);

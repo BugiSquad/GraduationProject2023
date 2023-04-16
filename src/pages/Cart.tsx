@@ -1,6 +1,6 @@
 import {CartItemList} from "../components/Cart";
 import React from "react";
-import {Food} from "../components/Food";
+import {Food} from "../types/Food";
 import data from "../data/SampleFood.json";
 import {PageTemplate, SimpleTemplate} from "./PageTemplate";
 import {Typography} from "@mui/material";
