@@ -37,7 +37,7 @@ export const MenuCategory: React.FC<Props> = ({ categories }) => {
             <Button key={idx} disableElevation disableRipple onClick={() => handleClick(idx, category.categoryName)}>
                 <Card
                     sx={{
-                        minWidth: 100,
+                        minWidth: 70,
                         minHeight: 40,
                         padding: "10px 5",
                         marginTop: "10px",
