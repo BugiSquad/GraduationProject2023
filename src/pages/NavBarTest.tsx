@@ -2,7 +2,7 @@ import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import {BottomNavigation, BottomNavigationAction} from "@mui/material";
 
-export const NavBarTest:React.FC =  ()=>{
+export const NavBarTest: React.FC = () => {
     return (<>
         <BottomNavigation
             showLabels
@@ -11,8 +11,8 @@ export const NavBarTest:React.FC =  ()=>{
             onChange={() => {
             }}
         >
-            <BottomNavigationAction label="Recents" icon={<PersonIcon/>} />
-            <BottomNavigationAction label="Nearby" icon={<PersonIcon/>} />
+            <BottomNavigationAction label="Recents" icon={<PersonIcon/>}/>
+            <BottomNavigationAction label="Nearby" icon={<PersonIcon/>}/>
         </BottomNavigation>
 
     </>)

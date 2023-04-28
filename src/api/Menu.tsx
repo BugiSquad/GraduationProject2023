@@ -39,14 +39,3 @@ export function toMenuItemArray(json: String): MenuItem[] {
     })
     return items
 }
-
-/*
-
-    public ResponseEntity findMenuOrderItemListByMenu(Menu.tsx menu) {
-    public ResponseEntity postMenu(MenuPostDto menuPostDto) {
-    public ResponseEntity updateMenu(MenuDto menuDto) {
-    public ResponseEntity updateTotalRating(MenuDto menuDto) {
-    public ResponseEntity findMenu(Long id) {
-    public ResponseEntity findMenusByCategory(MenuCategory category) {
-    public ResponseEntity deleteMenu(Long id) {
- */

@@ -56,7 +56,12 @@ export const MenuRepository = createSlice({
             if (find !== -1) state[category][find] = item;
         },
         removeMenu(state, action) {
-
+            let category: MenuCategory = action.payload;
+            if (category === undefined) {
+                console.error(`${action.payload} 해당 메뉴의 카테고리 분류가 누락되었습니다.`)
+                return;
+            }
+            state[category] = Array.of<MenuItem>();
         },
     }, extraReducers: (builder) => {
         builder.addCase(getAllMenus.fulfilled, (state, action) => {
@@ -65,5 +70,5 @@ export const MenuRepository = createSlice({
         })
     }
 })
-export const {addMenu, updateMenu} = MenuRepository.actions
+export const {addMenu, updateMenu, removeMenu} = MenuRepository.actions
 export const menuReducer = MenuRepository.reducer

@@ -7,7 +7,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
-import {toAPP, toCart, toCommunity, toMyPage} from "../store/navgroup";
+import {toAPP, toCart, toCommunity, toMenu, toMyPage} from "../store/navgroup";
 
 export const BottomNavigationGroup: React.FC = () => {
     const navigate = useNavigate();
@@ -33,8 +33,9 @@ export const BottomNavigationGroup: React.FC = () => {
                     navigate("/cart")
                     break;
                 case 3:
+                    dispatch(toMenu())
+                    navigate("/menu")
                     break;
-
                 case 4:
                     dispatch(toMyPage())
                     navigate("/mypage")
