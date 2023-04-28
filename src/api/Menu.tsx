@@ -2,6 +2,7 @@ import axios from 'axios'
 import {MenuCategory} from "../types/MenuCategory";
 import {getApiURL} from "./common";
 import data from "../data/ServersMenu.json"
+import {MenuItem} from "../types/MenuItem";
 
 /**
  *
@@ -22,6 +23,21 @@ export function addMenus() {
             console.warn(reason)
         })
     })
+}
+
+export function toMenuItemArray(json: String): MenuItem[] {
+
+    const objs = JSON.parse(JSON.stringify(json))
+    let items = objs.map((item: any) => {
+        return {
+            id: item.menuId,
+            name: item.name,
+            price: item.price,
+            imageUrl: item.imageUrl,
+            category: item.category as MenuCategory
+        }
+    })
+    return items
 }
 
 /*

@@ -1,17 +1,36 @@
 import React, {useState} from "react";
 import {Autocomplete, Button, TextField, Typography} from "@mui/material";
-import {addMenus, getMenusByCategory} from "../api/Menu";
+import {addMenus, getMenusByCategory, toMenuItemArray} from "../api/Menu";
 import {MenuCategory} from "../types/MenuCategory";
 import {MenuItem} from "../types/MenuItem";
 import {useDispatch} from "react-redux";
-import {addMenu} from "../store/menu";
+import {addMenu} from "../store/menuRepository";
 import {useAppSelector} from "../store/hooks";
 import FoodCardSlider from "../components/FoodCardSlider";
 
 export const APITest: React.FC = () => {
     const [menuType, setMenuType] = useState(MenuCategory.rice);
+    const [menus, setMenus] = useState(Array.of<MenuItem>());
     let dispatch = useDispatch();
     let state = useAppSelector(state => state.menu)
+    const get = (menuType: MenuCategory) => {
+        let axios = getMenusByCategory(menuType)
+        axios.then(function (response) {
+            const json = JSON.parse(JSON.stringify(response.data.data))
+            let menuItems = toMenuItemArray(json)
+            menuItems.forEach((item) => {
+                    if (item.category === undefined) console.warn(`${item.category} is null`)
+                    dispatch(addMenu(item))
+                    console.log(item)
+                }
+            );
+            set()
+        })
+    }
+    const set = () => {
+        setMenus(state[menuType])
+    }
+
     return (
         <>
             <div>
@@ -24,32 +43,20 @@ export const APITest: React.FC = () => {
                     id="combo-box-demo"
                     options={Object.values(MenuCategory)}
                     sx={{width: 300}}
-                    onChange={(o1, o2, o3, details) => setMenuType(details!.option)}
+                    onChange={
+                        (o1, o2, o3, details) => {
+                            setMenuType(details!.option)
+                            if (menus.length === 0) {
+                                get(details!.option)
+                            }
+                            setMenus([...state[details!.option]])
+                            console.log()
+                        }
+                    }
                     renderInput={(params) => <TextField {...params} label="카테고리"/>}
                 />
                 <Button onClick={() => {
-                    let axios = getMenusByCategory(menuType)
-                    axios.then(function (response) {
-                        // console.log(`response is ${response.data.data}`)
-                        const json = JSON.parse(JSON.stringify(response.data.data))
-                        const menuItem: MenuItem[] = json.map((item: any) => {
-                            return {
-                                id: item.menuId,
-                                name: item.name,
-                                price: item.price,
-                                imageUrl: item.imageUrl,
-                                category: item.category as MenuCategory
-                            }
-                        })
-                        menuItem.forEach((item) => {
-                                if (item.category === undefined) console.warn(`${item.category} is null`)
-                                dispatch(addMenu(item))
-                                console.log(item)
-                            }
-                        );
-                        //개개별의 객체를 출력
-                    })
-
+                    get(menuType)
                 }
                 }>메뉴 가져오기
                 </Button>
@@ -63,7 +70,7 @@ export const APITest: React.FC = () => {
                 <Button onClick={() => {
                     addMenus()
                 }}>메뉴 등록하기 </Button>
-                <FoodCardSlider foods={state[menuType]}></FoodCardSlider>
+                <FoodCardSlider foods={[...menus]}></FoodCardSlider>
             </div>
 
         </>

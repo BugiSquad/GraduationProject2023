@@ -1,12 +1,18 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {MenuItem} from "../types/MenuItem";
 import {MenuCategory} from "../types/MenuCategory";
 
+const getAllMenus = createAsyncThunk(
+    "getAllMenus", () => {
+        //a
+        return Array.of<MenuItem>()
+    }
+)
 /***
  * 서버와 통신으로 비동기로 가져온 메뉴들을 저장하는 장소
  * @author hoyeon(MenaceOneFive)
  */
-export const menu = createSlice({
+export const MenuRepository = createSlice({
     name: 'menu',
     initialState: {
         [MenuCategory.stew]: Array.of<MenuItem>(),
@@ -26,25 +32,38 @@ export const menu = createSlice({
         addMenu(state, action) {
             let item: MenuItem = action.payload;
             let category = item.category
+
             if (category === undefined) {
                 console.error(`${item} 해당 메뉴의 카테고리 분류가 누락되었습니다.`)
                 return;
             }
+
             let find = state[category].findIndex(e => e.id === item.id)
             if (find === -1) state[category] = [...state[category], item];
+
             else state[category][find] = item;
         },
         updateMenu(state, action) {
             let item: MenuItem = action.payload;
             let category = item.category
+
             if (category === undefined) {
                 console.error(`${item} 해당 메뉴의 카테고리 분류가 누락되었습니다.`)
                 return;
             }
+
             let find = state[category].findIndex(e => e.id === item.id)
             if (find !== -1) state[category][find] = item;
-        }
+        },
+        removeMenu(state, action) {
+
+        },
+    }, extraReducers: (builder) => {
+        builder.addCase(getAllMenus.fulfilled, (state, action) => {
+            //
+
+        })
     }
 })
-export const {addMenu, updateMenu} = menu.actions
-export const menuReducer = menu.reducer
+export const {addMenu, updateMenu} = MenuRepository.actions
+export const menuReducer = MenuRepository.reducer
