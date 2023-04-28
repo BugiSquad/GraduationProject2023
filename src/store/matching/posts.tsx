@@ -1,21 +1,20 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {faker} from "@faker-js/faker";
 import {PostItem} from "../../types/PostItem";
+import {getPosts} from "../../api/Post";
 
 export const getPostsFromRemote = createAsyncThunk(
     'getPostsFromRemote', () => {
-        const arr = []
-        for (let i = 0; i < 30; i++) {
-            arr.push({
-                "title": faker.name.fullName(),
-                "body": faker.lorem.paragraph(),
-                "interest": [],
-                "memberProfileUrl": faker.image.avatar(),
-                "minutesLeftUntilMeal": Math.trunc(Math.random() * 60) + "분 전",
-
-            })
-        }
-        return arr;
+        return getPosts();
+        //still need to be async and return arr when its done
+        // for (let i = 0; i < 30; i++) {
+        //     arr.push({
+        //         "title": faker.name.fullName(),
+        //         "body": faker.lorem.paragraph(),
+        //         "interest": [],
+        //         "memberProfileUrl": faker.image.avatar(),
+        //         "minutesLeftUntilMeal": Math.trunc(Math.random() * 60) + "분 전",
+        //     })
+        // }
     }
 )
 export const matchPosts = createSlice({
@@ -56,9 +55,19 @@ export const matchPosts = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(getPostsFromRemote.fulfilled, (state, action) => {
-            action.payload.map((item) => state.posts.push(item));
-        })
+        builder.addCase(getPostsFromRemote.fulfilled,
+            (state, action) => {
+                let res = action.payload
+                res.data.data.content.forEach((item: any) => {
+                    state.posts.push({
+                        "title": item.title,
+                        "body": item.body,
+                        "interest": item.interest,
+                        "memberProfileUrl": item.memberProfileUrl,
+                        "minutesLeftUntilMeal": item.minutesLeftUntilMeal,
+                    })
+                })
+            })
     }
 })
 export const {addPost, removePost, setSelected, setSelectedWith, setSelectedToNone} = matchPosts.actions

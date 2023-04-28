@@ -17,6 +17,7 @@ import {Message} from "./pages/Message";
 import {MakeAppointment} from "./pages/MakeAppointment";
 import React from "react";
 import {Menus} from "./pages/Menus";
+import {APITest} from "./pages/APITest";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -75,42 +76,37 @@ export const router = createBrowserRouter([
             throw new Error('Function not implemented.');
         }}/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/recentorderdetail",
         element: <RecentOrderDetail/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/recentmeetdetail",
         element: <RecentMeetDetail/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/mymeetingsdetail",
         element: <MyMeetingsDetail/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/mymessagedetail",
         element: <MyMessageDetail/>,
         errorElement: <ErrorPage/>,
-    },
-
-    {
+    }, {
         path: "/mypage/message",
         element: <Message/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/message/makeappointment",
         element: <MakeAppointment/>,
         errorElement: <ErrorPage/>,
-    },
-
-    {
+    }, {
         path: "/menu",
         element: <Menus/>,
+        errorElement: <ErrorPage/>,
+    }, {
+        path: "/apitest",
+        element: <APITest/>,
         errorElement: <ErrorPage/>,
     }
 ]);

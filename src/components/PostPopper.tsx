@@ -22,6 +22,7 @@ export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, on
                                 marginTop: "40px"
                             }}>
                                 <Typography sx={{p: 2}}>{items.title}</Typography>
+                                <Typography sx={{p: 2}}>{items.body}</Typography>
                                 <Typography sx={{p: 2}}>{items.minutesLeftUntilMeal}</Typography>
                             </div>
                             <div style={{
