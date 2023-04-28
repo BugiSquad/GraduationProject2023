@@ -1,5 +1,7 @@
 export interface PostItem {
-    postName: string;
-    avatarUrl: string;
-    postTime: string;
+    title: string;
+    body: string;
+    interest: string[];
+    memberProfileUrl: string;
+    minutesLeftUntilMeal: string;
 }

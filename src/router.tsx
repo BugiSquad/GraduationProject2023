@@ -113,5 +113,4 @@ export const router = createBrowserRouter([
         element: <Menus/>,
         errorElement: <ErrorPage/>,
     }
-    //<Route path="/" element={<Home />} />
 ]);

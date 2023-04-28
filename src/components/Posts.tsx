@@ -31,9 +31,9 @@ export const Posts: React.FC = () => {
                             setOpen(b)
                         }} placement={placement}/>
             {Array.from(items.posts).map((user, idx) =>
-                <Post key={idx} postName={user.postName}
-                      avatarUrl={user.avatarUrl}
-                      postTime={user.postTime}
+                <Post key={idx} title={user.title}
+                      memberProfileUrl={user.memberProfileUrl}
+                      minutesLeftUntilMeal={user.minutesLeftUntilMeal}
                       onClick={handleClick} index={idx}
                 />)
             }
