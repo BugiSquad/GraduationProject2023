@@ -1,7 +1,8 @@
 import {Button, Typography} from "@mui/material";
-import {createNewPost, requestMemberRegister} from "../api/Post";
+import {createNewPost} from "../api/Post";
 import {GroupType, Post} from "../types/Post";
 import {faker} from "@faker-js/faker";
+import {requestMemberRegister} from "../api/Member";
 
 /**
  * 회원가입 페이지

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {getMenusByCategory, toMenuItemArray} from "../api/Menu";
+import {getMenusByCategory, toMenuArray} from "../api/Menu";
 import {MenuCategory} from "../types/MenuCategory";
 import {MenuItem} from "../types/MenuItem";
 import {useDispatch} from "react-redux";
@@ -31,7 +31,7 @@ const MenuBody: React.FC = () => {
         axios.then(function (response) {
             dispatch(removeMenu(menuType))      //기존의 상태를 제거
             const json = JSON.parse(JSON.stringify(response.data.data))
-            let menuItems = toMenuItemArray(json)
+            let menuItems = toMenuArray(json)
             menuItems.forEach((item) => {
                     if (item.category === undefined) console.warn(`${item.category} is null`)
                     dispatch(addMenu(item))

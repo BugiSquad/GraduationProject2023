@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {MenuCategory} from "../types/MenuCategory";
-import {getApiURL} from "./common";
+import {getApiURL} from "./Common";
 import data from "../data/ServersMenu.json"
 import {MenuItem} from "../types/MenuItem";
 
@@ -13,6 +13,9 @@ export function getMenusByCategory(category: MenuCategory) {
     return axios.get(getApiURL() + `/menu/category?category=${category}`)
 }
 
+/**
+ * 더미 메뉴데이터들을 서버에 업로드합니다.
+ */
 export function addMenus() {
     let ary = JSON.parse(JSON.stringify(data));
     ary.forEach((item: any) => {
@@ -25,8 +28,11 @@ export function addMenus() {
     })
 }
 
-export function toMenuItemArray(json: String): MenuItem[] {
-
+/**
+ * 서버의 응답을 MenuItem[]로 변환합니다.
+ * @param json
+ */
+export function toMenuArray(json: String): MenuItem[] {
     const objs = JSON.parse(JSON.stringify(json))
     let items = objs.map((item: any) => {
         return {
