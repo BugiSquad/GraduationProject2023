@@ -25,7 +25,7 @@ export const MenuCategory: React.FC<Props> = ({ categories }) => {
 
     const handleClick = (idx: number, placeName: string) => {
         if (idx === selectedIdx) {
-            setSelectedIdx(null);
+            setSelectedIdx(null); 
             setSelectedPlaceName(null);
         } else {
             setSelectedIdx(idx);
@@ -42,7 +42,7 @@ export const MenuCategory: React.FC<Props> = ({ categories }) => {
                         padding: "10px 5",
                         marginTop: "10px",
                         borderRadius: "25px",
-                        backgroundColor: selectedIdx === idx ? category.bgColor : "#F4F4F4",
+                        backgroundColor: selectedIdx === idx ? category.bgColor : "#FE724C",
                     }}
                 >
                     <div style={{ alignItems: "center", justifyContent: "space-between", marginTop: "10px" }}>
