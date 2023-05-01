@@ -19,6 +19,7 @@ import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { WeekPopMenu } from "./pages/WeekPopMenu";
 import { RecentMenu } from "./pages/RecentMenu";
+import { FoodDetail } from "./pages/FoodDetail";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -71,6 +72,11 @@ export const router = createBrowserRouter([
     {
         path: "/thisweekpopular",
         element: <WeekPopMenu/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/fooddetail",
+        element: <FoodDetail />,
         errorElement: <ErrorPage/>,
     },
     {

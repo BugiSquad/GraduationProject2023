@@ -1,20 +1,19 @@
-import { Button } from "@mui/material"
+import data from "../data/SampleFood.json";
 import { MenuCategories } from "./MenuCategory"
+import { Food } from "../components/Food";
+import { CartItemList } from "./Cart"
 
+const foods: Food[] = data
 
 
 export const MenuList: React.FC = () => {
     return (
         <>
-        <MenuCategories />
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", paddingTop: "10px" }}>
-
-        <Button style={{
-                    backgroundColor: '#FE724C', color: "white", fontWeight: "bold", borderRadius: "0.5rem", padding: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
-                }}>
-                    로그인
-                </Button>
-        </div>
+            <MenuCategories />
+            <div style={{display: "flex", justifyContent: "center"}}>
+                <CartItemList foods={foods}></CartItemList>
+            </div>
         </>
     )
 }
+
