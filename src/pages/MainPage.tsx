@@ -24,7 +24,7 @@ export const MainPage:React.FC = ()=>{
                     width: '100%',
                     height: '100%',
                     justifyContent: 'center',
-                    background: 'orange'
+                    background: '#FE724C'
                 }}>
                     <Typography style={{textAlign: 'center'}} variant={"subtitle2"}>
                         혼밥 방지!
@@ -70,7 +70,7 @@ export const MainPage:React.FC = ()=>{
                             variant={"h5"}
                             color={"text.secondary"}
                             gutterBottom>이번 주 인기메뉴</Typography>
-                <Link to={""}><Typography style={{color: 'orange', float: 'right', paddingRight: '1rem'}}
+                <Link to={"/thisweekpopular"}><Typography style={{color: 'orange', float: 'right', paddingRight: '1rem'}}
                                           fontWeight={"bold"} align={"left"}
                                           variant={"subtitle2"}
                                           color={"text.secondary"}
@@ -90,8 +90,8 @@ export const MainPage:React.FC = ()=>{
                             fontWeight={"bold"} align={"left"}
                             variant={"h5"}
                             color={"text.secondary"}
-                            gutterBottom>추천메뉴</Typography>
-                <Link to={""}><Typography style={{color: 'orange', float: 'right', paddingRight: '1rem'}}
+                            gutterBottom>최근에 선택한 메뉴</Typography>
+                <Link to={"/recentmenu"}><Typography style={{color: 'orange', float: 'right', paddingRight: '1rem'}}
                                           fontWeight={"bold"} align={"left"}
                                           variant={"subtitle2"}
                                           color={"text.secondary"}

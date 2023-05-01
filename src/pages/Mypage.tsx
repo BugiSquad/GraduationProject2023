@@ -1,7 +1,6 @@
 import React from "react";
-import { PageTemplate, SimpleTemplate } from "./PageTemplate";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Button, Card, Typography } from "@mui/material";
+import { SimpleTemplate } from "./PageTemplate";
+import { Card} from "@mui/material";
 import { RecentOrders } from "../components/RecentOrders";
 import { MypageCards } from "../components/MypageCards";
 import { RecentMeets } from "../components/RecentMeets";
@@ -12,7 +11,7 @@ export const Mypage: React.FC = () => {
     return (
         <div className="App contaier">
         <SimpleTemplate param={{ pageHeaderName: "마이페이지" }}>
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginRight:"10px" }}>
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginRight:"10px" }}>
                 <div></div>
                 <a href="/mypage/editmyinfo" style={{color: 'black'}}>내 정보 수정</a>
             </div>
