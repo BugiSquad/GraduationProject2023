@@ -47,7 +47,10 @@ export const CartItem: React.FC<Food> = ({ name, price, image, description }, ke
                         sx={{
                             color: liked ? 'pink' : 'black'
                         }}
-                        onClick={handleClick}
+                        onClick={(event) => {
+                            event.stopPropagation(); // 이벤트 전파 중지
+                            handleClick(); // 내부 버튼 이벤트 핸들러 실행
+                        }}
                     >
                         {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                     </Button>
