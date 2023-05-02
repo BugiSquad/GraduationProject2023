@@ -15,9 +15,11 @@ import {MyMeetingsDetail} from "./pages/Detail/MyMeetingsDetail";
 import {MyMessageDetail} from "./pages/Detail/MyMessageDetail";
 import {Message} from "./pages/Message";
 import {MakeAppointment} from "./pages/MakeAppointment";
-import React from "react";
-import {Menus} from "./pages/Menus";
-import {APITest} from "./pages/APITest";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
+import { WeekPopMenu } from "./pages/WeekPopMenu";
+import { RecentMenu } from "./pages/RecentMenu";
+import { FoodDetail } from "./pages/FoodDetail";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -66,15 +68,35 @@ export const router = createBrowserRouter([
         element: <Matching/>,
         errorElement: <ErrorPage/>,
     },
+
+    {
+        path: "/thisweekpopular",
+        element: <WeekPopMenu/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/fooddetail",
+        element: <FoodDetail />,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/recentmenu",
+        element: <RecentMenu/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/login",
+        element: <Login/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/signup",
+        element: <Signup />,
+        errorElement: <ErrorPage/>,
+    },
     {
         path: "/mypage/editmyinfo",
-        element: <EditMyInfo userInfo={{
-            name: '',
-            email: '',
-            profilePic: null
-        }} onSave={function (userInfo: { name: string; email: string; profilePic: string | null; }): void {
-            throw new Error('Function not implemented.');
-        }}/>,
+        element: <EditMyInfo />,
         errorElement: <ErrorPage/>,
     }, {
         path: "/mypage/recentorderdetail",

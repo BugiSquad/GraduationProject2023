@@ -23,6 +23,7 @@ export const MainPageHeader: React.FC<PageHeaderParam>
         }}>
             <MenuIcon></MenuIcon>
             <Link to={"/app"}><Typography variant={"h5"} fontWeight={'bold'} fontFamily={"sans-serif"}>한성맛남</Typography></Link>
-            <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg"/>
+            <Link to={"/login"} style={{color:"black", fontSize:"10px"}}>로그인하기</Link>
+            {/* <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg"/> */}
         </div>)
 }
