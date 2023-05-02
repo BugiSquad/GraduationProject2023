@@ -9,9 +9,11 @@ const foods: MenuItem[] = data
 export const MenuList: React.FC = () => {
     return (
         <>
-            <MenuCategories />
+            <MenuCategories/>
             <div style={{display: "flex", justifyContent: "center"}}>
-                <CartItemList foods={foods}></CartItemList>
+                <CartItemList items={foods.map((e) => {
+                    return {...e, quantity: 0}
+                })}></CartItemList>
             </div>
         </>
     )

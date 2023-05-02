@@ -1,37 +1,40 @@
-import {MenuItem} from "../types/MenuItem";
 import React, {useState} from "react";
 import {SwipeableList, SwipeableListItem, SwipeAction, TrailingActions} from "react-swipeable-list";
 import {Avatar, Button, Typography} from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {FaStar} from "react-icons/fa";
+import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useNavigate} from 'react-router-dom';
+import {useAppDispatch} from "../store/hooks";
+import {remove} from "../store/cart";
+import {CartItem as Item} from "../types/CartItem";
 
-
-interface FoodList {
-    foods: MenuItem[]
-}
 
 interface Food {
+    id: number;
     name: string;
     price: number;
     imageUrl: string;
     description: string;
 }
 
-export const CartItem: React.FC<Food> = ({name, price, imageUrl, description}, key: number) => {
+export const CartItem: React.FC<Food> = ({id, name, price, imageUrl, description}, key: number) => {
     const [liked, setLiked] = useState(false);
-
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate();
+    const removeFromCart = () => {
+        dispatch(remove({id}))
+        navigate("/cart")
+    };
     const handleClick = () => {
         setLiked(!liked);
     };
 
-    const navigate = useNavigate();
 
     return (
-        <SwipeableListItem trailingActions={trailingActions()} key={key}>
-
+        <SwipeableListItem trailingActions={trailingActions(() => dispatch(remove({id})))} key={key}>
             <Button disableRipple style={{
                 paddingLeft: '10px',
                 paddingRight: '10px',
@@ -72,32 +75,47 @@ export const CartItem: React.FC<Food> = ({name, price, imageUrl, description}, k
                     >
                         {liked ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
                     </Button>
-                </Typography></Button>
+                </Typography>
+                <Button
+                    onClick={(event) => {
+                        removeFromCart()
+                        event.stopPropagation(); // 이벤트 전파 중지
+                    }}>
+                    <DeleteIcon/>
+                </Button>
+            </Button>
         </SwipeableListItem>
-    );
+    )
+        ;
 }
 
-export const CartItemList: React.FC<FoodList> = (list) => {
+interface CartItems {
+    items: Item[]
+}
+
+export const CartItemList: React.FC<CartItems> = (cart) => {
     return (<SwipeableList>
-        {list.foods.map((food, idx) =>
-            CartItem(food, idx)
-        )}
+        {cart.items.map((item, idx) => CartItem(item, idx))}
     </SwipeableList>);
 }
 
-const trailingActions = () => (
-    <TrailingActions>
-        <SwipeAction
-            destructive={true}
-            onClick={() => console.info('swipe action triggered')}
-        >
-            <div style={{
-                background: "red",
-                justifyContent: "center",
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column"
-            }}><DeleteForeverIcon sx={{color: "white"}}/></div>
-        </SwipeAction>
-    </TrailingActions>
-);
+const trailingActions = (callback: () => void) => {
+    return (
+        <TrailingActions>
+            <SwipeAction
+                destructive={true}
+                onClick={() => {
+                    console.info('swipe action triggered')
+                    //callback()
+                }}>
+                <div style={{
+                    background: "red",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    display: "flex",
+                    flexDirection: "column"
+                }}><DeleteForeverIcon sx={{color: "white"}}/></div>
+            </SwipeAction>
+        </TrailingActions>
+    );
+}
