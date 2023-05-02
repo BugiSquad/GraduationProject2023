@@ -1,9 +1,9 @@
 import data from "../data/SampleFood.json";
-import { MenuCategories } from "./MenuCategory"
-import { Food } from "../components/Food";
-import { CartItemList } from "./Cart"
+import {MenuCategories} from "./MenuCategory"
+import {CartItemList} from "./Cart"
+import {MenuItem} from "../types/MenuItem";
 
-const foods: Food[] = data
+const foods: MenuItem[] = data
 
 
 export const MenuList: React.FC = () => {

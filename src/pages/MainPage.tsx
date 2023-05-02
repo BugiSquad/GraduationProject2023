@@ -1,21 +1,18 @@
 import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
 import {MenuItem} from "../types/MenuItem";
-import { Food } from "../components/Food";
 import '../App.css'
-import { Avatar, Box, Button, Card, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import {Card, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 import data from '../data/SampleFood.json'
 import noodleImage from '../images/foodCategory/noodles.png';
 import soupImage from '../images/foodCategory/soup.png';
-import bowlriceImage from '../images/foodCategory/bowl-rice.png';
-import mixedriceImage from '../images/foodCategory/mixed-rice.png';
-import { MainCategory } from '../components/MainCategory';
-
+import bowlRiceImage from '../images/foodCategory/bowl-rice.png';
+import mixedRiceImage from '../images/foodCategory/mixed-rice.png';
+import {MainCategory} from '../components/MainCategory';
 
 
 const foods: MenuItem[] = data
-
 
 
 export const MainPage: React.FC = () => {
@@ -62,14 +59,14 @@ export const MainPage: React.FC = () => {
                 paddingRight: "1rem",
                 paddingBottom: "1rem"
             }}>
-               
-            <MainCategory category={"면류"} img={noodleImage} />
-            <MainCategory category={"찌개류"} img={soupImage} />
-            <MainCategory category={"덮밥류"} img={bowlriceImage} />
-            <MainCategory category={"비빔밥류"} img={mixedriceImage} />
+
+                <MainCategory category={"면류"} img={noodleImage}/>
+                <MainCategory category={"찌개류"} img={soupImage}/>
+                <MainCategory category={"덮밥류"} img={bowlRiceImage}/>
+                <MainCategory category={"비빔밥류"} img={mixedRiceImage}/>
 
             </div>
-            <br />
+            <br/>
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
