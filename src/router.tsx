@@ -98,38 +98,37 @@ export const router = createBrowserRouter([
         path: "/mypage/editmyinfo",
         element: <EditMyInfo />,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/recentorderdetail",
         element: <RecentOrderDetail/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/recentmeetdetail",
         element: <RecentMeetDetail/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/mymeetingsdetail",
         element: <MyMeetingsDetail/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/mymessagedetail",
         element: <MyMessageDetail/>,
         errorElement: <ErrorPage/>,
-    },
-
-    {
+    }, {
         path: "/mypage/message",
         element: <Message/>,
         errorElement: <ErrorPage/>,
-    },
-    {
+    }, {
         path: "/mypage/message/makeappointment",
         element: <MakeAppointment/>,
         errorElement: <ErrorPage/>,
-    },
-
-    //<Route path="/" element={<Home />} />
+    }, {
+        path: "/menu",
+        element: <Menus/>,
+        errorElement: <ErrorPage/>,
+    }, {
+        path: "/apitest",
+        element: <APITest/>,
+        errorElement: <ErrorPage/>,
+    }
 ]);

@@ -1,10 +1,10 @@
 import React from "react";
 import {Card, CardContent, CardMedia, Typography} from "@mui/material";
 import {FaStar} from "react-icons/fa";
-import {Food} from "./Food";
+import {MenuItem} from "../types/MenuItem";
 import 'react-swipeable-list/dist/styles.css';
 
-const FoodCard: React.FC<Food> = ({name, price, image, description}, key: number) => {
+const FoodCard: React.FC<MenuItem> = ({name, price, imageUrl, description}, key: number) => {
     //처음에는 하드코딩된 에셋 사용 추후에 객체를 받아서 동적으로 렌더링
 
     return <>
@@ -16,8 +16,8 @@ const FoodCard: React.FC<Food> = ({name, price, image, description}, key: number
             borderRadius: "14px",
             marginLeft: '0.5rem',
             marginRight: '0.5rem',
-        }}>
-            <CardMedia component={"img"} height={140} image={image} title={name}/>
+        }} key={key}>
+            <CardMedia component={"img"} height={140} image={imageUrl} title={name}/>
             <CardContent>
                 <Typography gutterBottom variant="h6" fontWeight={"bold"} component="div">
                     {name}

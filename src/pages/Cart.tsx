@@ -1,12 +1,12 @@
 import {CartItemList} from "../components/Cart";
 import React from "react";
-import {Food} from "../components/Food";
+import {MenuItem} from "../types/MenuItem";
 import data from "../data/SampleFood.json";
-import {PageTemplate, SimpleTemplate} from "./PageTemplate";
+import {SimpleTemplate} from "./PageTemplate";
 import {Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 
-const foods: Food[] = data
+const foods: MenuItem[] = data
 
 export const Cart: React.FC = () => {
     return (

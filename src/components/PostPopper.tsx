@@ -13,7 +13,7 @@ export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, on
             {({TransitionProps}) => (
                 <Fade {...TransitionProps} timeout={350}>
                     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <Avatar sx={{width: "25vw", height: "25vw", top: "40px"}} src={items.avatarUrl}/>
+                        <Avatar sx={{width: "25vw", height: "25vw", top: "40px"}} src={items.memberProfileUrl}/>
                         <Paper sx={{minWidth: "70vw"}}>
                             <div style={{
                                 display: "flex",
@@ -21,8 +21,9 @@ export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, on
                                 alignItems: "center",
                                 marginTop: "40px"
                             }}>
-                                <Typography sx={{p: 2}}>{items.postName}</Typography>
-                                <Typography sx={{p: 2}}>{items.postTime}</Typography>
+                                <Typography sx={{p: 2}}>{items.title}</Typography>
+                                <Typography sx={{p: 2}}>{items.body}</Typography>
+                                <Typography sx={{p: 2}}>{items.minutesLeftUntilMeal}</Typography>
                             </div>
                             <div style={{
                                 display: "flex",
@@ -32,7 +33,7 @@ export const PostPopper: FC<{ anchorEl: HTMLDivElement | null, open: boolean, on
                             }}>
                                 <Button sx={{background: "orange", color: "white"}}
                                         onClick={() => {
-                                            alert(`${items.postName}\n ${items.postTime}\n`);
+                                            alert(`${items.title}\n ${items.minutesLeftUntilMeal}\n`);
                                             navigate("/mypage/message")
                                             return;
                                         }}>

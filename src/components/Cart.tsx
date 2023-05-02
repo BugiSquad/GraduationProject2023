@@ -1,7 +1,8 @@
-import { Food } from "./Food";
-import React, { useState } from "react";
-import { SwipeableList, SwipeableListItem, SwipeAction, TrailingActions } from "react-swipeable-list";
-import { Avatar, Button, Typography } from "@mui/material";
+
+import {MenuItem} from "../types/MenuItem";
+import React from "react";
+import {SwipeableList, SwipeableListItem, SwipeAction, TrailingActions} from "react-swipeable-list";
+import {Avatar, Typography} from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { FaStar } from "react-icons/fa";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -11,9 +12,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 interface FoodList {
-    foods: Food[]
+    foods: MenuItem[]
 }
-
 
 export const CartItem: React.FC<Food> = ({ name, price, image, description }, key: number) => {
     const [liked, setLiked] = useState(false);

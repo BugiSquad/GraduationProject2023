@@ -6,6 +6,10 @@ import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {getPostsFromRemote} from "../store/matching/posts";
 
 export const Posts: React.FC = () => {
+    const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
+    const [open, setOpen] = React.useState(false);
+    const [placement, setPlacement] = React.useState<PopperPlacementType>("auto");
+
     const items = useAppSelector((state) => state.postItems)
     const dispatch = useAppDispatch()
 
@@ -13,16 +17,11 @@ export const Posts: React.FC = () => {
         dispatch(getPostsFromRemote())
     }, [])
 
-    const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
-    const [open, setOpen] = React.useState(false);
-    const [placement, setPlacement] = React.useState<PopperPlacementType>("auto");
-
-    const handleClick =
-        (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType) => {
-            setAnchorEl(event.currentTarget);
-            setOpen((prev) => placement !== newPlacement || !prev);
-            setPlacement(newPlacement);
-        };
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType) => {
+        setAnchorEl(event.currentTarget);
+        setOpen((prev) => placement !== newPlacement || !prev);
+        setPlacement(newPlacement);
+    };
 
     return (
         <div style={{width: "100%"}}>
@@ -31,9 +30,9 @@ export const Posts: React.FC = () => {
                             setOpen(b)
                         }} placement={placement}/>
             {Array.from(items.posts).map((user, idx) =>
-                <Post key={idx} postName={user.postName}
-                      avatarUrl={user.avatarUrl}
-                      postTime={user.postTime}
+                <Post key={idx} title={user.title}
+                      memberProfileUrl={user.memberProfileUrl}
+                      minutesLeftUntilMeal={user.minutesLeftUntilMeal}
                       onClick={handleClick} index={idx}
                 />)
             }

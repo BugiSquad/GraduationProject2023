@@ -4,9 +4,9 @@ import {useAppDispatch} from "../store/hooks";
 import {setSelectedWith} from "../store/matching/posts";
 
 export interface PostDetail {
-    postName: string;
-    avatarUrl: string;
-    postTime: string;
+    title: string;
+    memberProfileUrl: string;
+    minutesLeftUntilMeal: string;
     index: number;
     onClick: (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType) => void;
 }
@@ -20,8 +20,8 @@ export const Post: React.FC<PostDetail> = (detail: PostDetail) => {
                   detail.onClick(event, "auto");
                   dispatch(setSelectedWith(Number(event.currentTarget.id)))
               }}>
-            <Avatar src={detail.avatarUrl}/>
-            <Typography variant={"body2"}>{detail.postName}</Typography>
-            <Typography variant={"subtitle2"}>{detail.postTime}</Typography>
+            <Avatar src={detail.memberProfileUrl}/>
+            <Typography variant={"body2"}>{detail.title}</Typography>
+            <Typography variant={"subtitle2"}>{detail.minutesLeftUntilMeal}</Typography>
         </Card> </>)
 }

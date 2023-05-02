@@ -1,5 +1,6 @@
 import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
+import {MenuItem} from "../types/MenuItem";
 import { Food } from "../components/Food";
 import '../App.css'
 import { Avatar, Box, Button, Card, Typography } from "@mui/material";
@@ -13,7 +14,7 @@ import { MainCategory } from '../components/MainCategory';
 
 
 
-const foods: Food[] = data
+const foods: MenuItem[] = data
 
 
 
