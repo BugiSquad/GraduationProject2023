@@ -3,6 +3,7 @@ import {matchOption,} from "./matching/drawer";
 import {matchPosts} from "./matching/posts";
 import {navgroup} from "./navgroup";
 import {MenuRepository} from "./menuRepository";
+import {Cart} from "./cart";
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         postItems: matchPosts.reducer,
         navIdx: navgroup.reducer,
         menu: MenuRepository.reducer,
+        cart: Cart.reducer,
     }
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -13,6 +13,10 @@ export function getMenusByCategory(category: MenuCategory) {
     return axios.get(getApiURL() + `/menu/category?category=${category}`)
 }
 
+export function getMenuById(id: number) {
+    return axios.get(getApiURL() + `/menu?id=${id}`)
+}
+
 /**
  * 더미 메뉴데이터들을 서버에 업로드합니다.
  */
@@ -34,14 +38,25 @@ export function addMenus() {
  */
 export function toMenuArray(json: String): MenuItem[] {
     const objs = JSON.parse(JSON.stringify(json))
-    let items = objs.map((item: any) => {
+    let items = objs.map((e: any) => {
         return {
-            id: item.menuId,
-            name: item.name,
-            price: item.price,
-            imageUrl: item.imageUrl,
-            category: item.category as MenuCategory
+            id: e.menuId,
+            name: e.name,
+            price: e.price,
+            imageUrl: e.imageUrl,
+            category: e.category as MenuCategory
         }
     })
     return items
+}
+
+export function toMenuObject(json: String) {
+    let item = JSON.parse(JSON.stringify(json))
+    return {
+        id: item.menuId,
+        name: item.name,
+        price: item.price,
+        imageUrl: item.imageUrl,
+        category: item.category as MenuCategory
+    }
 }

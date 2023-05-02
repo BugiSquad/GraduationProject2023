@@ -1,17 +1,19 @@
 import data from "../data/SampleFood.json";
-import { MenuCategories } from "./MenuCategory"
-import { Food } from "../components/Food";
-import { CartItemList } from "./Cart"
+import {MenuCategories} from "./MenuCategory"
+import {CartItemList} from "./Cart"
+import {MenuItem} from "../types/MenuItem";
 
-const foods: Food[] = data
+const foods: MenuItem[] = data
 
 
 export const MenuList: React.FC = () => {
     return (
         <>
-            <MenuCategories />
+            <MenuCategories/>
             <div style={{display: "flex", justifyContent: "center"}}>
-                <CartItemList foods={foods}></CartItemList>
+                <CartItemList items={foods.map((e) => {
+                    return {...e, quantity: 0}
+                })}></CartItemList>
             </div>
         </>
     )

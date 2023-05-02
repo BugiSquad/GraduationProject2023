@@ -15,11 +15,13 @@ import {MyMeetingsDetail} from "./pages/Detail/MyMeetingsDetail";
 import {MyMessageDetail} from "./pages/Detail/MyMessageDetail";
 import {Message} from "./pages/Message";
 import {MakeAppointment} from "./pages/MakeAppointment";
-import { Login } from "./pages/Login";
-import { Signup } from "./pages/Signup";
-import { WeekPopMenu } from "./pages/WeekPopMenu";
-import { RecentMenu } from "./pages/RecentMenu";
-import { FoodDetail } from "./pages/FoodDetail";
+import {Login} from "./pages/Login";
+import {Signup} from "./pages/Signup";
+import {WeekPopMenu} from "./pages/WeekPopMenu";
+import {RecentMenu} from "./pages/RecentMenu";
+import {FoodDetail, menuLoader} from "./pages/FoodDetail";
+import {RestaurantMenu} from "./pages/RestaurantMenu";
+import {APITest} from "./pages/APITest";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -75,8 +77,9 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage/>,
     },
     {
-        path: "/fooddetail",
-        element: <FoodDetail />,
+        path: "/fooddetail/:id",
+        element: <FoodDetail/>,
+        loader: menuLoader,
         errorElement: <ErrorPage/>,
     },
     {
@@ -124,7 +127,7 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage/>,
     }, {
         path: "/menu",
-        element: <Menus/>,
+        element: <RestaurantMenu/>,
         errorElement: <ErrorPage/>,
     }, {
         path: "/apitest",
