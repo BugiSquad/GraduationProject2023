@@ -1,14 +1,23 @@
 import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
-import {Food} from "../components/Food";
+import { Food } from "../components/Food";
 import '../App.css'
-import {Avatar, Card, Typography} from "@mui/material";
-import {Link} from "react-router-dom";
+import { Avatar, Box, Button, Card, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import data from '../data/SampleFood.json'
+import noodleImage from '../images/foodCategory/noodles.png';
+import soupImage from '../images/foodCategory/soup.png';
+import bowlriceImage from '../images/foodCategory/bowl-rice.png';
+import mixedriceImage from '../images/foodCategory/mixed-rice.png';
+import { MainCategory } from '../components/MainCategory';
+
+
 
 const foods: Food[] = data
 
-export const MainPage:React.FC = ()=>{
+
+
+export const MainPage: React.FC = () => {
     return (
         <>
             <div style={{
@@ -26,23 +35,23 @@ export const MainPage:React.FC = ()=>{
                     justifyContent: 'center',
                     background: '#FE724C'
                 }}>
-                    <Typography style={{textAlign: 'center'}} variant={"subtitle2"}>
+                    <Typography style={{ textAlign: 'center' }} variant={"subtitle2"}>
                         혼밥 방지!
                     </Typography>
                 </Card>
             </div>
-            <br/>
+            <br />
 
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
             }}>
-                <Typography style={{float: 'left', paddingLeft: '1rem'}}
-                            fontWeight={"bold"} align={"left"}
-                            variant={"h5"}
-                            color={"text.secondary"}
-                            gutterBottom>어떤 메뉴가 땡겨요?</Typography>
+                <Typography style={{ float: 'left', paddingLeft: '1rem' }}
+                    fontWeight={"bold"} align={"left"}
+                    variant={"h5"}
+                    color={"text.secondary"}
+                    gutterBottom>어떤 메뉴가 땡겨요?</Typography>
             </div>
             <div style={{
                 display: 'flex',
@@ -52,57 +61,58 @@ export const MainPage:React.FC = ()=>{
                 paddingRight: "1rem",
                 paddingBottom: "1rem"
             }}>
-                <Avatar alt="Remy Sharp" src="https://cdn-icons-png.flaticon.com/512/2927/2927347.png"/>
-                <Avatar alt="Remy Sharp" src="https://cdn-icons-png.flaticon.com/512/2927/2927347.png"/>
-                <Avatar alt="Remy Sharp" src="https://cdn-icons-png.flaticon.com/512/2927/2927347.png"/>
-                <Avatar alt="Remy Sharp" src="https://cdn-icons-png.flaticon.com/512/2927/2927347.png"/>
-                <Avatar alt="Remy Sharp" src="https://cdn-icons-png.flaticon.com/512/2927/2927347.png"/>
-            </div>
-            <br/>
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingBottom: "1rem"
-            }}>
-                <Typography style={{float: 'left', paddingLeft: '1rem'}}
-                            fontWeight={"bold"} align={"left"}
-                            variant={"h5"}
-                            color={"text.secondary"}
-                            gutterBottom>이번 주 인기메뉴</Typography>
-                <Link to={"/thisweekpopular"}><Typography style={{color: 'orange', float: 'right', paddingRight: '1rem'}}
-                                          fontWeight={"bold"} align={"left"}
-                                          variant={"subtitle2"}
-                                          color={"text.secondary"}
-                                          gutterBottom>더 보기</Typography></Link>
-            </div>
-            <div style={{flexWrap: "nowrap"}}>
-                <FoodCardSlider foods={foods}/>
-            </div>
-            <br/> <br/>
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingBottom: "1rem"
-            }}>
-                <Typography style={{float: 'left', paddingLeft: '1rem'}}
-                            fontWeight={"bold"} align={"left"}
-                            variant={"h5"}
-                            color={"text.secondary"}
-                            gutterBottom>최근에 선택한 메뉴</Typography>
-                <Link to={"/recentmenu"}><Typography style={{color: 'orange', float: 'right', paddingRight: '1rem'}}
-                                          fontWeight={"bold"} align={"left"}
-                                          variant={"subtitle2"}
-                                          color={"text.secondary"}
-                                          gutterBottom>더 보기</Typography></Link>
-            </div>
-            <div style={{flexWrap: "nowrap"}}>
-                <FoodCardSlider foods={foods}/>
-            </div>
-            <br/>
+               
+            <MainCategory category={"면류"} img={noodleImage} />
+            <MainCategory category={"찌개류"} img={soupImage} />
+            <MainCategory category={"덮밥류"} img={bowlriceImage} />
+            <MainCategory category={"비빔밥류"} img={mixedriceImage} />
 
-    </>
+            </div>
+            <br />
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingBottom: "1rem"
+            }}>
+                <Typography style={{ float: 'left', paddingLeft: '1rem' }}
+                    fontWeight={"bold"} align={"left"}
+                    variant={"h5"}
+                    color={"text.secondary"}
+                    gutterBottom>이번 주 인기메뉴</Typography>
+                <Link to={"/thisweekpopular"}><Typography style={{ color: 'orange', float: 'right', paddingRight: '1rem' }}
+                    fontWeight={"bold"} align={"left"}
+                    variant={"subtitle2"}
+                    color={"text.secondary"}
+                    gutterBottom>더 보기</Typography></Link>
+            </div>
+            <div style={{ flexWrap: "nowrap" }}>
+                <FoodCardSlider foods={foods} />
+            </div>
+            <br /> <br />
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingBottom: "1rem"
+            }}>
+                <Typography style={{ float: 'left', paddingLeft: '1rem' }}
+                    fontWeight={"bold"} align={"left"}
+                    variant={"h5"}
+                    color={"text.secondary"}
+                    gutterBottom>최근에 선택한 메뉴</Typography>
+                <Link to={"/recentmenu"}><Typography style={{ color: 'orange', float: 'right', paddingRight: '1rem' }}
+                    fontWeight={"bold"} align={"left"}
+                    variant={"subtitle2"}
+                    color={"text.secondary"}
+                    gutterBottom>더 보기</Typography></Link>
+            </div>
+            <div style={{ flexWrap: "nowrap" }}>
+                <FoodCardSlider foods={foods} />
+            </div>
+            <br />
+
+        </>
     )
 
 }
