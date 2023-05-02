@@ -8,7 +8,7 @@ import FoodCardSlider from "../components/FoodCardSlider";
 import {MenuTabs} from "../components/MenuTabs";
 import {SimpleTemplate} from "./PageTemplate";
 
-export const Menus: React.FC = () => {
+export const RestaurantMenu: React.FC = () => {
     return (<>
         <SimpleTemplate param={{pageHeaderName: "메뉴"}}>
             <MenuBody/>

@@ -15,7 +15,7 @@ export const CartPriceDetail: React.FC = () => {
 }
 
 function getTotalPriceOf(cartItem: MenuItem[]) {
-    const price = cartItem.map((item, idx) => {
+    const price = cartItem.map((item) => {
         return item.price
     })
     return price.reduce((acc, value) => {
