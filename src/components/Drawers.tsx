@@ -35,6 +35,7 @@ export const FilterDrawer: React.FC = () => {
 export const AddDrawer: React.FC = () => {
     const isAddOpen = useAppSelector(state => state.matchOptions.add)
     const dispatch = useAppDispatch()
+
     const toggleDrawer = (open: boolean, name: String) =>
         (event: React.KeyboardEvent | React.MouseEvent) => {
             if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' ||

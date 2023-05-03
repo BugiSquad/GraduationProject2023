@@ -18,4 +18,3 @@ export const Cart: React.FC = () => {
         </SimpleTemplate>
     )
 }
-

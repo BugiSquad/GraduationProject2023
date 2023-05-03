@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getMenusByCategory, toMenuArray} from "../api/Menu";
 import {MenuCategory} from "../types/MenuCategory";
 import {MenuItem} from "../types/MenuItem";
 import {useDispatch} from "react-redux";
 import {addMenu, removeMenu} from "../store/menuRepository";
-import FoodCardSlider from "../components/FoodCardSlider";
 import {MenuTabs} from "../components/MenuTabs";
 import {SimpleTemplate} from "./PageTemplate";
+import MenuCardSlider from "../components/MenuCardSlider";
 
 export const RestaurantMenu: React.FC = () => {
     return (<>
@@ -25,6 +25,9 @@ const MenuBody: React.FC = () => {
     const [menus, setMenus] = useState(Array.of<MenuItem>());
     let dispatch = useDispatch();
 
+    useEffect(() => {
+        getMenuItemsWith(menuType)
+    }, [])
     //해당 메뉴 카테고리에 속하는 모든 메뉴를 가져옴
     const getMenuItemsWith = (menuType: MenuCategory) => {
         let axios = getMenusByCategory(menuType)
@@ -38,8 +41,11 @@ const MenuBody: React.FC = () => {
                 }
             );
             setMenus(menuItems)
+        }).catch(function (error) {
+            setMenus(Array.of<MenuItem>())
         })
     }
+
     const onMenuTypeChanges = (event: React.SyntheticEvent, newValue: MenuCategory) => {
         setMenuType(newValue)
         getMenuItemsWith(newValue)
@@ -47,7 +53,7 @@ const MenuBody: React.FC = () => {
 
     return (<div>
         <MenuTabs category={menuType} onMenuTypeChanges={onMenuTypeChanges}/>
-        <FoodCardSlider foods={[...menus]}></FoodCardSlider>
+        <MenuCardSlider foods={[...menus]}></MenuCardSlider>
     </div>)
 }
 

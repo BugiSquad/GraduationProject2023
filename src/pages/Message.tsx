@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Button, Card, IconButton, Typography } from "@mui/material";
+import React, {useState} from "react";
+import {Button, Card, IconButton, Typography} from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { handleGoBack } from "./Detail/MyMessageDetail";
+import {handleGoBack} from "./Detail/MyMessageDetail";
 import HandshakeIcon from '@mui/icons-material/Handshake';
-import { PageTemplate, SimpleTemplate } from "./PageTemplate";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from "react-router-dom";
-import { BottomNavigationGroup } from "../components/BottomNavigationGroup";
-import { faker } from "@faker-js/faker";
+import {Link} from "react-router-dom";
+import {BottomNavigationGroup} from "../components/BottomNavigationGroup";
+import {faker} from "@faker-js/faker";
+import {useAppSelector} from "../store/hooks";
 
 interface Message {
     id: number;
@@ -18,7 +18,7 @@ interface Message {
 export const Message: React.FC = () => {
     const [messageList, setMessageList] = useState<Message[]>([]);
     const [messageInput, setMessageInput] = useState<string>("");
-
+    const idx = useAppSelector((state) => state.navIdx)
     const handleSendButtonClick = () => {
         if (messageInput.trim() === "") {
             return;
@@ -79,11 +79,12 @@ export const Message: React.FC = () => {
                     value={messageInput}
                     onChange={(e) => setMessageInput(e.target.value)}
                 />
-                <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSendButtonClick}>
+                <button className="btn btn-outline-secondary" type="button" id="button-addon2"
+                        onClick={handleSendButtonClick}>
                     전송
                 </button>
             </div>
-            <BottomNavigationGroup />
+            <BottomNavigationGroup idx={idx.cur}/>
         </div>
     )
 }

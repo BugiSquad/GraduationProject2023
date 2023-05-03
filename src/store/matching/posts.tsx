@@ -41,6 +41,9 @@ export const matchPosts = createSlice({
             state.posts = state.posts.filter((item) => (
                 item.title !== payload.title || item.minutesLeftUntilMeal !== payload.minutesLeftUntilMeal))
         },
+        clearPosts(state) {
+            state.posts = []
+        },
         setSelected(state, action: PayloadAction<PostItem>) {
             // @ts-ignore
             state.selected = {...action.payload}
@@ -62,7 +65,7 @@ export const matchPosts = createSlice({
                     state.posts.push({
                         "title": item.title,
                         "body": item.body,
-                        "interest": item.interest,
+                        "interest": item.interest === undefined || item.interest.length === 0 ? ["배그"] : item.interest,
                         "memberProfileUrl": item.memberProfileUrl,
                         "minutesLeftUntilMeal": item.minutesLeftUntilMeal,
                     })
@@ -70,5 +73,5 @@ export const matchPosts = createSlice({
             })
     }
 })
-export const {addPost, removePost, setSelected, setSelectedWith, setSelectedToNone} = matchPosts.actions
+export const {addPost, removePost, setSelected, setSelectedWith, setSelectedToNone, clearPosts} = matchPosts.actions
 export const postReducer = matchPosts.reducer
