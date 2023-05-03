@@ -118,7 +118,7 @@ export const router = createBrowserRouter([
         element: <MyMessageDetail/>,
         errorElement: <ErrorPage/>,
     }, {
-        path: "/mypage/message",
+        path: "/mypage/message/:id",
         element: <Message/>,
         errorElement: <ErrorPage/>,
     }, {
