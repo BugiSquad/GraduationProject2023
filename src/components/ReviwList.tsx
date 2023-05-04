@@ -15,7 +15,7 @@ export const ReviewList: React.FC<ReviewwListProp> = ({userId, dayBefore, rating
             <div style={{display:'flex', flexDirection:"row", alignItems: "center", paddingTop:"10px"}}>
                 <Typography fontSize={13} paddingRight={3}>{userId}</Typography>
                 <Typography fontSize={12} paddingRight={12} color={'#848585'}>{dayBefore}</Typography>
-                <Rating sx={{marginRight:"0"}} name="read-only" value={rating} readOnly />
+                <Rating name="read-only" value={rating} readOnly />
             </div>
             <Typography fontSize={13} >{contents}</Typography>
         </div>
