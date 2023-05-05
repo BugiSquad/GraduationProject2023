@@ -1,18 +1,14 @@
 import React from "react";
 import { SimpleTemplate } from "./PageTemplate";
 import { UserInfo } from "../types/UserInfo";
-import { EditMyInfoContents } from "../components/EditMyInfoContent";
+import { UserInfoFrame } from "../components/UserInfoFrame";
 
 export const EditMyInfo: React.FC = () => {
   return (
-    <SimpleTemplate param={{ pageHeaderName: "내 정보 수정" }}>
-        <EditMyInfoContents userInfo={{
-        name: "",
-        email: "",
-        profilePic: null
-      }} onSave={function (userInfo: UserInfo): void {
-        throw new Error("Function not implemented.");
-      } } />
-    </SimpleTemplate>
+    <div className="App container">
+      <SimpleTemplate param={{ pageHeaderName: "내 정보 수정" }}>
+        <UserInfoFrame name={""} email={""} userprofilePic={null} isEdit={true}   />
+      </SimpleTemplate>
+    </div>
   );
 };

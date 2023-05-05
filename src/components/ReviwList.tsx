@@ -1,13 +1,11 @@
 import { Rating, Typography } from "@mui/material";
 
-
 interface ReviewwListProp {
     userId: String;
     dayBefore: String;
     rating: number;
     contents: String;
 }
-
 
 export const ReviewList: React.FC<ReviewwListProp> = ({userId, dayBefore, rating, contents}) => {
     return (
