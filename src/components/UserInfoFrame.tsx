@@ -96,13 +96,14 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({ userprofilePic, is
                 </Link>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "row", paddingTop: "50px", alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "row", paddingTop: "50px", alignItems: "flex-start" }}>
                 {/*이름*/}
-                <div style={{ display: "flex", alignContent: "flex-start", flexDirection: "column", alignItems: "center" }}>
+                {!isEdit ? null : <div style={{ display: "flex", alignContent: "flex-start", flexDirection: "column", alignItems: "center" }}>
                     <Typography fontSize={'15px'} sx={{ fontWeight: 'bold', minWidth: "40px", paddingRight: "80px" }}>이름＊</Typography>
                     <TextField size="small" required sx={{ minWidth: "40px", paddingRight: "20px" }} variant="standard" color="warning" />
 
-                </div>
+                </div> }
+                
                 {/*아이디*/}
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <Typography fontSize={'15px'} sx={{ fontWeight: 'bold', minWidth: "40px", paddingRight: "120px" }}>아이디＊</Typography>
