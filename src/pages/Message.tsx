@@ -19,6 +19,7 @@ interface Message {
     firstMessage: boolean;
 }
 
+const me = 1
 function MessageContent(message: Message) {
     return (<>
         <div style={{
@@ -74,7 +75,7 @@ export const Message: React.FC = () => {
     const param = useParams()
     const roomId = param.id
     const getMessage = () => {
-        getChat(Number(roomId), 20).then((res) => {
+        getChat(Number(roomId), 20).then((res: any) => {
             setRoomName(res.data.data.groupTitle)
             console.log(res.data.data)
             const data = res.data.data
@@ -82,7 +83,7 @@ export const Message: React.FC = () => {
                 console.log(message.name)
                 return {
                     id: message.id,
-                    member_Id: 20,
+                    member_Id: 1,
                     profileUrl: message.profileUrl,
                     name: message.name,
                     message: message.message,
@@ -98,7 +99,7 @@ export const Message: React.FC = () => {
         if (messageInput.trim() === "") {
             return;
         }
-        sendChat(Number(roomId), 20, messageInput.trim()).then((res) => {
+        sendChat(Number(roomId), 20, messageInput.trim()).then((res: any) => {
             getMessage()
         })
         setMessageInput("");

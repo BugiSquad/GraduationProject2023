@@ -44,7 +44,7 @@ export const APITest: React.FC = () => {
             body: `${faker.lorem.sentence(6)}`,
             memberId: 1,
             scheduledMealTime: dateToTimeString,
-            type: GroupType.MATCH
+            groupType: GroupType.INDIVIDUAL
         }
         createNewPost(post).then((res) => {
             console.log(res)

@@ -9,12 +9,12 @@ import axios from "axios";
  */
 export const joinChat = (subjectId: number, userId: number) => {
     console.log(subjectId)
-    return axios.post(`${getApiURL()}/group/participation`, {groupId: subjectId, memberId: userId})
+    return axios.post(`${getApiURL()}/match/participation`, {postId: subjectId, memberId: userId})
 }
 
-export const getChat = (roomId: number, userId: number) => {
-    return axios.get(`${getApiURL()}/note?groupId=${roomId}&memberId=${userId}`)
+export const getChat = (noteRoomId: number, userId: number) => {
+    return axios.get(`${getApiURL()}/note?noteRoomId=${noteRoomId}&memberId=${userId}`)
 }
-export const sendChat = (roomId: number, userId: number, message: string) => {
-    return axios.post(`${getApiURL()}/note`, {groupId: roomId, senderId: userId, message: message})
+export const sendChat = (noteRoomId: number, userId: number, message: string) => {
+    return axios.post(`${getApiURL()}/note`, {noteRoomId: noteRoomId, senderId: userId, message: message})
 }
