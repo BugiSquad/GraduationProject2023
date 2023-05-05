@@ -22,6 +22,7 @@ import {RecentMenu} from "./pages/RecentMenu";
 import {FoodDetail, menuLoader} from "./pages/FoodDetail";
 import {RestaurantMenu} from "./pages/RestaurantMenu";
 import {APITest} from "./pages/APITest";
+import { Order } from "./pages/Order";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -85,6 +86,11 @@ export const router = createBrowserRouter([
     {
         path: "/recentmenu",
         element: <RecentMenu/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/order",
+        element: <Order/>,
         errorElement: <ErrorPage/>,
     },
     {

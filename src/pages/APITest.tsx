@@ -3,6 +3,7 @@ import {createNewPost} from "../api/Post";
 import {GroupType, Post} from "../types/Post";
 import {faker} from "@faker-js/faker";
 import {requestMemberRegister} from "../api/Member";
+
 import {addMenus} from "../api/Menu";
 import {Gender, Interest, MemberType} from "../types/Member";
 
@@ -64,7 +65,8 @@ export const APITest: React.FC = () => {
         <div>
             <Typography variant={"h4"}>API테스트</Typography>
             <Button onClick={onButtonClicked}>회원가입</Button>
-            <Button onClick={addMenus}>메뉴 등록</Button>
+            {/*<Button onClick={createPost}>글 올리기</Button>*/}
+            <Button  onClick={()=>{addMenus()}}>메뉴 등록</Button>
             <Button onClick={createDummyMembers}>더미 회원 만들기(X100)</Button>
             <Button onClick={createDummyPosts}>더미 글 올리기</Button>
         </div>
