@@ -12,8 +12,8 @@ export const joinChat = (subjectId: number, userId: number) => {
     return axios.post(`${getApiURL()}/group/participation`, {groupId: subjectId, memberId: userId})
 }
 
-export const getChat = (roomId: number) => {
-    return axios.get(`${getApiURL()}/note?groupId=${roomId}`)
+export const getChat = (roomId: number, userId: number) => {
+    return axios.get(`${getApiURL()}/note?groupId=${roomId}&memberId=${userId}`)
 }
 export const sendChat = (roomId: number, userId: number, message: string) => {
     return axios.post(`${getApiURL()}/note`, {groupId: roomId, senderId: userId, message: message})

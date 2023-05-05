@@ -39,22 +39,19 @@ export const PostPopper: FC<{
                             }}>
                                 <Button sx={{background: "orange", color: "white"}}
                                         onClick={() => {
-                                            //navigate("/mypage/message")
-                                            let shouldNavigate = false;
                                             joinChat(item.id, 20).then((res) => {
+                                                console.log(`요청이 정상적으로 진행되었습니다.`)
+                                                const roomId = res.data.data.groupId
                                                 console.log(res)
-                                                shouldNavigate = true;
+                                                //중복으로 참여한 경우나 정상참여의 경우 바로 리다이렉트한다
+                                                navigate(`/mypage/message/${roomId}`)
                                             }).catch((err) => {
-                                                console.log(err)
+                                                console.warn(`요청에 문제가 있습니다. 확인이 필요합니다.`)
                                                 //오류코드 세분화 필요 -> 이미 만료된 경우, 이미 참여한 경우
                                                 let code = err.response.data.data.code
                                                 switch (code) {
                                                     case 'NOT_EXIST_GROUP':
                                                         alert("존재하지 않는 만남입니다.")
-                                                        break;
-                                                    case 'DUPLICATE_ENTITY_ERROR':
-                                                        alert("이미 참여한 만남입니다.")
-                                                        navigate(`/mypage/message/${"1"}`)
                                                         break;
                                                     case 'NOT_EXIST_MEMBER':
                                                         alert("다시 로그인이 필요합니다.")
@@ -62,8 +59,6 @@ export const PostPopper: FC<{
                                                     default:
                                                         break;
                                                 }
-                                            }).finally(() => {
-                                                // if(shouldNavigate)navigate(`/mypage/message/${"1"}`)
                                             })
                                             return;
                                         }}>

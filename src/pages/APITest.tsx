@@ -18,8 +18,8 @@ export const APITest: React.FC = () => {
     const onButtonClicked = () => {
         requestMemberRegister(
             {
-                name: `${faker.name}`,
-                phone: `${faker.phone}`,
+                name: `${faker.name.fullName()}`,
+                phone: `${faker.phone.number()}`,
                 studentId: Math.random() * 10000,
                 email: `example@hansung.ac.kr`,
                 memberType: "student",
