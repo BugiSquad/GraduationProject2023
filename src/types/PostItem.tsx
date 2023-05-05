@@ -1,5 +1,5 @@
 export interface PostItem {
-    id: number;
+    postId: number;
     title: string;
     body: string;
     interest: string[];

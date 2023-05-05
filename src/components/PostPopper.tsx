@@ -39,9 +39,9 @@ export const PostPopper: FC<{
                             }}>
                                 <Button sx={{background: "orange", color: "white"}}
                                         onClick={() => {
-                                            joinChat(item.id, 20).then((res) => {
+                                            joinChat(item.postId, 20).then((res) => {
                                                 console.log(`요청이 정상적으로 진행되었습니다.`)
-                                                const roomId = res.data.data.groupId
+                                                const roomId = res.data.data.noteRoomId
                                                 console.log(res)
                                                 //중복으로 참여한 경우나 정상참여의 경우 바로 리다이렉트한다
                                                 navigate(`/mypage/message/${roomId}`)

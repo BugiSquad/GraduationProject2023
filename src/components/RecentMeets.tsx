@@ -7,7 +7,7 @@ export const RecentMeets: React.FC = () => {
     const list: Array<PostItem> = [];
     for (let i = 0; i < 3; i++) {
         list.push({
-            id: -1, body: "", interest: [],
+            postId: -1, body: "", interest: [],
             "title": faker.name.fullName(),
             "memberProfileUrl": faker.image.avatar(),
             "minutesLeftUntilMeal": Math.trunc(Math.random() * 60) + "분 전"
@@ -16,7 +16,7 @@ export const RecentMeets: React.FC = () => {
     return (
         <div style={{width: "100%"}}>
             {list.map((user, idx) =>
-                <RecentMeet id={user.id} key={idx} title={user.title} memberProfileUrl={user.memberProfileUrl}
+                <RecentMeet postId={user.postId} key={idx} title={user.title} memberProfileUrl={user.memberProfileUrl}
                             minutesLeftUntilMeal={user.minutesLeftUntilMeal} body={user.body}
                             interest={user.interest}/>)
             }

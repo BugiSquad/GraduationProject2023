@@ -7,7 +7,7 @@ import {Post} from "../types/Post";
  * API 서버에서 게시글 목록을 가져옵니다
  */
 export function getPosts() {
-    return axios.get(getApiURL() + `/group`)
+    return axios.get(getApiURL() + `/match/post`)
 }
 
 /**
@@ -15,5 +15,5 @@ export function getPosts() {
  * @param post
  */
 export function createNewPost(post: Post) {
-    return axios.post(`${getApiURL()}/group`, post)
+    return axios.post(`${getApiURL()}/match/post`, post)
 }

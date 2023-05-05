@@ -23,7 +23,7 @@ function onSubmit(time: dayjs.Dayjs | null, title: string, body: string, groupTy
             body: `${body}`,
             memberId: 1,
             scheduledMealTime: timeToString,
-            type: groupType
+            groupType: groupType
         }
         createNewPost(post).then((res) => {
             console.log(res)
@@ -35,7 +35,7 @@ export const Write: React.FC = () => {
     const [time, setTime] = useState<Dayjs | null>(dayjs());
     const [title, setTitle] = useState<string>("")
     const [body, setBody] = useState<string>("")
-    const [groupType, setGroupType] = useState<GroupType>(GroupType.MATCH)
+    const [groupType, setGroupType] = useState<GroupType>(GroupType.INDIVIDUAL)
 
     const titleProps = useMemo(() => ({
         label: "제목", value: title,
@@ -59,7 +59,7 @@ export const Write: React.FC = () => {
 
     const onGroupTypeChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
         let t = event.target.value as string;
-        if (t === "MATCH" || t === "GROUP")
+        if (t === "INDIVIDUAL" || t === "ORGANIZATION")
             setGroupType(GroupType[t])
     }
 
@@ -87,12 +87,12 @@ export const Write: React.FC = () => {
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     style={{display: "flex", flexDirection: "row"}}
-                    defaultValue={GroupType.MATCH}
+                    defaultValue={GroupType.INDIVIDUAL}
                     name="radio-buttons-group"
                     onChange={onGroupTypeChanged}
                 >
-                    <FormControlLabel value={`${GroupType.MATCH}`} control={<Radio/>} label="개인"/>
-                    <FormControlLabel value={`${GroupType.GROUP}`} control={<Radio/>} label="단체"/>
+                    <FormControlLabel value={`${GroupType.INDIVIDUAL}`} control={<Radio/>} label="개인"/>
+                    <FormControlLabel value={`${GroupType.ORGANIZATION}`} control={<Radio/>} label="단체"/>
                 </RadioGroup>
                 <TextField {...bodyProps} />
                 <Button type={"submit"} sx={{display: "flex", background: "orange",}}>

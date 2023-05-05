@@ -22,7 +22,7 @@ export const matchPosts = createSlice({
     initialState: {
         posts: Array.of<PostItem>(),
         selected: {
-            id: -1,
+            postId: -1,
             title: "",
             body: "",
             interest: [],
@@ -55,7 +55,14 @@ export const matchPosts = createSlice({
             state.selected = state.posts[action.payload]
         },
         setSelectedToNone(state) {
-            state.selected = {id: -1, title: "", minutesLeftUntilMeal: "", memberProfileUrl: "", interest: [], body: ""}
+            state.selected = {
+                postId: -1,
+                title: "",
+                minutesLeftUntilMeal: "",
+                memberProfileUrl: "",
+                interest: [],
+                body: ""
+            }
         },
     },
     extraReducers: (builder) => {
@@ -64,12 +71,12 @@ export const matchPosts = createSlice({
                 let res = action.payload
                 res.data.data.content.forEach((item: any) => {
                     state.posts.push({
-                        "id": item.id,
-                        "title": item.title,
-                        "body": item.body,
-                        "interest": item.interest === undefined || item.interest.length === 0 ? ["배그"] : item.interest,
-                        "memberProfileUrl": item.memberProfileUrl,
-                        "minutesLeftUntilMeal": item.minutesLeftUntilMeal,
+                        postId: item.postId,
+                        title: item.title,
+                        body: item.body,
+                        interest: item.interest === undefined || item.interest.length === 0 ? ["배그"] : item.interest,
+                        memberProfileUrl: item.memberProfileUrl,
+                        minutesLeftUntilMeal: item.minutesLeftUntilMeal,
                     })
                 })
             })
