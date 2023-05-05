@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import {Avatar, Button, Fade, Paper, Popper, PopperPlacementType, Typography} from "@mui/material";
 import {useAppSelector} from "../store/hooks";
 import {useNavigate} from "react-router-dom";
-import {joinChat} from "../api/Chat";
+import {joinNoteRoom} from "../api/NoteRoom";
 
 export const PostPopper: FC<{
     anchorEl: HTMLDivElement | null,
@@ -39,7 +39,7 @@ export const PostPopper: FC<{
                             }}>
                                 <Button sx={{background: "orange", color: "white"}}
                                         onClick={() => {
-                                            joinChat(item.postId, 20).then((res) => {
+                                            joinNoteRoom(item.postId, 20).then((res) => {
                                                 console.log(`요청이 정상적으로 진행되었습니다.`)
                                                 const roomId = res.data.data.noteRoomId
                                                 console.log(res)

@@ -7,20 +7,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link, useParams} from "react-router-dom";
 import {BottomNavigationGroup} from "../components/BottomNavigationGroup";
 import {useAppSelector} from "../store/hooks";
-import {getChat, sendChat} from "../api/Chat";
+import {getNotesWith, sendNoteToRoom} from "../api/NoteRoom";
+import {NoteMessage} from "../types/NoteMessage";
 
-interface Message {
-    id: number;
-    member_Id: number;
-    profileUrl: string;
-    name: string;
-    message: string;
-    createdAt: string;
-    firstMessage: boolean;
-}
 
 const me = 1
-function MessageContent(message: Message) {
+
+function MessageContent(message: NoteMessage) {
     return (<>
         <div style={{
             display: "flex",
@@ -32,7 +25,7 @@ function MessageContent(message: Message) {
     </>);
 }
 
-function MyMessageBody(message: Message) {
+function MyMessageBody(message: NoteMessage) {
     if (message.firstMessage)
         return <div>{message.message}</div>
 
@@ -52,7 +45,7 @@ function MyMessageBody(message: Message) {
     );
 }
 
-function OthersMessageBody(message: Message) {
+function OthersMessageBody(message: NoteMessage) {
     return (
         <div style={{display: 'flex', flexDirection: 'column'}}>
             <div style={{
@@ -68,14 +61,14 @@ function OthersMessageBody(message: Message) {
 }
 
 export const Message: React.FC = () => {
-    const [messageList, setMessageList] = useState<Message[]>([]);
+    const [messageList, setMessageList] = useState<NoteMessage[]>([]);
     const [messageInput, setMessageInput] = useState<string>("");
     const [roomName, setRoomName] = useState("Empty Name")
     const navIdx = useAppSelector((state) => state.navIdx)
     const param = useParams()
     const roomId = param.id
     const getMessage = () => {
-        getChat(Number(roomId), 20).then((res: any) => {
+        getNotesWith(Number(roomId), 20).then((res: any) => {
             setRoomName(res.data.data.groupTitle)
             console.log(res.data.data)
             const data = res.data.data
@@ -99,7 +92,7 @@ export const Message: React.FC = () => {
         if (messageInput.trim() === "") {
             return;
         }
-        sendChat(Number(roomId), 20, messageInput.trim()).then((res: any) => {
+        sendNoteToRoom(Number(roomId), 20, messageInput.trim()).then((res: any) => {
             getMessage()
         })
         setMessageInput("");
@@ -118,7 +111,8 @@ export const Message: React.FC = () => {
                     <Button onClick={handleGoBack} disableElevation sx={{color: '#FE724C'}}>
                         <ArrowBackIosNewIcon/></Button> {roomName}</Typography>
                 <div style={{display: "inherit", alignItems: "center", paddingRight: "10px"}}>
-                    <Link to="/mypage/message/makeappointment"><IconButton><HandshakeIcon/></IconButton></Link>
+                    <Link
+                        to={`/mypage/message/makeappointment/${roomId}`}><IconButton><HandshakeIcon/></IconButton></Link>
                 </div>
             </div>
 
