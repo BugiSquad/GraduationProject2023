@@ -22,6 +22,7 @@ export const matchPosts = createSlice({
     initialState: {
         posts: Array.of<PostItem>(),
         selected: {
+            id: -1,
             title: "",
             body: "",
             interest: [],
@@ -41,6 +42,9 @@ export const matchPosts = createSlice({
             state.posts = state.posts.filter((item) => (
                 item.title !== payload.title || item.minutesLeftUntilMeal !== payload.minutesLeftUntilMeal))
         },
+        clearPosts(state) {
+            state.posts = []
+        },
         setSelected(state, action: PayloadAction<PostItem>) {
             // @ts-ignore
             state.selected = {...action.payload}
@@ -51,7 +55,7 @@ export const matchPosts = createSlice({
             state.selected = state.posts[action.payload]
         },
         setSelectedToNone(state) {
-            state.selected = {title: "", minutesLeftUntilMeal: "", memberProfileUrl: "", interest: [], body: ""}
+            state.selected = {id: -1, title: "", minutesLeftUntilMeal: "", memberProfileUrl: "", interest: [], body: ""}
         },
     },
     extraReducers: (builder) => {
@@ -60,9 +64,10 @@ export const matchPosts = createSlice({
                 let res = action.payload
                 res.data.data.content.forEach((item: any) => {
                     state.posts.push({
+                        "id": item.id,
                         "title": item.title,
                         "body": item.body,
-                        "interest": item.interest,
+                        "interest": item.interest === undefined || item.interest.length === 0 ? ["배그"] : item.interest,
                         "memberProfileUrl": item.memberProfileUrl,
                         "minutesLeftUntilMeal": item.minutesLeftUntilMeal,
                     })
@@ -70,5 +75,5 @@ export const matchPosts = createSlice({
             })
     }
 })
-export const {addPost, removePost, setSelected, setSelectedWith, setSelectedToNone} = matchPosts.actions
+export const {addPost, removePost, setSelected, setSelectedWith, setSelectedToNone, clearPosts} = matchPosts.actions
 export const postReducer = matchPosts.reducer

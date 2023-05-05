@@ -2,18 +2,19 @@ import React, {useEffect} from "react";
 import {Post} from "./Post";
 import {PopperPlacementType} from "@mui/material";
 import {PostPopper} from "./PostPopper";
+import {clearPosts, getPostsFromRemote} from "../store/matching/posts";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
-import {getPostsFromRemote} from "../store/matching/posts";
 
 export const Posts: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
     const [open, setOpen] = React.useState(false);
     const [placement, setPlacement] = React.useState<PopperPlacementType>("auto");
 
-    const items = useAppSelector((state) => state.postItems)
+    const state = useAppSelector(state => state.postItems.posts)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        dispatch(clearPosts())
         dispatch(getPostsFromRemote())
     }, [])
 
@@ -29,10 +30,11 @@ export const Posts: React.FC = () => {
                         onClose={(b: boolean) => {
                             setOpen(b)
                         }} placement={placement}/>
-            {Array.from(items.posts).map((user, idx) =>
+            {Array.from(state).map((user, idx) =>
                 <Post key={idx} title={user.title}
                       memberProfileUrl={user.memberProfileUrl}
-                      minutesLeftUntilMeal={user.minutesLeftUntilMeal}
+                      minutesLeftUntilMeal={Number(user.minutesLeftUntilMeal)}
+                      interest={user.interest}
                       onClick={handleClick} index={idx}
                 />)
             }

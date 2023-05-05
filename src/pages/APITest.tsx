@@ -3,7 +3,10 @@ import {createNewPost} from "../api/Post";
 import {GroupType, Post} from "../types/Post";
 import {faker} from "@faker-js/faker";
 import {requestMemberRegister} from "../api/Member";
-import { addMenus } from "../api/Menu";
+
+import {addMenus} from "../api/Menu";
+import {Gender, Interest, MemberType} from "../types/Member";
+
 /**
  * 회원가입 페이지
  * +
@@ -15,14 +18,19 @@ import { addMenus } from "../api/Menu";
 export const APITest: React.FC = () => {
     faker.setLocale('ko')
     const onButtonClicked = () => {
+        let interest = new Interest()
+        interest.pubg = true;
+        interest.lol = true;
         requestMemberRegister(
             {
-                name: `${faker.name}`,
-                phone: `${faker.phone}`,
+                name: `${faker.name.fullName()}`,
+                phone: `${faker.phone.number()}`,
                 studentId: Math.random() * 10000,
                 email: `example@hansung.ac.kr`,
-                memberType: "student",
-                department: "컴퓨터공학과"
+                memberType: MemberType.STUDENT,
+                department: "컴퓨터공학과",
+                gender: Gender.MALE,
+                interestPostDto: interest
             }
         ).then((res) => {
             console.log(res)
@@ -47,6 +55,7 @@ export const APITest: React.FC = () => {
             onButtonClicked()
         }
     }
+
     const createDummyPosts = () => {
         for (let i = 0; i < 100; i++) {
             createPost(i + 1)
