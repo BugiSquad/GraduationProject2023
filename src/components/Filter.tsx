@@ -1,7 +1,6 @@
-import React from "react";
-import {Button, Card, Typography} from "@mui/material";
-import { InterestFilter } from "./InterestFilter";
-
+import React, {useState} from "react";
+import {Autocomplete, Button, Card, TextField, Typography} from "@mui/material";
+import {InterestFilter} from "./InterestFilter";
 
 
 export const Filter: React.FC = () => {
@@ -17,7 +16,7 @@ export const Filter: React.FC = () => {
                 borderRadius: 5
             }}>
                 {/*위로 추가하는 바 필요*/}
-                <Autocomplete options={[...Object.keys(interest).map((item) => item)]}
+                <Autocomplete options={[...Object.keys(interests).map((item) => item)]}
                               renderInput={(params) => (
                                   <TextField label="관심사" {...params}
                                              InputProps={{
