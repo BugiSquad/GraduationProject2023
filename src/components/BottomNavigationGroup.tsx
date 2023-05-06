@@ -6,19 +6,20 @@ import PeopleIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {useAppDispatch} from "../store/hooks";
 import {toAPP, toCart, toCommunity, toMenu, toMyPage} from "../store/navgroup";
 
-export const BottomNavigationGroup: React.FC = () => {
+interface BottomNavigationGroupProps {
+    idx: number;
+}
+
+export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({idx}) => {
     const navigate = useNavigate();
-
-    const idx = useAppSelector((state) => state.navIdx)
     const dispatch = useAppDispatch()
-
     return (
         <Tabs sx={{position: 'fixed', bottom: 0, left: 0, right: 0, background: "white"}}
               variant="fullWidth"
-              value={idx.cur}                        //전역 상태관리를 이용해서 관리해야함
+              value={idx}                        //전역 상태관리를 이용해서 관리해야함
               onChange={(event, newValue) => {
                   switch (newValue) {
                       case 0:
@@ -28,7 +29,7 @@ export const BottomNavigationGroup: React.FC = () => {
                       case 1:
                           dispatch(toCommunity())
                           navigate("/community");
-                    break;
+                          break;
                 case 2:
                     dispatch(toCart())
                     navigate("/cart")

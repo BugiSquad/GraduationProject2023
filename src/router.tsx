@@ -12,8 +12,7 @@ import {EditMyInfo} from "./pages/EditMyInfo";
 import {RecentOrderDetail} from "./pages/Detail/RecentOrderDetail";
 import {RecentMeetDetail} from "./pages/Detail/RecentMeetDetail";
 import {MyMeetingsDetail} from "./pages/Detail/MyMeetingsDetail";
-import {MyMessageDetail} from "./pages/Detail/MyMessageDetail";
-import {Message} from "./pages/Message";
+import {MyMessageDetail, PersonalMessageDetail} from "./pages/Detail/MyMessageDetail";
 import {MakeAppointment} from "./pages/MakeAppointment";
 import {Login} from "./pages/Login";
 import {Signup} from "./pages/Signup";
@@ -22,7 +21,8 @@ import {RecentMenu} from "./pages/RecentMenu";
 import {FoodDetail, menuLoader} from "./pages/FoodDetail";
 import {RestaurantMenu} from "./pages/RestaurantMenu";
 import {APITest} from "./pages/APITest";
-import { Order } from "./pages/Order";
+import {Order} from "./pages/Order";
+import {Message} from "./pages/Message";
 
 export const router = createBrowserRouter([
     //이하의 객체는 개별의 Route임
@@ -100,12 +100,12 @@ export const router = createBrowserRouter([
     },
     {
         path: "/signup",
-        element: <Signup />,
+        element: <Signup/>,
         errorElement: <ErrorPage/>,
     },
     {
         path: "/mypage/editmyinfo",
-        element: <EditMyInfo />,
+        element: <EditMyInfo/>,
         errorElement: <ErrorPage/>,
     }, {
         path: "/mypage/recentorderdetail",
@@ -124,11 +124,11 @@ export const router = createBrowserRouter([
         element: <MyMessageDetail/>,
         errorElement: <ErrorPage/>,
     }, {
-        path: "/mypage/message",
+        path: "/mypage/message/:id",
         element: <Message/>,
         errorElement: <ErrorPage/>,
     }, {
-        path: "/mypage/message/makeappointment",
+        path: "/mypage/message/makeappointment/:noteRoomId",
         element: <MakeAppointment/>,
         errorElement: <ErrorPage/>,
     }, {
@@ -139,5 +139,9 @@ export const router = createBrowserRouter([
         path: "/apitest",
         element: <APITest/>,
         errorElement: <ErrorPage/>,
-    }
+    }, {
+        path: "/mypage/personalmessage/:postId",
+        element: <PersonalMessageDetail/>,
+        errorElement: <ErrorPage/>,
+    },
 ]);

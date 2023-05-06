@@ -1,11 +1,11 @@
 export enum GroupType {
-    MATCH = "MATCH", GROUP = "GROUP"
+    INDIVIDUAL = "INDIVIDUAL", ORGANIZATION = "ORGANIZATION"
 }
 
 export interface Post {
     memberId: number;
     title: string;
     body: string;
-    type: string;
+    groupType: GroupType;
     scheduledMealTime: string;
 }

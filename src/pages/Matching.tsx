@@ -10,9 +10,10 @@ import {AddDrawer, FilterDrawer} from "../components/Drawers";
 
 
 export const Matching: React.FC = () => {
-    return (<SimpleTemplate param={{ pageHeaderName: "매칭"}}>
-        <Contents/>
-    </SimpleTemplate>)
+    return (
+        <SimpleTemplate param={{pageHeaderName: "매칭"}}>
+            <Contents/>
+        </SimpleTemplate>)
 }
 
 const Contents: React.FC = () => {

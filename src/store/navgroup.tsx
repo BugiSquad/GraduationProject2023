@@ -6,6 +6,7 @@ export enum NavigationMenu {
 
 export const navgroup = createSlice({
     name: "navgroup",
+    //TODO
     initialState: {cur: NavigationMenu.APP},
     reducers: {
         toAPP(state) {

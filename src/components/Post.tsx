@@ -1,13 +1,14 @@
 import React from "react";
-import {Avatar, Card, PopperPlacementType, Typography} from "@mui/material";
+import {Avatar, Card, Chip, PopperPlacementType, Typography} from "@mui/material";
 import {useAppDispatch} from "../store/hooks";
 import {setSelectedWith} from "../store/matching/posts";
 
 export interface PostDetail {
     title: string;
     memberProfileUrl: string;
-    minutesLeftUntilMeal: string;
+    minutesLeftUntilMeal: number;
     index: number;
+    interest: string[];
     onClick: (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType) => void;
 }
 
@@ -20,8 +21,15 @@ export const Post: React.FC<PostDetail> = (detail: PostDetail) => {
                   detail.onClick(event, "auto");
                   dispatch(setSelectedWith(Number(event.currentTarget.id)))
               }}>
-            <Avatar src={detail.memberProfileUrl}/>
+            <Avatar src={detail.memberProfileUrl == null ? "" : detail.memberProfileUrl}/>
             <Typography variant={"body2"}>{detail.title}</Typography>
-            <Typography variant={"subtitle2"}>{detail.minutesLeftUntilMeal}</Typography>
+            {detail.interest.map((interest, idx) => <Chip label={`#${interest}`}></Chip>)}
+            <Typography variant={"subtitle2"}>{getTimeFrom(detail.minutesLeftUntilMeal)}전</Typography>
         </Card> </>)
+}
+const getTimeFrom = (minutesLeftUntilMeal: number): string => {
+    const hours = Math.floor(minutesLeftUntilMeal / 60)
+    const minutes = minutesLeftUntilMeal % 60
+    if (hours >= 1) return `${hours}시간 ${minutes}분`
+    else return `${minutes}분`
 }
