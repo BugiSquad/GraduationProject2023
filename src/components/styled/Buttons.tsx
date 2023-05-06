@@ -1,5 +1,5 @@
 import {styled} from "@mui/system";
-import {Button} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 
 export const OrangeButton = styled(Button)({
     margin: "5px",
@@ -11,4 +11,7 @@ export const OrangeButton = styled(Button)({
     color: "white",
     borderRadius: "2rem",
     padding: "0.5rem",
+})
+export const OrangeCircleButton = styled(IconButton)({
+    background: "#FE724C"
 })

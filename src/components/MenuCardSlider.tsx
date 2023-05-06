@@ -4,16 +4,16 @@ import {styled} from '@mui/system';
 import FoodCard from "./FoodCard";
 import {MenuItem} from "../types/MenuItem";
 
+interface FoodCardSliderItems {
+    foods: MenuItem[];
+}
+
 export const CustomGrid = styled(Grid)({
     position: 'relative',
     // display: 'flex',
     overflowY: 'scroll',
     scrollSnapType: 'y'
 });
-
-interface FoodCardSliderItems {
-    foods: MenuItem[];
-}
 
 const MenuCardSlider: React.FC<FoodCardSliderItems> = ({foods}) => {
     return (

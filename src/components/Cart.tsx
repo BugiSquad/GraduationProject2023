@@ -19,6 +19,10 @@ interface Food {
     description: string;
 }
 
+interface CartItems {
+    items: Item[]
+}
+
 export const CartItem: React.FC<Food> = ({id, name, price, imageUrl, description}, key: number) => {
     const [liked, setLiked] = useState(false);
     const dispatch = useAppDispatch()
@@ -74,9 +78,6 @@ export const CartItem: React.FC<Food> = ({id, name, price, imageUrl, description
     )
 }
 
-interface CartItems {
-    items: Item[]
-}
 
 export const CartItemList: React.FC<CartItems> = (cart) => {
     return (<SwipeableList>

@@ -1,11 +1,10 @@
-import useAutocomplete, { AutocompleteGetTagProps } from '@mui/base/useAutocomplete';
+import useAutocomplete, {AutocompleteGetTagProps} from '@mui/base/useAutocomplete';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { styled } from '@mui/material/styles';
-import { autocompleteClasses } from '@mui/material/Autocomplete';
-import { useState } from 'react';
+import {styled} from '@mui/material/styles';
+import {autocompleteClasses} from '@mui/material/Autocomplete';
 
-interface InterestOptionType {
+export interface InterestOptionType {
   label: string;
   key: number;
 }
@@ -34,17 +33,22 @@ interface TagProps extends ReturnType<AutocompleteGetTagProps> {
 }
 
 function Tag(props: TagProps) {
-  const { label, onDelete, ...other } = props;
+  const {label, onDelete, ...other} = props;
   return (
-    <div {...other}>
-      <span>{label}</span>
-      <CloseIcon fontSize='large' onClick={onDelete} />
-    </div>
+      <div {...other}>
+        <span>{label}</span>
+        <CloseIcon fontSize='large' onClick={onDelete}/>
+      </div>
   );
 }
 
-export const InterestFilter: React.FC = () => {
-  const [selectedInterests, setSelectedInterests] = useState<InterestOptionType[]>([]);
+interface InterestFilterProps {
+  selectedInterests: InterestOptionType[];
+  setSelectedInterests: React.Dispatch<React.SetStateAction<InterestOptionType[]>>;
+}
+
+//TODO ~/types/Interests.tsx와 중복되는 부분 합치기
+export const InterestFilter: React.FC<InterestFilterProps> = ({selectedInterests, setSelectedInterests}) => {
 
   const {
     getRootProps,

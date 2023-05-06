@@ -5,12 +5,14 @@ import {useNavigate} from "react-router-dom";
 import {joinNoteRoom} from "../api/NoteRoom";
 import {getMyID} from "../api/Common";
 
-export const PostPopper: FC<{
+interface PostPopperProps {
     anchorEl: HTMLDivElement | null,
     open: boolean,
     onClose: (s: boolean) => void,
     placement: PopperPlacementType
-}>
+}
+
+export const PostPopper: FC<PostPopperProps>
     = ({open, placement, onClose, anchorEl}) => {
 
     const item = useAppSelector((state) => state.postItems.selected)

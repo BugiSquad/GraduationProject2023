@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import {Autocomplete, Button, Card, TextField, Typography} from "@mui/material";
-import {InterestFilter} from "./InterestFilter";
+import {Card, Typography} from "@mui/material";
+import {InterestFilter, InterestOptionType} from "./InterestFilter";
+import {OrangeButton} from "./styled/Buttons";
 
 
 export const Filter: React.FC = () => {
-    const [interests, setInterests] = useState<string[]>([]);
+    const [interests, setInterests] = useState<InterestOptionType[]>([]);
     return (
         <>
             <Card id={"matchingFilter"} sx={{
@@ -16,25 +17,13 @@ export const Filter: React.FC = () => {
                 borderRadius: 5
             }}>
                 {/*위로 추가하는 바 필요*/}
-                <Autocomplete options={[...Object.keys(interests).map((item) => item)]}
-                              renderInput={(params) => (
-                                  <TextField label="관심사" {...params}
-                                             InputProps={{
-                                                 ...params.InputProps,
-                                                 type: 'search',
-                                             }}/>)}
-                              onChange={(event, value) => {
-                                  if (value != null)
-                                      setInterests([value, ...interests.filter(e => e !== value)])
-                              }}/>
                 <Typography variant={"h6"} fontWeight={"bold"}>필터</Typography>
-                <InterestFilter />
-
-                <Button>
-                    <Card sx={{display: "flex", background: "orange",}}>
+                <InterestFilter setSelectedInterests={setInterests} selectedInterests={interests}/>
+                <div>
+                    <OrangeButton>
                         <Typography sx={{color: "white"}}>적용</Typography>
-                    </Card>
-                </Button>
+                    </OrangeButton>
+                </div>
             </Card>
         </>
     )
