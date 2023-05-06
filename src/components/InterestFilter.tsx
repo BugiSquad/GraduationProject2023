@@ -1,4 +1,3 @@
-import * as React from 'react';
 import useAutocomplete, { AutocompleteGetTagProps } from '@mui/base/useAutocomplete';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,45 +6,103 @@ import { autocompleteClasses } from '@mui/material/Autocomplete';
 import { useState } from 'react';
 
 interface InterestOptionType {
-    label: string;
-    key: number;
+  label: string;
+  key: number;
 }
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const Interests = [
-    { key: 1, label: '배그' },
-    { key: 2, label: '롤' },
-    { key: 3, label: '연예인' },
-    { key: 4, label: '커피' },
-    { key: 5, label: '디저트' },
-    { key: 6, label: '게임' },
-    { key: 7, label: '팝송' },
-    { key: 8, label: 'KPOP' },
-    { key: 9, label: 'JPOP' },
-    { key: 10, label: '드라마' },
-    { key: 11, label: '영화' },
-    { key: 12, label: '여행' },
-    { key: 13, label: '공부' },
-    { key: 14, label: '등산' },
-    { key: 15, label: '책' },
- ];
+  { key: 1, label: '배그' },
+  { key: 2, label: '롤' },
+  { key: 3, label: '연예인' },
+  { key: 4, label: '커피' },
+  { key: 5, label: '디저트' },
+  { key: 6, label: '게임' },
+  { key: 7, label: '팝송' },
+  { key: 8, label: 'KPOP' },
+  { key: 9, label: 'JPOP' },
+  { key: 10, label: '드라마' },
+  { key: 11, label: '영화' },
+  { key: 12, label: '여행' },
+  { key: 13, label: '공부' },
+  { key: 14, label: '등산' },
+  { key: 15, label: '책' },
+];
+
+
+interface TagProps extends ReturnType<AutocompleteGetTagProps> {
+  label: string;
+}
+
+function Tag(props: TagProps) {
+  const { label, onDelete, ...other } = props;
+  return (
+    <div {...other}>
+      <span>{label}</span>
+      <CloseIcon fontSize='large' onClick={onDelete} />
+    </div>
+  );
+}
+
+export const InterestFilter: React.FC = () => {
+  const [selectedInterests, setSelectedInterests] = useState<InterestOptionType[]>([]);
+
+  const {
+    getRootProps,
+    getInputProps,
+    getTagProps,
+    getListboxProps,
+    getOptionProps,
+    groupedOptions,
+    focused,
+    setAnchorEl
+  } = useAutocomplete({
+    multiple: true,
+    options: Interests,
+    getOptionLabel: (option) => option.label,
+    onChange: (event, newValue) => {
+      setSelectedInterests(newValue);
+    },
+  });
+
+  console.log({ selectedInterests });
+  return (
+    <Root>
+      <div  {...getRootProps()}>
+        관심사를 골라주세요!
+        <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
+          {selectedInterests.map((option: InterestOptionType, index: number) => (
+            <StyledTag label={option.label}  {...getTagProps({ index })} key={option.key} />
+          ))}
+          <input {...getInputProps()} />
+        </InputWrapper>
+      </div>
+      {groupedOptions.length > 0 ? (
+        <Listbox {...getListboxProps()}>
+          {(groupedOptions as typeof Interests).map((option, index) => (
+            <li {...getOptionProps({ option, index })}>
+              <span>{option.label}</span>
+              <CheckIcon fontSize="small" />
+            </li>
+          ))}
+        </Listbox>
+      )  : null}
+    </Root>
+
+  );
+}
 
 const Root = styled('div')(
-    ({ theme }) => `
-  color: ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
-        };
+  ({ theme }) => `
+  color: ${
+    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
+  };
   font-size: 14px;
 `,
 );
 
-const Label = styled('label')`
-  padding: 0 0 4px;
-  line-height: 1.5;
-  display: block;
-`;
 
 const InputWrapper = styled('div')(
-    ({ theme }) => `
+  ({ theme }) => `
   width: 300px;
   border: 1px solid ${theme.palette.mode === 'dark' ? '#434343' : '#d9d9d9'};
   background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
@@ -66,7 +123,7 @@ const InputWrapper = styled('div')(
   & input {
     background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
     color: ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
-        };
+    };
     height: 30px;
     box-sizing: border-box;
     padding: 4px 6px;
@@ -80,29 +137,15 @@ const InputWrapper = styled('div')(
 `,
 );
 
-interface TagProps extends ReturnType<AutocompleteGetTagProps> {
-    label: string;
-}
-
-function Tag(props: TagProps) {
-    const { label, onDelete, ...other } = props;
-    return (
-        <div {...other}>
-            <span>{label}</span>
-            <CloseIcon onClick={onDelete} />
-        </div>
-    );
-}
-
 const StyledTag = styled(Tag)<TagProps>(
-    ({ theme }) => `
+  ({ theme }) => `
   display: flex;
   align-items: center;
   height: 24px;
   margin: 2px;
   line-height: 22px;
   background-color: ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : '#fafafa'
-        };
+    };
   border: 1px solid ${theme.palette.mode === 'dark' ? '#303030' : '#e8e8e8'};
   border-radius: 2px;
   box-sizing: content-box;
@@ -122,7 +165,7 @@ const StyledTag = styled(Tag)<TagProps>(
   }
 
   & svg {
-    font-size: 12px;
+    font-size: 20px;
     cursor: pointer;
     padding: 4px;
   }
@@ -130,7 +173,7 @@ const StyledTag = styled(Tag)<TagProps>(
 );
 
 const Listbox = styled('ul')(
-    ({ theme }) => `
+  ({ theme }) => `
   width: 300px;
   margin: 2px 0 0;
   padding: 0;
@@ -176,56 +219,3 @@ const Listbox = styled('ul')(
 `,
 );
 
-export const InterestFilter: React.FC = () => {
-    const [selectedInterests, setSelectedInterests] = useState<InterestOptionType[]>([]);
-
-    const {
-        getRootProps,
-        getInputLabelProps,
-        getInputProps,
-        getTagProps,
-        getListboxProps,
-        getOptionProps,
-        groupedOptions,
-        value,
-        focused,
-        setAnchorEl,
-    } = useAutocomplete({
-        id: 'customized-hook-demo',
-        multiple: true,
-        options: Interests,
-        getOptionLabel: (option) => option.label,
-        onChange: (event, newValue) => {
-            setSelectedInterests(newValue);
-        },
-    });
-
-    function handleDelete(index: number) {
-        const newSelectedInterests = [...selectedInterests];
-        newSelectedInterests.splice(index, 1);
-        setSelectedInterests(newSelectedInterests);
-    }
-    return (
-        <Root>
-            <div {...getRootProps()}>
-                <Label {...getInputLabelProps()}>관심사를 골라주세요!</Label>
-                <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
-                    {selectedInterests.map((option: InterestOptionType, index: number) => (
-                        <StyledTag label={option.label} onDelete={() => handleDelete(index)} key={option.key} />
-                    ))}
-                    <input {...getInputProps()} />
-                </InputWrapper>
-            </div>
-            {groupedOptions.length > 0 ? (
-                <Listbox {...getListboxProps()}>
-                    {(groupedOptions as typeof Interests).map((option, index) => (
-                        <li {...getOptionProps({ option, index })}>
-                            <span>{option.label}</span>
-                            <CheckIcon fontSize="small" />
-                        </li>
-                    ))}
-                </Listbox>
-            ) : null}
-        </Root>
-    );
-}
