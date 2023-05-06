@@ -2,7 +2,7 @@ import {styled} from "@mui/system";
 import {Button, IconButton} from "@mui/material";
 
 export const OrangeButton = styled(Button)({
-    margin: "5px",
+    margin: "10px",
     flex: "1",
     justifyContent: "center",
     alignItems: "center",

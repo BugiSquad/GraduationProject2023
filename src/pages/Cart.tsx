@@ -11,9 +11,9 @@ export const Cart: React.FC = () => {
     return (
         <SimpleTemplate param={{pageHeaderName: "장바구니"}}>
             <div>
-                <CartPriceDetail></CartPriceDetail>
                 <CartItemList items={cart.item}></CartItemList>
                 <Link to={""}><Typography variant={"subtitle2"}/></Link>
+                <CartPriceDetail></CartPriceDetail>
             </div>
         </SimpleTemplate>
     )
