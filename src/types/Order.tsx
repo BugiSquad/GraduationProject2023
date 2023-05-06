@@ -14,3 +14,24 @@ export type Order = {
     shop_id: number;
     payment_id: number;
 }
+
+export interface OrdersPostDto {
+    totalPrice: number;
+    ordersType: string;
+    memberId: number;
+    paymentPostDto: PaymentPostDto;
+    menuOrderItems: OrderItemPostDto[];
+}
+
+export interface OrderItemPostDto {
+    menuId: number;
+    count: number;
+}
+
+export interface PaymentPostDto {
+    paymentNum: string;
+    paymentTime: Date;
+    confirmNum: number;
+    detail: string;
+    paymentType: string;
+}
