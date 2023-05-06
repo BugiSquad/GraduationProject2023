@@ -1,11 +1,12 @@
-import {Button, Typography} from "@mui/material";
 import {createNewPost} from "../api/Post";
-import {GroupType, Post} from "../types/Post";
+import {GroupType, PostDto} from "../types/PostDto";
 import {faker} from "@faker-js/faker";
-import {requestMemberRegister} from "../api/Member";
+import {requestMemberSignUp} from "../api/Member";
 
 import {addMenus} from "../api/Menu";
-import {Gender, Interest, MemberType} from "../types/Member";
+import {Gender, Interest, MemberType} from "../types/MemberDto";
+import {Typography} from "@mui/material";
+import {OrangeButton} from "../components/styled/Buttons";
 
 /**
  * 회원가입 페이지
@@ -17,11 +18,11 @@ import {Gender, Interest, MemberType} from "../types/Member";
  */
 export const APITest: React.FC = () => {
     faker.setLocale('ko')
-    const onButtonClicked = () => {
+    const onOrangeButtonClicked = () => {
         let interest = new Interest()
         interest.pubg = true;
         interest.lol = true;
-        requestMemberRegister(
+        requestMemberSignUp(
             {
                 name: `${faker.name.fullName()}`,
                 phone: `${faker.phone.number()}`,
@@ -39,7 +40,7 @@ export const APITest: React.FC = () => {
     const createPost = (id: number) => {
         let time = new Date()
         let dateToTimeString = time.toISOString()
-        let post: Post = {
+        let post: PostDto = {
             title: `${faker.lorem.sentence(4)}`,
             body: `${faker.lorem.sentence(6)}`,
             memberId: 1,
@@ -52,7 +53,7 @@ export const APITest: React.FC = () => {
     }
     const createDummyMembers = () => {
         for (let i = 0; i < 100; i++) {
-            onButtonClicked()
+            onOrangeButtonClicked()
         }
     }
 
@@ -64,11 +65,13 @@ export const APITest: React.FC = () => {
     return (
         <div>
             <Typography variant={"h4"}>API테스트</Typography>
-            <Button onClick={onButtonClicked}>회원가입</Button>
-            {/*<Button onClick={createPost}>글 올리기</Button>*/}
-            <Button  onClick={()=>{addMenus()}}>메뉴 등록</Button>
-            <Button onClick={createDummyMembers}>더미 회원 만들기(X100)</Button>
-            <Button onClick={createDummyPosts}>더미 글 올리기</Button>
+            <OrangeButton onClick={onOrangeButtonClicked}>회원가입</OrangeButton>
+            {/*<OrangeButton onClick={createPost}>글 올리기</OrangeButton>*/}
+            <OrangeButton onClick={() => {
+                addMenus()
+            }}>메뉴 등록</OrangeButton>
+            <OrangeButton onClick={createDummyMembers}>더미 회원 만들기(X100)</OrangeButton>
+            <OrangeButton onClick={createDummyPosts}>더미 글 올리기</OrangeButton>
         </div>
     )
 }

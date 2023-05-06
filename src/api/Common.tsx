@@ -4,3 +4,4 @@
 export const getApiURL = () => {
     return process.env.NODE_ENV === 'production' ? "http://43.200.137.18:8080/api" : "http://localhost:8080/api";
 }
+export const getMyID = () => 1

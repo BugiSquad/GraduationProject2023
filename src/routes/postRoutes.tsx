@@ -3,7 +3,6 @@ import {ErrorPage} from "../error-page";
 import {Message} from "../pages/Message";
 
 export const PostRoutes = [
-
     {
         path: "/mypage/personalmessage/:postId",
         element: <PersonalMessageDetail/>,

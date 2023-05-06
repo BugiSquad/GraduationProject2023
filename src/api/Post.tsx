@@ -1,6 +1,6 @@
 import {getApiURL} from "./Common";
 import axios from "axios";
-import {Post} from "../types/Post";
+import {PostDto} from "../types/PostDto";
 
 
 /**
@@ -14,6 +14,6 @@ export function getPosts() {
  * 새로운 게시글을 생성합니다.
  * @param post
  */
-export function createNewPost(post: Post) {
+export function createNewPost(post: PostDto) {
     return axios.post(`${getApiURL()}/match/post`, post)
 }

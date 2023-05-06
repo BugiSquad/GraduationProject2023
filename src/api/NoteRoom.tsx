@@ -12,17 +12,37 @@ export const joinNoteRoom = (subjectId: number, userId: number) => {
     return axios.post(`${getApiURL()}/match/participation`, {postId: subjectId, memberId: userId})
 }
 
+/**
+ * 채팅방에 있는 쪽지를 모두 확인합니다
+ * @param noteRoomId 채팅방의 ID
+ * @param userId 사용자의 ID
+ */
 export const getNotesWith = (noteRoomId: number, userId: number) => {
     return axios.get(`${getApiURL()}/note?noteRoomId=${noteRoomId}&memberId=${userId}`)
 }
+
+/**
+ * 해당하는 채팅방에 쪽지를 보냅니다.
+ * @param noteRoomId 채팅방의 ID
+ * @param userId 사용자의 ID
+ * @param message 전송하고자 하는 메시지
+ */
 export const sendNoteToRoom = (noteRoomId: number, userId: number, message: string) => {
     return axios.post(`${getApiURL()}/note`, {noteRoomId: noteRoomId, senderId: userId, message: message})
 }
 
+/**
+ * 현재 채팅방에 참여중인 멤버들에 대한 정보를 요청합니다.
+ * @param noteRoomId 채팅방의 ID
+ */
 export const getNoteRoomMembers = (noteRoomId: number) => {
     return axios.get(`${getApiURL()}/note/room/members?noteRoomId=${noteRoomId}`)
 }
 
+/**
+ * 사용자가 참여하고 있는 채팅의 목록을 반환합니다.
+ * @param memberId 사용자의 ID
+ */
 export const getNoteRoomsWith = (memberId: number) => {
     return axios.get(`${getApiURL()}/note/rooms`, {
         params: {
@@ -30,6 +50,10 @@ export const getNoteRoomsWith = (memberId: number) => {
         }
     });
 };
+/**
+ * 개인 채팅에 해당하는 채팅방을 반환 받습니다.
+ * @param postId 개인 채팅방의 ID
+ */
 export const getIndividualRoom = (postId: string) => {
     return axios.get(`${getApiURL()}/note/rooms/individual?postId=${postId}`)
 };

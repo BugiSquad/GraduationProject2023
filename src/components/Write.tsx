@@ -1,12 +1,13 @@
 import React, {useMemo, useState} from "react";
-import {Button, Card, FormControlLabel, Radio, RadioGroup, TextField, Typography} from "@mui/material";
+import {Card, FormControlLabel, Radio, RadioGroup, TextField, Typography} from "@mui/material";
 import {DatePicker, MobileTimePicker} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from "dayjs";
 import 'dayjs/locale/ko';
 import {LocaleProvider} from "./LocaleProvider";
 import {Form} from "react-router-dom";
-import {GroupType, Post} from "../types/Post";
+import {GroupType, PostDto} from "../types/PostDto";
 import {createNewPost} from "../api/Post";
+import {OrangeButton} from "./styled/Buttons";
 
 /**
  * 게시글을 서버에 업로드 하는 함수
@@ -18,7 +19,7 @@ import {createNewPost} from "../api/Post";
 function onSubmit(time: dayjs.Dayjs | null, title: string, body: string, groupType: GroupType) {
     return () => {
         let timeToString = time == null ? dayjs().toISOString() : time.toISOString()
-        let post: Post = {
+        let post: PostDto = {
             title: `${title}`,
             body: `${body}`,
             memberId: 1,
@@ -95,9 +96,9 @@ export const Write: React.FC = () => {
                     <FormControlLabel value={`${GroupType.ORGANIZATION}`} control={<Radio/>} label="단체"/>
                 </RadioGroup>
                 <TextField {...bodyProps} />
-                <Button type={"submit"} sx={{display: "flex", background: "orange",}}>
+                <OrangeButton type={"submit"} sx={{display: "flex"}}>
                     <Typography sx={{color: "white"}}>작성</Typography>
-                </Button>
+                </OrangeButton>
             </Form>
         </Card>
     )

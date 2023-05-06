@@ -12,6 +12,7 @@ import {getNoteRoomMembers} from "../api/NoteRoom";
 import {PostRoomMember} from "../types/PostRoomMember";
 import {PromiseInfo} from "../types/PromiseInfo";
 import {makePromise} from "../api/Promise";
+import {getMyID} from "../api/Common";
 
 export const MakeAppointment: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -49,7 +50,7 @@ export const MakeAppointment: React.FC = () => {
         const payload: PromiseInfo = {
             noteRoomId: roomId,
             location: location,
-            memberId: 20,
+            memberId: getMyID(),
             promiseMemberIds: membersIds,
             promiseTime: selectedTime?.toISOString()
         }
