@@ -42,7 +42,7 @@ export const CartItem: React.FC<Food> = ({id, name, price, imageUrl, description
                 borderRadius: "2rem",
                 padding: "0.5rem",
                 boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-            }} onClick={() => navigate('/fooddetail')}>
+            }} onClick={() => navigate(`/fooddetail/${id}`)}>
                 <Avatar sx={{width: 70, height: 70}}
                         src={imageUrl}/>
                 <div style={{flexDirection: 'column'}}>

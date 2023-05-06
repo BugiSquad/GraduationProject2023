@@ -4,6 +4,10 @@ export enum OrderStatus {
     Finish = '완료됨'
 }
 
+export enum OrderType {
+    reservation = "reservation", now = "now", packaging = "packaging"
+}
+
 export type Order = {
     order_id: string;
     order_detail: string;
@@ -15,23 +19,24 @@ export type Order = {
     payment_id: number;
 }
 
-export interface OrdersPostDto {
-    totalPrice: number;
-    ordersType: string;
-    memberId: number;
-    paymentPostDto: PaymentPostDto;
-    menuOrderItems: OrderItemPostDto[];
-}
 
-export interface OrderItemPostDto {
+export interface MenuOrderItem {
     menuId: number;
     count: number;
 }
 
 export interface PaymentPostDto {
     paymentNum: string;
-    paymentTime: Date;
+    paymentTime?: Date;
     confirmNum: number;
     detail: string;
     paymentType: string;
+}
+
+
+export interface OrderDto {
+    ordersType: OrderType;
+    memberId: number;
+    paymentPostDto: PaymentPostDto;
+    menuOrderItems: MenuOrderItem[];
 }

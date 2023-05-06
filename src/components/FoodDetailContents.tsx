@@ -1,21 +1,21 @@
-import { Box, Button, FormControlLabel, Link, Paper, Radio, RadioGroup, Typography } from "@mui/material"
-import { FaStar } from "react-icons/fa"
-import { useState } from "react";
+import {Box, Button, FormControlLabel, Link, Paper, Radio, RadioGroup, Typography} from "@mui/material"
+import {FaStar} from "react-icons/fa"
+import {useState} from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { MdAddCircleOutline, MdRemoveCircleOutline } from 'react-icons/md';
-import { useAppDispatch } from "../store/hooks";
-import { add } from "../store/cart";
-import { CartItem } from "../types/CartItem";
-import { useNavigate } from "react-router-dom";
-import { ReviewBar } from "./ReviewBar";
-import { ReviewList } from "./ReviwList";
+import {MdAddCircleOutline, MdRemoveCircleOutline} from 'react-icons/md';
+import {useAppDispatch} from "../store/hooks";
+import {add} from "../store/cart";
+import {CartItem} from "../types/CartItem";
+import {useNavigate} from "react-router-dom";
+import {ReviewBar} from "./ReviewBar";
+import {ReviewList} from "./ReviwList";
 
 interface FoodDetailContentsProps {
     food: CartItem;
 }
 
 export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food }) => {
-    const [count, setCount] = useState<number>(0);
+    const [count, setCount] = useState<number>(1);
     const navigate = useNavigate();
 
     const handleDecrement = () => {
@@ -110,7 +110,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food }) 
                 padding: "0.5rem",
                 boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
             }} onClick={() => {
-                dispatch(add({ ...food }))
+                dispatch(add({...food, quantity: count}))
                 navigate('/cart')
             }}>
                 <Typography color={'white'}><ShoppingBagIcon /> 장바구니 담기</Typography>
