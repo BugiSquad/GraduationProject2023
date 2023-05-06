@@ -30,3 +30,6 @@ export const getNoteRoomsWith = (memberId: number) => {
         }
     });
 };
+export const getIndividualRoom = (postId: string) => {
+    return axios.get(`${getApiURL()}/note/rooms/individual?postId=${postId}`)
+};

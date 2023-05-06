@@ -12,7 +12,7 @@ import {EditMyInfo} from "./pages/EditMyInfo";
 import {RecentOrderDetail} from "./pages/Detail/RecentOrderDetail";
 import {RecentMeetDetail} from "./pages/Detail/RecentMeetDetail";
 import {MyMeetingsDetail} from "./pages/Detail/MyMeetingsDetail";
-import {MyMessageDetail} from "./pages/Detail/MyMessageDetail";
+import {MyMessageDetail, PersonalMessageDetail} from "./pages/Detail/MyMessageDetail";
 import {MakeAppointment} from "./pages/MakeAppointment";
 import {Login} from "./pages/Login";
 import {Signup} from "./pages/Signup";
@@ -100,12 +100,12 @@ export const router = createBrowserRouter([
     },
     {
         path: "/signup",
-        element: <Signup />,
+        element: <Signup/>,
         errorElement: <ErrorPage/>,
     },
     {
         path: "/mypage/editmyinfo",
-        element: <EditMyInfo />,
+        element: <EditMyInfo/>,
         errorElement: <ErrorPage/>,
     }, {
         path: "/mypage/recentorderdetail",
@@ -139,5 +139,9 @@ export const router = createBrowserRouter([
         path: "/apitest",
         element: <APITest/>,
         errorElement: <ErrorPage/>,
-    }
+    }, {
+        path: "/mypage/personalmessage/:postId",
+        element: <PersonalMessageDetail/>,
+        errorElement: <ErrorPage/>,
+    },
 ]);

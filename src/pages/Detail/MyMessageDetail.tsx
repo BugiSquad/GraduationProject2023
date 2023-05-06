@@ -3,7 +3,9 @@ import {SimpleTemplate} from "../PageTemplate";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {IconButton} from "@mui/material";
 import {MyMessage} from "../../components/MyMessage";
-import {getNoteRoomsWith} from "../../api/NoteRoom";
+import {getIndividualRoom, getNoteRoomsWith} from "../../api/NoteRoom";
+import {GroupType} from "../../types/Post";
+import {useParams} from "react-router-dom";
 
 
 export function handleGoBack() {
@@ -20,14 +22,42 @@ interface NoteInfo {
     creatorId: number;
 }
 
+interface NoteGroup {
+    postId: number;
+    title: string;
+    body: string;
+    groupType: 'INDIVIDUAL' | 'GROUP';
+    noteRooms: NoteInfo[];
+}
+
 export const MyMessageDetail: React.FC = () => {
     const [noteRooms, setNoteRooms] = useState<NoteInfo[]>([]);
+    const [noteGroups, setNoteGroup] = useState<NoteGroup[]>([])
     useEffect(() => {
         getNoteRoomsWith(20).then((res) => {
             const data = res.data.data
             const notes = data.map((note: NoteInfo) => note)
+            const tmp = notes.reduce((posts: NoteGroup[], note: NoteInfo) => {
+                let filtered = posts.filter((item: NoteGroup) => item.postId === note.postId)
+                if (filtered.length === 0)
+                    posts.push({
+                        noteRooms: [note],
+                        body: note.body,
+                        groupType: note.groupType,
+                        postId: note.postId,
+                        title: note.title
+                    })
+                else
+                    posts.forEach((item) => {
+                        if (item.postId === note.postId)
+                            item.noteRooms = [...item.noteRooms, note]
+                    })
+                return posts
+            }, [])
             console.log(notes)
             setNoteRooms(notes)
+            console.log(tmp)
+            setNoteGroup(tmp)
         })
     }, [])
     return (
@@ -43,11 +73,55 @@ export const MyMessageDetail: React.FC = () => {
                     <div></div>
                     <IconButton><DeleteOutlineIcon/></IconButton>
                 </div>
-                <MyMessage content="안녕하세요." date="2022-02-01"/>
-                <MyMessage content="반갑습니다." date="2022-02-02"/>
                 {noteRooms.map((value, idx) => <MyMessage content={value.title}
                                                           date={String(value.minutesLeftUntilMeal)}/>)}
+                <GroupHeader group={noteGroups}/>
             </div>
         </SimpleTemplate>
     )
+}
+
+interface Prop {
+    group: NoteGroup[]
+}
+
+const GroupHeader: React.FC<Prop> = ({group}) => {
+    return (<>
+            {group.map((item, idx) =>
+                <MyMessage content={`${item.groupType === GroupType.INDIVIDUAL ? "[개인]" : "[단체]"}${item.title}`}
+                           date={"10분 뒤"}/>
+            )}
+        </>
+    )
+}
+
+
+interface NoteRoomInfo {
+    memberId: number;
+    noteRoomId: number;
+    profileUrl: string | null;
+    name: string;
+    lastMessage: string | null;
+}
+
+
+export const PersonalMessageDetail: React.FC = () => {
+    const param = useParams()
+    const postId = param.postId
+    const [noteRooms, setNoteRooms] = useState<NoteRoomInfo[]>([])
+    useEffect(() => {
+        if (postId == null) return;
+        getIndividualRoom(postId).then((res) => {
+            const data = res.data.data
+            setNoteRooms(data.map((item: NoteRoomInfo) => item))
+        })
+    }, [])
+    noteRooms.forEach((item) => console.log(item))
+    return (<>
+        <SimpleTemplate param={{pageHeaderName: "쪽지함 목록"}}>
+            {noteRooms.map((room, idx) =>
+                <MyMessage content={room.name} date={room.memberId + "" + room.noteRoomId}/>
+            )}
+        </SimpleTemplate>
+    </>)
 }
