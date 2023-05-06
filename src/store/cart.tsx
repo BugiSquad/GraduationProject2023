@@ -33,7 +33,7 @@ export const Cart = createSlice(
                         flag = true
                     }
                 })
-                if (!flag) state.item.push(action.payload)
+                if (!flag) state.item.push(action.payload as CartItem)
                 saveCartToStorage(state.item)
             }, update(state, action) {
                 let flag = false

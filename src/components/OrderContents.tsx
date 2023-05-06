@@ -1,12 +1,14 @@
-import { Box, Button, Card, Modal, TextField, Typography } from "@mui/material"
-import { OrderpageCards } from "./OrderpageCards"
+import {Box, Button, Card, Modal, TextField, Typography} from "@mui/material"
+import {OrderpageCards} from "./OrderpageCards"
 import naverpayImg from '../images/logo_naverpay.png'
 import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
-import { OrderProductsList } from "./OrderProductsList"
+import {OrderProductsList} from "./OrderProductsList"
 import completeImg from '../images/complete.png'
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import {useNavigate} from "react-router-dom"
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {CartItem} from "../types/CartItem";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -25,21 +27,23 @@ export const OrderContents: React.FC = () => {
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = ()=> {
+    const items = useAppSelector(state => state.cart.item);
+    const dispatch = useAppDispatch();
+    const handleClose = () => {
         setOpen(false)
         navigate('/mypage');
     }
     return (<>
-        <Card sx={{
-            minWidth: 200,
-            maxWidth: 1000,
-            minHeight: 490,
-            padding: '10px 10',
+            <Card sx={{
+                minWidth: 200,
+                maxWidth: 1000,
+                minHeight: 490,
+                padding: '10px 10',
             margin: '10px',
         }}>
 
-            <OrderpageCards title="주문상품" content={<OrderProducts />} />
-            <OrderpageCards title="주문자 정보" content={<OrderInfo />} />
+                <OrderpageCards title="주문상품" content={<OrderProducts items={items}/>}/>
+                <OrderpageCards title="주문자 정보" content={<OrderInfo/>}/>
             <OrderpageCards title="결제수단" content={<PayMethod />} />
 
         </Card>
@@ -91,20 +95,25 @@ export const OrderContents: React.FC = () => {
                 borderRadius: "2rem",
                 padding: "0.5rem",
                 boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-            }} >
+            }}>
                 <Typography color={'white'} fontWeight={'bold'} fontSize={14}>예약 주문</Typography>
             </Button>
         </div>
-    </>
+        </>
 
     )
 }
 
-export const OrderProducts: React.FC = () => {
-    return (<>
-        <OrderProductsList />
+interface OrderProductsProps {
+    items: CartItem[];
+}
 
-    </>
+export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
+    return (<>
+            {items.map((item, idx) =>
+                <OrderProductsList name={item.name} quantity={item.quantity} price={item.price}/>
+            )}
+        </>
     )
 }
 

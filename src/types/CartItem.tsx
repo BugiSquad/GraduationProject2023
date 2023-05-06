@@ -1,11 +1,5 @@
-import {MenuCategory} from "./MenuCategory";
+import {MenuItem} from "./MenuItem";
 
-export interface CartItem {
-    id: number;
-    name: string;
-    price: number;
+export interface CartItem extends MenuItem {
     quantity: number;
-    imageUrl: string;
-    category?: MenuCategory;
-    description: string;
 }
