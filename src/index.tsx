@@ -5,7 +5,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import {store} from "./store/store";
-import {router} from "./router";
+import {router} from "./routes/router";
 // @ts-ignore
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
