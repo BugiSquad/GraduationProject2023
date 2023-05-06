@@ -1,6 +1,7 @@
-import React, {useState} from "react";
-import {Autocomplete, Button, Card, Chip, TextField, Typography} from "@mui/material";
-import interest from "../data/Interests.json";
+import React from "react";
+import {Button, Card, Typography} from "@mui/material";
+import { InterestFilter } from "./InterestFilter";
+
 
 
 export const Filter: React.FC = () => {
@@ -28,11 +29,8 @@ export const Filter: React.FC = () => {
                                       setInterests([value, ...interests.filter(e => e !== value)])
                               }}/>
                 <Typography variant={"h6"} fontWeight={"bold"}>필터</Typography>
-                <div style={{display: "flex", flexDirection: "row"}}>
-                    {interests?.map((item, idx) => <Chip label={item} onDelete={() => {
-                        setInterests(interests.filter(e => e !== item))
-                    }}/>)}
-                </div>
+                <InterestFilter />
+
                 <Button>
                     <Card sx={{display: "flex", background: "orange",}}>
                         <Typography sx={{color: "white"}}>적용</Typography>
