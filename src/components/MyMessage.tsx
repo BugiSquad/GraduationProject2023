@@ -4,9 +4,9 @@ import { EmailOutlined } from '@mui/icons-material';
 import { Message } from "../types/Message";
 import { Link } from "react-router-dom";
 
-export const MyMessage: React.FC<Message> = (detail: Message) => {
+export const MyMessage: React.FC<Message> = ({ msgLinkTo, isGroup, content, count }) => {
     return (
-        <Link to="/mypage/message">
+        <Link to={msgLinkTo} style={{textDecoration: "none"}}>
             <Card sx={{
                 paddingLeft: '10px',
                 paddingRight: '10px',
@@ -18,15 +18,15 @@ export const MyMessage: React.FC<Message> = (detail: Message) => {
                 minWidth: 300,
                 maxWidth: 400,
                 minHeight: 30,
+                backgroundColor: '#F4F4F4',
                 borderRadius: '15px',
+                padding: "0.5rem",
+                boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
 
             }}>
-                <Badge color="secondary" variant="dot" sx={{ maxHeight: "10px" }}>
-                    <EmailOutlined color="primary" sx={{ fontSize: 30, maxHeight: "18px" }} />
-                </Badge>
-
-                <Typography variant={"body2"}>{detail.content}</Typography>
-                <Typography variant={"subtitle2"}>{detail.date}</Typography>
+                <Typography fontSize={18} fontWeight={"bold"}>{isGroup ? "[단체]" : "[개인]"}</Typography>
+                <Typography fontSize={14}fontWeight={"bold"}>{content}</Typography>
+                <Typography fontSize={18} fontWeight={"bold"}>📩 x {count}</Typography>
             </Card>
         </Link>
     )
