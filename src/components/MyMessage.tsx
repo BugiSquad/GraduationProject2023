@@ -21,12 +21,12 @@ export const MyMessage: React.FC<Message> = ({ msgLinkTo, isGroup, content, coun
                 backgroundColor: '#F4F4F4',
                 borderRadius: '15px',
                 padding: "0.5rem",
-                boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
+                boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.3)"
 
             }}>
-                <Typography fontSize={18} fontWeight={"bold"}>{isGroup ? "[단체]" : "[개인]"}</Typography>
+                <Typography fontSize={16} fontWeight={"bold"}>{isGroup ? "[단체]" : "[개인]"}</Typography>
                 <Typography fontSize={14}fontWeight={"bold"}>{content}</Typography>
-                <Typography fontSize={18} fontWeight={"bold"}>📩 x {count}</Typography>
+                <Typography fontSize={16} fontWeight={"bold"}>📩 x {count}</Typography>
             </Card>
         </Link>
     )
