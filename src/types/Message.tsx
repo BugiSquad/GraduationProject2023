@@ -1,4 +1,6 @@
 export interface Message {
-    content: string,
-    date: string
+    msgLinkTo: string, 
+    isGroup: Boolean,
+    content: String,
+    count: number,
 }
