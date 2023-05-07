@@ -8,7 +8,6 @@ import {MyMessagebox} from "../components/MyMessagebox";
 
 export const Mypage: React.FC = () => {
     return (
-        <div className="App contaier">
         <SimpleTemplate param={{ pageHeaderName: "마이페이지" }}>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginRight:"10px" }}>
                 <div></div>
@@ -30,6 +29,5 @@ export const Mypage: React.FC = () => {
                 <MypageCards title="나의 쪽지함" content={<MyMessagebox/>} link="/mypage/mymessagedetail"/>
             </Card>
         </SimpleTemplate>
-        </div>
     )
 }
