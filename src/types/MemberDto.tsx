@@ -23,6 +23,16 @@ export class Interest {
     study: boolean = false;
     hiking: boolean = false;
     book: boolean = false;
+
+    constructor(interests?: Array<{ key: string, label: string }>) {
+        if (interests) {
+            interests.forEach(interest => {
+                if (this.hasOwnProperty(interest.key)) {
+                    this[interest.key as keyof Interest] = true;
+                }
+            });
+        }
+    }
 }
 
 /**

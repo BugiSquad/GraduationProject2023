@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {Card, Typography} from "@mui/material";
 import {InterestFilter, InterestOptionType} from "./InterestFilter";
-import {OrangeButton} from "./styled/Buttons";
 import {useDispatch} from "react-redux";
 import {closeFilter} from "../store/matching/drawer";
 import {DrawerGrid, DrawerGridChild} from "./styled/DrawerGrid";
+import {OrangeButton} from "./styled/Buttons";
 
 
 export const Filter: React.FC = () => {

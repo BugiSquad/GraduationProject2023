@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {MenuCategory} from "../types/MenuCategory";
-import {getApiURL} from "./Common";
+import {getApiURL, getMyToken} from "./Common";
 import data from "../data/ServersMenu.json"
 import {MenuItem} from "../types/MenuItem";
 
@@ -23,7 +23,11 @@ export function getMenuById(id: number) {
 export function addMenus() {
     let ary = JSON.parse(JSON.stringify(data));
     ary.forEach((item: any) => {
-        axios.post(`${getApiURL()}/menu`, {...item}).then(function (response) {
+        axios.post(`${getApiURL()}/menu`, {...item}, {
+            headers: {
+                accessToken: getMyToken()
+            }
+        }).then(function (response) {
             console.log(`${item.name} ${response.status}`)
 
         }).catch((reason) => {

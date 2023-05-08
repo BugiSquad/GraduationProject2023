@@ -6,25 +6,25 @@ import {autocompleteClasses} from '@mui/material/Autocomplete';
 
 export interface InterestOptionType {
   label: string;
-  key: number;
+  key: string;
 }
 
 const Interests = [
-  { key: 1, label: '배그' },
-  { key: 2, label: '롤' },
-  { key: 3, label: '연예인' },
-  { key: 4, label: '커피' },
-  { key: 5, label: '디저트' },
-  { key: 6, label: '게임' },
-  { key: 7, label: '팝송' },
-  { key: 8, label: 'KPOP' },
-  { key: 9, label: 'JPOP' },
-  { key: 10, label: '드라마' },
-  { key: 11, label: '영화' },
-  { key: 12, label: '여행' },
-  { key: 13, label: '공부' },
-  { key: 14, label: '등산' },
-  { key: 15, label: '책' },
+  {key: 'pubg', label: '배그'},
+  {key: 'lol', label: '롤'},
+  {key: 'celebrity', label: '연예인'},
+  {key: 'coffee', label: '커피'},
+  {key: 'dessert', label: '디저트'},
+  {key: 'game', label: '게임'},
+  {key: 'popSong', label: '팝송'},
+  {key: 'kPop', label: 'KPOP'},
+  {key: 'jPop', label: 'JPOP'},
+  {key: 'drama', label: '드라마'},
+  {key: 'movie', label: '영화'},
+  {key: 'travel', label: '여행'},
+  {key: 'study', label: '공부'},
+  {key: 'hiking', label: '등산'},
+  {key: 'book', label: '책'},
 ];
 
 
@@ -75,7 +75,7 @@ export const InterestFilter: React.FC<InterestFilterProps> = ({selectedInterests
         관심사를 골라주세요!
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
           {selectedInterests.map((option: InterestOptionType, index: number) => (
-            <StyledTag label={option.label}  {...getTagProps({ index })} key={option.key} />
+              <StyledTag label={option.label}  {...getTagProps({index})} key={index}/>
           ))}
           <input {...getInputProps()} />
         </InputWrapper>
