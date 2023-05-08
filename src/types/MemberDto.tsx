@@ -34,6 +34,7 @@ export interface MemberDto {
     studentId: number;
     email: string;
     department: string;
+    password: string;
     memberType: MemberType;
     gender: Gender;
     interestPostDto: Interest;
