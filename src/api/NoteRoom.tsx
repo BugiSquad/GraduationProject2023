@@ -18,6 +18,7 @@ export const joinNoteRoom = (subjectId: number, userId: number) => {
  * @param userId 사용자의 ID
  */
 export const getNotesWith = (noteRoomId: number, userId: number) => {
+    if (userId === -1) new Error('로그인이 필요합니다');
     return axios.get(`${getApiURL()}/note?noteRoomId=${noteRoomId}&memberId=${userId}`)
 }
 
@@ -28,6 +29,7 @@ export const getNotesWith = (noteRoomId: number, userId: number) => {
  * @param message 전송하고자 하는 메시지
  */
 export const sendNoteToRoom = (noteRoomId: number, userId: number, message: string) => {
+    if (userId === -1) new Error('로그인이 필요합니다');
     return axios.post(`${getApiURL()}/note`, {noteRoomId: noteRoomId, senderId: userId, message: message})
 }
 
@@ -44,6 +46,7 @@ export const getNoteRoomMembers = (noteRoomId: number) => {
  * @param memberId 사용자의 ID
  */
 export const getNoteRoomsWith = (memberId: number) => {
+    if (memberId === -1) new Error('로그인이 필요합니다');
     return axios.get(`${getApiURL()}/note/rooms`, {
         params: {
             memberId: memberId
