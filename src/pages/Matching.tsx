@@ -1,12 +1,14 @@
 import React from "react";
-import {IconButton, Typography} from "@mui/material";
-import {AddCircle, FilterAlt} from "@mui/icons-material";
+import {Typography} from "@mui/material";
+import {FilterAlt} from "@mui/icons-material";
 import {SimpleTemplate} from "./PageTemplate";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import {Posts} from "../components/Posts";
 import {useAppDispatch} from "../store/hooks";
 import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matching/drawer";
 import {AddDrawer, FilterDrawer} from "../components/Drawers";
+import AddIcon from '@mui/icons-material/Add';
+import {OrangeCircleButton} from "../components/styled/Buttons";
 
 
 export const Matching: React.FC = () => {
@@ -24,13 +26,15 @@ const Contents: React.FC = () => {
                 (event as React.KeyboardEvent).key === 'Shift')) {
                 return;
             }
-            if (name === 'add') {
-                if (open) dispatch(openDrawer());
-                else dispatch(closeDrawer());
-            }
-            if (name === 'filter') {
-                if (open) dispatch(openFilter());
-                else dispatch(closeFilter());
+            switch (name) {
+                case 'add':
+                    if (open) dispatch(openDrawer());
+                    else dispatch(closeDrawer());
+                    break;
+                case 'filter':
+                    if (open) dispatch(openFilter());
+                    else dispatch(closeFilter());
+                    break;
             }
             return;
         };
@@ -42,12 +46,12 @@ const Contents: React.FC = () => {
                     <Typography variant={"body1"} fontWeight={"bold"}>같이 먹어요!</Typography>
                 </div>
                 <div style={{display: "inherit", alignItems: "center"}}>
-                    <IconButton onClick={toggleDrawer(true, 'add')}>
-                        <AddCircle style={{color: "orange"}}/>
-                    </IconButton>
-                    <IconButton onClick={toggleDrawer(true, 'filter')}>
-                        <FilterAlt style={{color: "orange"}}/>
-                    </IconButton>
+                    <OrangeCircleButton sx={{background: "#FE724C"}} onClick={toggleDrawer(true, 'add')}>
+                        <AddIcon style={{color: "white"}}/>
+                    </OrangeCircleButton>
+                    <OrangeCircleButton sx={{background: "#FE724C"}} onClick={toggleDrawer(true, 'filter')}>
+                        <FilterAlt style={{color: "white"}}/>
+                    </OrangeCircleButton>
                     <AddDrawer/>
                     <FilterDrawer/>
                 </div>

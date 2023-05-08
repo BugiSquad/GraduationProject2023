@@ -9,8 +9,9 @@ export const PostsHeader = () => {
             <Typography variant={"h6"} fontWeight={"bold"}>같이 먹어요!</Typography>
         </div>
         <div style={{display: "inherit", alignItems: "center"}}>
-            <IconButton style={{background: "orange"}}><AddCircle style={{color: "white"}}/></IconButton>
-            <IconButton style={{background: "orange"}}><FilterAlt style={{color: "white"}}/></IconButton>
+            <IconButton style={{background: "#FE724C"}}><AddCircle
+                style={{background: "#FE724C", color: "white"}}/></IconButton>
+            <IconButton style={{background: "#FE724C"}}><FilterAlt style={{color: "white"}}/></IconButton>
         </div>
     </div>)
 }

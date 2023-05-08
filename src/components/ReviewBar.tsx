@@ -1,4 +1,4 @@
-import { Box, LinearProgress, Typography } from "@mui/material";
+import {Box, LinearProgress, Typography} from "@mui/material";
 
 
 interface ReviewBarProp {
@@ -6,7 +6,6 @@ interface ReviewBarProp {
     ratio: number;
     counts: number
 }
-
 
 export const ReviewBar: React.FC<ReviewBarProp> = ({rate, ratio, counts}) => {
 

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { SimpleTemplate } from "../PageTemplate";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { IconButton } from "@mui/material";
-import { MyMessage } from "../../components/MyMessage";
-import { getIndividualRoom, getNoteRoomsWith } from "../../api/NoteRoom";
-import { GroupType } from "../../types/Post";
-import { useParams } from "react-router-dom";
+import {IconButton} from "@mui/material";
+import {MyMessage} from "../../components/MyMessage";
+import {getIndividualRoom, getNoteRoomsWith} from "../../api/NoteRoom";
+import {GroupType} from "../../types/PostDto";
+import {useParams} from "react-router-dom";
+import {getMyID} from "../../api/Common";
 
 
 export function handleGoBack() {
@@ -34,7 +35,7 @@ export const MyMessageDetail: React.FC = () => {
     const [noteRooms, setNoteRooms] = useState<NoteInfo[]>([]);
     const [noteGroups, setNoteGroup] = useState<NoteGroup[]>([])
     useEffect(() => {
-        getNoteRoomsWith(20).then((res) => {
+        getNoteRoomsWith(getMyID()).then((res) => {
             const data = res.data.data
             const notes = data.map((note: NoteInfo) => note)
             const tmp = notes.reduce((posts: NoteGroup[], note: NoteInfo) => {
@@ -61,7 +62,7 @@ export const MyMessageDetail: React.FC = () => {
         })
     }, [])
     return (
-        <SimpleTemplate param={{ pageHeaderName: "쪽지함 목록" }}>
+        <SimpleTemplate param={{pageHeaderName: "쪽지함 목록"}}>
             <div>
                 <div style={{
                     display: "flex",

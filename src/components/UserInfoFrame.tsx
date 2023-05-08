@@ -1,10 +1,19 @@
-import { useState } from "react";
-import { InfoProps } from "../types/UserInfo";
+import React, {useState} from "react";
 import defaultImage from "../images/default.png";
-import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { Autocomplete, Link, Button, FormControl, Input, InputAdornment, InputLabel, NativeSelect, TextField, Typography } from "@mui/material"
-import React from "react";
-import { Link as Linkto } from "react-router-dom";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {
+    Autocomplete,
+    Button,
+    FormControl,
+    Input,
+    InputAdornment,
+    InputLabel,
+    Link,
+    NativeSelect,
+    TextField,
+    Typography
+} from "@mui/material"
+import {Link as Linkto} from "react-router-dom";
 import 'react-datepicker/dist/react-datepicker.css';
 
 
@@ -13,7 +22,7 @@ interface UserInfoFrameProps {
     email: string;
     userprofilePic: string | null; // 프로필 사진이 없을 수도 있으므로 null 가능성 추가
     isEdit: Boolean;
-};
+}
 
 const Departments = [
     { label: '한국어문학부' },
@@ -32,7 +41,6 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({ userprofilePic, is
     const [profilePic, setProfilePic] = useState<string | null>(
         userprofilePic
     );
-
 
     const handleProfilePicChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];

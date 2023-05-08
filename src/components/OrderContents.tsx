@@ -10,6 +10,10 @@ import {useNavigate} from "react-router-dom"
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {CartItem} from "../types/CartItem";
 
+interface OrderProductsProps {
+    items: CartItem[];
+}
+
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -104,9 +108,6 @@ export const OrderContents: React.FC = () => {
     )
 }
 
-interface OrderProductsProps {
-    items: CartItem[];
-}
 
 export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
     return (<>

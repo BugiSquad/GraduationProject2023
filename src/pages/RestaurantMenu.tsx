@@ -15,6 +15,7 @@ export const RestaurantMenu: React.FC = () => {
         </SimpleTemplate>
     </>)
 }
+
 /**
  * 메뉴를 보여주는 페이지
  * TODO FoodCardSlider를 이용한 렌더링은 많이 어색해 보임 다른 방법을 찾을 것
