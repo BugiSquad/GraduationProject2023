@@ -1,11 +1,14 @@
-import {Button, Typography} from "@mui/material";
+import {Button, Input, Typography} from "@mui/material";
 import {createNewPost} from "../api/Post";
 import {GroupType, Post} from "../types/Post";
 import {faker} from "@faker-js/faker";
-import {requestMemberRegister} from "../api/Member";
+import {requestMemberRegister, requestMemberSignIn} from "../api/Member";
 
 import {addMenus} from "../api/Menu";
 import {Gender, Interest, MemberType} from "../types/Member";
+import {useState} from "react";
+import {Form} from "react-router-dom";
+import {MyInfo} from "../types/MyInfo";
 
 /**
  * 회원가입 페이지
@@ -21,12 +24,14 @@ export const APITest: React.FC = () => {
         let interest = new Interest()
         interest.pubg = true;
         interest.lol = true;
+        let name = faker.word.noun()
         requestMemberRegister(
             {
-                name: `${faker.name.fullName()}`,
+                password: "example",
+                name: `${name}`,
                 phone: `${faker.phone.number()}`,
                 studentId: Math.random() * 10000,
-                email: `example@hansung.ac.kr`,
+                email: `${name}@example.com`,
                 memberType: MemberType.STUDENT,
                 department: "컴퓨터공학과",
                 gender: Gender.MALE,
@@ -66,9 +71,39 @@ export const APITest: React.FC = () => {
             <Typography variant={"h4"}>API테스트</Typography>
             <Button onClick={onButtonClicked}>회원가입</Button>
             {/*<Button onClick={createPost}>글 올리기</Button>*/}
-            <Button  onClick={()=>{addMenus()}}>메뉴 등록</Button>
+            <Button onClick={() => {
+                addMenus()
+            }}>메뉴 등록</Button>
             <Button onClick={createDummyMembers}>더미 회원 만들기(X100)</Button>
             <Button onClick={createDummyPosts}>더미 글 올리기</Button>
+            <SignInForm></SignInForm>
         </div>
+    )
+}
+
+const SignInForm: React.FC = () => {
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+
+    function onSubmit() {
+        requestMemberSignIn({email: email, password: password})
+            .then((res) => {
+                const myInfo: MyInfo = {...res.data.data}
+                localStorage.setItem("myInfo", JSON.stringify(myInfo))
+                console.log(localStorage.getItem("myInfo"))
+            })
+            .catch((err) => console.error(err))
+    }
+
+    return (
+        <>
+            <Form onSubmit={onSubmit}>
+                이메일: <Input type={"email"} onChange={(event) => setEmail(event.target.value as string)}></Input>
+                <br/>
+                비밀번호:<Input type={"password"} onChange={(event) => setPassword(event.target.value as string)}></Input>
+                <br/>
+                <Button type={"submit"}>제출하기</Button>
+            </Form>
+        </>
     )
 }

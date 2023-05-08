@@ -7,5 +7,14 @@ import {getApiURL} from "./Common";
  * @param member
  */
 export function requestMemberRegister(member: Member) {
-    return axios.post(`${getApiURL()}/member`, member)
+    return axios.post(`${getApiURL()}/member/signUp`, member)
+}
+
+interface SignInInfo {
+    email: string;
+    password: string;
+}
+
+export function requestMemberSignIn(info: SignInInfo) {
+    return axios.post(`${getApiURL()}/member/signIn?email=${info.email}&password=${info.password}`)
 }
