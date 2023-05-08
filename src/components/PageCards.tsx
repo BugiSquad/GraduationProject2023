@@ -5,7 +5,7 @@ interface OrderpageProps {
     content: React.ReactNode;
 }
 
-export const OrderpageCards = ({ title, content }: OrderpageProps) => { //마이페이지에 들어갈 카드 컴포넌트 포맷
+export const PageCards = ({ title, content }: OrderpageProps) => {
     return (
         <><Card style={{
             minInlineSize: '350px',
@@ -13,7 +13,7 @@ export const OrderpageCards = ({ title, content }: OrderpageProps) => { //마이
         }}>
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                    <Typography style={{ fontSize: 18, fontWeight: 'bold' }} variant={"h6"}>{title}</Typography>
+                    <Typography style={{ fontSize: 16, fontWeight: 'bold' }} variant={"h6"}>{title}</Typography>
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>

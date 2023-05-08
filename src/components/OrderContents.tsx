@@ -1,5 +1,5 @@
 import {Box, Button, Card, Modal, TextField, Typography} from "@mui/material"
-import {OrderpageCards} from "./OrderpageCards"
+import {PageCards} from "./PageCards"
 import naverpayImg from '../images/logo_naverpay.png'
 import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
@@ -42,9 +42,9 @@ export const OrderContents: React.FC = () => {
             margin: '10px',
         }}>
 
-                <OrderpageCards title="주문상품" content={<OrderProducts items={items}/>}/>
-                <OrderpageCards title="주문자 정보" content={<OrderInfo/>}/>
-            <OrderpageCards title="결제수단" content={<PayMethod />} />
+                <PageCards title="주문상품" content={<OrderProducts items={items}/>}/>
+                <PageCards title="주문자 정보" content={<OrderInfo/>}/>
+            <PageCards title="결제수단" content={<PayMethod />} />
 
         </Card>
         <div style={{ display: "flex", flexDirection: 'row', justifyContent: "center" }}>
