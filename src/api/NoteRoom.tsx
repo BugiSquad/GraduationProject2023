@@ -1,4 +1,4 @@
-import {getApiURL} from "./Common";
+import {getApiURL, getMyToken} from "./Common";
 import axios from "axios";
 
 
@@ -9,7 +9,10 @@ import axios from "axios";
  */
 export const joinNoteRoom = (subjectId: number, userId: number) => {
     console.log(subjectId)
-    return axios.post(`${getApiURL()}/match/participation`, {postId: subjectId, memberId: userId})
+    return axios.post(`${getApiURL()}/match/participation`, {
+        postId: subjectId,
+        memberId: userId
+    }, {headers: {accessToken: getMyToken()}})
 }
 
 /**
@@ -19,7 +22,7 @@ export const joinNoteRoom = (subjectId: number, userId: number) => {
  */
 export const getNotesWith = (noteRoomId: number, userId: number) => {
     if (userId === -1) new Error('로그인이 필요합니다');
-    return axios.get(`${getApiURL()}/note?noteRoomId=${noteRoomId}&memberId=${userId}`)
+    return axios.get(`${getApiURL()}/note?noteRoomId=${noteRoomId}&memberId=${userId}`, {headers: {accessToken: getMyToken()}})
 }
 
 /**
@@ -30,7 +33,11 @@ export const getNotesWith = (noteRoomId: number, userId: number) => {
  */
 export const sendNoteToRoom = (noteRoomId: number, userId: number, message: string) => {
     if (userId === -1) new Error('로그인이 필요합니다');
-    return axios.post(`${getApiURL()}/note`, {noteRoomId: noteRoomId, senderId: userId, message: message})
+    return axios.post(`${getApiURL()}/note`, {
+        noteRoomId: noteRoomId,
+        senderId: userId,
+        message: message
+    }, {headers: {accessToken: getMyToken()}})
 }
 
 /**
@@ -38,7 +45,7 @@ export const sendNoteToRoom = (noteRoomId: number, userId: number, message: stri
  * @param noteRoomId 채팅방의 ID
  */
 export const getNoteRoomMembers = (noteRoomId: number) => {
-    return axios.get(`${getApiURL()}/note/room/members?noteRoomId=${noteRoomId}`)
+    return axios.get(`${getApiURL()}/note/room/members?noteRoomId=${noteRoomId}`, {headers: {accessToken: getMyToken()}})
 }
 
 /**
@@ -50,6 +57,9 @@ export const getNoteRoomsWith = (memberId: number) => {
     return axios.get(`${getApiURL()}/note/rooms`, {
         params: {
             memberId: memberId
+        },
+        headers: {
+            accessToken: getMyToken()
         }
     });
 };

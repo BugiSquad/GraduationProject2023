@@ -1,6 +1,6 @@
 export interface NoteMessage {
-    id: number;
-    member_Id: number;
+    noteId: number;
+    memberId: number;
     profileUrl: string;
     name: string;
     message: string;

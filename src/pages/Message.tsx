@@ -30,7 +30,7 @@ function MyMessageBody(message: NoteMessage) {
 
     return (
         <div style={{display: 'flex', flexDirection: 'column'}}>
-            <div key={message.id} style={{
+            <div key={message.noteId} style={{
                 alignSelf: 'flex-end',
                 backgroundColor: '#007AFF',
                 color: 'white',
@@ -71,17 +71,9 @@ export const Message: React.FC = () => {
             setRoomName(res.data.data.groupTitle)
             console.log(res.data.data)
             const data = res.data.data
-            let messages = data.notes.map((message: any) => {
+            let messages = data.notes.map((message: NoteMessage) => {
                 console.log(message.name)
-                return {
-                    id: message.id,
-                    member_Id: 1,
-                    profileUrl: message.profileUrl,
-                    name: message.name,
-                    message: message.message,
-                    createdAt: message.createdAt,
-                    firstMessage: message.firstMessage
-                }
+                return message
             })
             setMessageList([...messageList, ...messages])
         })
@@ -136,7 +128,7 @@ export const Message: React.FC = () => {
 
                 {messageList.map((message) => {
                     let myId = getMyID()
-                    if (myId === message.member_Id)
+                    if (myId === message.memberId)
                         return MyMessageBody(message)
                     else
                         return OthersMessageBody(message)

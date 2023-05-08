@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { SimpleTemplate } from "../PageTemplate";
+import React, {useEffect, useState} from "react";
+import {SimpleTemplate} from "../PageTemplate";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {IconButton} from "@mui/material";
 import {MyMessage} from "../../components/MyMessage";
 import {getIndividualRoom, getNoteRoomsWith} from "../../api/NoteRoom";
-import {GroupType} from "../../types/PostDto";
 import {useParams} from "react-router-dom";
 import {getMyID} from "../../api/Common";
+import {GroupType} from "../../types/PostDto";
 
 
 export function handleGoBack() {
@@ -18,7 +18,7 @@ interface NoteInfo {
     title: string;
     body: string;
     minutesLeftUntilMeal: number;
-    groupType: 'INDIVIDUAL' | 'GROUP';
+    groupType: GroupType;
     noteRoomId: number;
     creatorId: number;
 }
@@ -27,7 +27,7 @@ interface NoteGroup {
     postId: number;
     title: string;
     body: string;
-    groupType: 'INDIVIDUAL' | 'GROUP';
+    groupType: GroupType;
     noteRooms: NoteInfo[];
 }
 
@@ -72,12 +72,15 @@ export const MyMessageDetail: React.FC = () => {
                     paddingRight: "20px"
                 }}>
                     <div></div>
-                    <IconButton><DeleteOutlineIcon /></IconButton>
+                    <IconButton><DeleteOutlineIcon/></IconButton>
                 </div>
-                {/* {noteRooms.map((value, idx) => <MyMessage content={value.title}
-                    date={String(value.minutesLeftUntilMeal)} />)} */}
-                <MyMessage content={"10분 뒤에 같이 먹을 사람 구해요"} count={3} isGroup={false} msgLinkTo={""} />
-                <GroupHeader group={noteGroups} />
+                {
+                    noteRooms.map((value, idx) => <MyMessage content={value.title} count={3}
+                                                             isGroup={value.groupType === GroupType.ORGANIZATION}
+                                                             msgLinkTo={`/mypage/message/${value.postId}`}/>)
+                }
+                <MyMessage content={"10분 뒤에 같이 먹을 사람 구해요"} count={3} isGroup={false} msgLinkTo={""}/>
+                <GroupHeader group={noteGroups}/>
             </div>
         </SimpleTemplate>
     )
@@ -87,13 +90,13 @@ interface Prop {
     group: NoteGroup[]
 }
 
-const GroupHeader: React.FC<Prop> = ({ group }) => {
+const GroupHeader: React.FC<Prop> = ({group}) => {
     return (<>
-        {/* {group.map((item, idx) =>
+            {/* {group.map((item, idx) =>
             <MyMessage content={`${item.groupType === GroupType.INDIVIDUAL ? "[개인]" : "[단체]"}${item.title}`}
                 date={"10분 뒤"} />
         )} */}
-    </>
+        </>
     )
 }
 
@@ -120,7 +123,7 @@ export const PersonalMessageDetail: React.FC = () => {
     }, [])
     noteRooms.forEach((item) => console.log(item))
     return (<>
-        <SimpleTemplate param={{ pageHeaderName: "쪽지함 목록" }}>
+        <SimpleTemplate param={{pageHeaderName: "쪽지함 목록"}}>
             {/* {noteRooms.map((room, idx) =>
                 <MyMessage content={room.name} date={room.memberId + "" + room.noteRoomId} />
             )} */}
