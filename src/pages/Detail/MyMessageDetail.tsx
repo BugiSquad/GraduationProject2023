@@ -7,6 +7,7 @@ import {getIndividualRoom, getNoteRoomsWith} from "../../api/NoteRoom";
 import {useParams} from "react-router-dom";
 import {getMyID} from "../../api/Common";
 import {GroupType} from "../../types/PostDto";
+import {BottomNavigationTab} from "../../types/PageHeaderParam";
 
 
 export function handleGoBack() {
@@ -62,7 +63,7 @@ export const MyMessageDetail: React.FC = () => {
         })
     }, [])
     return (
-        <SimpleTemplate param={{pageHeaderName: "쪽지함 목록"}}>
+        <SimpleTemplate param={{pageHeaderName: "쪽지함 목록", tab: BottomNavigationTab.MYPAGE}}>
             <div>
                 <div style={{
                     display: "flex",
@@ -123,7 +124,7 @@ export const PersonalMessageDetail: React.FC = () => {
     }, [])
     noteRooms.forEach((item) => console.log(item))
     return (<>
-        <SimpleTemplate param={{pageHeaderName: "쪽지함 목록"}}>
+        <SimpleTemplate param={{pageHeaderName: "쪽지함 목록", tab: BottomNavigationTab.MYPAGE}}>
             {/* {noteRooms.map((room, idx) =>
                 <MyMessage content={room.name} date={room.memberId + "" + room.noteRoomId} />
             )} */}

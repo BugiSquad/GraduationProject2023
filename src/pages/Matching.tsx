@@ -9,11 +9,12 @@ import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matchin
 import {AddDrawer, FilterDrawer} from "../components/Drawers";
 import AddIcon from '@mui/icons-material/Add';
 import {OrangeCircleButton} from "../components/styled/Buttons";
+import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 
 export const Matching: React.FC = () => {
     return (
-        <SimpleTemplate param={{pageHeaderName: "매칭"}}>
+        <SimpleTemplate param={{pageHeaderName: "매칭", tab: BottomNavigationTab.COMMUNITY}}>
             <Contents/>
         </SimpleTemplate>)
 }
