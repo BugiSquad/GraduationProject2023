@@ -34,8 +34,6 @@ export const InquiryPeriodContent: React.FC = () => {
               />
             </DemoContainer>
         </LocalizationProvider>
-        {selectedDate}
     </div>
-
     )
 }
