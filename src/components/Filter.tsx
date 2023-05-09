@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Card, Typography} from "@mui/material";
+import {Button, Card, Typography} from "@mui/material";
 import {InterestFilter, InterestOptionType} from "./InterestFilter";
 import {useDispatch} from "react-redux";
 import {closeFilter} from "../store/matching/drawer";
@@ -30,9 +30,9 @@ export const Filter: React.FC = () => {
                     </DrawerGridChild>
 
                     <DrawerGridChild item xs={12}>
-                        <OrangeButton onClick={() => onClick()}>
+                        <Button sx={OrangeButton} onClick={() => onClick()}>
                             <Typography sx={{color: "white"}}>적용</Typography>
-                        </OrangeButton>
+                        </Button>
                     </DrawerGridChild>
                 </DrawerGrid>
             </Card>

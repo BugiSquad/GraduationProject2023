@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from "react";
-import {Card, FormControlLabel, Radio, RadioGroup, TextField, Typography} from "@mui/material";
+import {Button, Card, FormControlLabel, Radio, RadioGroup, TextField, Typography} from "@mui/material";
 import {DatePicker, MobileTimePicker} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from "dayjs";
 import 'dayjs/locale/ko';
@@ -107,9 +107,9 @@ export const Write: React.FC = () => {
                     </DrawerGridChild>
 
                     <DrawerGridChild item xs={12}>
-                        <OrangeButton type={"submit"} sx={{display: "flex"}}>
+                        <Button sx={OrangeButton} type={"submit"}>
                             <Typography sx={{color: "white"}}>작성</Typography>
-                        </OrangeButton>
+                        </Button>
                     </DrawerGridChild>
                 </Form>
             </DrawerGrid>
