@@ -193,7 +193,7 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                         </FormControl>
                     </FormGridChild>
                     <FormGridChild item xs={12}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold'}}>새 비밀번호
+                        <Typography variant="body1" sx={{fontWeight: 'bold'}}>새 비밀번aqw
                             확인＊</Typography>
                         <FormControl variant="standard">
                             <Input required
