@@ -1,37 +1,30 @@
 import React, { useState } from "react";
 import { Button, Card, Typography } from "@mui/material";
 
+
+type Props<T extends Item> = {
+    items: T[];
+};
+
+export const bgColor: string = '#00000047'
+
 interface Item {
     name: string;
     bgColor: string;
 }
 
-type Props<T extends Item> = {
-    items: T[];
-};
-interface CategoryItem extends Item {
-    selectValue: boolean;
-}
-const bgColor: string = '#00000047'
-const categories: CategoryItem[] = [
-    { name: "전체", bgColor: bgColor, selectValue: false },
-    { name: "찌개류", bgColor: bgColor, selectValue: false },
-    {name: "면류", bgColor: bgColor, selectValue: false },
-    { name: "분식", bgColor: bgColor, selectValue: false },
-];
-
 export const RadioBarItem = <T extends Item>({ items }: Props<T>) => {
 
     const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-    const [selectedPlaceName, setSelectedPlaceName] = useState<string | null>(null);
+    const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
 
-    const handleClick = (idx: number, placeName: string) => {
+    const handleClick = (idx: number, ItemName: string) => {
         if (idx === selectedIdx) {
             setSelectedIdx(null); 
-            setSelectedPlaceName(null);
+            setSelectedItemName(null);
         } else {
             setSelectedIdx(idx);
-            setSelectedPlaceName(placeName);
+            setSelectedItemName(ItemName);
         }
     };
     return (<>
@@ -41,7 +34,7 @@ export const RadioBarItem = <T extends Item>({ items }: Props<T>) => {
                     sx={{
                         minWidth: 70,
                         minHeight: 40,
-                        padding: "10px 5",
+                        padding: "10px 1",
                         marginTop: "10px",
                         borderRadius: "25px",
                         backgroundColor: selectedIdx === idx ? item.bgColor : "#FE724C",
@@ -55,16 +48,7 @@ export const RadioBarItem = <T extends Item>({ items }: Props<T>) => {
                 </Card>
             </Button>
 
-        ))}            {selectedPlaceName && <div>Selected cg: {selectedPlaceName}</div>}
+        ))}            {selectedItemName && <div>Selected value: {selectedItemName}</div>}
 
     </>)
-}
-
-export const RadioBar: React.FC = () => {
-    return (<>
-        <div>
-            <RadioBarItem items={categories} />
-        </div>
-       </>
-    )
 }

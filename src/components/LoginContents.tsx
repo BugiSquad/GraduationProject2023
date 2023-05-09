@@ -14,6 +14,7 @@ import {useState} from "react"
 import {LoginDialog} from "./LoginDialog"
 import {getMyInfo, requestMemberSignIn, setMyInfo} from "../api/Member";
 import {MyInfo} from "../types/MyInfo";
+import { OrangeButton, WhiteButton } from "./styled/Buttons";
 
 export const LoginContents: React.FC = () => {
     const [email, setEmail] = useState("");
@@ -92,17 +93,11 @@ export const LoginContents: React.FC = () => {
                 <Button
                     component={RouterLink}
                     to="/signup"
-                    style={{
-                        backgroundColor: "white",
-                        color: "#FE724C",
-                        fontWeight: "bold",
-                        borderRadius: "0.5rem",
-                        padding: "0.5rem",
-                        boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)"
-                    }}
+                    sx={OrangeButton}
                 >
                     회원가입 하러가기
                 </Button>
+            
             </div>
             <Button disableElevation sx={{padding: "10px"}}>
                 아이디 / 비밀번호를 잊으셨나요? </Button>
