@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {getMenusByCategory, toMenuArray} from "../api/Menu";
-import {MenuCategory} from "../types/MenuCategory";
+import {MenuCategory, toLocalizedName} from "../types/MenuCategory";
 import {MenuItem} from "../types/MenuItem";
 import {useDispatch} from "react-redux";
 import {addMenu, removeMenu} from "../store/menuRepository";
-import {MenuTabs} from "../components/MenuTabs";
 import {SimpleTemplate} from "./PageTemplate";
 import MenuCardSlider from "../components/MenuCardSlider";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
+import {RadioBarItem} from "../components/RadioBar";
 
 export const RestaurantMenu: React.FC = () => {
     return (<>
@@ -25,11 +25,27 @@ export const RestaurantMenu: React.FC = () => {
 const MenuBody: React.FC = () => {
     const [menuType, setMenuType] = useState(MenuCategory.rice);
     const [menus, setMenus] = useState(Array.of<MenuItem>());
+    const [idx, setIdx] = useState<number>(0)
+    const category = Object.values(MenuCategory)
+    const names = category.map((item) => toLocalizedName(item))
     let dispatch = useDispatch();
 
     useEffect(() => {
-        getMenuItemsWith(menuType)
-    }, [])
+        async function getMenus() {
+            const response = await getMenusByCategory(category[idx])
+            //dispatch(removeMenu(category[idx]))      //기존의 상태를 제거
+            const json = JSON.parse(JSON.stringify(response.data.data))
+            let menuItems = toMenuArray(json)
+            menuItems.forEach((item) => {
+                    if (item.category === undefined) console.warn(`${item.category} is null`)
+                    dispatch(addMenu(item))
+                }
+            );
+            setMenus(menuItems)
+        }
+
+        getMenus();
+    })
     //해당 메뉴 카테고리에 속하는 모든 메뉴를 가져옴
     const getMenuItemsWith = (menuType: MenuCategory) => {
         let axios = getMenusByCategory(menuType)
@@ -54,7 +70,8 @@ const MenuBody: React.FC = () => {
     }
 
     return (<div>
-        <MenuTabs category={menuType} onMenuTypeChanges={onMenuTypeChanges}/>
+        {/*<MenuTabs category={menuType} onMenuTypeChanges={onMenuTypeChanges}/>*/}
+        <RadioBarItem setIndex={setIdx} index={idx} names={names}/>
         <MenuCardSlider foods={[...menus]}></MenuCardSlider>
     </div>)
 }

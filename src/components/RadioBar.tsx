@@ -1,35 +1,21 @@
-import React, { useState } from "react";
-import { Button, Card, Typography } from "@mui/material";
+import React from "react";
+import {Button, Card, Typography} from "@mui/material";
 
 
-type Props<T extends Item> = {
-    items: T[];
-};
-
-export const bgColor: string = '#00000047'
-
-interface Item {
-    name: string;
-    bgColor: string;
+export interface RadioBarItemProps {
+    names: string[];
+    index: number;
+    setIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const RadioBarItem = <T extends Item>({ items }: Props<T>) => {
+export const RadioBarItem: React.FC<RadioBarItemProps> = (items) => {
 
-    const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-    const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
-
-    const handleClick = (idx: number, ItemName: string) => {
-        if (idx === selectedIdx) {
-            setSelectedIdx(null); 
-            setSelectedItemName(null);
-        } else {
-            setSelectedIdx(idx);
-            setSelectedItemName(ItemName);
-        }
+    const handleClick = (idx: number) => {
+        items.setIndex(idx)
     };
     return (<>
-        {items.map((item, idx) => (
-            <Button key={idx} disableElevation disableRipple onClick={() => handleClick(idx, item.name)}>
+        {items.names.map((item, idx) => (
+            <Button key={idx} disableElevation disableRipple onClick={() => handleClick(idx)}>
                 <Card
                     sx={{
                         minWidth: 70,
@@ -37,18 +23,18 @@ export const RadioBarItem = <T extends Item>({ items }: Props<T>) => {
                         padding: "10px 1",
                         marginTop: "10px",
                         borderRadius: "25px",
-                        backgroundColor: selectedIdx === idx ? item.bgColor : "#FE724C",
+                        backgroundColor: items.index === idx ? '#00000047' : '#FE724C',
                     }}
                 >
-                    <div style={{ alignItems: "center", justifyContent: "space-between", marginTop: "10px" }}>
+                    <div style={{alignItems: "center", justifyContent: "space-between", marginTop: "10px"}}>
                         <Typography variant={"body2"} fontWeight={"bold"}>
-                            {item.name}
+                            {item}
                         </Typography>
                     </div>
                 </Card>
             </Button>
 
-        ))}            {selectedItemName && <div>Selected value: {selectedItemName}</div>}
+        ))}
 
     </>)
 }
