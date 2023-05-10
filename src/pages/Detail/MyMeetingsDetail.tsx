@@ -1,12 +1,13 @@
 import React from "react";
-import {PageTemplate, SimpleTemplate} from "../PageTemplate";
-import { MyMeetings } from "../../components/MyMeetings";
+import {SimpleTemplate} from "../PageTemplate";
+import {MyMeetings} from "../../components/MyMeetings";
+import {BottomNavigationTab} from "../../types/PageHeaderParam";
 
 export const MyMeetingsDetail: React.FC = () => {
     return (
-        <SimpleTemplate param={{ pageHeaderName: "나의 모임" }}>
+        <SimpleTemplate param={{pageHeaderName: "나의 모임", tab: BottomNavigationTab.MYPAGE}}>
             <div>
-                <MyMeetings />
+                <MyMeetings/>
             </div>
         </SimpleTemplate>
     )

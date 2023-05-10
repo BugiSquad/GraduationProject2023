@@ -1,54 +1,97 @@
-import React from "react";
-import {Tab, Tabs} from "@mui/material";
-import LocalDiningIcon from "@mui/icons-material/LocalDining";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleIcon from "@mui/icons-material/Dashboard";
+import React, {useState} from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../store/hooks";
 import {toAPP, toCart, toCommunity, toMenu, toMyPage} from "../store/navgroup";
+import '../components/BottomNavigationGroup.css'
+import AddIcon from "@mui/icons-material/Add";
+import GroupsIcon from '@mui/icons-material/Groups';
+import {RestaurantMenu} from "@mui/icons-material";
+import ForumIcon from '@mui/icons-material/Forum';
+
 
 interface BottomNavigationGroupProps {
-    idx: number;
+    tab: BottomNavigationTab;
 }
 
-export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({idx}) => {
+export enum BottomNavigationTab {
+    APP, COMMUNITY, MENU, CART, MYPAGE,
+}
+
+export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({tab}) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
-    return (
-        <Tabs sx={{position: 'fixed', bottom: 0, left: 0, right: 0, background: "white"}}
-              variant="fullWidth"
-              value={idx}                        //전역 상태관리를 이용해서 관리해야함
-              onChange={(event, newValue) => {
-                  switch (newValue) {
-                      case 0:
-                          dispatch(toAPP())
-                          navigate("/app");
-                          break;
-                      case 1:
-                          dispatch(toCommunity())
-                          navigate("/community");
-                          break;
-                case 2:
-                    dispatch(toCart())
-                    navigate("/cart")
-                    break;
-                case 3:
-                    dispatch(toMenu())
-                    navigate("/menu")
-                    break;
-                      case 4:
-                          dispatch(toMyPage())
-                          navigate("/mypage")
-                          break;
-                  }
-              }}
-        >
-            <Tab label="주문하기" icon={<LocalDiningIcon/>}/>
-            <Tab label="매칭" icon={<PeopleIcon/>}/>
-            <Tab label="장바구니" icon={<ShoppingCartIcon/>}/>
-            <Tab label="커뮤니티" icon={<DashboardIcon/>}/>
-            <Tab label="마이페이지" icon={<PersonIcon/>}/>
-        </Tabs>)
+    const changeTab = (value: BottomNavigationTab) => {
+        switch (value) {
+            case BottomNavigationTab.APP:
+                dispatch(toAPP())
+                navigate("/app");
+                break;
+            case BottomNavigationTab.COMMUNITY:
+                dispatch(toCommunity())
+                navigate("/community");
+                break;
+            case BottomNavigationTab.CART:
+                dispatch(toCart())
+                navigate("/cart")
+                break;
+            case BottomNavigationTab.MENU:
+                dispatch(toMenu())
+                navigate("/menu")
+                break;
+            case BottomNavigationTab.MYPAGE:
+                dispatch(toMyPage())
+                navigate("/mypage")
+                break;
+        }
+
+    }
+    const onChange = (event: React.SyntheticEvent<Element, Event>, newValue: BottomNavigationTab) => changeTab(newValue)
+
+
+    return (<NavigationImpl2 idx={tab} onChange={changeTab}/>)
 }
+
+interface tmp {
+    idx: number;
+    onChange: (newValue: BottomNavigationTab) => void;
+}
+
+
+export const NavigationImpl2: React.FC<tmp> = ({idx, onChange}) => {
+    const [lastClicked, setLastClick] = useState<number>(idx)
+    const ary = [
+        {text: "홈", icon: AddIcon},
+        {text: "같이 먹기", icon: GroupsIcon},
+        {text: "메뉴", icon: RestaurantMenu},
+        {text: "커뮤니티", icon: ForumIcon},
+        {text: "마이페이지", icon: PersonIcon},
+    ]
+
+    return (
+        <div className={'body'} style={{position: "fixed", bottom: "1vh", left: 0, right: '0'}}>
+            <div className={"navigation"}>
+                <ul>
+                    {ary.map((item, idx) => {
+                        return (
+                            <li
+                                key={idx}
+                                className={lastClicked === idx ? "list active" : "list"}
+                                onClick={(event) => {
+                                    onChange(idx)
+                                    setLastClick(idx)
+                                }}>
+                                <a>
+                                    <span className={"icon"}><item.icon
+                                        sx={{color: lastClicked === idx ? "orange" : "black"}}/></span>
+                                    {/*<span className={"text"}>{item.text}</span>*/}
+                                </a>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        </div>
+    )
+}
+

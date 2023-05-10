@@ -5,11 +5,12 @@ import {RecentOrders} from "../components/RecentOrders";
 import {MypageCards} from "../components/MypageCards";
 import {RecentMeets} from "../components/RecentMeets";
 import {MyMessagebox} from "../components/MyMessagebox";
+import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 export const Mypage: React.FC = () => {
     return (
-        <SimpleTemplate param={{ pageHeaderName: "마이페이지" }}>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginRight:"10px" }}>
+        <SimpleTemplate param={{pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE}}>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginRight: "10px"}}>
                 <div></div>
                 <a href="/mypage/editmyinfo" style={{color: 'black'}}>내 정보 수정</a>
             </div>

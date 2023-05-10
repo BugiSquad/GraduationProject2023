@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {Button, Card, IconButton, Typography} from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import {handleGoBack} from "./Detail/MyMessageDetail";
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import {handleGoBack} from "./Detail/MyMessageDetail";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link, useParams} from "react-router-dom";
-import {BottomNavigationGroup} from "../components/BottomNavigationGroup";
 import {useAppSelector} from "../store/hooks";
 import {getNotesWith, sendNoteToRoom} from "../api/NoteRoom";
 import {NoteMessage} from "../types/NoteMessage";
 import {getMyID} from "../api/Common";
+import {SimpleTemplate} from "./PageTemplate";
+import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 
 function MessageContent(message: NoteMessage) {
@@ -90,7 +91,7 @@ export const Message: React.FC = () => {
     };
 
     return (
-        <div className="App container">
+        <SimpleTemplate param={{pageHeaderName: "", tab: BottomNavigationTab.COMMUNITY}}>
             <div style={{
                 display: "flex",
                 flexDirection: "row",
@@ -149,7 +150,6 @@ export const Message: React.FC = () => {
                         onClick={handleSendButtonClick}> 전송
                 </button>
             </div>
-            <BottomNavigationGroup idx={navIdx.cur}/>
-        </div>
+        </SimpleTemplate>
     )
 }

@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --clr: #222327;
+    --pos: 19vw;
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background: var(--clr);*/
+}
+
+.navigation {
+    position: relative;
+    width: 95vw;
+    height: 10vw;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    display: flex;
+    border-radius: 2vw;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.navigation ul {
+    display: flex;
+    /*justify-content: center;*/
+    width: 95vw;
+    padding-inline-start: 0px;
+
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    width: 19vw;
+    height: 19vw;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 10vw;
+    text-align: center;
+    font-weight: 500;
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    line-height: 11.25vw;
+    text-align: center;
+    font-size: 1.5em;
+    transition: 0.5s;
+    /*color: var(--clr)*/
+}
+
+.navigation ul li.active a .icon {
+    transform: translateY(-32%);
+}
+
+.navigation ul li a .text {
+    position: absolute;
+    font-weight: 400;
+    color: var(--clr);
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    transition: 0.05s;
+    opacity: 0;
+    transform: translateY(20%);
+}
+
+.navigation ul li.active a .text {
+    opacity: 1;
+    transform: translateY(50%);
+}
+
+.indicator {
+    position: absolute;
+    top: -50%;
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    border: 1.2vw solid var(--clr);
+    transition: 0.05s;
+    background: #29fd53;
+}
+
+/*.navigation ul li:nth-child(1).active ~ .indicator {*/
+/*    transform: translateX(calc(var(--pos) * 0));*/
+/*}*/
+
+/*.navigation ul li:nth-child(2).active ~ .indicator {*/
+/*    transform: translateX(calc(var(--pos) * 1));*/
+/*}*/
+
+/*.navigation ul li:nth-child(3).active ~ .indicator {*/
+/*    transform: translateX(calc(var(--pos) * 2));*/
+/*}*/
+
+/*.navigation ul li:nth-child(4).active ~ .indicator {*/
+/*    transform: translateX(calc(var(--pos) * 3 ));*/
+/*}*/
+
+/*.navigation ul li:nth-child(5).active ~ .indicator {*/
+/*    transform: translateX(calc(var(--pos) * 4));*/
+/*}*/

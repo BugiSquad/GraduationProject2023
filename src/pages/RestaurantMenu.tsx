@@ -7,10 +7,11 @@ import {addMenu, removeMenu} from "../store/menuRepository";
 import {MenuTabs} from "../components/MenuTabs";
 import {SimpleTemplate} from "./PageTemplate";
 import MenuCardSlider from "../components/MenuCardSlider";
+import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 export const RestaurantMenu: React.FC = () => {
     return (<>
-        <SimpleTemplate param={{pageHeaderName: "메뉴"}}>
+        <SimpleTemplate param={{pageHeaderName: "메뉴", tab: BottomNavigationTab.MENU}}>
             <MenuBody/>
         </SimpleTemplate>
     </>)

@@ -13,6 +13,7 @@ import {PostRoomMember} from "../types/PostRoomMember";
 import {PromiseInfo} from "../types/PromiseInfo";
 import {makePromise} from "../api/Promise";
 import {getMyID} from "../api/Common";
+import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 export const MakeAppointment: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -63,7 +64,7 @@ export const MakeAppointment: React.FC = () => {
 
 
     return (
-        <SimpleTemplate param={{pageHeaderName: "약속잡기"}}>
+        <SimpleTemplate param={{pageHeaderName: "약속잡기", tab: BottomNavigationTab.COMMUNITY}}>
             <div style={{display: "flex", flexDirection: "row", marginLeft: "10px", marginTop: "20px"}}>
                 <Typography variant={"h6"} fontWeight={'bold'}>언제 볼래요?</Typography>
             </div>
