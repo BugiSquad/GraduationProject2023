@@ -12,14 +12,14 @@ export const OrderProductsList: React.FC<OrderProductsListProps> = ({name, price
             paddingLeft: '10px',
             paddingRight: '10px',
             display: "flex",
-            margin: "20px",
+            margin: "10px",
             justifyContent: "space-between",
+            width: "100%",
             alignItems: "center",
-            minWidth: 280
         }}>
-            <Typography fontSize={14} fontWeight='bold'>{name}</Typography>
-            <Typography fontSize={14}>{quantity}개</Typography>
-            <Typography fontSize={14}>₩{price}</Typography>
+            <Typography sx={{flex: "1"}} fontSize={14} fontWeight='bold'>{name}</Typography>
+            <Typography sx={{flex: "1"}} fontSize={14}>{quantity}개</Typography>
+            <Typography sx={{flex: "1"}} fontSize={14}>₩{price}</Typography>
         </Card>
     )
 }

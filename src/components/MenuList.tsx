@@ -1,4 +1,3 @@
-import data from "../data/SampleFood.json";
 import {MenuItem} from "../types/MenuItem";
 import {RadioBarItem} from "./RadioBar";
 import React, {useEffect, useState} from "react";
@@ -7,10 +6,6 @@ import {useDispatch} from "react-redux";
 import {getMenusByCategory, toMenuArray} from "../api/Menu";
 import {addMenu} from "../store/menuRepository";
 import FoodCard from "./FoodCard";
-
-
-const foods: MenuItem[] = data
-
 
 export const MenuList: React.FC = () => {
     const category = Object.values(MenuCategory)

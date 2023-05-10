@@ -18,6 +18,7 @@ import {FormGridChild} from "./styled/FormGrid";
 import {InterestFilter, InterestOptionType} from "./InterestFilter";
 import {requestMemberSignUp} from "../api/Member";
 import {Gender, Interest, MemberType} from "../types/MemberDto";
+import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
 
 interface UserInfoFrameProps {
@@ -242,33 +243,13 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                         }}/>
                     </FormGridChild>
                     <FormGridChild item xs={4}>
-                        <Button type={"submit"} disableElevation disableRipple>
-                            <Typography sx={{
-                                minWidth: "70px",
-                                height: "40px",
-                                backgroundColor: '#FE724C',
-                                color: "white",
-                                fontWeight: "bold",
-                                fontSize: "14px",
-                                borderRadius: "1rem",
-                                padding: "0.5rem",
-                                boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
-                            }}>{isEdit ? "수정하기" : "회원가입하기"}</Typography>
+                        <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
+                            {isEdit ? "수정하기" : "회원가입하기"}
                         </Button>
                     </FormGridChild>
                     <FormGridChild item xs={4}>
-                        <Linkto to="/login"><Button disableElevation disableRipple sx={{paddingRight: "80px"}}>
-                            <Typography sx={{
-                                minWidth: "70px",
-                                height: "40px",
-                                backgroundColor: 'white',
-                                color: "#FE724C",
-                                fontWeight: "bold",
-                                fontSize: "14px",
-                                borderRadius: "1rem",
-                                padding: "0.5rem",
-                                boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
-                            }}>취소</Typography>
+                        <Linkto to="/login"><Button disableElevation disableRipple sx={WhiteButton}>
+                            취소
                         </Button></Linkto>
                     </FormGridChild>
                 </Grid>

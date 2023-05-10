@@ -5,10 +5,13 @@ import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
 import {OrderProductsList} from "./OrderProductsList"
 import completeImg from '../images/complete.png'
-import React from "react"
+import React, {useState} from "react"
 import {useNavigate} from "react-router-dom"
-import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {useAppSelector} from "../store/hooks";
 import {CartItem} from "../types/CartItem";
+import {CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentType} from "../types/Order";
+import {createOrder} from "../api/Order";
+import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -26,13 +29,50 @@ const style = {
     p: 4,
 };
 
-export const OrderContents: React.FC = () => {
+const createDummyPaymentDetail = async (paymentType: PaymentType) => {
+    const randomNumber = Math.floor(Math.random() * 1000000);
+    const randomSixDigitNumber = ('000000' + randomNumber).slice(-6);
+    const randomNumber1 = Math.floor(Math.random() * 1000000);
+    const randomSixDigitNumber1 = ('000000' + randomNumber1).slice(-6);
+    const result: CreatePaymentDetailDto = {
+        confirmNum: Number(randomSixDigitNumber1),
+        paymentNum: randomSixDigitNumber,
+        paymentType: paymentType,
+        detail: "",
+    }
+    return result
+}
 
+const createOrderTitle = (cartItems: CartItem[]) => {
+    if (cartItems.length === 1) return cartItems[0].name
+    else return `${cartItems[0].name} 외 ${cartItems.length - 1}건`
+}
+export const OrderContents: React.FC = () => {
     const navigate = useNavigate();
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
     const items = useAppSelector(state => state.cart.item);
-    const dispatch = useAppDispatch();
+    const [method, setMethod] = useState<PaymentType>(PaymentType.NONE);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = async () => {
+        setOpen(true);
+        const res = await createDummyPaymentDetail(method)
+        console.log(res);
+        const myOrder: CreateOrderDto = {
+            ordersType: OrderType.now,
+            memberId: 1,
+            paymentPostDto: {
+                paymentType: method,
+                confirmNum: 12314123,
+                detail: createOrderTitle(items),
+                paymentNum: "123123123123",
+            },
+            menuOrderItems: items.map((item, idx) => {
+                return {menuId: item.id, count: item.quantity} as OrderItem
+            })
+        }
+        createOrder(myOrder)
+            .then((res) => console.log(res.data))
+            .catch((err) => console.error(err))
+    }
     const handleClose = () => {
         setOpen(false)
         navigate('/mypage');
@@ -43,85 +83,34 @@ export const OrderContents: React.FC = () => {
                 maxWidth: 1000,
                 minHeight: 490,
                 padding: '10px 10',
-            margin: '10px',
-        }}>
-
+                margin: '10px',
+            }}>
                 <PageCards title="주문상품" content={<OrderProducts items={items}/>}/>
                 <PageCards title="주문자 정보" content={<OrderInfo/>}/>
-            <PageCards title="결제수단" content={<PayMethod />} />
-
-        </Card>
-        <div style={{ display: "flex", flexDirection: 'row', justifyContent: "center" }}>
-            <Button disableElevation disableRipple onClick={handleOpen} sx={{
-                minWidth: "100px",
-                margin: "5px",
-                backgroundColor: '#FE724C',
-                fontWeight: "bold",
-                borderRadius: "2rem",
-                padding: "0.5rem",
-                boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-            }} >
-                <Typography color={'white'} fontWeight={'bold'} fontSize={14}>바로 주문(완료테스트)</Typography>
-            </Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
-                        주문이 완료되었습니다.
-                    </Typography>
-                    <img src={completeImg} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem', paddingTop: "20px" }} />
-                    <div style={{ display: 'flex', flexDirection: "column", justifyContent: "space-between" }}>
-                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingTop: "20px", paddingLeft:"30px", paddingRight:"30px" }}>
-
-                            <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
-                            <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingLeft:"30px", paddingRight:"30px" }}>
-
-                            <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
-                            <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
-                        </div>
-
-                    </div>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    </Typography>
-                </Box>
-            </Modal>
-            <Button disableElevation disableRipple sx={{
-                minWidth: "100px",
-
-                margin: "5px",
-                backgroundColor: '#FE724C',
-                borderRadius: "2rem",
-                padding: "0.5rem",
-                boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-            }}>
-                <Typography color={'white'} fontWeight={'bold'} fontSize={14}>예약 주문</Typography>
-            </Button>
-        </div>
+                <PageCards title="결제수단" content={<PayMethod method={method} setMethod={setMethod}/>}/>
+            </Card>
+            <OnComplete isOpen={open} onClose={handleClose}/>
+            <div style={{display: "flex", flexDirection: 'row', justifyContent: "center"}}>
+                <Button disableElevation disableRipple onClick={handleOpen} sx={OrangeButton}> 바로 주문(완료테스트) </Button>
+                <Button disableElevation disableRipple sx={WhiteButton}> 예약 주문 </Button>
+            </div>
         </>
 
     )
 }
 
-
 export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
-    return (<>
+    return (<div style={{display: "flex", flexDirection: "column", width: "100%", alignItems: "center"}}>
             {items.map((item, idx) =>
                 <OrderProductsList name={item.name} quantity={item.quantity} price={item.price}/>
             )}
-        </>
+        </div>
     )
 }
 
 export const OrderInfo: React.FC = () => {
     return (
-
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: 'flex-start' }}>
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: 'flex-start'}}>
             <Typography fontSize={11} color="#FE724C">* 표시된 항목은 필수로 입력해야 합니다.</Typography>
             <TextField
                 size="small"
@@ -130,7 +119,6 @@ export const OrderInfo: React.FC = () => {
                 label="이름"
                 variant="standard"
             />
-
             <TextField
                 size="small"
                 required
@@ -142,20 +130,83 @@ export const OrderInfo: React.FC = () => {
     )
 }
 
-export const PayMethod: React.FC = () => {
+interface PayMethodProp {
+    method: PaymentType;
+    setMethod: React.Dispatch<React.SetStateAction<PaymentType>>
+}
+
+const payment = [
+    {src: naverpayImg, type: PaymentType.NAVERPAY},
+    {src: kakaopayImg, type: PaymentType.KAKAOPAY},
+    {src: creditcardImg, type: PaymentType.CREDITCARD}
+]
+
+export const PayMethod: React.FC<PayMethodProp> = ({method, setMethod}) => {
+    const onClick = (type: PaymentType) => setMethod(type)
     return (
         <div style={{
             justifyContent: 'space-between',
         }}>
-            <Button disableElevation sx={{ borderRadius: '3rem', maxWidth: '100px', maxHeight: '30px', paddingRight: "10px" }}>
-                <img src={naverpayImg} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
-            </Button>
-            <Button disableElevation sx={{ borderRadius: '3rem', maxWidth: '100px', maxHeight: '30px', paddingRight: "10px" }}>
-                <img src={kakaopayImg} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
-            </Button>
-            <Button disableElevation sx={{ borderRadius: '3rem', maxWidth: '100px', maxHeight: '30px', paddingRight: "10px" }}>
-                <img src={creditcardImg} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
-            </Button>
+            {payment.map((item, idx) => {
+                return (
+                    <Button disableElevation
+                            onClick={() => onClick(item.type)}
+                            sx={{borderRadius: '3rem', maxWidth: '100px', maxHeight: '30px', paddingRight: "10px"}}>
+                        <img src={item.src}
+                             style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem'}}
+                             alt={item.type}/>
+                    </Button>
+                )
+            })}
         </div>
     )
+}
+
+const OnComplete: React.FC<{ isOpen: boolean, onClose: () => void }> = ({isOpen, onClose}) => {
+
+    return (<Modal
+        open={isOpen}
+        onClose={onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+    >
+        <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
+                주문이 완료되었습니다.
+            </Typography>
+            <img src={completeImg} style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '1rem',
+                paddingTop: "20px"
+            }}/>
+            <div style={{display: 'flex', flexDirection: "column", justifyContent: "space-between"}}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingTop: "20px",
+                    paddingLeft: "30px",
+                    paddingRight: "30px"
+                }}>
+                    <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
+                    <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingLeft: "30px",
+                    paddingRight: "30px"
+                }}>
+                    <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
+                    <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
+                </div>
+
+            </div>
+            <Typography id="modal-modal-description" sx={{mt: 2}}>
+            </Typography>
+        </Box>
+    </Modal>)
 }

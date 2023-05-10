@@ -9,6 +9,7 @@ export enum OrderType {
 }
 
 export enum PaymentType {
+    NONE = "none",
     NAVERPAY = "naverPay",
     KAKAOPAY = "kakaoPay",
     CREDITCARD = "creditCard"
@@ -31,18 +32,44 @@ export interface OrderItem {
     count: number;
 }
 
-export interface PaymentDetail {
+export interface CreatePaymentDetailDto {
     paymentNum: string;
-    paymentTime?: Date;
     confirmNum: number;
     detail: string;
     paymentType: PaymentType;
 }
 
+interface Payment {
+    paymentId: number;
+    paymentNum: string;
+    paymentTime: Date;
+    confirmNum: number;
+    detail: string;
+    paymentType: PaymentType;
+    modifiedAt: Date;
+}
 
-export interface OrderDto {
+interface MenuOrdersItem {
+    menuOrdersItemId: number;
+    count: number;
+    sumPrice: number;
+    orderId: number;
+    menuId: number;
+}
+
+interface OrderDto {
     ordersType: OrderType;
     memberId: number;
-    paymentPostDto: PaymentDetail;
+}
+
+export interface CreateOrderDto extends OrderDto {
+    paymentPostDto: CreatePaymentDetailDto;
     menuOrderItems: OrderItem[];
+}
+
+export interface OrderList extends OrderDto {
+    ordersId: number;
+    totalPrice: number;
+    paymentDto: Payment;
+    menuOrdersItemDtoList: MenuOrdersItem[];
 }

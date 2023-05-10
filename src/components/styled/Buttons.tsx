@@ -1,5 +1,5 @@
 import {styled} from "@mui/system";
-import {Button, IconButton} from "@mui/material";
+import {IconButton} from "@mui/material";
 
 export const OrangeButton = ({
     margin: "10px",
@@ -13,7 +13,7 @@ export const OrangeButton = ({
     padding: "0.5rem",
 })
 
-export const WhiteButton = styled(Button)({
+export const WhiteButton = {
     margin: "10px",
     flex: "1",
     justifyContent: "center",
@@ -23,7 +23,8 @@ export const WhiteButton = styled(Button)({
     color: '#FE724C',
     borderRadius: "2rem",
     padding: "0.5rem",
-})
+    boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
+}
 
 export const OrangeCircleButton = styled(IconButton)({
     background: "#FE724C"
