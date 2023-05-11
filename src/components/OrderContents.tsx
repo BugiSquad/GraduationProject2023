@@ -1,14 +1,16 @@
-import {Box, Button, Card, Modal, TextField, Typography} from "@mui/material"
-import {PageCards} from "./PageCards"
+import { Box, Button, Card, Modal, TextField, Typography } from "@mui/material"
+import { PageCards } from "./PageCards"
 import naverpayImg from '../images/logo_naverpay.png'
 import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
-import {OrderProductsList} from "./OrderProductsList"
+import { OrderProductsList } from "./OrderProductsList"
 import completeImg from '../images/complete.png'
 import React from "react"
-import {useNavigate} from "react-router-dom"
-import {useAppDispatch, useAppSelector} from "../store/hooks";
-import {CartItem} from "../types/CartItem";
+import { useNavigate } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { CartItem } from "../types/CartItem";
+import { OrangeButton, WhiteButton } from "./styled/Buttons"
+import { Margin } from "@mui/icons-material"
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -38,30 +40,21 @@ export const OrderContents: React.FC = () => {
         navigate('/mypage');
     }
     return (<>
-            <Card sx={{
-                minWidth: 200,
-                maxWidth: 1000,
-                minHeight: 490,
-                padding: '10px 10',
+        <Card sx={{
+            minWidth: 200,
+            maxWidth: 1000,
+            padding: '15px 1',
             margin: '10px',
         }}>
 
-                <PageCards title="주문상품" content={<OrderProducts items={items}/>}/>
-                <PageCards title="주문자 정보" content={<OrderInfo/>}/>
+            <PageCards title="주문상품" content={<OrderProducts items={items} />} />
+            <PageCards title="주문자 정보" content={<OrderInfo />} />
             <PageCards title="결제수단" content={<PayMethod />} />
 
         </Card>
         <div style={{ display: "flex", flexDirection: 'row', justifyContent: "center" }}>
-            <Button disableElevation disableRipple onClick={handleOpen} sx={{
-                minWidth: "100px",
-                margin: "5px",
-                backgroundColor: '#FE724C',
-                fontWeight: "bold",
-                borderRadius: "2rem",
-                padding: "0.5rem",
-                boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-            }} >
-                <Typography color={'white'} fontWeight={'bold'} fontSize={14}>바로 주문(완료테스트)</Typography>
+            <Button disableElevation disableRipple onClick={handleOpen} sx={OrangeButton} >
+                바로 주문
             </Button>
             <Modal
                 open={open}
@@ -75,12 +68,12 @@ export const OrderContents: React.FC = () => {
                     </Typography>
                     <img src={completeImg} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem', paddingTop: "20px" }} />
                     <div style={{ display: 'flex', flexDirection: "column", justifyContent: "space-between" }}>
-                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingTop: "20px", paddingLeft:"30px", paddingRight:"30px" }}>
+                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingTop: "20px", paddingLeft: "30px", paddingRight: "30px" }}>
 
                             <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
                             <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingLeft:"30px", paddingRight:"30px" }}>
+                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingLeft: "30px", paddingRight: "30px" }}>
 
                             <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
                             <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
@@ -91,30 +84,22 @@ export const OrderContents: React.FC = () => {
                     </Typography>
                 </Box>
             </Modal>
-            <Button disableElevation disableRipple sx={{
-                minWidth: "100px",
-
-                margin: "5px",
-                backgroundColor: '#FE724C',
-                borderRadius: "2rem",
-                padding: "0.5rem",
-                boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-            }}>
-                <Typography color={'white'} fontWeight={'bold'} fontSize={14}>예약 주문</Typography>
+            <Button disableElevation disableRipple sx={WhiteButton} >
+                예약 주문
             </Button>
         </div>
-        </>
+    </>
 
     )
 }
 
 
-export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
+export const OrderProducts: React.FC<OrderProductsProps> = ({ items }) => {
     return (<>
-            {items.map((item, idx) =>
-                <OrderProductsList name={item.name} quantity={item.quantity} price={item.price}/>
-            )}
-        </>
+        {items.map((item, idx) =>
+            <OrderProductsList name={item.name} quantity={item.quantity} price={item.price} />
+        )}
+    </>
     )
 }
 
