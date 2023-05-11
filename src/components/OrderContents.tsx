@@ -88,7 +88,7 @@ export const OrderContents: React.FC = () => {
 
             <PageCards title="주문상품" content={<OrderProducts items={items} />} />
             <PageCards title="주문자 정보" content={<OrderInfo />} />
-            <PageCards title="결제수단" content={<PayMethod />} />
+            {/* <PageCards title="결제수단" content={<PayMethod />} /> */}
 
         </Card>
         <div style={{ display: "flex", flexDirection: 'row', justifyContent: "center" }}>
