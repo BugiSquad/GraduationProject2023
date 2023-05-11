@@ -15,18 +15,15 @@ import Banner1 from '../images/banner1.png';
 import Banner2 from '../images/banner2.png';
 import Banner3 from '../images/banner3.png';
 
-
-
-
 const foods: MenuItem[] = data
 
 export const MainPage: React.FC = () => {
     return (
         <>
             <Carousel navButtonsAlwaysInvisible>
-                <Paper elevation={0}><img src={Banner1} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} /></Paper>
-                <Paper elevation={0}><img src={Banner2} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} /></Paper>
-                <Paper elevation={0}><img src={Banner3} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} /></Paper>
+                <Paper elevation={0}><img src={Banner1} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
+                <Paper elevation={0}><img src={Banner2} style={{ width: '100%', height: '100%', objectFit: 'cover'}} /></Paper>
+                <Paper elevation={0}><img src={Banner3} style={{ width: '100%', height: '100%', objectFit: 'cover'}} /></Paper>
 
             </Carousel>
 
