@@ -27,7 +27,7 @@ export const RadioBarItem: React.FC<RadioBarItemProps> = (items) => {
                     }}
                 >
                     <div style={{alignItems: "center", justifyContent: "space-between", marginTop: "10px"}}>
-                        <Typography variant={"body2"} fontWeight={"bold"}>
+                        <Typography variant={"body2"} fontWeight={"bold"} >
                             {item}
                         </Typography>
                     </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import {SimpleTemplate} from "./PageTemplate";
-import {Card} from "@mui/material";
+import {Button, Card} from "@mui/material";
 import {RecentOrders} from "../components/RecentOrders";
 import {MypageCards} from "../components/MypageCards";
 import {RecentMeets} from "../components/RecentMeets";
 import {MyMessagebox} from "../components/MyMessagebox";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
+import { WhiteButton } from "../components/styled/Buttons";
 
 export const Mypage: React.FC = () => {
     return (
@@ -29,6 +30,7 @@ export const Mypage: React.FC = () => {
                 <MypageCards title="나의 모임" content={<MyMeetings />} link="/mypage/mymeetingsdetail" />*/}
                 <MypageCards title="나의 쪽지함" content={<MyMessagebox/>} link="/mypage/mymessagedetail"/>
             </Card>
+            <Button sx={WhiteButton} style={{width:"100%", borderRadius:"0.3rem"}}>로그아웃하기 </Button>
         </SimpleTemplate>
     )
 }
