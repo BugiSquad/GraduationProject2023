@@ -3,7 +3,6 @@ import { CartItemList } from "./Cart"
 import { MenuItem } from "../types/MenuItem";
 import { RadioBarItem, bgColor } from "./RadioBar";
 
-
 const foods: MenuItem[] = data
 
 const categories = [
