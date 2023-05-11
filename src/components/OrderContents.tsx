@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { CartItem } from "../types/CartItem";
 import { OrangeButton, WhiteButton } from "./styled/Buttons"
-import { Margin } from "@mui/icons-material"
 
 interface OrderProductsProps {
     items: CartItem[];

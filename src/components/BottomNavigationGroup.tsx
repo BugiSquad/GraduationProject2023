@@ -83,7 +83,7 @@ export const NavigationImpl2: React.FC<tmp> = ({idx, onChange}) => {
                                 }}>
                                 <a>
                                     <span className={"icon"}><item.icon
-                                        sx={{color: lastClicked === idx ? "orange" : "black"}}/></span>
+                                        sx={{color: lastClicked === idx ? "#FE724C" : "black"}}/></span>
                                     {/*<span className={"text"}>{item.text}</span>*/}
                                 </a>
                             </li>
