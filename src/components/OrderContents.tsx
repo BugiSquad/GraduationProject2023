@@ -1,9 +1,9 @@
-import { Box, Button, Card, Modal, TextField, Typography } from "@mui/material"
-import { PageCards } from "./PageCards"
+import {Box, Button, Card, Modal, TextField, Typography} from "@mui/material"
+import {PageCards} from "./PageCards"
 import naverpayImg from '../images/logo_naverpay.png'
 import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
-import { OrderProductsList } from "./OrderProductsList"
+import {OrderProductsList} from "./OrderProductsList"
 import completeImg from '../images/complete.png'
 
 import React, {useState} from "react"
@@ -79,55 +79,74 @@ export const OrderContents: React.FC = () => {
         navigate('/mypage');
     }
     return (<>
-        <Card sx={{
-            minWidth: 200,
-            maxWidth: 1000,
-            padding: '15px 1',
-            margin: '10px',
-        }}>
+            <Card sx={{
+                minWidth: 200,
+                maxWidth: 1000,
+                padding: '15px 1',
+                margin: '10px',
+            }}>
 
-            <PageCards title="주문상품" content={<OrderProducts items={items} />} />
-            <PageCards title="주문자 정보" content={<OrderInfo />} />
-            <PageCards title="결제수단" content={<PayMethod />} />
+                <PageCards title="주문상품" content={<OrderProducts items={items}/>}/>
+                <PageCards title="주문자 정보" content={<OrderInfo/>}/>
+                <PageCards title="결제수단" content={<PayMethod method={method} setMethod={setMethod}/>}/>
 
-        </Card>
-        <div style={{ display: "flex", flexDirection: 'row', justifyContent: "center" }}>
-            <Button disableElevation disableRipple onClick={handleOpen} sx={OrangeButton} >
-                바로 주문
-            </Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
-                        주문이 완료되었습니다.
-                    </Typography>
-                    <img src={completeImg} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem', paddingTop: "20px" }} />
-                    <div style={{ display: 'flex', flexDirection: "column", justifyContent: "space-between" }}>
-                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingTop: "20px", paddingLeft: "30px", paddingRight: "30px" }}>
+            </Card>
+            <div style={{display: "flex", flexDirection: 'row', justifyContent: "center"}}>
+                <Button disableElevation disableRipple onClick={handleOpen} sx={OrangeButton}>
+                    바로 주문
+                </Button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
+                            주문이 완료되었습니다.
+                        </Typography>
+                        <img src={completeImg} style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '1rem',
+                            paddingTop: "20px"
+                        }}/>
+                        <div style={{display: 'flex', flexDirection: "column", justifyContent: "space-between"}}>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                paddingTop: "20px",
+                                paddingLeft: "30px",
+                                paddingRight: "30px"
+                            }}>
 
-                            <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
-                            <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
+                                <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
+                                <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
+                            </div>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                paddingLeft: "30px",
+                                paddingRight: "30px"
+                            }}>
+
+                                <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
+                                <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
+                            </div>
+
                         </div>
-                        <div style={{ display: 'flex', flexDirection: "row", justifyContent: "space-between", paddingLeft: "30px", paddingRight: "30px" }}>
-
-                            <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
-                            <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
-                        </div>
-
-                    </div>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    </Typography>
-                </Box>
-            </Modal>
-            <Button disableElevation disableRipple sx={WhiteButton} >
-                예약 주문
-            </Button>
-        </div>
-    </>
+                        <Typography id="modal-modal-description" sx={{mt: 2}}>
+                        </Typography>
+                    </Box>
+                </Modal>
+                <Button disableElevation disableRipple sx={WhiteButton}>
+                    예약 주문
+                </Button>
+            </div>
+        </>
 
 
     )
