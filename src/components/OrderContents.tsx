@@ -86,6 +86,7 @@ export const OrderContents: React.FC = () => {
                 margin: '10px',
             }}>
 
+
                 <PageCards title="주문상품" content={<OrderProducts items={items}/>}/>
                 <PageCards title="주문자 정보" content={<OrderInfo/>}/>
                 <PageCards title="결제수단" content={<PayMethod method={method} setMethod={setMethod}/>}/>
