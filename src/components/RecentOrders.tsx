@@ -11,7 +11,7 @@ export const RecentOrders: React.FC = () => {
             const data = res.data.data.map((item: OrderList) => item)
             setList(data)
             console.log(data)
-        })
+        }).catch((err) => console.warn(err))
     }, [])
     return (
         <div style={{width: "100%"}}>

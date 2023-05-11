@@ -12,6 +12,7 @@ import {CartItem} from "../types/CartItem";
 import {CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentType} from "../types/Order";
 import {createOrder} from "../api/Order";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
+import {getMyID} from "../api/Common";
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -58,7 +59,7 @@ export const OrderContents: React.FC = () => {
         console.log(res);
         const myOrder: CreateOrderDto = {
             ordersType: OrderType.now,
-            memberId: 1,
+            memberId: getMyID(),
             paymentPostDto: {
                 paymentType: method,
                 confirmNum: 12314123,
