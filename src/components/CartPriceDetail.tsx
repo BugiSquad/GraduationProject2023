@@ -1,22 +1,32 @@
-import {Button, Card, Typography} from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import React from "react";
-import {MenuItem} from "../types/MenuItem";
-import {useAppSelector} from "../store/hooks";
-import {useNavigate} from "react-router-dom";
-import {OrangeButton} from "./styled/Buttons";
+import { MenuItem } from "../types/MenuItem";
+import { useAppSelector } from "../store/hooks";
+import { useNavigate } from "react-router-dom";
+import { OrangeButton } from "./styled/Buttons";
 
 export const CartPriceDetail: React.FC = () => {
     const cart = useAppSelector((state) => state.cart)
     const navigate = useNavigate()
     return (
         <div>
-            <Card>
-                <Typography variant={"h6"}>총 결제 금액</Typography>
-                <Typography variant={"h5"}>{cart.item.length > 0 ? getTotalPriceOf(cart.item) : 0}</Typography>
-                <Button sx={OrangeButton} onClick={() => {
+            {cart.item.length > 0 ? <Card sx={{ padding: "10px", margin: "10px" }}>
+                <Button sx={OrangeButton} style={{ borderRadius: "0.3rem", padding: "10px", width: "300px" }} onClick={() => {
                     navigate("/order")
-                }}>주문하기</Button>
-            </Card>
+                }}
+                >
+                    <Typography
+                        fontSize={"18px"}
+                        fontWeight={'bold'}
+                        color={"lightgray"}
+                        sx={{ paddingRight: "10px" }}>총 {cart.item.length}개 | </Typography>
+                    {getTotalPriceOf(cart.item)}원 주문하기</Button>
+
+            </Card> : <div style={{ paddingTop: "200px" }}><Typography color={'lightgray'} fontWeight={'bold'}>장바구니에 메뉴가 없습니다.<br />메뉴를 추가해보세요.</Typography>
+                <Button sx={OrangeButton} style={{ borderRadius: "0.3rem", padding: "10px", margin: "10px", width: "220px" }} onClick={() => {
+                    navigate("/menu")
+                }}>메뉴 보러가기</Button></div>}
+
         </div>)
 }
 

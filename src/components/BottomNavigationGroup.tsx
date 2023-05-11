@@ -4,10 +4,10 @@ import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../store/hooks";
 import {toAPP, toCart, toCommunity, toMenu, toMyPage} from "../store/navgroup";
 import '../components/BottomNavigationGroup.css'
-import AddIcon from "@mui/icons-material/Add";
 import GroupsIcon from '@mui/icons-material/Groups';
 import {RestaurantMenu} from "@mui/icons-material";
-import ForumIcon from '@mui/icons-material/Forum';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HomeIcon from '@mui/icons-material/Home';
 
 
 interface BottomNavigationGroupProps {
@@ -61,10 +61,10 @@ interface tmp {
 export const NavigationImpl2: React.FC<tmp> = ({idx, onChange}) => {
     const [lastClicked, setLastClick] = useState<number>(idx)
     const ary = [
-        {text: "홈", icon: AddIcon},
+        {text: "홈", icon: HomeIcon},
         {text: "같이 먹기", icon: GroupsIcon},
         {text: "메뉴", icon: RestaurantMenu},
-        {text: "커뮤니티", icon: ForumIcon},
+        {text: "장바구니", icon: ShoppingCartIcon},
         {text: "마이페이지", icon: PersonIcon},
     ]
 

@@ -7,6 +7,7 @@ import {getMenusByCategory, toMenuArray} from "../api/Menu";
 import {addMenu} from "../store/menuRepository";
 import FoodCard from "./FoodCard";
 
+
 export const MenuList: React.FC = () => {
     const category = Object.values(MenuCategory)
     const [idx, setIdx] = useState<number>(0)
