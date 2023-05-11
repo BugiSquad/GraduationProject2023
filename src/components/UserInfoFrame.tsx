@@ -22,7 +22,7 @@ import {Gender, Interest, MemberType} from "../types/MemberDto";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
 
-interface UserInfoFrameProps {
+export interface UserInfoFrameProps {
     name: string;
     email: string;
     userprofilePic: string | null; // 프로필 사진이 없을 수도 있으므로 null 가능성 추가
