@@ -78,7 +78,7 @@ export const MyMessageDetail: React.FC = () => {
                 {
                     noteRooms.map((value, idx) => <MyMessage content={value.title} count={3}
                                                              isGroup={value.groupType === GroupType.ORGANIZATION}
-                                                             msgLinkTo={`/mypage/message/${value.postId}`}/>)
+                                                             msgLinkTo={`/mypage/message/${value.noteRoomId}`}/>)
                 }
                 <MyMessage content={"10분 뒤에 같이 먹을 사람 구해요"} count={3} isGroup={false} msgLinkTo={""}/>
                 <GroupHeader group={noteGroups}/>

@@ -13,8 +13,6 @@ export const RecentOrderDetail: React.FC = () => {
         <SimpleTemplate param={{pageHeaderName: "최근 주문 내역", tab: BottomNavigationTab.MYPAGE}}>
             <div style={{paddingTop: "20px"}}>
                 <PageCards title="조회 조건" content={<InquiryPeriodContent/>}/>
-
-
                 <PageCards title="조회 내역" content={<RecentOrders/>}/>
             </div>
         </SimpleTemplate>

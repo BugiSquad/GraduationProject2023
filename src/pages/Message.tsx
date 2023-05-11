@@ -9,8 +9,6 @@ import {useAppSelector} from "../store/hooks";
 import {getNotesWith, sendNoteToRoom} from "../api/NoteRoom";
 import {NoteMessage} from "../types/NoteMessage";
 import {getMyID} from "../api/Common";
-import {SimpleTemplate} from "./PageTemplate";
-import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 
 function MessageContent(message: NoteMessage) {
@@ -20,7 +18,9 @@ function MessageContent(message: NoteMessage) {
             fontWeight: "bold",
             fontSize: "7px",
             alignSelf: 'flex-end'
-        }}>{message.name}<Typography variant={"subtitle2"}>dummyTime</Typography></div>
+        }}>{message.name}
+            {/*<Typography variant={"subtitle2"}>dummyTime</Typography>*/}
+        </div>
         <div>{message.message}</div>
     </>);
 }
@@ -91,7 +91,7 @@ export const Message: React.FC = () => {
     };
 
     return (
-        <SimpleTemplate param={{pageHeaderName: "", tab: BottomNavigationTab.COMMUNITY}}>
+        <div style={{width: "100%"}}>
             <div style={{
                 display: "flex",
                 flexDirection: "row",
@@ -101,7 +101,7 @@ export const Message: React.FC = () => {
             }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>
                     <Button onClick={handleGoBack} disableElevation sx={{color: '#FE724C'}}>
-                        <ArrowBackIosNewIcon/></Button> {roomName}</Typography>
+                        <ArrowBackIosNewIcon/></Button> {"같이 밥 먹어요"}</Typography>
                 <div style={{display: "inherit", alignItems: "center", paddingRight: "10px"}}>
                     <Link
                         to={`/mypage/message/makeappointment/${roomId}`}><IconButton><HandshakeIcon/></IconButton></Link>
@@ -150,6 +150,6 @@ export const Message: React.FC = () => {
                         onClick={handleSendButtonClick}> 전송
                 </button>
             </div>
-        </SimpleTemplate>
+        </div>
     )
 }

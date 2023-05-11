@@ -4,6 +4,7 @@ import {PopperPlacementType} from "@mui/material";
 import {PostPopper} from "./PostPopper";
 import {clearPosts, getPostsFromRemote} from "../store/matching/posts";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {faker} from "@faker-js/faker";
 
 export const Posts: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
@@ -31,8 +32,9 @@ export const Posts: React.FC = () => {
                             setOpen(b)
                         }} placement={placement}/>
             {Array.from(state).map((user, idx) =>
-                <Post key={idx} title={user.title}
-                      memberProfileUrl={user.memberProfileUrl}
+                <Post key={idx} title={"밥 먹어요"}
+                      memberProfileUrl={faker.image.avatar()}
+                    // memberProfileUrl={user.memberProfileUrl}
                       minutesLeftUntilMeal={Number(user.minutesLeftUntilMeal)}
                       interest={user.interest}
                       onClick={handleClick} index={idx}

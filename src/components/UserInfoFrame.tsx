@@ -14,11 +14,12 @@ import {
 } from "@mui/material"
 import { Form, Link as Linkto } from "react-router-dom";
 import 'react-datepicker/dist/react-datepicker.css';
-import { FormGridChild } from "./styled/FormGrid";
-import { InterestFilter, InterestOptionType } from "./InterestFilter";
-import { requestMemberSignUp } from "../api/Member";
-import { Gender, Interest, MemberType } from "../types/MemberDto";
-import { OrangeButton, WhiteButton } from "./styled/Buttons";
+
+import {FormGridChild} from "./styled/FormGrid";
+import {InterestFilter, InterestOptionType} from "./InterestFilter";
+import {requestMemberSignUp} from "../api/Member";
+import {Gender, Interest, MemberType} from "../types/MemberDto";
+import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
 
 interface UserInfoFrameProps {
@@ -233,7 +234,8 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({ userprofilePic, is
                             }} />
                     </FormGridChild>
                     <FormGridChild item xs={4}>
-                        <Button type={"submit"} disableElevation disableRipple sx={OrangeButton} >
+
+                        <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
                             {isEdit ? "수정하기" : "회원가입하기"}
                         </Button>
                     </FormGridChild>
