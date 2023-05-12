@@ -3,11 +3,14 @@ import {createNewPost} from "../api/Post";
 import {faker} from "@faker-js/faker";
 import {requestMemberSignIn, requestMemberSignUp, setMyInfo} from "../api/Member";
 import {addMenus} from "../api/Menu";
-import {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Form} from "react-router-dom";
 import {MyInfo} from "../types/MyInfo";
 import {Gender, Interest, MemberType} from "../types/MemberDto";
 import {GroupType, PostDto} from "../types/PostDto";
+import {checkPermission, requestPermission} from "../api/Notification";
+import {subscribeWith, SubscriptionPostDto} from "../api/Subscription";
+import {getMyID} from "../api/Common";
 
 /**
  * 회원가입 페이지
@@ -24,20 +27,21 @@ export const APITest: React.FC = () => {
         interest.pubg = true;
         interest.lol = true;
         let name = faker.word.noun()
+        const member = {
+            password: "example",
+            name: `${name}`,
+            phone: `${faker.phone.number()}`,
+            studentId: Math.random() * 10000,
+            email: `${name}@example.com`,
+            memberType: MemberType.STUDENT,
+            department: "컴퓨터공학과",
+            gender: Gender.MALE,
+            interestPostDto: interest
+        }
         requestMemberSignUp(
-            {
-                password: "example",
-                name: `${name}`,
-                phone: `${faker.phone.number()}`,
-                studentId: Math.random() * 10000,
-                email: `${name}@example.com`,
-                memberType: MemberType.STUDENT,
-                department: "컴퓨터공학과",
-                gender: Gender.MALE,
-                interestPostDto: interest
-            }
+            member
         ).then((res) => {
-            console.log(res)
+            console.log(member)
         })
     }
     const createPost = (id: number) => {
@@ -65,20 +69,58 @@ export const APITest: React.FC = () => {
             createPost(i + 1)
         }
     }
+    if (checkPermission())
+        navigator.serviceWorker.getRegistration().then(res => {
+            if (res != null) {
+                res.showNotification("asdf", {body: 'asdf'})
+                res.pushManager.getSubscription().then(v => {
+                    if (v != null)
+                        alert(v.endpoint)
+                    else {
+                        res.pushManager.subscribe({
+                            applicationServerKey: "BKuaSaL3pR_rsX00tUY6AbQ1pIZEf-T7fSTrFM1z_8Ygt50uP5OSzMqVYWdQWeNYVc_tAC8T2w3FMx3MjYwno2U",
+                            userVisibleOnly: true,
+                        });
+                    }
+                })
+
+            } else {
+                navigator.serviceWorker.register(`${window.location.protocol + '//' + window.location.host}/service-worker.js`, {scope: '/'})
+                    .then((res) => {
+                        res.pushManager.getSubscription().then(value => {
+                            if (value != null) alert(`${value.endpoint}`)
+                            else alert("error")
+                        }).catch(error => alert(error))
+                        alert("error")
+                    })
+                    .catch((err) => alert(err))
+                // navigator.serviceWorker.register()
+            }
+        })
     return (
-        <div>
-            <Typography variant={"h4"}>API테스트</Typography>
-            <Button onClick={onButtonClicked}>회원가입</Button>
-            {/*<Button onClick={createPost}>글 올리기</Button>*/}
-            <Button onClick={() => {
-                addMenus()
-            }}>메뉴 등록</Button>
-            <Button onClick={createDummyMembers}>더미 회원 만들기(X100)</Button>
-            <Button onClick={createDummyPosts}>더미 글 올리기</Button>
-            <SignInForm></SignInForm>
-            <MessageTMP></MessageTMP>
-        </div>
-    )
+        <>
+            <head>
+                <link rel={"manifest"} href={"/site.webmanifest"}/>
+            </head>
+            <div>
+                <Typography variant={"h4"}>API테스트</Typography>
+                <Button onClick={onButtonClicked}>회원가입</Button>
+                {/*<Button onClick={createPost}>글 올리기</Button>*/}
+                <Button onClick={() => {
+                    addMenus()
+                }}>메뉴 등록</Button>
+                <Button onClick={createDummyMembers}>더미 회원 만들기(X100)</Button>
+                <Button onClick={createDummyPosts}>더미 글 올리기</Button>
+                <SignInForm></SignInForm>
+                <MessageTMP></MessageTMP>
+                <Button onClick={requestPermission}>권한 요청</Button>
+                <Button onClick={() => {
+                    if (checkPermission())
+                        alert(Notification.permission)
+                }}>권한 확인</Button>
+
+            </div>
+        </>)
 }
 
 const SignInForm: React.FC = () => {
@@ -114,33 +156,42 @@ async function registerServiceWorker() {
     if (!registration) {
         // 없으면 서비스 워커 등록
         registration = await navigator.serviceWorker.register('/service-worker.js');
+    } else {
+        registration.pushManager.getSubscription().then(value => {
+            if (value != null)
+                alert(value.endpoint)
+        })
     }
 }
 
-const checkPermission = () => {
-    if ("Notification" in window) {
-        // 브라우저에서 Notification API를 지원하는 경우
-        if (Notification.permission === "granted") {
-            // 이미 권한이 부여된 경우
-            var notification = new Notification("알림이 도착했습니다!");
-        } else if (Notification.permission !== "denied") {
-            // 권한이 거절되지 않은 경우
-            Notification.requestPermission().then(function (permission) {
-                if (permission === "granted") {
-                    var notification = new Notification("알림이 도착했습니다!");
-                }
-            });
-        }
-    }
-}
 export const MessageTMP: React.FC = () => {
-    useEffect(() => {
-        Notification.requestPermission().then(function (permission) {
-            if (permission !== 'granted') {
-                throw new Error('Permission not granted for Notification')
+    const [auth, setAuth] = useState({} as SubscriptionPostDto)
+    const subscribe = () => {
+        navigator.serviceWorker.getRegistration().then((res) => {
+            if (res != null) {
+                res.pushManager.getSubscription().then(subscription => {
+                    if (subscription != null) {
+                        let s = subscription.toJSON()
+                        let a = {
+                            endpoint: `${s.endpoint}`,
+                            auth: `${s.keys!!.auth}`,
+                            p256dh: `${s.keys!!.p256dh}`,
+                            memberId: getMyID()
+                        }
+                        setAuth(a)
+                        subscribeWith(a as SubscriptionPostDto).then(res => alert(res)).catch(err => alert(JSON.stringify(err)))
+                    }
+                })
             }
         })
-        registerServiceWorker().then()
-    })
-    return (<></>)
+    }
+    return (
+        <>
+            <div>
+                <Typography variant={"subtitle1"}>{JSON.stringify(auth)}</Typography>
+            </div>
+            <Button onClick={() => {
+                subscribe()
+            }}>정보 확인</Button>
+        </>)
 }
