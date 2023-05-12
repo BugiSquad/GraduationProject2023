@@ -10,11 +10,13 @@ import {router} from "./routes/router";
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
+
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 root.render(
     // <React.StrictMode>
-        <Provider store={store}>
-            <RouterProvider router={router}/>
-        </Provider>
+    <Provider store={store}>
+        <RouterProvider router={router}/>
+    </Provider>
     // </React.StrictMode>
 );
 
