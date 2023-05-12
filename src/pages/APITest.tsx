@@ -3,7 +3,7 @@ import {createNewPost} from "../api/Post";
 import {faker} from "@faker-js/faker";
 import {requestMemberSignIn, requestMemberSignUp, setMyInfo} from "../api/Member";
 import {addMenus} from "../api/Menu";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Form} from "react-router-dom";
 import {MyInfo} from "../types/MyInfo";
 import {Gender, Interest, MemberType} from "../types/MemberDto";
@@ -76,6 +76,7 @@ export const APITest: React.FC = () => {
             <Button onClick={createDummyMembers}>더미 회원 만들기(X100)</Button>
             <Button onClick={createDummyPosts}>더미 글 올리기</Button>
             <SignInForm></SignInForm>
+            <MessageTMP></MessageTMP>
         </div>
     )
 }
@@ -104,4 +105,42 @@ const SignInForm: React.FC = () => {
             </Form>
         </>
     )
+}
+
+async function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    // 이미 등록되어있는 정보 가져오기
+    let registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) {
+        // 없으면 서비스 워커 등록
+        registration = await navigator.serviceWorker.register('/service-worker.js');
+    }
+}
+
+const checkPermission = () => {
+    if ("Notification" in window) {
+        // 브라우저에서 Notification API를 지원하는 경우
+        if (Notification.permission === "granted") {
+            // 이미 권한이 부여된 경우
+            var notification = new Notification("알림이 도착했습니다!");
+        } else if (Notification.permission !== "denied") {
+            // 권한이 거절되지 않은 경우
+            Notification.requestPermission().then(function (permission) {
+                if (permission === "granted") {
+                    var notification = new Notification("알림이 도착했습니다!");
+                }
+            });
+        }
+    }
+}
+export const MessageTMP: React.FC = () => {
+    useEffect(() => {
+        Notification.requestPermission().then(function (permission) {
+            if (permission !== 'granted') {
+                throw new Error('Permission not granted for Notification')
+            }
+        })
+        registerServiceWorker().then()
+    })
+    return (<></>)
 }

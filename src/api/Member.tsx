@@ -39,6 +39,7 @@ export function getMyInfo(): MyInfo {
     return JSON.parse(store)
 }
 
+
 /**
  * 로컬 스토리지에서 사용자 정보를 삭제합니다.
  */
