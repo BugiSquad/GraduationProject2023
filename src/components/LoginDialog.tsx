@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { getMyID } from "../api/Common";
 
 interface LoginDialogProps {
     isLoggedIn: boolean;
@@ -20,7 +21,7 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ isLoggedIn }) => {
                 zIndex: 100,
             }}
         >
-            {isLoggedIn ? <div style={{ display: "flex", justifyContent: "space-between" }}>
+            {((getMyID())!=-1) ? <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div>로그인이 성공하였습니다!</div>
                 <Link to="/app"><Button>닫기</Button></Link>
             </div> :
