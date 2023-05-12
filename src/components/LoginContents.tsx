@@ -9,19 +9,20 @@ import {
     TextField,
     Typography
 } from "@mui/material"
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from "react"
 import { LoginDialog } from "./LoginDialog"
 import { getMyInfo, requestMemberSignIn, setMyInfo } from "../api/Member";
 import { MyInfo } from "../types/MyInfo";
 import { OrangeButton, WhiteButton } from "./styled/Buttons";
+import { getMyID } from "../api/Common";
 
 export const LoginContents: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -38,18 +39,21 @@ export const LoginContents: React.FC = () => {
     };
 
     const handleLogin = () => {
-        // TODO: Implement login logic here 
-        if (email === "a" && password === "a") {
-            console.log("logged in.");
-            setIsLoggedIn(true);
-        }
         requestMemberSignIn({ email: email, password: password }).then((res) => {
             let info = res.data.data as MyInfo
+            if (info.memberId != '-1') {
+                console.log("logged in.");
+                setIsLoggedIn(true);
+                alert("로그인에 성공하였습니다.");
+                navigate("/app");
+            }
+            else {
+                alert("부적절한 접근입니다. 다시 시도해주세요.");
+            }
             setMyInfo(info)
             let storedInfo = getMyInfo()
             console.log(`로그인 했습니다. ${JSON.stringify(storedInfo)} `)
         }).catch(err => console.error(err))
-        setIsLoginDialogOpen(true);
     };
 
     return (
@@ -98,8 +102,6 @@ export const LoginContents: React.FC = () => {
             </div>
             <Button disableElevation sx={{ padding: "10px" }}>
                 아이디 / 비밀번호를 잊으셨나요? </Button>
-            {isLoginDialogOpen && <LoginDialog isLoggedIn={isLoggedIn} />}
-
         </>
     )
 } 

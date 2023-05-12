@@ -1,7 +1,7 @@
-import {MemberDto} from "../types/MemberDto";
+import { MemberDto } from "../types/MemberDto";
 import axios from "axios";
-import {getApiURL} from "./Common";
-import {MyInfo} from "../types/MyInfo";
+import { getApiURL } from "./Common";
+import { MyInfo } from "../types/MyInfo";
 
 /**
  * 새로운 회원을 생성합니다.
@@ -35,6 +35,15 @@ export function setMyInfo(info: MyInfo) {
 export function getMyInfo(): MyInfo {
     let store = localStorage.getItem("myInfo")
     if (store == null)
-        return {memberId: "-1", accessToken: ""}
+        return { memberId: "-1", accessToken: "" }
     return JSON.parse(store)
+}
+
+/**
+ * 로컬 스토리지에서 사용자 정보를 삭제합니다.
+ */
+export function removeMyInfo() {
+    localStorage.removeItem("myInfo");
+    alert("정상적으로 로그아웃 되었습니다.");
+    window.location.href = "/app";
 }
