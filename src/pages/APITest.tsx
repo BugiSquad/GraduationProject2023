@@ -71,30 +71,18 @@ export const APITest: React.FC = () => {
     }
     if (checkPermission()) {
         navigator.serviceWorker.getRegistration().then(res => {
-            if (res != null) {
-                alert("simple")
-                res.showNotification("asdf", {body: 'asdf'})
-                res.pushManager.getSubscription().then(v => {
-                    if (v != null)
-                        alert(v.endpoint)
-                    else {
-                        res.pushManager.subscribe({
-                            applicationServerKey: "BKuaSaL3pR_rsX00tUY6AbQ1pIZEf-T7fSTrFM1z_8Ygt50uP5OSzMqVYWdQWeNYVc_tAC8T2w3FMx3MjYwno2U",
-                            userVisibleOnly: true,
-                        });
+            if (res != null) return res;
+            else return navigator.serviceWorker.register(`/service-worker.js`, {scope: '/'})
+        }).then(async res => {
+            res.showNotification("asdf", {body: 'asdf'})
+            const subscription = await res.pushManager.getSubscription()
+            if (subscription == null) {
+                const newSubscription = await res.pushManager.subscribe({
+                        applicationServerKey: "BKuaSaL3pR_rsX00tUY6AbQ1pIZEf-T7fSTrFM1z_8Ygt50uP5OSzMqVYWdQWeNYVc_tAC8T2w3FMx3MjYwno2U",
+                        userVisibleOnly: true,
                     }
-                })
-
-            } else {
-                alert(`${window.location.protocol + '//' + window.location.host}/service-worker.js`)
-                navigator.serviceWorker.register(`/service-worker.js`, {scope: '/'})
-                    .then((res1) => {
-                        if (res1 == null) return;
-                        res1.pushManager.getSubscription().then((value) => {
-                            if (value != null) alert(`${value.endpoint}`)
-                            else alert("error")
-                        })
-                    }).catch(error => alert(error))
+                )
+                alert(`${JSON.stringify(newSubscription.toJSON())}`)
             }
         })
     }
