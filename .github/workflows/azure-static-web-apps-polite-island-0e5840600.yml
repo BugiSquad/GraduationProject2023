@@ -32,6 +32,7 @@ jobs:
           output_location: "" # Built app content directory - optional
         env:
           NPM_CONFIG_LEGACY_PEER_DEPS: true
+          CI: false
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
