@@ -2,6 +2,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import {Avatar, Typography} from "@mui/material";
 import React from "react";
 import {Link} from "react-router-dom";
+import logo from '../../images/logo.png';
+import { getMyID, getMyToken } from "../../api/Common";
+import profilePic from '../../images/default.png'
 
 interface PageHeaderParam {
     pageHeaderName: String;
@@ -22,8 +25,8 @@ export const MainPageHeader: React.FC<PageHeaderParam>
             paddingRight: '1rem'
         }}>
             <MenuIcon></MenuIcon>
-            <Link to={"/app"}><Typography variant={"h5"} fontWeight={'bold'} fontFamily={"sans-serif"}>한성맛남</Typography></Link>
-            <Link to={"/login"} style={{color:"black", fontSize:"10px"}}>로그인하기</Link>
+            <Link to={"/app"} onClick={() => {console.log(getMyID(), getMyToken())}}><img src={logo} style={{ paddingTop:"10px", width: '50%', height: '50%', objectFit: 'cover' }}/></Link>
+            {getMyID()? <Link to={"/mypage"} onClick={() => {console.log(getMyID())}}><Avatar src={profilePic}></Avatar></Link> :<Link to={"/login"} style={{color:"black", fontSize:"14px"}}>로그인하기</Link>}
             {/* <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg"/> */}
         </div>)
 }

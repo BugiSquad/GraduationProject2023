@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import defaultImage from "../images/default.png";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
     Autocomplete,
     Button,
@@ -12,8 +12,9 @@ import {
     TextField,
     Typography
 } from "@mui/material"
-import {Form, Link as Linkto} from "react-router-dom";
+import { Form, Link as Linkto } from "react-router-dom";
 import 'react-datepicker/dist/react-datepicker.css';
+
 import {FormGridChild} from "./styled/FormGrid";
 import {InterestFilter, InterestOptionType} from "./InterestFilter";
 import {requestMemberSignUp} from "../api/Member";
@@ -21,7 +22,7 @@ import {Gender, Interest, MemberType} from "../types/MemberDto";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
 
-interface UserInfoFrameProps {
+export interface UserInfoFrameProps {
     name: string;
     email: string;
     userprofilePic: string | null; // 프로필 사진이 없을 수도 있으므로 null 가능성 추가
@@ -29,18 +30,18 @@ interface UserInfoFrameProps {
 }
 
 const Departments = [
-    {label: '한국어문학부'},
-    {label: '역사문화학부'},
-    {label: '영어영문학부'},
-    {label: '지식정보학부'},
-    {label: '컴퓨터공학과'},
-    {label: 'IT응용시스템공학과'},
-    {label: '산업경영공학과'},
-    {label: '기계시스템공학과'},
-    {label: '전자정보공학과'},
+    { label: '한국어문학부' },
+    { label: '역사문화학부' },
+    { label: '영어영문학부' },
+    { label: '지식정보학부' },
+    { label: '컴퓨터공학과' },
+    { label: 'IT응용시스템공학과' },
+    { label: '산업경영공학과' },
+    { label: '기계시스템공학과' },
+    { label: '전자정보공학과' },
 ]
 
-export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isEdit}) => {
+export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({ userprofilePic, isEdit }) => {
 
     const [profilePic, setProfilePic] = useState<string | null>(
         userprofilePic
@@ -97,19 +98,19 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
     return (
         <>
             <Form onSubmit={onSubmit}>
-                <div style={{paddingTop: "20px"}}>
+                <div style={{ paddingTop: "20px" }}>
                     <img
                         src={profilePic || defaultImage}
                         alt="프로필 사진"
-                        style={{width: 120, height: 120, borderRadius: "40%"}}
+                        style={{ width: 120, height: 120, borderRadius: "40%" }}
                     />
                 </div>
 
 
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "center", paddingTop: "10px"}}>
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", paddingTop: "10px" }}>
                     <Link
                         component="label"
-                        sx={{color: "grey", fontSize: "13px"}}
+                        sx={{ color: "grey", fontSize: "13px" }}
                     >
                         {isEdit ? "사진 수정하기 " : "사진 추가하기 "}
                         <input
@@ -118,7 +119,7 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                             hidden
                         />
                     </Link>
-                    <Link sx={{color: "grey", fontSize: "13px"}}
+                    <Link sx={{ color: "grey", fontSize: "13px" }}
                     >
                         / 삭제하기
                     </Link>
@@ -131,95 +132,87 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                             minWidth: "40px",
                         }}>이메일＊</Typography>
                         <TextField size="small" type={"email"} required
-                                   variant="standard" value={email} onChange={(event) => {
-                            setEmail(event.target.value)
-                        }} color="warning"/>
+                            variant="standard" value={email} onChange={(event) => {
+                                setEmail(event.target.value)
+                            }} color="warning" />
                     </FormGridChild>
                     <FormGridChild item xs={4}>
                         {isEdit ? false :
-                            <Button disableElevation disableRipple>
-                                <Typography sx={{
-                                    minWidth: "70px",
-                                    height: "30px",
-                                    backgroundColor: '#FE724C',
-                                    color: "white",
-                                    fontWeight: "bold",
-                                    fontSize: "12px",
-                                    borderRadius: "1rem",
-                                    padding: "0.5rem",
-                                    boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
-                                }}>중복확인</Typography>
+                            <Button disableElevation disableRipple sx={OrangeButton}>
+                                중복확인
                             </Button>
                         }
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>닉네임</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', }}>닉네임</Typography>
                         <TextField required variant="standard"
-                                   color="warning" value={nickname}
-                                   onChange={(event) => {
-                                       setNickname(event.target.value)
-                                   }}
+                            color="warning" value={nickname}
+                            onChange={(event) => {
+                                setNickname(event.target.value)
+                            }}
                         />
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold'}}>학번*</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>학번*</Typography>
                         <TextField required variant="standard"
-                                   type={"number"}
-                                   color="warning" value={studentId}
-                                   onChange={(event) => {
-                                       setStudentId(Number(event.target.value))
-                                   }}
+                            type={"number"}
+                            color="warning" value={studentId}
+                            onChange={(event) => {
+                                setStudentId(Number(event.target.value))
+                            }}
                         />
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>새 비밀번호＊</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', }}>새 비밀번호＊</Typography>
                         <FormControl variant="standard">
                             <Input required
-                                   type={showPassword ? 'text' : 'password'}
-                                   color="warning"
-                                   endAdornment={
-                                       <InputAdornment position="end">
-                                           <Button disableElevation disableRipple sx={{color: "grey"}}
-                                                   aria-label="toggle password visibility"
-                                                   onClick={handleClickShowPassword}
-                                                   onMouseDown={handleMouseDownPassword}
-                                           >
-                                               {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                           </Button>
-                                       </InputAdornment>
-                                   }
-                                   value={password}
-                                   onChange={(event) => setPassword(event.target.value)}
+                                type={showPassword ? 'text' : 'password'}
+                                color="warning"
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <Button disableElevation disableRipple sx={{ color: "grey" }}
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </Button>
+                                    </InputAdornment>
+                                }
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
                             />
                         </FormControl>
                     </FormGridChild>
                     <FormGridChild item xs={12}>
+
                         <Typography variant="body1" sx={{fontWeight: 'bold'}}>새 비밀번호
+
                             확인＊</Typography>
                         <FormControl variant="standard">
                             <Input required
-                                   type={showPassword ? 'text' : 'password'}
-                                   color="warning"
-                                   endAdornment={
-                                       <InputAdornment position="end">
-                                           <Button disableElevation disableRipple sx={{color: "grey"}}
-                                                   aria-label="toggle password visibility"
-                                                   onClick={handleClickShowPassword}
-                                                   onMouseDown={handleMouseDownPassword}
-                                           >
-                                               {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                           </Button>
-                                       </InputAdornment>
-                                   }
-                                   value={testPassword}
-                                   onChange={(e) => {
-                                       setTestPassword(e.target.value)
-                                   }}
+                                type={showPassword ? 'text' : 'password'}
+                                color="warning"
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <Button disableElevation disableRipple sx={{ color: "grey" }}
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </Button>
+                                    </InputAdornment>
+                                }
+                                value={testPassword}
+                                onChange={(e) => {
+                                    setTestPassword(e.target.value)
+                                }}
                             />
                         </FormControl>
                     </FormGridChild>
                     <FormGridChild item xs={12}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>학과＊</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', }}>학과＊</Typography>
                         <Autocomplete
                             disablePortal
                             options={Departments}
@@ -228,21 +221,22 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                                 setDepartment(v.label)
                             }}
                             renderInput={(params) => (
-                                <TextField required {...params} variant="standard" color="warning"/>
+                                <TextField required {...params} variant="standard" color="warning" />
                             )}
                         />
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <InterestFilter setSelectedInterests={setInterests} selectedInterests={interests}/>
+                        <InterestFilter setSelectedInterests={setInterests} selectedInterests={interests} />
                     </FormGridChild>
                     <FormGridChild item xs={12}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold', minWidth: "40px"}}>전화번호＊</Typography>
-                        <TextField required sx={{minWidth: "265px", paddingRight: "20px"}} variant="standard"
-                                   color="warning" value={phone} onChange={(e) => {
-                            setPhone(e.target.value)
-                        }}/>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px" }}>전화번호＊</Typography>
+                        <TextField required sx={{ minWidth: "265px", paddingRight: "20px" }} variant="standard"
+                            color="warning" value={phone} onChange={(e) => {
+                                setPhone(e.target.value)
+                            }} />
                     </FormGridChild>
                     <FormGridChild item xs={4}>
+
                         <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
                             {isEdit ? "수정하기" : "회원가입하기"}
                         </Button>
