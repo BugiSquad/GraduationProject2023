@@ -166,6 +166,7 @@ async function registerServiceWorker() {
 
 export const MessageTMP: React.FC = () => {
     const [auth, setAuth] = useState({} as SubscriptionPostDto)
+    const [message, setMessage] = useState("")
     const subscribe = () => {
         navigator.serviceWorker.getRegistration().then((res) => {
             if (res != null) {
@@ -180,15 +181,16 @@ export const MessageTMP: React.FC = () => {
                         }
                         setAuth(a)
                         subscribeWith(a as SubscriptionPostDto).then(res => alert(res)).catch(err => alert(JSON.stringify(err)))
-                    }
-                })
-            }
+                    } else setMessage(message + "\n subscription is null")
+                }).catch(error => setMessage(message + `\n ${error.message}`))
+            } else setMessage(message + "\n res is null")
         })
     }
     return (
         <>
             <div>
                 <Typography variant={"subtitle1"}>{JSON.stringify(auth)}</Typography>
+                <Typography variant={"subtitle1"}>{message}</Typography>
             </div>
             <Button onClick={() => {
                 subscribe()
