@@ -69,9 +69,10 @@ export const APITest: React.FC = () => {
             createPost(i + 1)
         }
     }
-    if (checkPermission())
+    if (checkPermission()) {
         navigator.serviceWorker.getRegistration().then(res => {
             if (res != null) {
+                alert("simple")
                 res.showNotification("asdf", {body: 'asdf'})
                 res.pushManager.getSubscription().then(v => {
                     if (v != null)
@@ -85,18 +86,18 @@ export const APITest: React.FC = () => {
                 })
 
             } else {
-                navigator.serviceWorker.register(`${window.location.protocol + '//' + window.location.host}/service-worker.js`, {scope: '/'})
-                    .then((res) => {
-                        res.pushManager.getSubscription().then(value => {
+                alert(`${window.location.protocol + '//' + window.location.host}/service-worker.js`)
+                navigator.serviceWorker.register(`/service-worker.js`, {scope: '/'})
+                    .then((res1) => {
+                        if (res1 == null) return;
+                        res1.pushManager.getSubscription().then((value) => {
                             if (value != null) alert(`${value.endpoint}`)
                             else alert("error")
-                        }).catch(error => alert(error))
-                        alert("error")
-                    })
-                    .catch((err) => alert(err))
-                // navigator.serviceWorker.register()
+                        })
+                    }).catch(error => alert(error))
             }
         })
+    }
     return (
         <>
             <head>
@@ -150,17 +151,26 @@ const SignInForm: React.FC = () => {
 }
 
 async function registerServiceWorker() {
-    if (!('serviceWorker' in navigator)) return;
+    if (!('serviceWorker' in navigator)) {
+        alert("failed to get endpoint")
+        return;
+    }
     // 이미 등록되어있는 정보 가져오기
-    let registration = await navigator.serviceWorker.getRegistration();
-    if (!registration) {
-        // 없으면 서비스 워커 등록
-        registration = await navigator.serviceWorker.register('/service-worker.js');
-    } else {
-        registration.pushManager.getSubscription().then(value => {
-            if (value != null)
-                alert(value.endpoint)
-        })
+    try {
+        let registration = await navigator.serviceWorker.getRegistration();
+        if (!registration) {
+            // 없으면 서비스 워커 등록
+            registration = await navigator.serviceWorker.register('/service-worker.js');
+        } else {
+            const value = await registration.pushManager.getSubscription()
+            if (value != null) {
+                alert("success to get endpoint")
+                // alert(value.endpoint)
+            } else
+                alert("failed to get endpoint")
+        }
+    } catch (e) {
+        alert(`Exception : ${e}`)
     }
 }
 
@@ -172,6 +182,7 @@ export const MessageTMP: React.FC = () => {
             if (res != null) {
                 res.pushManager.getSubscription().then(subscription => {
                     if (subscription != null) {
+                        alert("simple")
                         let s = subscription.toJSON()
                         let a = {
                             endpoint: `${s.endpoint}`,
@@ -179,7 +190,7 @@ export const MessageTMP: React.FC = () => {
                             p256dh: `${s.keys!!.p256dh}`,
                             memberId: getMyID()
                         }
-                        setAuth(a)
+                        setAuth(a as SubscriptionPostDto)
                         subscribeWith(a as SubscriptionPostDto).then(res => alert(res)).catch(err => alert(JSON.stringify(err)))
                     } else setMessage(message + "\n subscription is null")
                 }).catch(error => setMessage(message + `\n ${error.message}`))
@@ -193,7 +204,10 @@ export const MessageTMP: React.FC = () => {
                 <Typography variant={"subtitle1"}>{message}</Typography>
             </div>
             <Button onClick={() => {
+                registerServiceWorker().then(r => alert(r))
+            }}>Provider 구독</Button>
+            <Button onClick={() => {
                 subscribe()
-            }}>정보 확인</Button>
+            }}>백엔드 구독</Button>
         </>)
 }

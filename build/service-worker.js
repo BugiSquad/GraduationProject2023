@@ -19,8 +19,7 @@ self.addEventListener('push', function (event) {
             body: data.message
         })
     });
-
-    self.addEventListener('notificationclick', function (event) {
-        // 푸시 알림 클릭 시 실행되는 코드
-    });
-})
+});
+self.addEventListener('notificationclick', function (event) {
+    // 푸시 알림 클릭 시 실행되는 코드
+});
