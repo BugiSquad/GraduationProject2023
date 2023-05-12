@@ -38,3 +38,8 @@ export function getMyInfo(): MyInfo {
         return {memberId: "-1", accessToken: ""}
     return JSON.parse(store)
 }
+
+export function signOut(): void {
+    let emptyInfo: MyInfo = {memberId: '-1', accessToken: ''}
+    setMyInfo(emptyInfo)
+}
