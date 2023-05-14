@@ -7,10 +7,9 @@ self.addEventListener('activate', function (event) {
 });
 
 self.addEventListener('push', function (event) {
-    // const data = event.data.json(); // 푸시 메시지의 데이터를 추출
-    //
+    const data = event.data.json(); // 푸시 메시지의 데이터를 추출
     const options = {
-        body: "도착", // 푸시 메시지 내용
+        body: `${JSON.stringify(data)}`, // 푸시 메시지 내용
         // icon: 'icon.png', // 알림 아이콘 URL
         // 기타 옵션들...
     };
