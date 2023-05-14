@@ -37,4 +37,5 @@ function log(...args: any[]) {
         self.clients.openWindow('https://github.com/leegeunhyeok/web-push');
     });
 
+// eslint-disable-next-line no-restricted-globals
 })(self as unknown as ServiceWorkerGlobalScope);
