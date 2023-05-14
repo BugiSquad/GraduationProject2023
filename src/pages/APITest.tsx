@@ -3,14 +3,14 @@ import {createNewPost} from "../api/Post";
 import {faker} from "@faker-js/faker";
 import {requestMemberSignIn, requestMemberSignUp, setMyInfo} from "../api/Member";
 import {addMenus} from "../api/Menu";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Form} from "react-router-dom";
 import {MyInfo} from "../types/MyInfo";
 import {Gender, Interest, MemberType} from "../types/MemberDto";
 import {GroupType, PostDto} from "../types/PostDto";
-import {checkPermission, requestPermission} from "../api/Notification";
+import {checkPermission, registerWorker, requestPermission, subscribePushService} from "../api/Notification";
 import {subscribeWith, SubscriptionPostDto} from "../api/Subscription";
-import {getMyID} from "../api/Common";
+import {getApiURL, getMyID} from "../api/Common";
 
 /**
  * 회원가입 페이지
@@ -69,23 +69,6 @@ export const APITest: React.FC = () => {
             createPost(i + 1)
         }
     }
-    if (checkPermission()) {
-        navigator.serviceWorker.getRegistration().then(res => {
-            if (res != null) return res;
-            else return navigator.serviceWorker.register(`/service-worker.js`, {scope: '/'})
-        }).then(async res => {
-            res.showNotification("asdf", {body: 'asdf'})
-            const subscription = await res.pushManager.getSubscription()
-            if (subscription == null) {
-                const newSubscription = await res.pushManager.subscribe({
-                        applicationServerKey: "BKuaSaL3pR_rsX00tUY6AbQ1pIZEf-T7fSTrFM1z_8Ygt50uP5OSzMqVYWdQWeNYVc_tAC8T2w3FMx3MjYwno2U",
-                        userVisibleOnly: true,
-                    }
-                )
-                alert(`${JSON.stringify(newSubscription.toJSON())}`)
-            }
-        })
-    }
     return (
         <>
             <head>
@@ -102,12 +85,6 @@ export const APITest: React.FC = () => {
                 <Button onClick={createDummyPosts}>더미 글 올리기</Button>
                 <SignInForm></SignInForm>
                 <MessageTMP></MessageTMP>
-                <Button onClick={requestPermission}>권한 요청</Button>
-                <Button onClick={() => {
-                    if (checkPermission())
-                        alert(Notification.permission)
-                }}>권한 확인</Button>
-
             </div>
         </>)
 }
@@ -138,33 +115,11 @@ const SignInForm: React.FC = () => {
     )
 }
 
-async function registerServiceWorker() {
-    if (!('serviceWorker' in navigator)) {
-        alert("failed to get endpoint")
-        return;
-    }
-    // 이미 등록되어있는 정보 가져오기
-    try {
-        let registration = await navigator.serviceWorker.getRegistration();
-        if (!registration) {
-            // 없으면 서비스 워커 등록
-            registration = await navigator.serviceWorker.register('/service-worker.js');
-        } else {
-            const value = await registration.pushManager.getSubscription()
-            if (value != null) {
-                alert("success to get endpoint")
-                // alert(value.endpoint)
-            } else
-                alert("failed to get endpoint")
-        }
-    } catch (e) {
-        alert(`Exception : ${e}`)
-    }
-}
-
 export const MessageTMP: React.FC = () => {
     const [auth, setAuth] = useState({} as SubscriptionPostDto)
-    const [message, setMessage] = useState("")
+    const [permission, setPermission] = useState(false)
+    const [info, setInfo] = useState("")
+    const [endpoint, setEndpoint] = useState(getApiURL())
     const subscribe = () => {
         navigator.serviceWorker.getRegistration().then((res) => {
             if (res != null) {
@@ -180,22 +135,29 @@ export const MessageTMP: React.FC = () => {
                         }
                         setAuth(a as SubscriptionPostDto)
                         subscribeWith(a as SubscriptionPostDto).then(res => alert(res)).catch(err => alert(JSON.stringify(err)))
-                    } else setMessage(message + "\n subscription is null")
-                }).catch(error => setMessage(message + `\n ${error.message}`))
-            } else setMessage(message + "\n res is null")
+                    } else setInfo(info + "\n subscription is null")
+                }).catch(error => setInfo(info + `\n ${error.message}`))
+            } else setInfo(info + "\n res is null")
         })
     }
+    useEffect(() => {
+        if (checkPermission())
+            setPermission(true)
+    }, [])
     return (
         <>
             <div>
-                <Typography variant={"subtitle1"}>{JSON.stringify(auth)}</Typography>
-                <Typography variant={"subtitle1"}>{message}</Typography>
+                <Typography variant={"subtitle1"}>API 서버: {endpoint}</Typography>
+                <Typography variant={"subtitle1"}>인증정보 : {JSON.stringify(auth)}</Typography>
+                <Typography variant={"subtitle1"}>권한: {permission ? "Granted" : "Not granted"}</Typography>
+                <Typography variant={"subtitle1"}>DebugInfo: {info}</Typography>
             </div>
             <Button onClick={() => {
-                registerServiceWorker().then(r => alert(r))
-            }}>Provider 구독</Button>
-            <Button onClick={() => {
-                subscribe()
-            }}>백엔드 구독</Button>
+                if (checkPermission()) setPermission(true)
+            }}>권한 확인</Button>
+            <Button onClick={() => requestPermission()}>권한 요청</Button>
+            <Button onClick={() => registerWorker()}>워커 등록</Button>
+            <Button onClick={() => subscribePushService()}>서비스 등록</Button>
+            <Button onClick={() => subscribe()}>백엔드 구독</Button>
         </>)
 }
