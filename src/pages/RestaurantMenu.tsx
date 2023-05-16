@@ -23,7 +23,7 @@ export const RestaurantMenu: React.FC = () => {
  * @constructor
  */
 const MenuBody: React.FC = () => {
-    const [menuType, setMenuType] = useState(MenuCategory.rice);
+    const [menuType, setMenuType] = useState(MenuCategory.RICE);
     const [menus, setMenus] = useState(Array.of<MenuItem>());
     const [idx, setIdx] = useState<number>(0)
     const category = Object.values(MenuCategory)

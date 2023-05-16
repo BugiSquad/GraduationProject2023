@@ -1,15 +1,15 @@
 import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
-import { MenuItem } from "../types/MenuItem";
+import {MenuItem} from "../types/MenuItem";
 import '../App.css'
-import { Card, Paper, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import {Paper, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 import data from '../data/SampleFood.json'
 import noodleImage from '../images/foodCategory/noodles.png';
 import soupImage from '../images/foodCategory/soup.png';
 import bowlRiceImage from '../images/foodCategory/bowl-rice.png';
 import mixedRiceImage from '../images/foodCategory/mixed-rice.png';
-import { MainCategory } from '../components/MainCategory';
+import {MainCategory} from '../components/MainCategory';
 import Carousel from 'react-material-ui-carousel';
 import Banner1 from '../images/banner1.png';
 import Banner2 from '../images/banner2.png';

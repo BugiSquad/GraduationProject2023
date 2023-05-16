@@ -1,4 +1,4 @@
-import {getApiURL, getMyID, getMyToken} from "./Common";
+import {getApiURL, getMyToken} from "./Common";
 import axios from "axios";
 
 
@@ -11,7 +11,6 @@ export const joinNoteRoom = (subjectId: number, userId: number) => {
     console.log(subjectId)
     return axios.post(`${getApiURL()}/match/participation`, {
         postId: subjectId,
-        memberId: Number(getMyID())
     }, {headers: {accessToken: getMyToken()}})
 }
 

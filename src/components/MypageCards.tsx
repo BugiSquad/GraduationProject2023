@@ -1,5 +1,5 @@
-import { Card, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import {Card, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 
 interface MypageProps {
     title: string;
@@ -7,7 +7,7 @@ interface MypageProps {
     link: string
 }
 
-export const MypageCards = ({ title, content, link }: MypageProps) => { //마이페이지에 들어갈 카드 컴포넌트 포맷
+export const MypageCards = ({title, content, link}: MypageProps) => { //마이페이지에 들어갈 카드 컴포넌트 포맷
     return (
         <><Card style={{
             minInlineSize: '350px',

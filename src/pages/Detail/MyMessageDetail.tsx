@@ -5,7 +5,6 @@ import {IconButton} from "@mui/material";
 import {MyMessage} from "../../components/MyMessage";
 import {getIndividualRoom, getNoteRoomsWith} from "../../api/NoteRoom";
 import {useParams} from "react-router-dom";
-import {getMyID} from "../../api/Common";
 import {GroupType} from "../../types/PostDto";
 import {BottomNavigationTab} from "../../types/PageHeaderParam";
 
@@ -36,7 +35,7 @@ export const MyMessageDetail: React.FC = () => {
     const [noteRooms, setNoteRooms] = useState<NoteInfo[]>([]);
     const [noteGroups, setNoteGroup] = useState<NoteGroup[]>([])
     useEffect(() => {
-        getNoteRoomsWith(getMyID()).then((res) => {
+        getNoteRoomsWith(0).then((res) => {
             const data = res.data.data
             const notes = data.map((note: NoteInfo) => note)
             const tmp = notes.reduce((posts: NoteGroup[], note: NoteInfo) => {

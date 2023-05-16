@@ -10,7 +10,7 @@ export const RequestPermission: React.FC = () => {
         localStorage.setItem("disableNotificationPopup", "true")
     }
 
-    if (getMyInfo().memberId === '-1' || !showPopUp)
+    if (getMyInfo().accessToken === '' || !showPopUp)
         return (<> </>)
     return (
         <div>

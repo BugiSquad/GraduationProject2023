@@ -1,10 +1,9 @@
 import React from "react";
-import { Badge, Card, Typography } from "@mui/material";
-import { EmailOutlined } from '@mui/icons-material';
-import { Message } from "../types/Message";
-import { Link } from "react-router-dom";
+import {Card, Typography} from "@mui/material";
+import {Message} from "../types/Message";
+import {Link} from "react-router-dom";
 
-export const MyMessage: React.FC<Message> = ({ msgLinkTo, isGroup, content, count }) => {
+export const MyMessage: React.FC<Message> = ({msgLinkTo, isGroup, content, count}) => {
     return (
         <Link to={msgLinkTo} style={{textDecoration: "none"}}>
             <Card sx={{

@@ -15,13 +15,13 @@ const getAllMenus = createAsyncThunk(
 export const MenuRepository = createSlice({
     name: 'menu',
     initialState: {
-        [MenuCategory.stew]: Array.of<MenuItem>(),
-        [MenuCategory.rice]: Array.of<MenuItem>(),
-        [MenuCategory.noodle]: Array.of<MenuItem>(),
-        [MenuCategory.chinaFood]: Array.of<MenuItem>(),
-        [MenuCategory.japanFood]: Array.of<MenuItem>(),
-        [MenuCategory.koreanFood]: Array.of<MenuItem>(),
-        [MenuCategory.westernFood]: Array.of<MenuItem>(),
+        [MenuCategory.STEW]: Array.of<MenuItem>(),
+        [MenuCategory.RICE]: Array.of<MenuItem>(),
+        [MenuCategory.NOODLE]: Array.of<MenuItem>(),
+        [MenuCategory.CHINA_FOOD]: Array.of<MenuItem>(),
+        [MenuCategory.JAPAN_FOOD]: Array.of<MenuItem>(),
+        [MenuCategory.KOREAN_FOOD]: Array.of<MenuItem>(),
+        [MenuCategory.WESTERN_FOOD]: Array.of<MenuItem>(),
     },
     reducers: {
         /***

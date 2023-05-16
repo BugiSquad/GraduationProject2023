@@ -5,14 +5,14 @@ export enum OrderStatus {
 }
 
 export enum OrderType {
-    reservation = "reservation", now = "now", packaging = "packaging"
+    RESERVATION = "RESERVATION", NOW = "NOW", PACKAGING = "PACKAGING"
 }
 
 export enum PaymentType {
-    NONE = "none",
-    NAVERPAY = "naverPay",
-    KAKAOPAY = "kakaoPay",
-    CREDITCARD = "creditCard"
+    NONE = "NONE",
+    NAVER_PAY = "NAVER_PAY",
+    KAKAO_PAY = "KAKAO_PAY",
+    CREDITCARD = "CREDITCARD"
 }
 
 export type Order = {
@@ -59,7 +59,6 @@ interface MenuOrdersItem {
 
 interface OrderDto {
     ordersType: OrderType;
-    memberId: number;
 }
 
 export interface CreateOrderDto extends OrderDto {

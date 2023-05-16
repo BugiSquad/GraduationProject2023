@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {MyMessage} from "./MyMessage";
 import {GroupType} from "../types/PostDto";
 import {getNoteRoomsWith} from "../api/NoteRoom";
-import {getMyID} from "../api/Common";
 import {Typography} from "@mui/material";
 import {normalTypography} from "./styled/Text";
 
@@ -28,7 +27,7 @@ export const MyMessagebox: React.FC = () => {
     const [noteRooms, setNoteRooms] = useState<NoteInfo[]>([]);
     const [noteGroups, setNoteGroup] = useState<NoteGroup[]>([])
     useEffect(() => {
-        getNoteRoomsWith(getMyID()).then((res) => {
+        getNoteRoomsWith(0).then((res) => {
             const data = res.data.data
             const notes = data.map((note: NoteInfo) => note)
             const tmp = notes.reduce((posts: NoteGroup[], note: NoteInfo) => {

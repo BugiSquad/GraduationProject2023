@@ -8,7 +8,7 @@ import {MyMessagebox} from "../components/MyMessagebox";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import {OrangeButton} from "../components/styled/Buttons";
 import {removeMyInfo} from "../api/Member";
-import {getMyID} from "../api/Common";
+import {getMyToken} from "../api/Common";
 import {useNavigate} from "react-router-dom";
 
 export const Mypage: React.FC = () => {
@@ -17,7 +17,7 @@ export const Mypage: React.FC = () => {
     const handleLogout = () => {
         removeMyInfo();
     };
-    if (getMyID() === -1)
+    if (getMyToken() === "")
         return (
             <Card>
                 {/*<Button sx={WhiteButton} style={{width: "100%", borderRadius: "0.3rem"}}*/}

@@ -19,6 +19,7 @@ import {FormGridChild} from "./styled/FormGrid";
 import {InterestFilter, InterestOptionType} from "./InterestFilter";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
 import axios from "axios";
+import {getMyToken} from "../api/Common";
 
 
 export interface UserInfoFrameProps {
@@ -89,7 +90,7 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
         }
         const formData = new FormData();
         formData.append('file', profilePic);
-        axios.post('https://api.bugisquad.link/api/s3', formData).then((res) => {
+        axios.post('https://api.bugisquad.link/api/s3', formData, {headers: {accessToken: getMyToken()}}).then((res) => {
             console.log(res)
         }).catch((err) => console.error(err))
         // requestMemberSignUp({

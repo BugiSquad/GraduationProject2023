@@ -1,12 +1,12 @@
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import { getMyID } from "../api/Common";
+import {Button} from "@mui/material";
+import {Link} from "react-router-dom";
+import {getMyToken} from "../api/Common";
 
 interface LoginDialogProps {
     isLoggedIn: boolean;
 }
 
-export const LoginDialog: React.FC<LoginDialogProps> = ({ isLoggedIn }) => {
+export const LoginDialog: React.FC<LoginDialogProps> = ({isLoggedIn}) => {
     return (
         <div
             style={{
@@ -21,11 +21,11 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ isLoggedIn }) => {
                 zIndex: 100,
             }}
         >
-            {((getMyID())!=-1) ? <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div>로그인이 성공하였습니다!</div>
-                <Link to="/app"><Button>닫기</Button></Link>
-            </div> :
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+            {((getMyToken()) !== "") ? <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <div>로그인이 성공하였습니다!</div>
+                    <Link to="/app"><Button>닫기</Button></Link>
+                </div> :
+                <div style={{display: "flex", justifyContent: "space-between"}}>
                     <div>부적절한 접근입니다. 다시 시도해주세요.</div>
                 </div>}
         </div>

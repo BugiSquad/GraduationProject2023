@@ -12,7 +12,6 @@ import {getNoteRoomMembers} from "../api/NoteRoom";
 import {PostRoomMember} from "../types/PostRoomMember";
 import {PromiseInfo} from "../types/PromiseInfo";
 import {makePromise} from "../api/Promise";
-import {getMyID} from "../api/Common";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 export const MakeAppointment: React.FC = () => {
@@ -51,7 +50,7 @@ export const MakeAppointment: React.FC = () => {
         const payload: PromiseInfo = {
             noteRoomId: roomId,
             location: location,
-            memberId: getMyID(),
+            memberId: 0,
             promiseMemberIds: membersIds,
             promiseTime: selectedTime?.toISOString()
         }

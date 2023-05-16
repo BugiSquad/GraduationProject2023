@@ -35,7 +35,7 @@ export function setMyInfo(info: MyInfo) {
 export function getMyInfo(): MyInfo {
     let store = localStorage.getItem("myInfo")
     if (store == null)
-        return { memberId: "-1", accessToken: "" }
+        return {accessToken: ""}
     return JSON.parse(store)
 }
 

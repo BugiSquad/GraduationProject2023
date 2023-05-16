@@ -1,19 +1,20 @@
-import { Button, Card, Typography } from "@mui/material";
+import {Button, Card, Typography} from "@mui/material";
 import React from "react";
-import { MenuItem } from "../types/MenuItem";
-import { useAppSelector } from "../store/hooks";
-import { useNavigate } from "react-router-dom";
-import { OrangeButton } from "./styled/Buttons";
+import {MenuItem} from "../types/MenuItem";
+import {useAppSelector} from "../store/hooks";
+import {useNavigate} from "react-router-dom";
+import {OrangeButton} from "./styled/Buttons";
 
 export const CartPriceDetail: React.FC = () => {
     const cart = useAppSelector((state) => state.cart)
     const navigate = useNavigate()
     return (
         <div>
-            {cart.item.length > 0 ? <Card sx={{ padding: "10px", margin: "10px" }}>
-                <Button sx={OrangeButton} style={{ borderRadius: "0.3rem", padding: "10px", width: "300px" }} onClick={() => {
-                    navigate("/order")
-                }}
+            {cart.item.length > 0 ? <Card sx={{padding: "10px", margin: "10px"}}>
+                <Button sx={OrangeButton} style={{borderRadius: "0.3rem", padding: "10px", width: "300px"}}
+                        onClick={() => {
+                            navigate("/order")
+                        }}
                 >
                     <Typography
                         fontSize={"18px"}

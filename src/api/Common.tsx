@@ -6,5 +6,4 @@ import {getMyInfo} from "./Member";
 export const getApiURL = () => {
     return process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_ENDPOINT}/api` : "http://localhost:8080/api";
 }
-export const getMyID = () => Number(getMyInfo().memberId)
 export const getMyToken = () => getMyInfo().accessToken

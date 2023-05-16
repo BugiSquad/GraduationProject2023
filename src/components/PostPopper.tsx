@@ -3,7 +3,6 @@ import {Avatar, Button, Fade, Paper, Popper, PopperPlacementType, Typography} fr
 import {useAppSelector} from "../store/hooks";
 import {useNavigate} from "react-router-dom";
 import {joinNoteRoom} from "../api/NoteRoom";
-import {getMyID} from "../api/Common";
 
 interface PostPopperProps {
     anchorEl: HTMLDivElement | null,
@@ -42,7 +41,7 @@ export const PostPopper: FC<PostPopperProps>
                             }}>
                                 <Button sx={{background: "orange", color: "white"}}
                                         onClick={() => {
-                                            joinNoteRoom(item.postId, getMyID()).then((res) => {
+                                            joinNoteRoom(item.postId, 0).then((res) => {
                                                 console.log(`요청이 정상적으로 진행되었습니다.`)
                                                 const roomId = res.data.data.noteRoomId
                                                 console.log(res)
