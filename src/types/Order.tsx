@@ -1,7 +1,20 @@
 export enum OrderStatus {
-    Request = '요청됨',
-    Receive = '접수됨',
-    Finish = '완료됨'
+    RESERVATION = "예약주문", NOW = "접수됨", PACKAGING = "포장주문", COMPLETE = "완료"
+}
+
+export const toOrderStatus = (value: string) => {
+    switch (value) {
+        case "RESERVATION":
+            return OrderStatus.RESERVATION
+        case "NOW":
+            return OrderStatus.NOW
+        case "PACKAGING":
+            return OrderStatus.PACKAGING
+        case "COMPLETE":
+            return OrderStatus.COMPLETE
+        default:
+            throw new Error("알 수 없는 주문상태입니다.")
+    }
 }
 
 export enum OrderType {
@@ -57,18 +70,16 @@ interface MenuOrdersItem {
     menuId: number;
 }
 
-interface OrderDto {
+export interface CreateOrderDto {
+    paymentPostDto: CreatePaymentDetailDto;
+    menuOrderItems: OrderItem[];
     ordersType: OrderType;
 }
 
-export interface CreateOrderDto extends OrderDto {
-    paymentPostDto: CreatePaymentDetailDto;
-    menuOrderItems: OrderItem[];
-}
-
-export interface OrderList extends OrderDto {
+export interface OrderList {
     ordersId: number;
     totalPrice: number;
     paymentDto: Payment;
+    ordersType: OrderStatus;
     menuOrdersItemDtoList: MenuOrdersItem[];
 }

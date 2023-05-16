@@ -10,7 +10,7 @@ import {BottomNavigationTab} from "../types/PageHeaderParam";
 export const Cart: React.FC = () => {
     const cart = useAppSelector((state) => state.cart)
     return (
-        <SimpleTemplate param={{pageHeaderName: "장바구니", tab: BottomNavigationTab.MATCHING}}>
+        <SimpleTemplate param={{pageHeaderName: "장바구니", tab: BottomNavigationTab.MENU}}>
             <div>
                 <CartItemList items={cart.item}></CartItemList>
                 <Link to={""}><Typography variant={"subtitle2"}/></Link>
