@@ -9,7 +9,6 @@ export interface RadioBarItemProps {
 }
 
 export const RadioBarItem: React.FC<RadioBarItemProps> = (items) => {
-
     const handleClick = (idx: number) => {
         items.setIndex(idx)
     };

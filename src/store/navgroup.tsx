@@ -1,30 +1,27 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {BottomNavigationTab} from "../types/PageHeaderParam";
 
-export enum NavigationMenu {
-    APP = 0, COMMUNITY = 1, CART = 2,  MENU = 3, MYPAGE = 4
-}
 
 export const navgroup = createSlice({
     name: "navgroup",
     //TODO
-    initialState: {cur: NavigationMenu.APP},
+    initialState: {cur: BottomNavigationTab.APP},
     reducers: {
         toAPP(state) {
-            state.cur = NavigationMenu.APP;
+            state.cur = BottomNavigationTab.APP;
         },
-        toCommunity(state) {
-            state.cur = NavigationMenu.COMMUNITY;
-        },
-        toCart(state) {
-            state.cur = NavigationMenu.CART;
+        toMatching(state) {
+            state.cur = BottomNavigationTab.MATCHING;
         },
         toMenu(state) {
-            state.cur = NavigationMenu.MENU;
+            state.cur = BottomNavigationTab.MENU;
+        }, toCommunity(state) {
+            state.cur = BottomNavigationTab.COMMUNITY;
         },
         toMyPage(state) {
-            state.cur = NavigationMenu.MYPAGE;
+            state.cur = BottomNavigationTab.MYPAGE;
         },
     }
 })
-export const {toCart, toCommunity, toMyPage, toAPP, toMenu} = navgroup.actions
+export const {toMatching, toCommunity, toMyPage, toAPP, toMenu} = navgroup.actions
 export const navReducer = navgroup.reducer

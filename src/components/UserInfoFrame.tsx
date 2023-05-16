@@ -20,6 +20,8 @@ import {InterestFilter, InterestOptionType} from "./InterestFilter";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
 import axios from "axios";
 import {getMyToken} from "../api/Common";
+import {requestMemberSignUp} from "../api/Member";
+import {Gender, Interest, MemberType} from "../types/MemberDto";
 
 
 export interface UserInfoFrameProps {
@@ -84,28 +86,25 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
         // if (studentId === undefined) return;
         userInfo.interests = interests
         console.log(userInfo)
-        if (profilePic == null) {
+        if (profilePic != null) {
             console.log("파일이 비어있습니다.");
-            return;
+            const formData = new FormData();
+            formData.append('file', profilePic);
+            axios.post('https://api.bugisquad.link/api/s3', formData, {headers: {accessToken: getMyToken()}}).then((res) => {
+                console.log(res)
+            }).catch((err) => console.error(err))
+            // return;
         }
-        const formData = new FormData();
-        formData.append('file', profilePic);
-        axios.post('https://api.bugisquad.link/api/s3', formData, {headers: {accessToken: getMyToken()}}).then((res) => {
+        requestMemberSignUp({
+            name: userInfo.nickname,
+            ...userInfo,
+            gender: Gender.NONE,
+            memberType: MemberType.STUDENT,
+            interestPostDto: new Interest(interests),
+            profileUrl: ""
+        }).then((res) => {
             console.log(res)
         }).catch((err) => console.error(err))
-        // requestMemberSignUp({
-        //     email: email,
-        //     password: password,
-        //     department: department,
-        //     memberType: MemberType.STUDENT,
-        //     name: nickname,
-        //     phone: phone,
-        //     studentId: studentId,
-        //     gender: Gender.MALE,
-        //     interestPostDto: new Interest(interests)
-        // }).then((res) => {
-        //     console.log(res)
-        // }).catch((err) => console.error(err))
     }
     return (
         <>

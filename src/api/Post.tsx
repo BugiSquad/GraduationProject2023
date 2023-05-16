@@ -1,4 +1,4 @@
-import {getApiURL, getMyToken} from "./Common";
+import {getApiURL, getHeader} from "./Common";
 import axios from "axios";
 import {PostDto} from "../types/PostDto";
 
@@ -7,7 +7,7 @@ import {PostDto} from "../types/PostDto";
  * API 서버에서 게시글 목록을 가져옵니다
  */
 export function getPosts() {
-    return axios.get(getApiURL() + `/match/post`, {headers: {accessToken: getMyToken()}})
+    return axios.get(getApiURL() + `/match/post`, getHeader())
 }
 
 /**
@@ -15,5 +15,5 @@ export function getPosts() {
  * @param post
  */
 export function createNewPost(post: PostDto) {
-    return axios.post(`${getApiURL()}/match/post`, post, {headers: {accessToken: getMyToken()}})
+    return axios.post(`${getApiURL()}/match/post`, post, getHeader())
 }

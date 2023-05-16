@@ -3,12 +3,12 @@ import {ErrorPage} from "../error-page";
 import {FoodDetail, menuLoader} from "../pages/FoodDetail";
 import {Order} from "../pages/Order";
 import {RecentOrderDetail} from "../pages/Detail/RecentOrderDetail";
-import {Community} from "../pages/Community";
+import {Cart} from "../pages/Cart";
 
 export const OrderRoutes = [
     {
         path: "/cart",
-        element: <Community/>,
+        element: <Cart/>,
         errorElement: <ErrorPage/>,
     }, {
         path: "/fooddetail/:id",
@@ -23,5 +23,5 @@ export const OrderRoutes = [
         path: "/mypage/recentorderdetail",
         element: <RecentOrderDetail/>,
         errorElement: <ErrorPage/>,
-    },
+    }
 ]

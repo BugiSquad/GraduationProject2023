@@ -8,6 +8,7 @@ import {PostRoutes} from "./postRoutes";
 import {OrderRoutes} from "./orderRoutes";
 import {MenuRoutes} from "./menuRoutes";
 import {MeetingRoutes} from "./meetingRoutes";
+import {Community} from "../pages/Community";
 
 const routes = [...MyPageRoutes, ...PostRoutes, ...OrderRoutes, ...MenuRoutes, ...MeetingRoutes]
 export const router = createBrowserRouter([
@@ -23,6 +24,11 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage/>,
     }, {
         path: "/community",
+        element: <Community/>,
+        errorElement: <ErrorPage/>,
+    }
+    , {
+        path: "/matching",
         element: <Matching/>,
         errorElement: <ErrorPage/>,
     }, {

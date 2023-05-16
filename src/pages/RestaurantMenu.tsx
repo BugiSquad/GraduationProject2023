@@ -45,7 +45,7 @@ const MenuBody: React.FC = () => {
         }
 
         getMenus();
-    })
+    }, [idx])
     //해당 메뉴 카테고리에 속하는 모든 메뉴를 가져옴
     const getMenuItemsWith = (menuType: MenuCategory) => {
         let axios = getMenusByCategory(menuType)
@@ -62,11 +62,6 @@ const MenuBody: React.FC = () => {
         }).catch(function (error) {
             setMenus(Array.of<MenuItem>())
         })
-    }
-
-    const onMenuTypeChanges = (event: React.SyntheticEvent, newValue: MenuCategory) => {
-        setMenuType(newValue)
-        getMenuItemsWith(newValue)
     }
 
     return (<div>

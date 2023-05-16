@@ -4,7 +4,7 @@ import React from "react";
 
 export const Community: React.FC = () => {
     return (
-        <SimpleTemplate param={{pageHeaderName: "커뮤니티", tab: BottomNavigationTab.CART}}>
+        <SimpleTemplate param={{pageHeaderName: "커뮤니티", tab: BottomNavigationTab.COMMUNITY}}>
             <Content></Content>
         </SimpleTemplate>
     )

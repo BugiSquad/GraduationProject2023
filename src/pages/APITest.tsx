@@ -6,7 +6,7 @@ import {addMenus} from "../api/Menu";
 import React, {useEffect, useState} from "react";
 import {Form} from "react-router-dom";
 import {MyInfo} from "../types/MyInfo";
-import {Gender, Interest, MemberType} from "../types/MemberDto";
+import {Gender, Interest, MemberDto, MemberType} from "../types/MemberDto";
 import {GroupType, PostDto} from "../types/PostDto";
 import {checkPermission, registerWorker, requestPermission, subscribePushService} from "../api/Notification";
 import {subscribeWith, SubscriptionPostDto} from "../api/Subscription";
@@ -38,7 +38,7 @@ export const APITest: React.FC = () => {
             department: "컴퓨터공학과",
             gender: Gender.MALE,
             interestPostDto: interest
-        }
+        } as MemberDto
         requestMemberSignUp(
             member
         ).then((res) => {

@@ -14,7 +14,7 @@ import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 export const Matching: React.FC = () => {
     return (
-        <SimpleTemplate param={{pageHeaderName: "매칭", tab: BottomNavigationTab.COMMUNITY}}>
+        <SimpleTemplate param={{pageHeaderName: "매칭", tab: BottomNavigationTab.MATCHING}}>
             <Content/>
         </SimpleTemplate>)
 }
