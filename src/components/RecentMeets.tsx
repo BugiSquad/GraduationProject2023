@@ -2,6 +2,8 @@ import React from "react";
 import {PostItem} from "../types/PostItem";
 import {faker} from "@faker-js/faker";
 import {RecentMeet} from "./RecentMeet";
+import {Typography} from "@mui/material";
+import {normalTypography} from "./styled/Text";
 
 export const RecentMeets: React.FC = () => {
     const list: Array<PostItem> = [];
@@ -15,7 +17,8 @@ export const RecentMeets: React.FC = () => {
     }
     return (
         <div style={{width: "100%"}}>
-            {list.map((user, idx) =>
+            {list.length === 0 ? <Typography sx={normalTypography} color={"lightgrey"}>최근 만남이
+                없습니다.</Typography> : list.map((user, idx) =>
                 <RecentMeet postId={user.postId} key={idx} title={user.title} memberProfileUrl={user.memberProfileUrl}
                             minutesLeftUntilMeal={user.minutesLeftUntilMeal} body={user.body}
                             interest={user.interest}/>)

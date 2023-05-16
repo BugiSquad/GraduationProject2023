@@ -5,16 +5,6 @@ import {getPosts} from "../../api/Post";
 export const getPostsFromRemote = createAsyncThunk(
     'getPostsFromRemote', () => {
         return getPosts();
-        //still need to be async and return arr when its done
-        // for (let i = 0; i < 30; i++) {
-        //     arr.push({
-        //         "title": faker.name.fullName(),
-        //         "body": faker.lorem.paragraph(),
-        //         "interest": [],
-        //         "memberProfileUrl": faker.image.avatar(),
-        //         "minutesLeftUntilMeal": Math.trunc(Math.random() * 60) + "분 전",
-        //     })
-        // }
     }
 )
 export const matchPosts = createSlice({
