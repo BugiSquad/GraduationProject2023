@@ -1,14 +1,14 @@
 //주문과 관련된 라우팅정보
-import {Cart} from "../pages/Cart";
 import {ErrorPage} from "../error-page";
 import {FoodDetail, menuLoader} from "../pages/FoodDetail";
 import {Order} from "../pages/Order";
 import {RecentOrderDetail} from "../pages/Detail/RecentOrderDetail";
+import {Community} from "../pages/Community";
 
 export const OrderRoutes = [
     {
         path: "/cart",
-        element: <Cart/>,
+        element: <Community/>,
         errorElement: <ErrorPage/>,
     }, {
         path: "/fooddetail/:id",

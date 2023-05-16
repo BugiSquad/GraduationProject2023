@@ -11,6 +11,7 @@ import {GroupType, PostDto} from "../types/PostDto";
 import {checkPermission, registerWorker, requestPermission, subscribePushService} from "../api/Notification";
 import {subscribeWith, SubscriptionPostDto} from "../api/Subscription";
 import {getApiURL, getMyID} from "../api/Common";
+import {RequestPermission} from "../components/RequestPermission";
 
 /**
  * 회원가입 페이지
@@ -85,6 +86,7 @@ export const APITest: React.FC = () => {
                 <Button onClick={createDummyPosts}>더미 글 올리기</Button>
                 <SignInForm></SignInForm>
                 <MessageTMP></MessageTMP>
+                <RequestPermission/>
             </div>
         </>)
 }
@@ -156,8 +158,16 @@ export const MessageTMP: React.FC = () => {
                 if (checkPermission()) setPermission(true)
             }}>권한 확인</Button>
             <Button onClick={() => requestPermission()}>권한 요청</Button>
-            <Button onClick={() => registerWorker()}>워커 등록</Button>
-            <Button onClick={() => subscribePushService()}>서비스 등록</Button>
+            <Button onClick={() => registerWorker().then(res => {
+                if (res.active == null)
+                    alert("서비스워커 등록에 실패했습니다.")
+                else {
+                    res.showNotification("제목", {body: "등록성공"})
+                }
+            })}>워커 등록</Button>
+            <Button onClick={() => subscribePushService().then(res => {
+
+            })}>서비스 등록</Button>
             <Button onClick={() => subscribe()}>백엔드 구독</Button>
         </>)
 }

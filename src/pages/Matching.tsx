@@ -15,11 +15,11 @@ import {BottomNavigationTab} from "../types/PageHeaderParam";
 export const Matching: React.FC = () => {
     return (
         <SimpleTemplate param={{pageHeaderName: "매칭", tab: BottomNavigationTab.COMMUNITY}}>
-            <Contents/>
+            <Content/>
         </SimpleTemplate>)
 }
 
-const Contents: React.FC = () => {
+const Content: React.FC = () => {
     const dispatch = useAppDispatch()
     const toggleDrawer = (open: boolean, name: String) =>
         (event: React.KeyboardEvent | React.MouseEvent) => {

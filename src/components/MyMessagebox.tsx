@@ -3,6 +3,8 @@ import {MyMessage} from "./MyMessage";
 import {GroupType} from "../types/PostDto";
 import {getNoteRoomsWith} from "../api/NoteRoom";
 import {getMyID} from "../api/Common";
+import {Typography} from "@mui/material";
+import {normalTypography} from "./styled/Text";
 
 interface NoteInfo {
     postId: number;
@@ -55,12 +57,14 @@ export const MyMessagebox: React.FC = () => {
     return (
         <div>
             {
-                noteRooms.map((value, idx) => <MyMessage content={value.title} count={3}
-                                                         isGroup={value.groupType === GroupType.ORGANIZATION}
-                                                         msgLinkTo={`/mypage/message/${value.noteRoomId}`}/>)
+                noteRooms.length === 0 ?
+                    <Typography sx={normalTypography} color={"lightgrey"}>
+                        조회 내역이 없습니다.</Typography> :
+                    noteRooms.map((value, idx) =>
+                        <MyMessage content={value.title} count={3}
+                                   isGroup={value.groupType === GroupType.ORGANIZATION}
+                                   msgLinkTo={`/mypage/message/${value.noteRoomId}`}/>)
             }
-            {/*<MyMessage content="안녕하세요." count={2} isGroup={false} msgLinkTo={""} />*/}
         </div>
-
     )
 }

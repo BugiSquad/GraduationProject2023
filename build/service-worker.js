@@ -1,3 +1,11 @@
+self.addEventListener('install', function (event) {
+    // 서비스워커 설치 시 실행되는 코드
+});
+
+self.addEventListener('activate', function (event) {
+    // 서비스워커 활성화 시 실행되는 코드
+});
+
 self.addEventListener('push', function (event) {
     const data = event.data.json(); // 푸시 메시지의 데이터를 추출
     const options = {
@@ -9,13 +17,8 @@ self.addEventListener('push', function (event) {
     event.waitUntil(
         self.registration.showNotification("빈 제목", options)
     );
-});
+})
 
 self.addEventListener('notificationclick', function (event) {
-    event.notification.close(); // 알림 닫기
-
-    // 알림 클릭 시 수행할 동작
-    event.waitUntil(
-        clients.openWindow('https://www.example.com') // 새 창 또는 웹 페이지 열기
-    );
+    // 푸시 알림 클릭 시 실행되는 코드
 });
