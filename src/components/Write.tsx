@@ -21,10 +21,7 @@ interface FormProps {
 
 export const Write: React.FC = () => {
     const [props, setProps] = useState<FormProps>({
-        title: "",
-        body: "",
-        groupType: GroupType.INDIVIDUAL,
-        time: dayjs()
+        title: "", body: "", groupType: GroupType.INDIVIDUAL, time: dayjs()
     });
     const dispatch = useAppDispatch();
 
