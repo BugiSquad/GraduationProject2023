@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { SimpleTemplate } from "./PageTemplate";
 import { Button, Card } from "@mui/material";
 import { RecentOrders } from "../components/RecentOrders";

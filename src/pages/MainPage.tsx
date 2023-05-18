@@ -2,7 +2,7 @@ import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
 import { MenuItem } from "../types/MenuItem";
 import '../App.css'
-import { Card, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import data from '../data/SampleFood.json'
 import noodleImage from '../images/foodCategory/noodles.png';
