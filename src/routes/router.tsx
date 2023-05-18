@@ -13,6 +13,11 @@ const routes = [...MyPageRoutes, ...PostRoutes, ...OrderRoutes, ...MenuRoutes, .
 export const router = createBrowserRouter([
     ...routes,
     {
+        path: "/",
+        element: <APITest/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
         path: "/app",
         element: <App/>,
         errorElement: <ErrorPage/>,
