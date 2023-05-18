@@ -24,7 +24,6 @@ export const MainPage: React.FC = () => {
                 <Paper elevation={0}><img src={Banner1} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
                 <Paper elevation={0}><img src={Banner2} style={{ width: '100%', height: '100%', objectFit: 'cover'}} /></Paper>
                 <Paper elevation={0}><img src={Banner3} style={{ width: '100%', height: '100%', objectFit: 'cover'}} /></Paper>
-
             </Carousel>
 
             <div style={{

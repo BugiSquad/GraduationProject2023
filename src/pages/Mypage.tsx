@@ -10,6 +10,7 @@ import { OrangeButton, WhiteButton } from "../components/styled/Buttons";
 import { removeMyInfo } from "../api/Member";
 import { getMyID } from "../api/Common";
 import { useNavigate } from "react-router-dom";
+import { LikedMenuContents } from "../components/LikedMenuContents";
 
 export const Mypage: React.FC = () => {
     const navigate = useNavigate();
@@ -38,8 +39,10 @@ export const Mypage: React.FC = () => {
                 추후에 구현하는 것으로 변경
                 <MypageCards title="나의 모임" content={<MyMeetings />} link="/mypage/mymeetingsdetail" />*/}
                 <MypageCards title="나의 쪽지함" content={<MyMessagebox />} link="/mypage/mymessagedetail" />
+                <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents />} link="/mypage/likedmenu" />
+
             </Card>
-            {!((getMyID()) == -1) ? <Button sx={WhiteButton} style={{ width: "100%", borderRadius: "0.3rem" }} onClick={handleLogout}>로그아웃하기 </Button> :
+            {!((getMyID()) === -1) ? <Button sx={WhiteButton} style={{ width: "100%", borderRadius: "0.3rem" }} onClick={handleLogout}>로그아웃하기 </Button> :
                 <Button sx={OrangeButton} style={{ width: "100%", borderRadius: "0.3rem" }} onClick={()=>navigate('/login')}>로그인 하러가기 </Button>}
         </SimpleTemplate>
     )

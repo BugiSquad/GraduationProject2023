@@ -4,6 +4,7 @@ import {ErrorPage} from "../error-page";
 import {FoodDetail, menuLoader} from "../pages/FoodDetail";
 import {Order} from "../pages/Order";
 import {RecentOrderDetail} from "../pages/Detail/RecentOrderDetail";
+import { LikedMenu } from "../pages/LikedMenu";
 
 export const OrderRoutes = [
     {
@@ -22,6 +23,11 @@ export const OrderRoutes = [
     }, {
         path: "/mypage/recentorderdetail",
         element: <RecentOrderDetail/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/mypage/likedmenu",
+        element: <LikedMenu/>,
         errorElement: <ErrorPage/>,
     },
 ]
