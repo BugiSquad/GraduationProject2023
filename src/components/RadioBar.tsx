@@ -12,9 +12,9 @@ export const RadioBarItem: React.FC<RadioBarItemProps> = (items) => {
     const handleClick = (idx: number) => {
         items.setIndex(idx)
     };
-    return (<>
+    return (<div style={{display: "flex", flexDirection: "row", overflow: "scroll"}}>
         {items.names.map((item, idx) => (
-            <Button key={idx} disableElevation disableRipple onClick={() => handleClick(idx)}>
+            <Button key={idx} sx={{margin: "10px"}} disableElevation disableRipple onClick={() => handleClick(idx)}>
                 <Card
                     sx={{
                         minWidth: 70,
@@ -26,7 +26,7 @@ export const RadioBarItem: React.FC<RadioBarItemProps> = (items) => {
                     }}
                 >
                     <div style={{alignItems: "center", justifyContent: "space-between", marginTop: "10px"}}>
-                        <Typography variant={"body2"} fontWeight={"bold"} >
+                        <Typography variant={"body2"} fontWeight={"bold"}>
                             {item}
                         </Typography>
                     </div>
@@ -35,5 +35,5 @@ export const RadioBarItem: React.FC<RadioBarItemProps> = (items) => {
 
         ))}
 
-    </>)
+    </div>)
 }

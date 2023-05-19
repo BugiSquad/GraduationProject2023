@@ -65,7 +65,6 @@ const MenuBody: React.FC = () => {
     }
 
     return (<div>
-        {/*<MenuTabs category={menuType} onMenuTypeChanges={onMenuTypeChanges}/>*/}
         <RadioBarItem setIndex={setIdx} index={idx} names={names}/>
         <MenuCardSlider foods={[...menus]}></MenuCardSlider>
     </div>)

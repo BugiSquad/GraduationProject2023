@@ -1,29 +1,36 @@
-import React, {useState} from "react";
+import {FC, useState} from "react";
 import {SwipeableList, SwipeableListItem, SwipeAction, TrailingActions} from "react-swipeable-list";
 import {Avatar, Button, Typography} from "@mui/material";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {FaStar} from "react-icons/fa";
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useNavigate} from 'react-router-dom';
 import {useAppDispatch} from "../store/hooks";
 import {remove} from "../store/cart";
 import {CartItem as Item} from "../types/CartItem";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
-interface Food {
-    id: number;
-    name: string;
-    price: number;
-    imageUrl: string;
-    description: string;
+export const CartItemList: FC<CartItems> = (cart) => {
+    const dispatch = useAppDispatch()
+    return (<SwipeableList>
+        {cart.items.map((item, idx) => {
+            return (
+                <SwipeableListItem
+                    trailingActions={
+                        trailingActions(() => dispatch(remove(item.id)))
+                    } key={idx}>
+                    <CartItem key={idx} food={item}/>
+                </SwipeableListItem>)
+        })}
+    </SwipeableList>);
 }
 
 interface CartItems {
     items: Item[]
 }
 
-export const CartItem: React.FC<{ food: Food, key: number }> = (props) => {
+export const CartItem: FC<{ food: Item, key: number }> = (props) => {
     const [liked, setLiked] = useState(false);
     const navigate = useNavigate();
     const handleClick = () => {
@@ -76,29 +83,12 @@ export const CartItem: React.FC<{ food: Food, key: number }> = (props) => {
 }
 
 
-export const CartItemList: React.FC<CartItems> = (cart) => {
-    const dispatch = useAppDispatch()
-    return (<SwipeableList>
-        {cart.items.map((item, idx) => {
-            return (
-                <SwipeableListItem trailingActions={trailingActions(() => dispatch(remove(item.id)))}
-                                   key={idx}>
-                    <CartItem key={idx} food={item}/>
-                </SwipeableListItem>)
-        })}
-    </SwipeableList>);
-}
-
-
 const trailingActions = (callback: () => void) => {
     return (
         <TrailingActions>
             <SwipeAction
                 destructive={true}
-                onClick={() => {
-                    console.info('swipe action triggered')
-                    callback()
-                }}>
+                onClick={() => callback()}>
                 <div style={{
                     background: "red",
                     justifyContent: "center",
