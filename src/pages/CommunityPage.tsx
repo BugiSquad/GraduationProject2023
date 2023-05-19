@@ -7,7 +7,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import {getNoticeFromRemote, NoticeInformation} from "../api/Notice";
 import {getVoteItemsFromRemote, takeANewMenuVote, VoteItem} from "../api/Vote";
 
-export const Community: React.FC = () => {
+export const CommunityPage: React.FC = () => {
     return (
         <SimpleTemplate param={{pageHeaderName: "커뮤니티", tab: BottomNavigationTab.COMMUNITY}}>
             <Content></Content>
@@ -30,18 +30,28 @@ const Content: React.FC = () => {
     }, [])
     return (<>
         <BoardCard title={"공지사항"}
-                   content={<div style={{display: "flex", flexDirection: "column"}}>{noticeItems.map((item, idx) =>
-                       <Notice key={idx} info={item}></Notice>)}</div>} link={""}/>
-        <BoardCard title={"투표"} content={<FavoriteMenuVote items={voteItems}></FavoriteMenuVote>} link={""}/>
+                   content={<NoticeMain noticeItems={noticeItems}></NoticeMain>} link={""}/>
+        <BoardCard title={"투표"} content={<VoteMain items={voteItems}></VoteMain>} link={""}/>
     </>)
 }
 
+
+interface NoticeMainProps {
+    noticeItems: NoticeInformation[];
+}
+
+const NoticeMain: React.FC<NoticeMainProps> = (props) => {
+    return (
+        <div style={{display: "flex", flexDirection: "column"}}>{props.noticeItems.map((item, idx) =>
+            <NoticeItem key={idx} info={item}></NoticeItem>)}</div>
+    )
+}
 
 interface NoticeItemProps {
     info: NoticeInformation
 }
 
-const Notice: React.FC<NoticeItemProps> = (props) => {
+const NoticeItem: React.FC<NoticeItemProps> = (props) => {
     return (
         <Card sx={{
             display: "flex",
@@ -60,7 +70,7 @@ const Notice: React.FC<NoticeItemProps> = (props) => {
         </Card>
     )
 }
-const FavoriteMenuVote: React.FC<{ items: VoteItem[] }> = (props) => {
+const VoteMain: React.FC<{ items: VoteItem[] }> = (props) => {
     const [flag, setFlag] = useState<boolean>(false);
     const pollAnswers = props.items.length === 0 ? [] :
         props.items.sort((a, b) => {

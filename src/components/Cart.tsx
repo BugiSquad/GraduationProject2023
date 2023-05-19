@@ -85,6 +85,7 @@ export const CartItemList: React.FC<CartItems> = (cart) => {
     </SwipeableList>);
 }
 
+
 const trailingActions = (callback: () => void) => {
     return (
         <TrailingActions>

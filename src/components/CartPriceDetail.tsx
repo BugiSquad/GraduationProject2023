@@ -20,13 +20,16 @@ export const CartPriceDetail: React.FC = () => {
                         fontSize={"18px"}
                         fontWeight={'bold'}
                         color={"lightgray"}
-                        sx={{ paddingRight: "10px" }}>총 {cart.item.length}개 | </Typography>
+                        sx={{paddingRight: "10px"}}>총 {cart.item.length}개 | </Typography>
                     {getTotalPriceOf(cart.item)}원 주문하기</Button>
 
-            </Card> : <div style={{ paddingTop: "200px" }}><Typography color={'lightgray'} fontWeight={'bold'}>장바구니에 메뉴가 없습니다.<br />메뉴를 추가해보세요.</Typography>
-                <Button sx={OrangeButton} style={{ borderRadius: "0.3rem", padding: "10px", margin: "10px", width: "220px" }} onClick={() => {
-                    navigate("/menu")
-                }}>메뉴 보러가기</Button></div>}
+            </Card> : <div style={{paddingTop: "200px"}}><Typography color={'lightgray'} fontWeight={'bold'}>장바구니에 메뉴가
+                없습니다.<br/>메뉴를 추가해보세요.</Typography>
+                <Button sx={OrangeButton}
+                        style={{borderRadius: "0.3rem", padding: "10px", margin: "10px", width: "220px"}}
+                        onClick={() => {
+                            navigate("/menu")
+                        }}>메뉴 보러가기</Button></div>}
 
         </div>)
 }

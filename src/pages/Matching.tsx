@@ -2,7 +2,6 @@ import React from "react";
 import {Typography} from "@mui/material";
 import {FilterAlt} from "@mui/icons-material";
 import {SimpleTemplate} from "./PageTemplate";
-import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import {Posts} from "../components/Posts";
 import {useAppDispatch} from "../store/hooks";
 import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matching/drawer";
@@ -43,7 +42,6 @@ const Content: React.FC = () => {
         <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
             <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
                 <div style={{display: "inherit", alignItems: "center"}}>
-                    <LocalDiningIcon/>
                     <Typography variant={"body1"} fontWeight={"bold"}>같이 먹어요!</Typography>
                 </div>
                 <div style={{display: "inherit", alignItems: "center"}}>
