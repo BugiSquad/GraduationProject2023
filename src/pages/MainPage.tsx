@@ -2,7 +2,7 @@ import React from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
 import { MenuItem } from "../types/MenuItem";
 import '../App.css'
-import { Card, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import data from '../data/SampleFood.json'
 import noodleImage from '../images/foodCategory/noodles.png';
@@ -24,7 +24,6 @@ export const MainPage: React.FC = () => {
                 <Paper elevation={0}><img src={Banner1} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
                 <Paper elevation={0}><img src={Banner2} style={{ width: '100%', height: '100%', objectFit: 'cover'}} /></Paper>
                 <Paper elevation={0}><img src={Banner3} style={{ width: '100%', height: '100%', objectFit: 'cover'}} /></Paper>
-
             </Carousel>
 
             <div style={{
