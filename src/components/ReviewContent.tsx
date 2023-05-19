@@ -1,9 +1,15 @@
-import { Rating, Typography } from "@mui/material";
+import { Button, Grid, Rating, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
 import { normalTypography } from "./styled/Text";
 import React from "react";
+import { OrangeButton, WhiteButton } from "./styled/Buttons";
+import Box from '@mui/joy/Box';
+import IconButton from '@mui/joy/IconButton';
+import Textarea from '@mui/joy/Textarea';
+import Typography_joy from '@mui/joy/Typography';
+
 
 
 export const ReviewContent: React.FC = () => {
@@ -60,13 +66,16 @@ export const ReviewContent: React.FC = () => {
     );
 
     const [value, setValue] = React.useState<number | null>(2);
+    const [text, setText] = React.useState('');
+    const addEmoji = (emoji: string) => () => setText(`${text}${emoji}`);
 
 
     return (
         <>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                <Typography sx={{ marginTop: "20px" }} fontWeight={'bold'} fontSize={'20px'}>{ordersInfo}</Typography>
-                <div style={{ display: "flex", flexDirection: "row", alignItems:"center", marginTop:"10px", fontSize:"20px", width:"100%" }}>
+                <Typography sx={{ marginTop: "5%" }} fontWeight={'bold'} fontSize={'20px'}>{ordersInfo}</Typography>
+
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: "10px", fontSize: "20px", width: "100%" }}>
                     <Typography>별점을 매겨주세요.</Typography>
                     <Rating
                         name="simple-controlled"
@@ -76,12 +85,47 @@ export const ReviewContent: React.FC = () => {
                         }}
                     />
                 </div>
+            </div>
 
-                <StyledTextarea sx={{ marginTop: "10px" }}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                {/* <StyledTextarea sx={{ marginTop: "10px" }}
                     aria-label="minimum height"
                     minRows={5}
                     placeholder="리뷰를 작성해주세요."
+                /> */}
+                <Textarea
+
+                    placeholder="리뷰를 작성해주세요."
+                    value={text}
+                    onChange={(event) => setText(event.target.value)}
+                    minRows={15}
+
+                    startDecorator={
+                        <Box sx={{ display: 'flex', gap: 0.5 }}>
+                            <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
+                                👍
+                            </IconButton>
+                            <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
+                                🏖
+                            </IconButton>
+                            <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
+                                😍
+                            </IconButton>
+                        </Box>
+                    }
+                    endDecorator={
+                        <Typography_joy level="body3" sx={{ ml: 'auto' }}>
+                            {text.length} 글자
+                        </Typography_joy>
+                    }
+                    sx={{ width: "100%" }}
                 />
+                <div style={{display:"contents"}}>
+                    <Button sx={OrangeButton} style={{ width: "100%", borderRadius: "0.3rem" }}>등록</Button>
+                    <Button sx={WhiteButton} style={{ width: "100%", borderRadius: "0.3rem" }}>취소</Button>
+                </div>
+
+
             </div>
 
         </>
