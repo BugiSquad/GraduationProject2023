@@ -1,9 +1,10 @@
 import {SimpleTemplate} from "./PageTemplate";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {BoardCard} from "../components/BoardCard";
 import {Button, Card, Grid, Typography} from "@mui/material";
 import LinearProgress from '@mui/material/LinearProgress';
+import {getNoticeFromRemote} from "../api/Notice";
 
 export const Community: React.FC = () => {
     return (
@@ -13,10 +14,16 @@ export const Community: React.FC = () => {
     )
 
 }
+
 const Content: React.FC = () => {
-    const noticeItems: NoticeInfo[] = [
-        {noticeId: 1, title: "시험기간 운영 안내", date: new Date()},
-        {noticeId: 2, title: "5월 4주차 신메뉴", date: new Date()}]
+    const [noticeItems, setNoticeItems] = useState<NoticeInfo[]>([])
+    useEffect(() => {
+        getNoticeFromRemote().then((res) => {
+            const content: NoticeInfo[] = res.data.data.content
+            setNoticeItems(content)
+            console.log(content)
+        })
+    }, [])
     return (<>
         <BoardCard title={"공지사항"}
                    content={<div style={{display: "flex", flexDirection: "column"}}>{noticeItems.map((item, idx) =>
@@ -27,8 +34,8 @@ const Content: React.FC = () => {
 
 interface NoticeInfo {
     title: string,
-    noticeId: number;
-    date: Date;
+    informationId: number;
+    modifiedAt: Date;
 }
 
 interface NoticeItemProps {
@@ -46,11 +53,11 @@ const NoticeItem: React.FC<NoticeItemProps> = (props) => {
             minWidth: 280,
             maxWidth: 400
         }}>
-            <Typography variant={"subtitle2"} fontWeight='bold'>{props.info.noticeId}</Typography>
+            <Typography variant={"subtitle2"} fontWeight='bold'>{props.info.informationId}</Typography>
             <Typography
                 variant={"subtitle2"}>{props.info.title}</Typography>
             <Typography variant={"subtitle2"} fontWeight='bold'
-                        style={{color: "#FE724C"}}>{props.info.date.toDateString()}</Typography>
+                        style={{color: "#FE724C"}}>{props.info.modifiedAt.toLocaleString()}</Typography>
         </Card>
     )
 }
