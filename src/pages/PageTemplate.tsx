@@ -4,6 +4,7 @@ import {BottomNavigationTab, PageHeaderParam, SimpleHeaderParam} from "../types/
 import {PageHeader} from "../components/PageHeaders/PageHeader";
 import {SimpleHeader} from "../components/PageHeaders/SimpleHeader";
 import {useAppSelector} from "../store/hooks";
+import '../App.css'
 
 export const PageTemplate: FC<{ children: ReactNode, param: PageHeaderParam }> = ({children, param}) => {
     const idx = useAppSelector((state) => state.navIdx)
