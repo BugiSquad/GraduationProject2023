@@ -5,9 +5,12 @@ import {RecentOrders} from "../../components/RecentOrders";
 import {PageCards} from "../../components/PageCards";
 import {BottomNavigationTab} from "../../types/PageHeaderParam";
 import {InquiryPeriodContent} from "../../components/InquiryPeriod";
-
+import { RecentOrder } from "../../components/RecentOrder";
+import { OrderList, OrderType, PaymentType } from "../../types/Order";
 
 export const RecentOrderDetail: React.FC = () => {
+
+      
     return (
         <SimpleTemplate param={{pageHeaderName: "최근 주문 내역", tab: BottomNavigationTab.MYPAGE}}>
             <div style={{paddingTop: "20px"}}>
