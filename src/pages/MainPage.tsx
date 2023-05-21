@@ -24,7 +24,9 @@ export const MainPage: React.FC = () => {
     useEffect(() => {
         getPopularMenuFromRemote().then((res) => {
             const data = res.data.data
-            setMonthFavorite(data.map((item: MenuItem) => item))
+            setMonthFavorite(data.map((item: any) => {
+                return {...item, id: item.menuId}
+            }))
         })
     }, [])
     return (

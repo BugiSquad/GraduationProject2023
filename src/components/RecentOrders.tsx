@@ -17,6 +17,7 @@ export const RecentOrders: React.FC = () => {
             setList(data)
         }).catch((err) => console.warn(err))
     }, [])
+
     return (<>
         {list.length > 0 ?
             <div style={{width: "100%"}}>

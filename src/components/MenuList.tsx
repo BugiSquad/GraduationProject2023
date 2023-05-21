@@ -28,6 +28,7 @@ export const MenuList: React.FC = () => {
             );
             setMenus(menuItems)
         }
+
         getMenus();
     })
 
