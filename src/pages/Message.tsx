@@ -75,10 +75,18 @@ export const Message: React.FC = () => {
                 console.log(message.name)
                 return message
             })
-            setMessageList([...messageList, ...messages])
+            setMessageList(messages)
         })
     }
-    useEffect(() => getMessage(), [])
+    useEffect(() => {
+        getMessage()
+        const interval = setInterval(() => {
+            getMessage()
+        }, 1000);
+        return () => {
+            clearInterval(interval); // 컴포넌트가 언마운트될 때 interval을 정리합니다.
+        };
+    }, [])
     const handleSendButtonClick = () => {
         if (messageInput.trim() === "") {
             return;
@@ -127,7 +135,6 @@ export const Message: React.FC = () => {
                 </div>
 
                 {messageList.map((message) => {
-                    console.log(message.memberId)
                     if (message.memberId === -1)
                         return MyMessageBody(message)
                     else

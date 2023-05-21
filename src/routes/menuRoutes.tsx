@@ -5,11 +5,16 @@ import {RecentMenu} from "../pages/RecentMenu";
 
 export const MenuRoutes = [
     {
-        path: "/menu",
+        path: "/menu/",
+        element: <RestaurantMenu/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/menu/:category",
         element: <RestaurantMenu/>,
         errorElement: <ErrorPage/>,
     }, {
-        path: "/thisweekpopular",
+        path: "/thisweekpopular/",
         element: <WeekPopMenu/>,
         errorElement: <ErrorPage/>,
     }, {

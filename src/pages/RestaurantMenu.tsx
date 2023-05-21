@@ -8,12 +8,17 @@ import {SimpleTemplate} from "./PageTemplate";
 import MenuCardSlider from "../components/MenuCardSlider";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import {RadioBarItem} from "../components/RadioBar";
+import {useParams} from "react-router-dom";
 
 
 export const RestaurantMenu: React.FC = () => {
+    const param = useParams()
+    let category = param.category?.toUpperCase() as MenuCategory
+    if (category == null) category = MenuCategory.STEW
+    console.log(category)
     return (<>
         <SimpleTemplate param={{pageHeaderName: "메뉴", tab: BottomNavigationTab.MENU}}>
-            <MenuBody />
+            <MenuBody category={category}/>
         </SimpleTemplate>
     </>)
 }
@@ -23,11 +28,10 @@ export const RestaurantMenu: React.FC = () => {
  * TODO FoodCardSlider를 이용한 렌더링은 많이 어색해 보임 다른 방법을 찾을 것
  * @constructor
  */
-const MenuBody: React.FC = () => {
-    const [menuType, setMenuType] = useState(MenuCategory.RICE);
+const MenuBody: React.FC<{ category: MenuCategory }> = (props) => {
     const [menus, setMenus] = useState(Array.of<MenuItem>());
-    const [idx, setIdx] = useState<number>(0)
     const category = Object.values(MenuCategory)
+    const [idx, setIdx] = useState<number>(category.indexOf(props.category))
     const names = category.map((item) => toLocalizedName(item))
     let dispatch = useDispatch();
 

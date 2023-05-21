@@ -16,11 +16,13 @@ import Banner1 from '../images/banner1.png';
 import Banner2 from '../images/banner2.png';
 import Banner3 from '../images/banner3.png';
 import {getPopularMenuFromRemote} from "../api/Favor";
+import {getFoodsWith, StorageType} from "../store/LocalStorage";
 
 const foods: MenuItem[] = data
 
 export const MainPage: React.FC = () => {
     const [monthFavorite, setMonthFavorite] = useState<MenuItem[]>([])
+    const recently_viewed = getFoodsWith(StorageType.RECENTLY_VIEWED)
     useEffect(() => {
         getPopularMenuFromRemote().then((res) => {
             const data = res.data.data
@@ -36,7 +38,8 @@ export const MainPage: React.FC = () => {
             <br/>
             <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"} items={monthFavorite}></FavoriteMenusCard>
             <br/> <br/>
-            <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"} items={foods}></FavoriteMenusCard>
+            <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
+                               items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
             <br/>
 
         </>
@@ -78,10 +81,10 @@ const MainCategories: React.FC = () => {
                 paddingRight: "1rem",
                 paddingBottom: "1rem"
             }}>
-                <MainCategory category={"면류"} img={noodleImage}/>
-                <MainCategory category={"찌개류"} img={soupImage}/>
-                <MainCategory category={"덮밥류"} img={bowlRiceImage}/>
-                <MainCategory category={"비빔밥류"} img={mixedRiceImage}/>
+                <Link to={"/menu/noodle"}><MainCategory category={"면류"} img={noodleImage}/></Link>
+                <Link to={"/menu/stew"}><MainCategory category={"찌개류"} img={soupImage}/></Link>
+                <Link to={"/menu/korean_food"}> <MainCategory category={"한식"} img={mixedRiceImage}/></Link>
+                <Link to={"/menu/japan_food"}> <MainCategory category={"일식"} img={bowlRiceImage}/></Link>
             </div>
         </>
     )

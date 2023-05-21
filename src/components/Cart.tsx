@@ -9,6 +9,7 @@ import {remove} from "../store/cart";
 import {CartItem as Item} from "../types/CartItem";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} from "../store/LocalStorage";
 
 
 export const CartItemList: FC<CartItems> = (cart) => {
@@ -30,10 +31,19 @@ interface CartItems {
     items: Item[]
 }
 
+
 export const CartItem: FC<{ food: Item, key: number }> = (props) => {
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(
+        getFoodsWith(StorageType.FAVORITE).filter((item: Item) => item.id === props.food.id).length !== 0
+    );
     const navigate = useNavigate();
     const handleClick = () => {
+        if (liked) {
+            removeFoodFromStorage(StorageType.FAVORITE, props.food)
+        } else {
+            saveFoodToStorage(StorageType.FAVORITE, props.food)
+        }
+        console.log(localStorage.getItem("favorite"))
         setLiked(!liked);
     };
     return (
@@ -51,7 +61,9 @@ export const CartItem: FC<{ food: Item, key: number }> = (props) => {
             borderRadius: "2rem",
             padding: "0.5rem",
             boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-        }} onClick={() => navigate(`/fooddetail/${props.food.id}`)}>
+        }} onClick={() => {
+            navigate(`/fooddetail/${props.food.id}`)
+        }}>
             <Avatar sx={{width: 70, height: 70}}
                     src={props.food.imageUrl}/>
             <div style={{flexDirection: 'column'}}>
