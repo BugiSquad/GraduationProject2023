@@ -3,6 +3,7 @@ import {ErrorPage} from "../error-page";
 import {Signup} from "../pages/Signup";
 import {Mypage} from "../pages/Mypage";
 import {Login} from "../pages/Login";
+import {RecentMeetInfo, recentMeetInfoLoader} from "../pages/RecentMeetInfo";
 
 export const MyPageRoutes = [
     {
@@ -18,9 +19,14 @@ export const MyPageRoutes = [
         element: <Login/>,
         errorElement: <ErrorPage/>,
     }, {
+        path: "/mypage/recentmeetinfo/:id",
+        element: <RecentMeetInfo/>,
+        loader: recentMeetInfoLoader,
+        errorElement: <ErrorPage/>,
+    }, {
         path: "/mypage",
         element: <Mypage/>,
         errorElement: <ErrorPage/>,
     },
-    
+
 ]

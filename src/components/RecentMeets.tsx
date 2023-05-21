@@ -3,6 +3,7 @@ import {RecentMeet} from "./RecentMeet";
 import {Typography} from "@mui/material";
 import {normalTypography} from "./styled/Text";
 import {getPromise} from "../api/Promise";
+import {Link} from "react-router-dom";
 
 export interface MemberMeetingDto {
     id: number;
@@ -31,7 +32,8 @@ export const RecentMeets: React.FC = () => {
             {meetingInfo.length === 0 ? <Typography sx={normalTypography} color={"lightgrey"}>최근 만남이
                 없습니다.</Typography> : meetingInfo.map(
                 (meeting, idx) =>
-                    <RecentMeet key={idx} meetingInfo={meeting}></RecentMeet>)
+                    <Link key={idx} to={`/mypage/recentmeetinfo/${meeting.promiseId}`}><RecentMeet
+                        meetingInfo={meeting}></RecentMeet></Link>)
             }
         </div>
     )

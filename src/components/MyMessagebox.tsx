@@ -58,7 +58,7 @@ export const MyMessagebox: React.FC = () => {
                     <Typography sx={normalTypography} color={"lightgrey"}>
                         조회 내역이 없습니다.</Typography> :
                     noteRooms.map((value, idx) =>
-                        <MyMessage content={value.title} count={3}
+                        <MyMessage key={idx} content={value.title} count={3}
                                    isGroup={value.groupType === GroupType.ORGANIZATION}
                                    msgLinkTo={`/mypage/message/${value.noteRoomId}`}/>)
             }
