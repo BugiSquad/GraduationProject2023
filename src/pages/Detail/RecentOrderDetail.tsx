@@ -4,9 +4,7 @@ import {SimpleTemplate} from "../PageTemplate";
 import {RecentOrders} from "../../components/RecentOrders";
 import {PageCards} from "../../components/PageCards";
 import {BottomNavigationTab} from "../../types/PageHeaderParam";
-import {InquiryPeriodContent} from "../../components/InquiryPeriod";
-import { RecentOrder } from "../../components/RecentOrder";
-import { OrderList, OrderType, PaymentType } from "../../types/Order";
+import {InquiryPeriodContent} from "../../components/inquiryPeriod";
 
 export const RecentOrderDetail: React.FC = () => {
 

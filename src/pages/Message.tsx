@@ -8,7 +8,6 @@ import {Link, useParams} from "react-router-dom";
 import {useAppSelector} from "../store/hooks";
 import {getNotesWith, sendNoteToRoom} from "../api/NoteRoom";
 import {NoteMessage} from "../types/NoteMessage";
-import {getMyID} from "../api/Common";
 
 
 function MessageContent(message: NoteMessage) {
@@ -68,7 +67,7 @@ export const Message: React.FC = () => {
     const param = useParams()
     const roomId = param.id
     const getMessage = () => {
-        getNotesWith(Number(roomId), getMyID()).then((res: any) => {
+        getNotesWith(Number(roomId)).then((res: any) => {
             setRoomName(res.data.data.groupTitle)
             console.log(res.data.data)
             const data = res.data.data
@@ -84,7 +83,7 @@ export const Message: React.FC = () => {
         if (messageInput.trim() === "") {
             return;
         }
-        sendNoteToRoom(Number(roomId), getMyID(), messageInput.trim()).then((res: any) => {
+        sendNoteToRoom(Number(roomId), messageInput.trim()).then((res: any) => {
             getMessage()
         })
         setMessageInput("");
@@ -128,8 +127,8 @@ export const Message: React.FC = () => {
                 </div>
 
                 {messageList.map((message) => {
-                    let myId = getMyID()
-                    if (myId === message.memberId)
+                    console.log(message.memberId)
+                    if (message.memberId === -1)
                         return MyMessageBody(message)
                     else
                         return OthersMessageBody(message)

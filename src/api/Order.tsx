@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getApiURL, getMyID, getMyToken} from "./Common";
+import {getApiURL, getMyToken} from "./Common";
 import {CreateOrderDto} from "../types/Order";
 
 export const createOrder = (order: CreateOrderDto) => {
@@ -7,5 +7,5 @@ export const createOrder = (order: CreateOrderDto) => {
         {headers: {accessToken: getMyToken()}})
 }
 export const getOrderList = () => {
-    return axios.get(`${getApiURL()}/order/member?id=${getMyID()}`, {headers: {accessToken: getMyToken()}})
+    return axios.get(`${getApiURL()}/order/member`, {headers: {accessToken: getMyToken()}})
 }

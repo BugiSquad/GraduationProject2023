@@ -1,4 +1,4 @@
-import { Card, Typography } from "@mui/material";
+import {Card, Typography} from "@mui/material";
 
 interface OrderpageProps {
     title: string;

@@ -23,7 +23,7 @@ const FoodCardSlider: React.FC<FoodCardSliderItems> = ({foods}) => {
                     (<FoodCard id={food.id} name={food.name} price={food.price} imageUrl={food.imageUrl}
                                description={food.description}
                                key={idx}/>)
-                )};
+                )}
             </CustomGrid>
         </>
     );

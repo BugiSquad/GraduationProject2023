@@ -6,11 +6,12 @@ import {addMenus} from "../api/Menu";
 import React, {useEffect, useState} from "react";
 import {Form} from "react-router-dom";
 import {MyInfo} from "../types/MyInfo";
-import {Gender, Interest, MemberType} from "../types/MemberDto";
+import {Gender, Interest, MemberDto, MemberType} from "../types/MemberDto";
 import {GroupType, PostDto} from "../types/PostDto";
 import {checkPermission, registerWorker, requestPermission, subscribePushService} from "../api/Notification";
 import {subscribeWith, SubscriptionPostDto} from "../api/Subscription";
-import {getApiURL, getMyID} from "../api/Common";
+import {getApiURL} from "../api/Common";
+import {RequestPermission} from "../components/RequestPermission";
 
 /**
  * 회원가입 페이지
@@ -37,7 +38,7 @@ export const APITest: React.FC = () => {
             department: "컴퓨터공학과",
             gender: Gender.MALE,
             interestPostDto: interest
-        }
+        } as MemberDto
         requestMemberSignUp(
             member
         ).then((res) => {
@@ -50,7 +51,6 @@ export const APITest: React.FC = () => {
         let post: PostDto = {
             title: `${faker.lorem.sentence(4)}`,
             body: `${faker.lorem.sentence(6)}`,
-            memberId: Math.floor(Math.random() * 100),
             scheduledMealTime: dateToTimeString,
             groupType: GroupType.INDIVIDUAL
         }
@@ -85,6 +85,7 @@ export const APITest: React.FC = () => {
                 <Button onClick={createDummyPosts}>더미 글 올리기</Button>
                 <SignInForm></SignInForm>
                 <MessageTMP></MessageTMP>
+                <RequestPermission/>
             </div>
         </>)
 }
@@ -96,7 +97,7 @@ const SignInForm: React.FC = () => {
     function onSubmit() {
         requestMemberSignIn({email: email, password: password})
             .then((res) => {
-                const myInfo: MyInfo = {...res.data.data}
+                const myInfo: MyInfo = {accessToken: res.data.data}
                 setMyInfo(myInfo)
             })
             .catch((err) => console.error(err))
@@ -131,7 +132,6 @@ export const MessageTMP: React.FC = () => {
                             endpoint: `${s.endpoint}`,
                             auth: `${s.keys!!.auth}`,
                             p256dh: `${s.keys!!.p256dh}`,
-                            memberId: getMyID()
                         }
                         setAuth(a as SubscriptionPostDto)
                         subscribeWith(a as SubscriptionPostDto).then(res => alert(res)).catch(err => alert(JSON.stringify(err)))
@@ -156,8 +156,16 @@ export const MessageTMP: React.FC = () => {
                 if (checkPermission()) setPermission(true)
             }}>권한 확인</Button>
             <Button onClick={() => requestPermission()}>권한 요청</Button>
-            <Button onClick={() => registerWorker()}>워커 등록</Button>
-            <Button onClick={() => subscribePushService()}>서비스 등록</Button>
+            <Button onClick={() => registerWorker().then(res => {
+                if (res.active == null)
+                    alert("서비스워커 등록에 실패했습니다.")
+                else {
+                    res.showNotification("제목", {body: "등록성공"})
+                }
+            })}>워커 등록</Button>
+            <Button onClick={() => subscribePushService().then(res => {
+
+            })}>서비스 등록</Button>
             <Button onClick={() => subscribe()}>백엔드 구독</Button>
         </>)
 }

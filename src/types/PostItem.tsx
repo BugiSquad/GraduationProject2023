@@ -5,4 +5,5 @@ export interface PostItem {
     interest: string[];
     memberProfileUrl: string;
     minutesLeftUntilMeal: string;
+    yearOfEnter: number;
 }

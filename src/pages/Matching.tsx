@@ -2,7 +2,6 @@ import React from "react";
 import {Typography} from "@mui/material";
 import {FilterAlt} from "@mui/icons-material";
 import {SimpleTemplate} from "./PageTemplate";
-import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import {Posts} from "../components/Posts";
 import {useAppDispatch} from "../store/hooks";
 import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matching/drawer";
@@ -14,12 +13,12 @@ import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 export const Matching: React.FC = () => {
     return (
-        <SimpleTemplate param={{pageHeaderName: "매칭", tab: BottomNavigationTab.COMMUNITY}}>
-            <Contents/>
+        <SimpleTemplate param={{pageHeaderName: "매칭", tab: BottomNavigationTab.MATCHING}}>
+            <Content/>
         </SimpleTemplate>)
 }
 
-const Contents: React.FC = () => {
+const Content: React.FC = () => {
     const dispatch = useAppDispatch()
     const toggleDrawer = (open: boolean, name: String) =>
         (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -43,7 +42,6 @@ const Contents: React.FC = () => {
         <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
             <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
                 <div style={{display: "inherit", alignItems: "center"}}>
-                    <LocalDiningIcon/>
                     <Typography variant={"body1"} fontWeight={"bold"}>같이 먹어요!</Typography>
                 </div>
                 <div style={{display: "inherit", alignItems: "center"}}>

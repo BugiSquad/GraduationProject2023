@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { RadioBarItem } from "./RadioBar"
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from "@mui/x-date-pickers";
-import { OrangeButton } from "./styled/Buttons";
-import { Button } from "@mui/material";
+import {useState} from "react";
+import {RadioBarItem} from "./RadioBar"
+import {DemoContainer, DemoItem} from '@mui/x-date-pickers/internals/demo';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from "@mui/x-date-pickers";
+import {OrangeButton} from "./styled/Buttons";
+import {Button} from "@mui/material";
 
 
 export const InquiryPeriodContent: React.FC = () => {

@@ -1,10 +1,9 @@
 import React from "react";
-import { Badge, Card, Typography } from "@mui/material";
-import { EmailOutlined } from '@mui/icons-material';
-import { Message } from "../types/Message";
-import { Link } from "react-router-dom";
+import {Card, Typography} from "@mui/material";
+import {Message} from "../types/Message";
+import {Link} from "react-router-dom";
 
-export const MyMessage: React.FC<Message> = ({ msgLinkTo, isGroup, content, count }) => {
+export const MyMessage: React.FC<Message> = ({msgLinkTo, isGroup, content, count}) => {
     return (
         <Link to={msgLinkTo} style={{textDecoration: "none"}}>
             <Card sx={{
@@ -12,7 +11,6 @@ export const MyMessage: React.FC<Message> = ({ msgLinkTo, isGroup, content, coun
                 paddingRight: '10px',
                 display: "flex",
                 margin: "20px",
-                flex: "1",
                 justifyContent: "space-between",
                 alignItems: "center",
                 minWidth: 300,
@@ -25,8 +23,8 @@ export const MyMessage: React.FC<Message> = ({ msgLinkTo, isGroup, content, coun
 
             }}>
                 <Typography fontSize={16} fontWeight={"bold"}>{isGroup ? "[단체]" : "[개인]"}</Typography>
-                <Typography fontSize={14}fontWeight={"bold"}>{content}</Typography>
-                <Typography fontSize={16} fontWeight={"bold"}>📩 x {count}</Typography>
+                <Typography fontSize={14} fontWeight={"bold"}>{content}</Typography>
+                <Typography fontSize={16} fontWeight={"bold"}></Typography>
             </Card>
         </Link>
     )
