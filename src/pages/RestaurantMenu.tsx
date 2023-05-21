@@ -9,10 +9,11 @@ import MenuCardSlider from "../components/MenuCardSlider";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import {RadioBarItem} from "../components/RadioBar";
 
+
 export const RestaurantMenu: React.FC = () => {
     return (<>
         <SimpleTemplate param={{pageHeaderName: "메뉴", tab: BottomNavigationTab.MENU}}>
-            <MenuBody/>
+            <MenuBody />
         </SimpleTemplate>
     </>)
 }

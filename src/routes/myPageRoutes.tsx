@@ -22,4 +22,5 @@ export const MyPageRoutes = [
         element: <Mypage/>,
         errorElement: <ErrorPage/>,
     },
+    
 ]

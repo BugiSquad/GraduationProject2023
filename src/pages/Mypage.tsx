@@ -11,6 +11,7 @@ import {removeMyInfo} from "../api/Member";
 import {getMyToken} from "../api/Common";
 import {useNavigate} from "react-router-dom";
 
+
 export const Mypage: React.FC = () => {
     const navigate = useNavigate();
 

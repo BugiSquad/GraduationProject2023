@@ -4,6 +4,7 @@ import {MenuItem} from "../types/MenuItem";
 import '../App.css'
 import {Paper, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
+
 import data from '../data/SampleFood.json'
 import noodleImage from '../images/foodCategory/noodles.png';
 import soupImage from '../images/foodCategory/soup.png';
@@ -39,6 +40,7 @@ export const MainPage: React.FC = () => {
         </>
     )
 }
+
 
 const MainCarousel: React.FC = () => {
     return (

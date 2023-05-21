@@ -5,6 +5,7 @@ import {Order} from "../pages/Order";
 import {RecentOrderDetail} from "../pages/Detail/RecentOrderDetail";
 import {Cart} from "../pages/Cart";
 
+
 export const OrderRoutes = [
     {
         path: "/cart",

@@ -2,13 +2,21 @@ import React from "react";
 import {Card, Typography} from "@mui/material";
 import {OrderList} from "../types/Order";
 
+
 export const RecentOrder: React.FC<OrderList> = (detail: OrderList) => {
+    const navigate = useNavigate();
+
+    const handleReviewClick = (detail: OrderList) => {
+        console.log("주문번호 : "+detail.ordersId+detail.paymentDto.detail+"에 대한 리뷰 작성")
+        navigate(`/review/${detail.paymentDto.detail}`);
+      };
+
     return (<>
         <Card sx={{
             paddingLeft: '10px',
             paddingRight: '10px',
+            marginTop:"7px",
             display: "flex",
-            margin: "20px",
             flex: "1",
             justifyContent: "space-between",
             alignItems: "center",
