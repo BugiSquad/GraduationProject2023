@@ -51,7 +51,6 @@ export const APITest: React.FC = () => {
         let post: PostDto = {
             title: `${faker.lorem.sentence(4)}`,
             body: `${faker.lorem.sentence(6)}`,
-            memberId: Math.floor(Math.random() * 100),
             scheduledMealTime: dateToTimeString,
             groupType: GroupType.INDIVIDUAL
         }

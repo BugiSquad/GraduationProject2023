@@ -42,7 +42,7 @@ interface NoticeMainProps {
 
 const NoticeMain: React.FC<NoticeMainProps> = (props) => {
     return (
-        <div style={{display: "flex", flexDirection: "column"}}>{props.noticeItems.map((item, idx) =>
+        <div style={{display: "flex", flexDirection: "column", width: "100%"}}>{props.noticeItems.map((item, idx) =>
             <NoticeItem key={idx} info={item}></NoticeItem>)}</div>
     )
 }
@@ -52,6 +52,11 @@ interface NoticeItemProps {
 }
 
 const NoticeItem: React.FC<NoticeItemProps> = (props) => {
+    const date = new Date(props.info.modifiedAt)
+    const year = String(date.getFullYear()).substring(2, 4);
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}년 ${month}월 ${day}일`;
     return (
         <Card sx={{
             display: "flex",
@@ -59,6 +64,7 @@ const NoticeItem: React.FC<NoticeItemProps> = (props) => {
             flex: "1",
             justifyContent: "space-between",
             alignItems: "center",
+            width: "100%",
             minWidth: 280,
             maxWidth: 400
         }}>
@@ -66,7 +72,7 @@ const NoticeItem: React.FC<NoticeItemProps> = (props) => {
             <Typography
                 variant={"subtitle2"}>{props.info.title}</Typography>
             <Typography variant={"subtitle2"} fontWeight='bold'
-                        style={{color: "#FE724C"}}>{props.info.modifiedAt.toLocaleString()}</Typography>
+                        style={{color: "#FE724C"}}>{formattedDate}</Typography>
         </Card>
     )
 }

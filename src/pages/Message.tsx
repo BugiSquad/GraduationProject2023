@@ -67,7 +67,7 @@ export const Message: React.FC = () => {
     const param = useParams()
     const roomId = param.id
     const getMessage = () => {
-        getNotesWith(Number(roomId), 0).then((res: any) => {
+        getNotesWith(Number(roomId)).then((res: any) => {
             setRoomName(res.data.data.groupTitle)
             console.log(res.data.data)
             const data = res.data.data
@@ -83,7 +83,7 @@ export const Message: React.FC = () => {
         if (messageInput.trim() === "") {
             return;
         }
-        sendNoteToRoom(Number(roomId), 0, messageInput.trim()).then((res: any) => {
+        sendNoteToRoom(Number(roomId), messageInput.trim()).then((res: any) => {
             getMessage()
         })
         setMessageInput("");
@@ -127,7 +127,8 @@ export const Message: React.FC = () => {
                 </div>
 
                 {messageList.map((message) => {
-                    if (true)
+                    console.log(message.memberId)
+                    if (message.memberId === -1)
                         return MyMessageBody(message)
                     else
                         return OthersMessageBody(message)

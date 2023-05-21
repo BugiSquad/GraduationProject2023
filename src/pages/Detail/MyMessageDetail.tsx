@@ -3,7 +3,7 @@ import {SimpleTemplate} from "../PageTemplate";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {IconButton} from "@mui/material";
 import {MyMessage} from "../../components/MyMessage";
-import {getIndividualRoom, getNoteRoomsWith} from "../../api/NoteRoom";
+import {getIndividualRoom, getMyNoteRoom} from "../../api/NoteRoom";
 import {useParams} from "react-router-dom";
 import {GroupType} from "../../types/PostDto";
 import {BottomNavigationTab} from "../../types/PageHeaderParam";
@@ -35,7 +35,7 @@ export const MyMessageDetail: React.FC = () => {
     const [noteRooms, setNoteRooms] = useState<NoteInfo[]>([]);
     const [noteGroups, setNoteGroup] = useState<NoteGroup[]>([])
     useEffect(() => {
-        getNoteRoomsWith(0).then((res) => {
+        getMyNoteRoom().then((res) => {
             const data = res.data.data
             const notes = data.map((note: NoteInfo) => note)
             const tmp = notes.reduce((posts: NoteGroup[], note: NoteInfo) => {
@@ -75,7 +75,7 @@ export const MyMessageDetail: React.FC = () => {
                     <IconButton><DeleteOutlineIcon/></IconButton>
                 </div>
                 {
-                    noteRooms.map((value, idx) => <MyMessage content={value.title} count={3}
+                    noteRooms.map((value, idx) => <MyMessage key={idx} content={value.title} count={3}
                                                              isGroup={value.groupType === GroupType.ORGANIZATION}
                                                              msgLinkTo={`/mypage/message/${value.noteRoomId}`}/>)
                 }

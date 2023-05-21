@@ -57,7 +57,6 @@ export const Write: React.FC = () => {
             let post: PostDto = {
                 title: `${props.title}`,
                 body: `${props.body}`,
-                memberId: 1,
                 scheduledMealTime: timeToString,
                 groupType: props.groupType
             }

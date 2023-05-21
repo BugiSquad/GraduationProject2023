@@ -11,7 +11,6 @@ export const MyMessage: React.FC<Message> = ({msgLinkTo, isGroup, content, count
                 paddingRight: '10px',
                 display: "flex",
                 margin: "20px",
-                flex: "1",
                 justifyContent: "space-between",
                 alignItems: "center",
                 minWidth: 300,
@@ -24,8 +23,8 @@ export const MyMessage: React.FC<Message> = ({msgLinkTo, isGroup, content, count
 
             }}>
                 <Typography fontSize={16} fontWeight={"bold"}>{isGroup ? "[단체]" : "[개인]"}</Typography>
-                <Typography fontSize={14}fontWeight={"bold"}>{content}</Typography>
-                <Typography fontSize={16} fontWeight={"bold"}>📩 x {count}</Typography>
+                <Typography fontSize={14} fontWeight={"bold"}>{content}</Typography>
+                <Typography fontSize={16} fontWeight={"bold"}></Typography>
             </Card>
         </Link>
     )

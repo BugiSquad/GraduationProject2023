@@ -1,6 +1,6 @@
 import React from "react";
 import {SimpleTemplate} from "./PageTemplate";
-import {Button, Card} from "@mui/material";
+import {Button} from "@mui/material";
 import {RecentOrders} from "../components/RecentOrders";
 import {MypageCards} from "../components/MypageCards";
 import {RecentMeets} from "../components/RecentMeets";
@@ -19,12 +19,18 @@ export const Mypage: React.FC = () => {
     };
     if (getMyToken() === "")
         return (
-            <Card>
-                {/*<Button sx={WhiteButton} style={{width: "100%", borderRadius: "0.3rem"}}*/}
-                {/*        onClick={handleLogout}>로그아웃하기 </Button>*/}
-                <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
-                        onClick={() => navigate('/login')}>로그인 하러가기 </Button>
-            </Card>)
+            <SimpleTemplate param={{pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE}}>
+                <div style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginRight: "10px",
+                    height: "80%"
+                }}>
+                    <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
+                            onClick={() => navigate('/login')}>로그인 하러가기 </Button>
+                </div>
+            </SimpleTemplate>)
     else
         return (
             <SimpleTemplate param={{pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE}}>
