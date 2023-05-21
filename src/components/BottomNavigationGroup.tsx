@@ -2,21 +2,19 @@ import React, {useState} from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../store/hooks";
-import {toAPP, toCart, toCommunity, toMenu, toMyPage} from "../store/navgroup";
+import {toAPP, toCommunity, toMatching, toMenu, toMyPage} from "../store/navgroup";
 import '../components/BottomNavigationGroup.css'
 import GroupsIcon from '@mui/icons-material/Groups';
 import {RestaurantMenu} from "@mui/icons-material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HomeIcon from '@mui/icons-material/Home';
+import {BottomNavigationTab} from "../types/PageHeaderParam";
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 
 interface BottomNavigationGroupProps {
     tab: BottomNavigationTab;
 }
 
-export enum BottomNavigationTab {
-    APP, COMMUNITY, MENU, CART, MYPAGE,
-}
 
 export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({tab}) => {
     const navigate = useNavigate();
@@ -31,13 +29,13 @@ export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({tab
                 dispatch(toCommunity())
                 navigate("/community");
                 break;
-            case BottomNavigationTab.CART:
-                dispatch(toCart())
-                navigate("/cart")
-                break;
             case BottomNavigationTab.MENU:
                 dispatch(toMenu())
                 navigate("/menu")
+                break;
+            case BottomNavigationTab.MATCHING:
+                dispatch(toMatching())
+                navigate("/matching")
                 break;
             case BottomNavigationTab.MYPAGE:
                 dispatch(toMyPage())
@@ -62,9 +60,9 @@ export const NavigationImpl2: React.FC<tmp> = ({idx, onChange}) => {
     const [lastClicked, setLastClick] = useState<number>(idx)
     const ary = [
         {text: "홈", icon: HomeIcon},
-        {text: "같이 먹기", icon: GroupsIcon},
+        {text: "게시판", icon: AssignmentIcon},
         {text: "메뉴", icon: RestaurantMenu},
-        {text: "장바구니", icon: ShoppingCartIcon},
+        {text: "같이 먹기", icon: GroupsIcon},
         {text: "마이페이지", icon: PersonIcon},
     ]
 
@@ -84,7 +82,6 @@ export const NavigationImpl2: React.FC<tmp> = ({idx, onChange}) => {
                                 <a>
                                     <span className={"icon"}><item.icon
                                         sx={{color: lastClicked === idx ? "#FE724C" : "black"}}/></span>
-                                    {/*<span className={"text"}>{item.text}</span>*/}
                                 </a>
                             </li>
                         )

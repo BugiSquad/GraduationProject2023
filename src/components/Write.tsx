@@ -12,49 +12,53 @@ import {DrawerGrid, DrawerGridChild} from "./styled/DrawerGrid";
 import {useAppDispatch} from "../store/hooks";
 import {closeDrawer} from "../store/matching/drawer";
 
+interface FormProps {
+    time: Dayjs;
+    title: string;
+    body: string;
+    groupType: GroupType;
+}
 
 export const Write: React.FC = () => {
-    const [time, setTime] = useState<Dayjs | null>(dayjs());
-    const [title, setTitle] = useState<string>("")
-    const [body, setBody] = useState<string>("")
-    const [groupType, setGroupType] = useState<GroupType>(GroupType.INDIVIDUAL)
+    const [props, setProps] = useState<FormProps>({
+        title: "", body: "", groupType: GroupType.INDIVIDUAL, time: dayjs()
+    });
     const dispatch = useAppDispatch();
 
     const titleProps = useMemo(() => ({
-        label: "제목", value: title,
+        label: "제목", value: props.title,
         variant: "outlined" as "outlined",
-        onChange: (event: React.SyntheticEvent) => {
-            // @ts-ignore
-            setTitle(event.target.value as string)
+        onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            setProps({...props, title: event.target.value == null ? "" : event.target.value})
         }
-    }), [title]);
+    }), [props]);
 
     const bodyProps = useMemo(() => ({
-        label: "내용", value: body,
+        label: "내용", value: props.body,
         multiline: true, minRows: 5,
         maxRows: 10, placeholder: "내용을 입력해주세요.",
         margin: "normal" as "normal", variant: "outlined" as "outlined",
-        onChange: (event: React.SyntheticEvent) => {
-            // @ts-ignore
-            setBody(event.target.value as string)
+        onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            setProps({...props, body: event.target.value == null ? "" : event.target.value})
         }
-    }), [body]);
+    }), [props]);
 
     const onGroupTypeChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
         let t = event.target.value as string;
         if (t === "INDIVIDUAL" || t === "ORGANIZATION")
-            setGroupType(GroupType[t])
+            setProps({...props, groupType: GroupType[t]})
     }
 
-    function onSubmit(time: dayjs.Dayjs | null, title: string, body: string, groupType: GroupType) {
+    function onSubmit() {
+
+        if (props.time == null || props.title.length === 0) return
         return () => {
-            let timeToString = time == null ? dayjs().toISOString() : time.toISOString()
+            let timeToString = props.time.toISOString()
             let post: PostDto = {
-                title: `${title}`,
-                body: `${body}`,
-                memberId: 1,
+                title: `${props.title}`,
+                body: `${props.body}`,
                 scheduledMealTime: timeToString,
-                groupType: groupType
+                groupType: props.groupType
             }
             createNewPost(post).then((res) => {
                 console.log(res)
@@ -63,6 +67,8 @@ export const Write: React.FC = () => {
         };
     }
 
+    console.log(props.time)
+
     return (
         <Card id={"createMatch"} sx={{
             display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "center"
@@ -70,7 +76,7 @@ export const Write: React.FC = () => {
         }}>
             <Typography variant={"h6"} fontWeight={"bold"}>글 작성</Typography>
             <DrawerGrid container rowSpacing={1}>
-                <Form onSubmit={onSubmit(time, title, body, groupType)}>
+                <Form onSubmit={onSubmit()}>
                     <DrawerGridChild item xs={12}>
                         <TextField {...titleProps}/>
                     </DrawerGridChild>
@@ -78,13 +84,33 @@ export const Write: React.FC = () => {
                         <div style={{display: "flex", flexDirection: "row"}}>
                             <LocaleProvider>
                                 <DatePicker label="미팅 날짜" views={['day']} format={"MM월 DD일"}
-                                            onChange={(value) => setTime(value)}
-                                            defaultValue={time} minDate={dayjs().startOf("day")}
+                                            onChange={(value, context) => {
+                                                if (value == null) return;
+                                                if (value.diff(dayjs(), 'day') < 0) {
+                                                    console.error("잘못된 시간을 선택")
+                                                    return;
+                                                }
+                                                setProps({
+                                                    ...props,
+                                                    time: props.time.year(value.year()).month(value.month()).date(value.date())
+                                                })
+                                            }} value={props.time} minDate={dayjs().startOf("day")}
                                             maxDate={dayjs().add(7, 'day')}
                                             selectedSections={"day"}/>
                             </LocaleProvider>
                             <LocaleProvider>
-                                <MobileTimePicker label={"미팅 시간"} format={"hh시 mm분"} defaultValue={time}/>
+                                <MobileTimePicker label={"미팅 시간"} format={"hh시 mm분"}
+                                                  onChange={(value, context) => {
+                                                      if (value == null) return;
+                                                      if (value.diff(dayjs(), 'minute') < 0) {
+                                                          console.error("잘못된 시간을 선택")
+                                                          return;
+                                                      }
+                                                      setProps({
+                                                          ...props,
+                                                          time: props.time.hour(value.hour()).minute(value.minute())
+                                                      })
+                                                  }} value={props.time}/>
                             </LocaleProvider>
                         </div>
                     </DrawerGridChild>

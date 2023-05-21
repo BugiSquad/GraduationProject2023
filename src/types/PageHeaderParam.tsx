@@ -7,7 +7,7 @@ export interface PageHeaderParam {
 }
 
 export enum BottomNavigationTab {
-    APP, COMMUNITY, MENU, CART, MYPAGE,
+    APP, COMMUNITY, MENU, MATCHING, MYPAGE,
 }
 
 export interface SimpleHeaderParam {

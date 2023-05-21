@@ -1,26 +1,30 @@
-import React, {useEffect} from "react";
-import {Post} from "./Post";
+import React, {useEffect, useState} from "react";
 import {PopperPlacementType} from "@mui/material";
+import {getPosts} from "../api/Post";
+import {PostItem} from "../types/PostItem";
 import {PostPopper} from "./PostPopper";
-import {clearPosts, getPostsFromRemote} from "../store/matching/posts";
-import {useAppDispatch, useAppSelector} from "../store/hooks";
-import {faker} from "@faker-js/faker";
+import {Post} from "./Post";
 
 export const Posts: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
     const [open, setOpen] = React.useState(false);
     const [placement, setPlacement] = React.useState<PopperPlacementType>("auto");
 
-    const state = useAppSelector(state => state.postItems.posts)
-    const dispatch = useAppDispatch()
+    // const state = useAppSelector(state => state.postItems.posts)
+    const [posts, setPosts] = useState<PostItem[]>([])
+    const [selected, setSelected] = useState<PostItem>({} as PostItem)
 
     useEffect(() => {
-        dispatch(clearPosts())
-        dispatch(getPostsFromRemote())
+        getPosts().then(res => {
+            const data = res.data.data.content.map((item: PostItem) => item);
+            setPosts(data)
+            // console.log(data)
+        })
     }, [])
 
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType) => {
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType, selected: PostItem) => {
         setAnchorEl(event.currentTarget);
+        setSelected(selected)
         setOpen((prev) => placement !== newPlacement || !prev);
         setPlacement(newPlacement);
     };
@@ -30,16 +34,20 @@ export const Posts: React.FC = () => {
             <PostPopper anchorEl={anchorEl} open={open}
                         onClose={(b: boolean) => {
                             setOpen(b)
-                        }} placement={placement}/>
-            {Array.from(state).map((user, idx) =>
-                <Post key={idx} title={"밥 먹어요"}
-                      memberProfileUrl={faker.image.avatar()}
-                    // memberProfileUrl={user.memberProfileUrl}
-                      minutesLeftUntilMeal={Number(user.minutesLeftUntilMeal)}
-                      interest={user.interest}
-                      onClick={handleClick} index={idx}
+                        }} placement={placement}
+                        postItem={selected}
+            />
+            {posts.map((postItem, idx) => {
+                // console.log(postItem);
+                return (<Post key={idx} title={`${postItem.title}`}
+                              memberProfileUrl={`${postItem.memberProfileUrl == null ? "" : postItem.memberProfileUrl}`}
+                              minutesLeftUntilMeal={Number(postItem.minutesLeftUntilMeal)}
+                              interest={postItem.interest}
+                              onClick={(event, newPlacement) => {
+                                  handleClick(event, newPlacement, postItem)
+                              }} index={idx}
                 />)
-            }
+            })}
         </div>
     )
 }

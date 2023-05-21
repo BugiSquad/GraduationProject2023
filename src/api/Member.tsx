@@ -1,14 +1,14 @@
-import { MemberDto } from "../types/MemberDto";
+import {MemberDto} from "../types/MemberDto";
 import axios from "axios";
-import { getApiURL } from "./Common";
-import { MyInfo } from "../types/MyInfo";
+import {getApiURL} from "./Common";
+import {MyInfo} from "../types/MyInfo";
 
 /**
  * 새로운 회원을 생성합니다.
  * @param member 회원에 대한 정보를 담은 객체
  */
 export function requestMemberSignUp(member: MemberDto) {
-    return axios.post(`${getApiURL()}/member/signUp`, member)
+    return axios.post(`${getApiURL()}/member/signUp`, member, {headers: {crossOrigin: true}})
 }
 
 interface SignInInfo {
@@ -35,7 +35,7 @@ export function setMyInfo(info: MyInfo) {
 export function getMyInfo(): MyInfo {
     let store = localStorage.getItem("myInfo")
     if (store == null)
-        return { memberId: "-1", accessToken: "" }
+        return {accessToken: ""}
     return JSON.parse(store)
 }
 

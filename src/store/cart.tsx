@@ -54,7 +54,7 @@ export const Cart = createSlice(
             remove(state, action) {
                 let item = action.payload
                 state.item = state.item.filter((e: MenuItem) => {
-                    return e.id !== item.id
+                    return e.id !== item
                 })
                 saveCartToStorage(state.item)
             },

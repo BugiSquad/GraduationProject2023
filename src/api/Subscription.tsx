@@ -8,6 +8,12 @@ export interface SubscriptionPostDto {
     memberId: number
 
 }
+
 export const subscribeWith = (dto: SubscriptionPostDto) => {
-    return axios.post(`${getApiURL()}/message/subscribe`, dto, {headers: {accessToken: getMyToken()}})
+    return axios.post(`${getApiURL()}/message/subscribe`, dto, {
+        headers: {
+            crossOrigin: true,
+            accessToken: getMyToken()
+        }
+    })
 }

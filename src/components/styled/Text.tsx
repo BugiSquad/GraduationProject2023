@@ -1,5 +1,5 @@
-import { styled } from "@mui/system";
-import { Typography } from "@mui/material";
+import {styled} from "@mui/system";
+import {Typography} from "@mui/material";
 
 export const LargeText = styled(Typography)({
     variant: 'h2',

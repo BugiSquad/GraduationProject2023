@@ -1,10 +1,12 @@
-import MenuIcon from "@mui/icons-material/Menu";
-import {Avatar} from "@mui/material";
+import {Avatar, Badge} from "@mui/material";
+
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import logo from '../../images/logo.png';
-import { getMyID, getMyToken } from "../../api/Common";
+import {getMyToken} from "../../api/Common";
 import profilePic from '../../images/default.png'
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import {useAppSelector} from "../../store/hooks";
 
 interface PageHeaderParam {
     pageHeaderName: String;
@@ -15,6 +17,8 @@ interface PageHeaderParam {
 export const MainPageHeader: React.FC<PageHeaderParam>
     = (pageHeaderParam: PageHeaderParam) => {
 
+    const navigate = useNavigate()
+    const count = useAppSelector(app => app.cart.item.length)
     return (
         <div style={{
             display: 'flex',
@@ -24,9 +28,13 @@ export const MainPageHeader: React.FC<PageHeaderParam>
             paddingLeft: '1rem',
             paddingRight: '1rem'
         }}>
-            <MenuIcon></MenuIcon>
-            <Link to={"/app"} onClick={() => {console.log(getMyID(), getMyToken())}}><img src={logo} style={{ paddingTop:"10px", width: '50%', height: '50%', objectFit: 'cover' }}/></Link>
-            {((getMyID())!==-1) ? <Link to={"/mypage"} onClick={() => {console.log(getMyID())}}><Avatar src={profilePic}></Avatar></Link> :<Link to={"/login"} style={{color:"black", fontSize:"10px"}}>로그인하기</Link>}
-            {/* <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg"/> */}
+            <Badge badgeContent={count} color="primary">
+                <ShoppingCartIcon onClick={() => navigate("/cart")}></ShoppingCartIcon>
+            </Badge>
+            <Link to={"/app"} onClick={() => {
+            }}><img src={logo} style={{paddingTop: "10px", width: '50%', height: '50%', objectFit: 'cover'}}/></Link>
+            {(getMyToken() !== "") ? <Link to={"/mypage"} onClick={() => {
+                }}><Avatar src={profilePic}></Avatar></Link> :
+                <Link to={"/login"} style={{color: "black", fontSize: "14px"}}>로그인하기</Link>}
         </div>)
 }

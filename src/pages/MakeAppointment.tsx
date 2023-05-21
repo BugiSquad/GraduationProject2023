@@ -12,7 +12,6 @@ import {getNoteRoomMembers} from "../api/NoteRoom";
 import {PostRoomMember} from "../types/PostRoomMember";
 import {PromiseInfo} from "../types/PromiseInfo";
 import {makePromise} from "../api/Promise";
-import {getMyID} from "../api/Common";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 
 export const MakeAppointment: React.FC = () => {
@@ -32,7 +31,7 @@ export const MakeAppointment: React.FC = () => {
     useEffect(() => {
         getNoteRoomMembers(Number(noteRoomId)).then((res) => {
             const data = res.data.data
-            const members = data.map((member: PostRoomMember) => member)
+            const members = data.map((member: PostRoomMember) => member).filter((member: PostRoomMember) => member.memberId !== -1)
             console.log(members)
             setChecked(new Array(members.size).fill(false))
             setMembers(members)
@@ -51,7 +50,6 @@ export const MakeAppointment: React.FC = () => {
         const payload: PromiseInfo = {
             noteRoomId: roomId,
             location: location,
-            memberId: getMyID(),
             promiseMemberIds: membersIds,
             promiseTime: selectedTime?.toISOString()
         }

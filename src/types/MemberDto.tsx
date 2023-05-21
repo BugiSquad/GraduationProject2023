@@ -48,4 +48,5 @@ export interface MemberDto {
     memberType: MemberType;
     gender: Gender;
     interestPostDto: Interest;
+    profileUrl: string;
 }

@@ -24,7 +24,7 @@ export const RestaurantMenu: React.FC = () => {
  * @constructor
  */
 const MenuBody: React.FC = () => {
-    const [menuType, setMenuType] = useState(MenuCategory.rice);
+    const [menuType, setMenuType] = useState(MenuCategory.RICE);
     const [menus, setMenus] = useState(Array.of<MenuItem>());
     const [idx, setIdx] = useState<number>(0)
     const category = Object.values(MenuCategory)
@@ -46,7 +46,7 @@ const MenuBody: React.FC = () => {
         }
 
         getMenus();
-    })
+    }, [idx])
     //해당 메뉴 카테고리에 속하는 모든 메뉴를 가져옴
     const getMenuItemsWith = (menuType: MenuCategory) => {
         let axios = getMenusByCategory(menuType)
@@ -65,13 +65,7 @@ const MenuBody: React.FC = () => {
         })
     }
 
-    const onMenuTypeChanges = (event: React.SyntheticEvent, newValue: MenuCategory) => {
-        setMenuType(newValue)
-        getMenuItemsWith(newValue)
-    }
-
     return (<div>
-        {/*<MenuTabs category={menuType} onMenuTypeChanges={onMenuTypeChanges}/>*/}
         <RadioBarItem setIndex={setIdx} index={idx} names={names}/>
         <MenuCardSlider foods={[...menus]}></MenuCardSlider>
     </div>)

@@ -3,7 +3,6 @@ export enum GroupType {
 }
 
 export interface PostDto {
-    memberId: number;
     title: string;
     body: string;
     groupType: GroupType;

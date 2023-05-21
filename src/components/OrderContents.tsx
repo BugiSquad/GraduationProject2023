@@ -13,7 +13,6 @@ import {CartItem} from "../types/CartItem";
 import {CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentType} from "../types/Order";
 import {createOrder} from "../api/Order";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
-import {getMyID} from "../api/Common";
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -59,8 +58,7 @@ export const OrderContents: React.FC = () => {
         const res = await createDummyPaymentDetail(method)
         console.log(res);
         const myOrder: CreateOrderDto = {
-            ordersType: OrderType.now,
-            memberId: getMyID(),
+            ordersType: OrderType.NOW,
             paymentPostDto: {
                 paymentType: method,
                 confirmNum: 12314123,
@@ -192,8 +190,8 @@ interface PayMethodProp {
 }
 
 const payment = [
-    {src: naverpayImg, type: PaymentType.NAVERPAY},
-    {src: kakaopayImg, type: PaymentType.KAKAOPAY},
+    {src: naverpayImg, type: PaymentType.NAVER_PAY},
+    {src: kakaopayImg, type: PaymentType.KAKAO_PAY},
     {src: creditcardImg, type: PaymentType.CREDITCARD}
 ]
 
