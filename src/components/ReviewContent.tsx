@@ -2,7 +2,6 @@ import { Button, Grid, Rating, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
-import { normalTypography } from "./styled/Text";
 import React from "react";
 import { OrangeButton, WhiteButton } from "./styled/Buttons";
 import Box from '@mui/joy/Box';
