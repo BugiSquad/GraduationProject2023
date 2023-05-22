@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
-import { MenuItem } from "../types/MenuItem";
+import {MenuItem} from "../types/MenuItem";
 import '../App.css'
 
-import { Paper, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import {Paper, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
 
 
 import data from '../data/SampleFood.json'
@@ -12,13 +12,13 @@ import noodleImage from '../images/foodCategory/noodles.png';
 import soupImage from '../images/foodCategory/soup.png';
 import bowlRiceImage from '../images/foodCategory/bowl-rice.png';
 import mixedRiceImage from '../images/foodCategory/mixed-rice.png';
-import { MainCategory } from '../components/MainCategory';
+import {MainCategory} from '../components/MainCategory';
 import Carousel from 'react-material-ui-carousel';
 import Banner1 from '../images/banner1.png';
 import Banner2 from '../images/banner2.png';
 import Banner3 from '../images/banner3.png';
-import { getPopularMenuFromRemote } from "../api/Favor";
-import { getFoodsWith, StorageType } from "../store/LocalStorage";
+import {getPopularMenuFromRemote} from "../api/Favor";
+import {getFoodsWith, StorageType} from "../store/LocalStorage";
 
 const foods: MenuItem[] = data
 
@@ -130,7 +130,7 @@ const FavoriteMenusCard: React.FC<FavoriteMenusCardProps> = (props) => {
                     color={"text.secondary"}
                     gutterBottom>더 보기</Typography></Link>
             </div>
-            <div style={{flexWrap: "nowrap", transform: "-0.5rem, 0, 0"}}>
+            <div style={{flexWrap: "nowrap", transform: "-0.3rem, 0, 0"}}>
                 <FoodCardSlider foods={props.items}/>
             </div>
         </>

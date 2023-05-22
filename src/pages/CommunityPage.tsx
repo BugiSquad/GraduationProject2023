@@ -2,10 +2,11 @@ import {SimpleTemplate} from "./PageTemplate";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import React, {useEffect, useState} from "react";
 import {BoardCard} from "../components/BoardCard";
-import {Button, Card, Grid, Typography} from "@mui/material";
+import {Alert, Button, Card, FormControlLabel, Grid, Radio, RadioGroup, Snackbar, Typography} from "@mui/material";
 import LinearProgress from '@mui/material/LinearProgress';
 import {getNoticeFromRemote, NoticeInformation} from "../api/Notice";
 import {getVoteItemsFromRemote, takeANewMenuVote, VoteItem} from "../api/Vote";
+import {OrangeButton} from "../components/styled/Buttons";
 
 export const CommunityPage: React.FC = () => {
     return (
@@ -78,31 +79,56 @@ const NoticeItem: React.FC<NoticeItemProps> = (props) => {
 }
 const VoteMain: React.FC<{ items: VoteItem[] }> = (props) => {
     const [flag, setFlag] = useState<boolean>(false);
+    const [errorMsg, setErrorMsg] = useState<string>("");
+    const [open, setOpen] = useState(false);
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
     const pollAnswers = props.items.length === 0 ? [] :
         props.items.sort((a, b) => {
             if (a.votes > b.votes) return -1;
             else if (a.votes === b.votes) return 0;
             else return 1;
         })
-    if (flag) return (<VoteResult pollAnswers={pollAnswers}></VoteResult>)
-    else return (<VoteButtons pollAnswers={pollAnswers} setState={setFlag}></VoteButtons>)
+    if (flag) return (
+        <>
+            <VoteResult pollAnswers={pollAnswers}></VoteResult>
+            <Snackbar anchorOrigin={{vertical: "bottom", horizontal: "center"}} open={open} autoHideDuration={2000}
+                      onClose={handleClose}>
+                <Alert severity="error" sx={{width: '100%'}}> {errorMsg} </Alert>
+            </Snackbar>
+        </>
+    )
+    else return (<>
+        <VoteButtons pollAnswers={pollAnswers} setState={setFlag} setMsg={setErrorMsg}
+                     setOpenErr={setOpen}></VoteButtons>
+        <Snackbar anchorOrigin={{vertical: "bottom", horizontal: "center"}} open={open} autoHideDuration={2000}
+                  onClose={handleClose}>
+            <Alert severity="error" sx={{width: '100%'}}> {errorMsg} </Alert>
+        </Snackbar>
+    </>)
 }
 
 const VoteResult: React.FC<{ pollAnswers: VoteItem[] }> = (prop) => {
     let totalCount = 0
     prop.pollAnswers.forEach((answer) => totalCount += answer.votes)
     return (
-        <Grid container spacing={2} style={{width: "100%", alignItems: "center"}}>
+        <Grid container style={{width: "100%", alignItems: "center"}}>
             {prop.pollAnswers.map((item, idx) => {
                 return (
                     <>
                         <Grid item xs={2}>
                             <Typography variant={"subtitle2"}>{item.name}</Typography>
                         </Grid>
-                        <Grid item xs={10}>
+                        <Grid item xs={9}>
                             <LinearProgress sx={{width: "90%"}} variant={"determinate"}
                                             value={item.votes / totalCount * 100}/>
                         </Grid>
+                        <Grid item xs={1}><span>{item.votes}표</span></Grid>
                     </>
                 )
             })}
@@ -111,24 +137,40 @@ const VoteResult: React.FC<{ pollAnswers: VoteItem[] }> = (prop) => {
 }
 const VoteButtons: React.FC<{
     pollAnswers: VoteItem[],
-    setState: React.Dispatch<React.SetStateAction<boolean>>
-}> = (prop) => {
+    setState: React.Dispatch<React.SetStateAction<boolean>>,
+    setMsg: React.Dispatch<React.SetStateAction<string>>,
+    setOpenErr: React.Dispatch<React.SetStateAction<boolean>>
+}> = (props) => {
+    const [value, setValue] = React.useState('');
+    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue((event.target as HTMLInputElement).value);
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        takeANewMenuVote(Number(value))
+            .then((res) => console.log(res))
+            .catch(err => {
+                console.error(err)
+                props.setMsg(err.response.data.data.message)
+                props.setOpenErr(true)
+            })
+            .finally(() => {
+                props.setState(true)
+            })
+    };
+    const handleViewResult = () => {
+        props.setState(true)
+    }
     return (
-        <Grid container spacing={2} style={{width: "100%", alignItems: "center"}}>
-            {prop.pollAnswers.map((item, idx) => {
-                return (
-                    <Grid item xs={12}><Button style={{width: "100%", alignItems: "center", justifyItems: "left"}}
-                                               onClick={() => {
-                                                   takeANewMenuVote(item.newMenuId)
-                                                       .then((res) => console.log(res))
-                                                       .catch(err => console.error(err))
-                                                       .finally(() => {
-                                                           prop.setState(true)
-                                                       })
-                                               }}>
-                        <Typography variant={"body1"}>{item.name}</Typography>
-                    </Button> </Grid>
-                )
-            })}
-        </Grid>)
+        <form onSubmit={handleSubmit}>
+            <RadioGroup onChange={handleRadioChange}>
+                {props.pollAnswers.map((item, idx) => {
+                    return (<FormControlLabel key={idx} value={item.newMenuId} control={<Radio/>} label={item.name}/>)
+                })}
+            </RadioGroup>
+            <Button type={"submit"} sx={OrangeButton}>투표하기</Button>
+            <Button type={"button"} sx={OrangeButton} onClick={handleViewResult}>결과 보기</Button>
+        </form>
+    )
 }

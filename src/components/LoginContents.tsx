@@ -29,7 +29,6 @@ export const LoginContents: React.FC = () => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 

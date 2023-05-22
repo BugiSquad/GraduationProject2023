@@ -10,11 +10,10 @@ export const FoodDetail: React.FC = () => {
     const loaderData = useLoaderData() as CartItem
     if (loaderData === undefined || loaderData == null) return (<div>로딩중</div>)
     saveFoodToStorage(StorageType.RECENTLY_VIEWED, loaderData)
-    return (<div className="App container">
-            <SimpleTemplate param={{pageHeaderName: "음식 상세", tab: BottomNavigationTab.MENU}}>
-                <FoodDetailContents food={{...loaderData}}/>
-            </SimpleTemplate>
-        </div>
+    return (
+        <SimpleTemplate param={{pageHeaderName: "음식 상세", tab: BottomNavigationTab.MENU}}>
+            <FoodDetailContents food={{...loaderData}}/>
+        </SimpleTemplate>
     )
 }
 
