@@ -9,6 +9,10 @@ import {CartItem} from "../types/CartItem";
 import {useNavigate} from "react-router-dom";
 import {ReviewBar} from "./ReviewBar";
 import {ReviewList} from "./ReviwList";
+import { StorageType, getFoodsWith, removeFoodFromStorage, saveFoodToStorage } from "../store/LocalStorage";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 interface FoodDetailContentsProps {
     food: CartItem;
@@ -16,6 +20,9 @@ interface FoodDetailContentsProps {
 
 export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food }) => {
     const [count, setCount] = useState<number>(1);
+    const [liked, setLiked] = useState<boolean>(
+        getFoodsWith(StorageType.FAVORITE).filter((item: CartItem) => item.id === food.id).length !== 0
+      );
     const navigate = useNavigate();
 
     const handleDecrement = () => {
@@ -28,12 +35,37 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food }) 
         setCount(count + 1);
     };
     const dispatch = useAppDispatch()
+
+    const handleClick = () => {
+        if (liked) {
+          removeFoodFromStorage(StorageType.FAVORITE, food);
+        } else {
+          saveFoodToStorage(StorageType.FAVORITE, food);
+        }
+        setLiked(!liked);
+      };
+
     return (<>
 
         <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "column", paddingTop: '10px' }}>
             <Paper sx={{ borderRadius: '1rem' }} elevation={3}>
                 <img src={food.imageUrl} alt="Food"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+                   <Box sx={{ position: 'absolute', top: '10px', right: '10px' }}>
+            <Button
+              disableElevation
+              disableRipple
+              sx={{
+                color: liked ? 'pink' : 'black',
+              }}
+              onClick={(event) => {
+                event.stopPropagation();
+                handleClick();
+              }}
+            >
+              {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </Button>
+          </Box>
             </Paper>
             <div style={{ display: "flex", alignContent: "flex-start" }} >
                 <Typography fontSize={'28px'} sx={{ paddingTop: "10px", fontWeight: "bold" }}> {food.name}</Typography>
