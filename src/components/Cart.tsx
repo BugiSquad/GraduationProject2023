@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import {SwipeableList, SwipeableListItem, SwipeAction, TrailingActions} from "react-swipeable-list";
-import {Avatar, Button, Typography} from "@mui/material";
+import {Avatar, Box, Button, Typography} from "@mui/material";
 import {FaStar} from "react-icons/fa";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useNavigate} from 'react-router-dom';
@@ -10,6 +10,9 @@ import {CartItem as Item} from "../types/CartItem";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} from "../store/LocalStorage";
+import { menuCard } from "./styled/Cards";
+import { MdAddCircleOutline, MdRemoveCircleOutline } from "react-icons/md";
+import { count } from "console";
 
 
 export const CartItemList: FC<CartItems> = (cart) => {
@@ -21,7 +24,7 @@ export const CartItemList: FC<CartItems> = (cart) => {
                     trailingActions={
                         trailingActions(() => dispatch(remove(item.id)))
                     } key={idx}>
-                    <CartItem key={idx} food={item}/>
+                    <CartItemCart key={idx} food={item}/>
                 </SwipeableListItem>)
         })}
     </SwipeableList>);
@@ -32,36 +35,23 @@ interface CartItems {
 }
 
 
-export const CartItem: FC<{ food: Item, key: number }> = (props) => {
-    const [liked, setLiked] = useState(
-        getFoodsWith(StorageType.FAVORITE).filter((item: Item) => item.id === props.food.id).length !== 0
-    );
+export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
+    
+    const [count, setCount] = useState<number>(1);
+
     const navigate = useNavigate();
-    const handleClick = () => {
-        if (liked) {
-            removeFoodFromStorage(StorageType.FAVORITE, props.food)
-        } else {
-            saveFoodToStorage(StorageType.FAVORITE, props.food)
+    
+    const handleDecrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
         }
-        console.log(localStorage.getItem("favorite"))
-        setLiked(!liked);
+    };
+
+    const handleIncrement = () => {
+        setCount(count + 1);
     };
     return (
-        <Button disableRipple style={{
-            paddingLeft: '10px',
-            paddingRight: '10px',
-            margin: "5px",
-            flex: "1",
-            justifyContent: "space-between",
-            alignItems: "center",
-            minWidth: 280,
-            backgroundColor: '#F4F4F4',
-            color: "",
-            fontWeight: "bold",
-            borderRadius: "2rem",
-            padding: "0.5rem",
-            boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-        }} onClick={() => {
+        <Button disableRipple style={menuCard} onClick={() => {
             navigate(`/fooddetail/${props.food.id}`)
         }}>
             <Avatar sx={{width: 70, height: 70}}
@@ -76,6 +66,67 @@ export const CartItem: FC<{ food: Item, key: number }> = (props) => {
                     </Typography>
                 </div>
             </div>
+            <Box display="flex">
+                    <Button disableElevation
+                        style={{ minWidth: 'unset', borderRadius: '50%', color: '#FE724C' }}
+                        onClick={handleDecrement}
+                        startIcon={<MdRemoveCircleOutline />}
+                    />
+                    <Box
+                        component="span"
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        {count}
+                    </Box>
+                    <Button disableElevation
+                        style={{ minWidth: 'unset', borderRadius: '50%', color: '#FE724C' }}
+                        onClick={handleIncrement}
+                        startIcon={<MdAddCircleOutline />}
+                    />
+                </Box>
+            
+        </Button>
+    )
+}
+
+export const CartItemMenu: FC<{ food: Item, key: number }> = (props) => {
+    const [liked, setLiked] = useState(
+        getFoodsWith(StorageType.FAVORITE).filter((item: Item) => item.id === props.food.id).length !== 0
+    );
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        if (liked) {
+            removeFoodFromStorage(StorageType.FAVORITE, props.food)
+        } else {
+            saveFoodToStorage(StorageType.FAVORITE, props.food)
+        }
+        console.log(localStorage.getItem("favorite"))
+        setLiked(!liked);
+    };
+    
+    return (
+        <Button disableRipple style={menuCard} onClick={() => {
+            navigate(`/fooddetail/${props.food.id}`)
+        }}>
+            <Avatar sx={{width: 70, height: 70}}
+                    src={props.food.imageUrl}/>
+            <div style={{flexDirection: 'column'}}>
+                <Typography color={'black'} fontSize={17} fontWeight={'bold'}>{props.food.name}</Typography>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <Typography sx={{paddingRight: '5px'}} color={'black'} fontSize={15}
+                                fontWeight={'bold'}>{props.food.price}원</Typography>
+                    <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
+                        <FaStar style={{color: "orange"}}/> 5.0 (10)
+                    </Typography>
+                </div>
+            </div>
+            
             <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
                 <Button
                     disableElevation disableRipple
@@ -93,7 +144,6 @@ export const CartItem: FC<{ food: Item, key: number }> = (props) => {
         </Button>
     )
 }
-
 
 const trailingActions = (callback: () => void) => {
     return (

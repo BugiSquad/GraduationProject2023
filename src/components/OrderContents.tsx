@@ -154,7 +154,7 @@ export const OrderContents: React.FC = () => {
 
 
 export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
-    return (<div style={{display: "flex", flexDirection: "column", width: "100%", alignItems: "center"}}>
+    return (<div style={{display: "flex", flexDirection: "column", width: "100%", alignItems: "center", margin:"10px"}}>
             {items.map((item, idx) =>
                 <OrderProductsList name={item.name} quantity={item.quantity} price={item.price}/>
             )}
@@ -164,7 +164,7 @@ export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
 
 export const OrderInfo: React.FC = () => {
     return (
-        <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: 'flex-start'}}>
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", width:"100%", margin:"10px"}}>
             <Typography fontSize={11} color="#FE724C">* 표시된 항목은 필수로 입력해야 합니다.</Typography>
             <TextField
                 size="small"

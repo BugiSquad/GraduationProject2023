@@ -5,6 +5,19 @@ import {normalTypography} from "./styled/Text";
 import {getPromise} from "../api/Promise";
 import {Link} from "react-router-dom";
 
+const memberMeeting: MemberMeetingDto[] = [
+    {
+      id: 1, // 가상 멤버 ID
+      name: 1234, // 가상 멤버 이름
+      profileUrl: "https://example.com/profile.jpg" // 가상 프로필 URL
+    },
+    {
+      id: 2, // 가상 멤버 ID
+      name: 1234, // 가상 멤버 이름
+      profileUrl: "https://example.com/profile.jpg" // 가상 프로필 URL
+    }
+  ];
+
 export interface MemberMeetingDto {
     id: number;
     name: number;
@@ -35,6 +48,7 @@ export const RecentMeets: React.FC = () => {
                     <Link key={idx} to={`/mypage/recentmeetinfo/${meeting.promiseId}`}><RecentMeet
                         meetingInfo={meeting}></RecentMeet></Link>)
             }
+            
         </div>
     )
 }
