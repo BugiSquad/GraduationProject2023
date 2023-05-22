@@ -69,7 +69,10 @@ export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
             <Box display="flex">
                     <Button disableElevation
                         style={{ minWidth: 'unset', borderRadius: '50%', color: '#FE724C' }}
-                        onClick={handleDecrement}
+                        onClick={(event) => {
+                            event.stopPropagation(); // 이벤트 전파 중지
+                            handleDecrement(); // 내부 버튼 이벤트 핸들러 실행
+                        }}
                         startIcon={<MdRemoveCircleOutline />}
                     />
                     <Box
@@ -85,7 +88,10 @@ export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
                     </Box>
                     <Button disableElevation
                         style={{ minWidth: 'unset', borderRadius: '50%', color: '#FE724C' }}
-                        onClick={handleIncrement}
+                        onClick={(event) => {
+                            event.stopPropagation(); // 이벤트 전파 중지
+                            handleIncrement(); // 내부 버튼 이벤트 핸들러 실행
+                        }}
                         startIcon={<MdAddCircleOutline />}
                     />
                 </Box>
