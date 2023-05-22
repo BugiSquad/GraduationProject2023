@@ -48,7 +48,10 @@ export const MainPage: React.FC = () => {
 
 const MainCarousel: React.FC = () => {
     return (
-        <Carousel navButtonsAlwaysInvisible>
+        <Carousel navButtonsAlwaysInvisible sx={{
+            paddingLeft: "0.5rem",
+            paddingRight: "0.5rem",
+        }}>
             <Paper elevation={0}><img src={Banner1}
                                       style={{width: '100%', height: '100%', objectFit: 'cover'}}/></Paper>
             <Paper elevation={0}><img src={Banner2}
@@ -66,7 +69,7 @@ const MainCategories: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
             }}>
-                <Typography style={{float: 'left', paddingLeft: '1rem'}}
+                <Typography style={{float: 'left', paddingLeft: '0.5rem'}}
                             fontWeight={"bold"} align={"left"}
                             variant={"h5"}
                             color={"text.secondary"}
@@ -76,9 +79,9 @@ const MainCategories: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingLeft: "1rem",
-                paddingRight: "1rem",
-                paddingBottom: "1rem"
+                paddingLeft: "0.5rem",
+                paddingRight: "0.5rem",
+                paddingBottom: "0.5rem"
             }}>
                 <Link style={{textDecoration: "none", color: "black"}} to={"/menu/noodle"}><MainCategory category={"면류"}
                                                                                                          img={noodleImage}/></Link>
@@ -106,21 +109,23 @@ const FavoriteMenusCard: React.FC<FavoriteMenusCardProps> = (props) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingBottom: "1rem"
+                paddingLeft: "0.5rem",
+                paddingRight: "0.5rem",
+                paddingBottom: "0.5rem"
             }}>
-                <Typography style={{float: 'left', paddingLeft: '1rem'}}
+                <Typography style={{float: 'left'}}
                             fontWeight={"bold"} align={"left"}
                             variant={"h5"}
                             color={"text.secondary"}
                             gutterBottom>{props.title}</Typography>
                 <Link to={`${props.link}`}><Typography
-                    style={{color: 'orange', float: 'right', paddingRight: '1rem'}}
+                    style={{color: 'orange', float: 'right', paddingRight: '0.5rem'}}
                     fontWeight={"bold"} align={"left"}
                     variant={"subtitle2"}
                     color={"text.secondary"}
                     gutterBottom>더 보기</Typography></Link>
             </div>
-            <div style={{flexWrap: "nowrap"}}>
+            <div style={{flexWrap: "nowrap", transform: "-0.5rem, 0, 0"}}>
                 <FoodCardSlider foods={props.items}/>
             </div>
         </>

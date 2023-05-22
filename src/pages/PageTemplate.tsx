@@ -12,7 +12,6 @@ export const PageTemplate: FC<{ children: ReactNode, param: PageHeaderParam }> =
         function handleScroll() {
             const old = scroll.current
             scroll.current = window.scrollY
-            console.log(scroll.current)
             setState([old, scroll.current])
         }
 
@@ -25,7 +24,7 @@ export const PageTemplate: FC<{ children: ReactNode, param: PageHeaderParam }> =
         <>
             <div className="App container">
                 <PageHeader {...param}/>
-                <div style={{display: "flex", flexDirection: "column", paddingTop: "2vh", paddingBottom: "10vh"}}>
+                <div style={{display: "flex", flexDirection: "column", paddingTop: "1vh", paddingBottom: "10vh"}}>
                     {children}
                 </div>
                 <BottomNavigationGroup scroll={state} tab={BottomNavigationTab.APP}/>
@@ -42,7 +41,6 @@ export const SimpleTemplate: FC<{ children: ReactNode, param: SimpleHeaderParam 
         function handleScroll() {
             const old = scroll.current
             scroll.current = window.scrollY
-            console.log(scroll.current)
             setState([old, scroll.current])
         }
 
