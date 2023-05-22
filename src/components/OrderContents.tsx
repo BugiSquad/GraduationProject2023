@@ -1,18 +1,19 @@
-import {Box, Button, Card, Modal, TextField, Typography} from "@mui/material"
-import {PageCards} from "./PageCards"
+import { Box, Button, Card, Modal, TextField, Typography } from "@mui/material"
+import { PageCards } from "./PageCards"
 import naverpayImg from '../images/logo_naverpay.png'
 import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
-import {OrderProductsList} from "./OrderProductsList"
+import { OrderProductsList } from "./OrderProductsList"
 import completeImg from '../images/complete.png'
 
-import React, {useState} from "react"
-import {useNavigate} from "react-router-dom"
-import {useAppSelector} from "../store/hooks";
-import {CartItem} from "../types/CartItem";
-import {CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentType} from "../types/Order";
-import {createOrder} from "../api/Order";
-import {OrangeButton, WhiteButton} from "./styled/Buttons";
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAppSelector } from "../store/hooks";
+import { CartItem } from "../types/CartItem";
+import { CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentType } from "../types/Order";
+import { createOrder } from "../api/Order";
+import { OrangeButton, WhiteButton } from "./styled/Buttons";
+import { normalCard } from "./styled/Cards"
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -66,7 +67,7 @@ export const OrderContents: React.FC = () => {
                 paymentNum: "123123123123",
             },
             menuOrderItems: items.map((item, idx) => {
-                return {menuId: item.id, count: item.quantity} as OrderItem
+                return { menuId: item.id, count: item.quantity } as OrderItem
             })
         }
         createOrder(myOrder)
@@ -78,93 +79,109 @@ export const OrderContents: React.FC = () => {
         navigate('/mypage');
     }
     return (<>
-            <Card sx={{
-                minWidth: 200,
-                maxWidth: 1000,
-                padding: '15px 1',
-                margin: '10px',
-            }}>
+        <Card sx={{
+            minWidth: 200,
+            maxWidth: 1000,
+            padding: '15px 1',
+            margin: '10px',
+        }}>
 
 
-                <PageCards title="주문상품" content={<OrderProducts items={items}/>}/>
-                <PageCards title="주문자 정보" content={<OrderInfo/>}/>
-                <PageCards title="결제수단" content={<PayMethod method={method} setMethod={setMethod}/>}/>
+            <PageCards title="주문상품" content={<OrderProducts items={items} />} />
+            <PageCards title="주문자 정보" content={<OrderInfo />} />
+            <PageCards title="결제수단" content={<PayMethod method={method} setMethod={setMethod} />} />
 
-            </Card>
-            <div style={{display: "flex", flexDirection: 'row', justifyContent: "center"}}>
-                <Button disableElevation disableRipple onClick={handleOpen} sx={OrangeButton}>
-                    바로 주문
-                </Button>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
-                            주문이 완료되었습니다.
-                        </Typography>
-                        <img src={completeImg} style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            borderRadius: '1rem',
-                            paddingTop: "20px"
-                        }}/>
-                        <div style={{display: 'flex', flexDirection: "column", justifyContent: "space-between"}}>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                paddingTop: "20px",
-                                paddingLeft: "30px",
-                                paddingRight: "30px"
-                            }}>
+        </Card>
+        <div style={{ display: "flex", flexDirection: 'row', justifyContent: "center" }}>
+            <Button disableElevation disableRipple onClick={handleOpen} sx={OrangeButton}>
+                바로 주문
+            </Button>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
+                        주문이 완료되었습니다.
+                    </Typography>
+                    <img src={completeImg} style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        borderRadius: '1rem',
+                        paddingTop: "20px"
+                    }} />
+                    <div style={{ display: 'flex', flexDirection: "column", justifyContent: "space-between" }}>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            paddingTop: "20px",
+                            paddingLeft: "30px",
+                            paddingRight: "30px"
+                        }}>
 
-                                <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
-                                <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
-                            </div>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                paddingLeft: "30px",
-                                paddingRight: "30px"
-                            }}>
-
-                                <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
-                                <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
-                            </div>
-
+                            <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
+                            <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
                         </div>
-                        <Typography id="modal-modal-description" sx={{mt: 2}}>
-                        </Typography>
-                    </Box>
-                </Modal>
-                <Button disableElevation disableRipple sx={WhiteButton}>
-                    예약 주문
-                </Button>
-            </div>
-        </>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            paddingLeft: "30px",
+                            paddingRight: "30px"
+                        }}>
+
+                            <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
+                            <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
+                        </div>
+
+                    </div>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    </Typography>
+                </Box>
+            </Modal>
+            <Button disableElevation disableRipple sx={WhiteButton}>
+                예약 주문
+            </Button>
+        </div>
+    </>
 
 
     )
 }
 
 
-export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
-    return (<div style={{display: "flex", flexDirection: "column", width: "100%", alignItems: "center", margin:"10px"}}>
-            {items.map((item, idx) =>
-                <OrderProductsList name={item.name} quantity={item.quantity} price={item.quantity*item.price}/>
-            )}
-        </div>
+export const OrderProducts: React.FC<OrderProductsProps> = ({ items }) => {
+    const [totalPrice, setTotalPrice] = useState(0);
+    useEffect(() => {
+        // 각 음식의 가격을 계산하여 totalPrice에 누적
+        const calculateTotalPrice = () => {
+            let totalPrice = 0;
+            items.forEach((item) => {
+                const itemPrice = item.quantity * item.price;
+                totalPrice += itemPrice;
+            });
+            setTotalPrice(totalPrice);
+        };
+
+        calculateTotalPrice();
+    }, [items]);
+
+    return (<div style={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center", margin: "10px" }}>
+        {items.map((item, idx) =>
+            <OrderProductsList name={item.name} quantity={item.quantity} price={item.quantity * item.price} />,
+        )}
+            <Typography fontWeight={'bold'}>결제 금액 : {totalPrice}원</Typography>
+    </div>
     )
 }
 
 export const OrderInfo: React.FC = () => {
     return (
-        <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", width:"100%", margin:"10px"}}>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", width: "100%", margin: "10px" }}>
             <Typography fontSize={11} color="#FE724C">* 표시된 항목은 필수로 입력해야 합니다.</Typography>
             <TextField
                 size="small"
@@ -190,12 +207,12 @@ interface PayMethodProp {
 }
 
 const payment = [
-    {src: naverpayImg, type: PaymentType.NAVER_PAY},
-    {src: kakaopayImg, type: PaymentType.KAKAO_PAY},
-    {src: creditcardImg, type: PaymentType.CREDITCARD}
+    { src: naverpayImg, type: PaymentType.NAVER_PAY },
+    { src: kakaopayImg, type: PaymentType.KAKAO_PAY },
+    { src: creditcardImg, type: PaymentType.CREDITCARD }
 ]
 
-export const PayMethod: React.FC<PayMethodProp> = ({method, setMethod}) => {
+export const PayMethod: React.FC<PayMethodProp> = ({ method, setMethod }) => {
     const onClick = (type: PaymentType) => setMethod(type)
     return (
         <div style={{
@@ -204,11 +221,11 @@ export const PayMethod: React.FC<PayMethodProp> = ({method, setMethod}) => {
             {payment.map((item, idx) => {
                 return (
                     <Button disableElevation
-                            onClick={() => onClick(item.type)}
-                            sx={{borderRadius: '3rem', maxWidth: '100px', maxHeight: '30px', paddingRight: "10px"}}>
+                        onClick={() => onClick(item.type)}
+                        sx={{ borderRadius: '3rem', maxWidth: '100px', maxHeight: '30px', paddingRight: "10px" }}>
                         <img src={item.src}
-                             style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem'}}
-                             alt={item.type}/>
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }}
+                            alt={item.type} />
                     </Button>
                 )
             })}
@@ -216,7 +233,7 @@ export const PayMethod: React.FC<PayMethodProp> = ({method, setMethod}) => {
     )
 }
 
-const OnComplete: React.FC<{ isOpen: boolean, onClose: () => void }> = ({isOpen, onClose}) => {
+const OnComplete: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onClose }) => {
 
     return (<Modal
         open={isOpen}
@@ -234,8 +251,8 @@ const OnComplete: React.FC<{ isOpen: boolean, onClose: () => void }> = ({isOpen,
                 objectFit: 'cover',
                 borderRadius: '1rem',
                 paddingTop: "20px"
-            }}/>
-            <div style={{display: 'flex', flexDirection: "column", justifyContent: "space-between"}}>
+            }} />
+            <div style={{ display: 'flex', flexDirection: "column", justifyContent: "space-between" }}>
                 <div style={{
                     display: 'flex',
                     flexDirection: "row",
@@ -259,7 +276,7 @@ const OnComplete: React.FC<{ isOpen: boolean, onClose: () => void }> = ({isOpen,
                 </div>
 
             </div>
-            <Typography id="modal-modal-description" sx={{mt: 2}}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             </Typography>
         </Box>
     </Modal>)
