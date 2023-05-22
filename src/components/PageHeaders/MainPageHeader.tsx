@@ -33,8 +33,10 @@ export const MainPageHeader: React.FC<PageHeaderParam>
             </Badge>
             <Link to={"/app"} onClick={() => {
             }}><img src={logo} style={{paddingTop: "10px", width: '50%', height: '50%', objectFit: 'cover'}}/></Link>
-            {(getMyToken() !== "") ? <Link to={"/mypage"} onClick={() => {
-                }}><Avatar src={profilePic}></Avatar></Link> :
-                <Link to={"/login"} style={{color: "black", fontSize: "14px"}}>로그인하기</Link>}
+            <div style={{display: "inline-block", whiteSpace: "nowrap"}}>
+                {(getMyToken() !== "") ? <Link to={"/mypage"} onClick={() => {
+                    }}><Avatar src={profilePic}></Avatar></Link> :
+                    <Link to={"/login"} style={{color: "black", fontSize: "14px"}}>로그인</Link>}
+            </div>
         </div>)
 }

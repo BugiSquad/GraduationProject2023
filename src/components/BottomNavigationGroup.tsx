@@ -13,10 +13,11 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 
 interface BottomNavigationGroupProps {
     tab: BottomNavigationTab;
+    scroll: number[];
 }
 
 
-export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({tab}) => {
+export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({tab, scroll}) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
     const changeTab = (value: BottomNavigationTab) => {
@@ -47,16 +48,17 @@ export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({tab
     const onChange = (event: React.SyntheticEvent<Element, Event>, newValue: BottomNavigationTab) => changeTab(newValue)
 
 
-    return (<NavigationImpl2 idx={tab} onChange={changeTab}/>)
+    return (<NavigationImpl2 scroll={scroll} idx={tab} onChange={changeTab}/>)
 }
 
 interface tmp {
     idx: number;
     onChange: (newValue: BottomNavigationTab) => void;
+    scroll: number[];
 }
 
 
-export const NavigationImpl2: React.FC<tmp> = ({idx, onChange}) => {
+export const NavigationImpl2: React.FC<tmp> = ({idx, onChange, scroll}) => {
     const [lastClicked, setLastClick] = useState<number>(idx)
     const ary = [
         {text: "홈", icon: HomeIcon},
@@ -64,11 +66,14 @@ export const NavigationImpl2: React.FC<tmp> = ({idx, onChange}) => {
         {text: "메뉴", icon: RestaurantMenu},
         {text: "같이 먹기", icon: GroupsIcon},
         {text: "마이페이지", icon: PersonIcon},
-    ]
+    ];
 
+    let diff = 0;
+    if (scroll[1] - scroll[0] > 0) diff = 1;
+    else if (scroll[1] - scroll[0] <= 0) diff = -1;
     return (
-        <div className={'body'} style={{position: "fixed", bottom: "1vh", left: 0, right: '0'}}>
-            <div className={"navigation"}>
+        <div className={`navigation `} style={{position: "fixed", bottom: "0vh", left: 0, right: '0',}}>
+            <div className={`${diff > 0 && scroll[1] > 100 ? "scroll_down" : ""}`}>
                 <ul>
                     {ary.map((item, idx) => {
                         return (

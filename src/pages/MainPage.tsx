@@ -4,7 +4,6 @@ import {MenuItem} from "../types/MenuItem";
 import '../App.css'
 import {Paper, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-
 import data from '../data/SampleFood.json'
 import noodleImage from '../images/foodCategory/noodles.png';
 import soupImage from '../images/foodCategory/soup.png';
@@ -81,10 +80,14 @@ const MainCategories: React.FC = () => {
                 paddingRight: "1rem",
                 paddingBottom: "1rem"
             }}>
-                <Link to={"/menu/noodle"}><MainCategory category={"면류"} img={noodleImage}/></Link>
-                <Link to={"/menu/stew"}><MainCategory category={"찌개류"} img={soupImage}/></Link>
-                <Link to={"/menu/korean_food"}> <MainCategory category={"한식"} img={mixedRiceImage}/></Link>
-                <Link to={"/menu/japan_food"}> <MainCategory category={"일식"} img={bowlRiceImage}/></Link>
+                <Link style={{textDecoration: "none", color: "black"}} to={"/menu/noodle"}><MainCategory category={"면류"}
+                                                                                                         img={noodleImage}/></Link>
+                <Link style={{textDecoration: "none", color: "black"}} to={"/menu/stew"}><MainCategory category={"찌개류"}
+                                                                                                       img={soupImage}/></Link>
+                <Link style={{textDecoration: "none", color: "black"}} to={"/menu/korean_food"}> <MainCategory
+                    category={"한식"} img={mixedRiceImage}/></Link>
+                <Link style={{textDecoration: "none", color: "black"}} to={"/menu/japan_food"}> <MainCategory
+                    category={"일식"} img={bowlRiceImage}/></Link>
             </div>
         </>
     )
