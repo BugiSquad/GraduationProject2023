@@ -1,6 +1,6 @@
 import React from "react";
 import {SimpleTemplate} from "./PageTemplate";
-import {Button} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {RecentOrders} from "../components/RecentOrders";
 import {MypageCards} from "../components/MypageCards";
 import {RecentMeets} from "../components/RecentMeets";
@@ -24,13 +24,22 @@ export const Mypage: React.FC = () => {
             <SimpleTemplate param={{pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE}}>
                 <div style={{
                     display: "flex",
-                    flexDirection: "row",
+                    height: "60vh",
                     alignItems: "center",
-                    marginRight: "10px",
-                    height: "80%"
+                    flexDirection: "column",
+                    justifyContent: "center",
                 }}>
-                    <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
-                            onClick={() => navigate('/login')}>로그인 하러가기 </Button>
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        alignContent: "center",
+                        marginRight: "10px",
+                    }}>
+                        <Typography variant={"caption"}> 로그인하여 더 많은 기능과 옵션을 이용해보세요.</Typography>
+                        <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
+                                onClick={() => navigate('/login')}>로그인하기</Button>
+                    </div>
                 </div>
             </SimpleTemplate>)
     else

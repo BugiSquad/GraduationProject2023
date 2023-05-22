@@ -69,7 +69,7 @@ const MenuBody: React.FC<{ category: MenuCategory }> = (props) => {
         })
     }
 
-    return (<div>
+    return (<div style={{paddingLeft: "1rem",}}>
         <RadioBarItem setIndex={setIdx} index={idx} names={names}/>
         <MenuCardSlider foods={[...menus]}></MenuCardSlider>
     </div>)

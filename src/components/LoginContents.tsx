@@ -1,11 +1,13 @@
 import {Visibility, VisibilityOff} from "@mui/icons-material"
 import {
+    Alert,
     Button,
     FormControl,
     IconButton,
     InputAdornment,
     InputLabel,
     OutlinedInput,
+    Snackbar,
     TextField,
     Typography
 } from "@mui/material"
@@ -21,6 +23,15 @@ export const LoginContents: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -42,15 +53,18 @@ export const LoginContents: React.FC = () => {
             if (info.accessToken != '') {
                 console.log("logged in.");
                 setIsLoggedIn(true);
-                alert("로그인에 성공하였습니다.");
                 navigate("/app");
             } else {
-                alert("부적절한 접근입니다. 다시 시도해주세요.");
+                // alert("부적절한 접근입니다. 다시 시도해주세요.");
+                setOpen(true)
             }
             setMyInfo(info)
             let storedInfo = getMyInfo()
             console.log(`로그인 했습니다. ${JSON.stringify(storedInfo)} `)
-        }).catch(err => console.error(err))
+        }).catch(err => {
+            console.error(err)
+            setOpen(true)
+        })
     };
 
     return (
@@ -99,6 +113,12 @@ export const LoginContents: React.FC = () => {
             </div>
             <Button disableElevation sx={{padding: "10px"}}>
                 아이디 / 비밀번호를 잊으셨나요? </Button>
+            <Snackbar anchorOrigin={{vertical: "bottom", horizontal: "center"}} open={open} autoHideDuration={1500}
+                      onClose={handleClose}>
+                <Alert severity="error" sx={{width: '100%'}}>
+                    아이디 또는 비밀번호가 일치하지 않습니다.
+                </Alert>
+            </Snackbar>
         </>
     )
 } 

@@ -39,7 +39,7 @@ const Content: React.FC = () => {
             return;
         };
     return (<>
-        <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
+        <div style={{display: "flex", flexDirection: "column", width: "100%", paddingLeft: '0.75rem'}}>
             <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
                 <div style={{display: "inherit", alignItems: "center"}}>
                     <Typography variant={"body1"} fontWeight={"bold"}>같이 먹어요!</Typography>

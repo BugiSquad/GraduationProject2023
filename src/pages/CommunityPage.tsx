@@ -28,11 +28,11 @@ const Content: React.FC = () => {
             setVoteItems(content)
         })
     }, [])
-    return (<>
+    return (<div style={{paddingLeft: '0.5rem', paddingRight: '0.5rem'}}>
         <BoardCard title={"공지사항"}
                    content={<NoticeMain noticeItems={noticeItems}></NoticeMain>} link={""}/>
         <BoardCard title={"투표"} content={<VoteMain items={voteItems}></VoteMain>} link={""}/>
-    </>)
+    </div>)
 }
 
 
