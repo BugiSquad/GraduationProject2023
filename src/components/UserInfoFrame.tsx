@@ -247,15 +247,16 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                         }}/>
                     </FormGridChild>
                     <FormGridChild item xs={4}>
-
                         <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
-                            {isEdit ? "수정하기" : "회원가입하기"}
+                            {isEdit ? "수정" : "가입"}
                         </Button>
                     </FormGridChild>
                     <FormGridChild item xs={4}>
                         <Linkto to="/login"><Button disableElevation disableRipple sx={WhiteButton}>
                             취소
                         </Button></Linkto>
+                    </FormGridChild>
+                    <FormGridChild item xs={4}>
                         <Button onClick={onSubmit} sx={WhiteButton}>사진 제출</Button>
                     </FormGridChild>
                 </Grid>

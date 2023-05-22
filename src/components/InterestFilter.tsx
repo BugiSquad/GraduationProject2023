@@ -10,7 +10,7 @@ export interface InterestOptionType {
 }
 
 const Interests = [
-  {key: 'pubg', label: '배그'},
+  {key: 'pbug', label: '배그'},
   {key: 'lol', label: '롤'},
   {key: 'celebrity', label: '연예인'},
   {key: 'coffee', label: '커피'},
