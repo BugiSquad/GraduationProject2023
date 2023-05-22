@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import defaultImage from "../images/default.png";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
     Autocomplete,
     Button,
@@ -12,16 +12,16 @@ import {
     TextField,
     Typography
 } from "@mui/material"
-import {Form, Link as Linkto} from "react-router-dom";
+import { Form, Link as Linkto } from "react-router-dom";
 import 'react-datepicker/dist/react-datepicker.css';
 
-import {FormGridChild} from "./styled/FormGrid";
-import {InterestFilter, InterestOptionType} from "./InterestFilter";
-import {OrangeButton, WhiteButton} from "./styled/Buttons";
+import { FormGridChild } from "./styled/FormGrid";
+import { InterestFilter, InterestOptionType } from "./InterestFilter";
+import { OrangeButton, WhiteButton } from "./styled/Buttons";
 import axios from "axios";
-import {getMyToken} from "../api/Common";
-import {requestMemberSignUp} from "../api/Member";
-import {Gender, Interest, MemberType} from "../types/MemberDto";
+import { getMyToken } from "../api/Common";
+import { requestMemberSignUp } from "../api/Member";
+import { Gender, Interest, MemberType } from "../types/MemberDto";
 
 
 export interface UserInfoFrameProps {
@@ -32,15 +32,15 @@ export interface UserInfoFrameProps {
 }
 
 const Departments = [
-    {label: '한국어문학부'},
-    {label: '역사문화학부'},
-    {label: '영어영문학부'},
-    {label: '지식정보학부'},
-    {label: '컴퓨터공학과'},
-    {label: 'IT응용시스템공학과'},
-    {label: '산업경영공학과'},
-    {label: '기계시스템공학과'},
-    {label: '전자정보공학과'},
+    { label: '한국어문학부' },
+    { label: '역사문화학부' },
+    { label: '영어영문학부' },
+    { label: '지식정보학부' },
+    { label: '컴퓨터공학과' },
+    { label: 'IT응용시스템공학과' },
+    { label: '산업경영공학과' },
+    { label: '기계시스템공학과' },
+    { label: '전자정보공학과' },
 ]
 
 interface UserInfo {
@@ -55,7 +55,7 @@ interface UserInfo {
     interests: InterestOptionType[],
 }
 
-export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isEdit}) => {
+export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({ userprofilePic, isEdit }) => {
     const [profilePic, setProfilePic] = useState<string | null>(
         userprofilePic
     );
@@ -90,7 +90,7 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
             console.log("파일이 비어있습니다.");
             const formData = new FormData();
             formData.append('file', profilePic);
-            axios.post('https://api.bugisquad.link/api/s3', formData, {headers: {accessToken: getMyToken()}}).then((res) => {
+            axios.post('https://api.bugisquad.link/api/s3', formData, { headers: { accessToken: getMyToken() } }).then((res) => {
                 console.log(res)
             }).catch((err) => console.error(err))
             // return;
@@ -106,22 +106,25 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
             console.log(res)
         }).catch((err) => console.error(err))
     }
+    const handleRemoveImg = () => {
+        setProfilePic(defaultImage);
+    }
     return (
         <>
             <Form onSubmit={onSubmit}>
-                <div style={{paddingTop: "20px"}}>
+                <div style={{ paddingTop: "20px" }}>
                     <img
                         src={profilePic || defaultImage}
                         alt="프로필 사진"
-                        style={{width: 120, height: 120, borderRadius: "40%"}}
+                        style={{ width: 130, height: 120, borderRadius: "35%" }}
                     />
                 </div>
 
 
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "center", paddingTop: "10px"}}>
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", paddingTop: "10px" }}>
                     <Link
                         component="label"
-                        sx={{color: "grey", fontSize: "13px"}}
+                        sx={{ color: "grey", fontSize: "13px" }}
                     >
                         {isEdit ? "사진 수정하기 " : "사진 추가하기 "}
                         <input
@@ -130,7 +133,8 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                             hidden
                         />
                     </Link>
-                    <Link sx={{color: "grey", fontSize: "13px"}}
+                    <Link sx={{ color: "grey", fontSize: "13px" }}
+                    onClick={handleRemoveImg}
                     >
                         / 삭제하기
                     </Link>
@@ -143,9 +147,9 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                             minWidth: "40px",
                         }}>이메일＊</Typography>
                         <TextField size="small" type={"email"} required
-                                   variant="standard" value={userInfo.email} onChange={(event) => {
-                            setInfo({...userInfo, email: event.target.value})
-                        }} color="warning"/>
+                            variant="standard" value={userInfo.email} onChange={(event) => {
+                                setInfo({ ...userInfo, email: event.target.value })
+                            }} color="warning" />
                     </FormGridChild>
                     <FormGridChild item xs={4}>
                         {isEdit ? false :
@@ -155,110 +159,104 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                         }
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>닉네임</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', }}>닉네임</Typography>
                         <TextField required variant="standard"
-                                   color="warning" value={userInfo.nickname}
-                                   onChange={(event) => {
-                                       setInfo({...userInfo, nickname: event.target.value})
-                                   }}
+                            color="warning" value={userInfo.nickname}
+                            onChange={(event) => {
+                                setInfo({ ...userInfo, nickname: event.target.value })
+                            }}
                         />
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold'}}>학번*</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>학번*</Typography>
                         <TextField required variant="standard"
-                                   type={"number"}
-                                   color="warning" value={userInfo.studentId}
-                                   onChange={(event) => {
-                                       setInfo({...userInfo, studentId: Number(event.target.value)})
-                                   }}
+                            type={"number"}
+                            color="warning" value={userInfo.studentId}
+                            onChange={(event) => {
+                                setInfo({ ...userInfo, studentId: Number(event.target.value) })
+                            }}
                         />
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>새 비밀번호＊</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', }}>새 비밀번호＊</Typography>
                         <FormControl variant="standard">
                             <Input required
-                                   type={showPassword ? 'text' : 'password'}
-                                   color="warning"
-                                   endAdornment={
-                                       <InputAdornment position="end">
-                                           <Button disableElevation disableRipple sx={{color: "grey"}}
-                                                   aria-label="toggle password visibility"
-                                                   onClick={handleClickShowPassword}
-                                                   onMouseDown={handleMouseDownPassword}
-                                           >
-                                               {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                           </Button>
-                                       </InputAdornment>
-                                   }
-                                   value={userInfo.password}
-                                   onChange={(event) => setInfo({...userInfo, password: event.target.value})}
+                                type={showPassword ? 'text' : 'password'}
+                                color="warning"
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <Button disableElevation disableRipple sx={{ color: "grey" }}
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </Button>
+                                    </InputAdornment>
+                                }
+                                value={userInfo.password}
+                                onChange={(event) => setInfo({ ...userInfo, password: event.target.value })}
                             />
                         </FormControl>
                     </FormGridChild>
                     <FormGridChild item xs={12}>
 
-                        <Typography variant="body1" sx={{fontWeight: 'bold'}}>새 비밀번호
+                        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>새 비밀번호
 
                             확인＊</Typography>
                         <FormControl variant="standard">
                             <Input required
-                                   type={showPassword ? 'text' : 'password'}
-                                   color="warning"
-                                   endAdornment={
-                                       <InputAdornment position="end">
-                                           <Button disableElevation disableRipple sx={{color: "grey"}}
-                                                   aria-label="toggle password visibility"
-                                                   onClick={handleClickShowPassword}
-                                                   onMouseDown={handleMouseDownPassword}
-                                           >
-                                               {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                           </Button>
-                                       </InputAdornment>
-                                   }
-                                   value={userInfo.testPassword}
-                                   onChange={(e) => {
-                                       setInfo({...userInfo, testPassword: e.target.value})
-                                   }}
+                                type={showPassword ? 'text' : 'password'}
+                                color="warning"
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <Button disableElevation disableRipple sx={{ color: "grey" }}
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </Button>
+                                    </InputAdornment>
+                                }
+                                value={userInfo.testPassword}
+                                onChange={(e) => {
+                                    setInfo({ ...userInfo, testPassword: e.target.value })
+                                }}
                             />
                         </FormControl>
                     </FormGridChild>
                     <FormGridChild item xs={12}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>학과＊</Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', }}>학과＊</Typography>
                         <Autocomplete
                             disablePortal
                             options={Departments}
                             onChange={(e, v) => {
                                 if (v == null) return;
-                                setInfo({...userInfo, department: v.label})
+                                setInfo({ ...userInfo, department: v.label })
                             }}
                             renderInput={(params) => (
-                                <TextField required {...params} variant="standard" color="warning"/>
+                                <TextField required {...params} variant="standard" color="warning" />
                             )}
                         />
                     </FormGridChild>
                     <FormGridChild item xs={5}>
-                        <InterestFilter setSelectedInterests={setInterests} selectedInterests={interests}/>
+                        <InterestFilter setSelectedInterests={setInterests} selectedInterests={interests} />
                     </FormGridChild>
                     <FormGridChild item xs={12}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold', minWidth: "40px"}}>전화번호＊</Typography>
-                        <TextField required sx={{minWidth: "265px", paddingRight: "20px"}} variant="standard"
-                                   color="warning" value={userInfo.phone} onChange={(e) => {
-                            setInfo({...userInfo, phone: e.target.value})
-                        }}/>
+                        <Typography variant="body1" sx={{ fontWeight: 'bold', minWidth: "40px" }}>전화번호＊</Typography>
+                        <TextField required sx={{ minWidth: "265px", paddingRight: "20px" }} variant="standard"
+                            color="warning" value={userInfo.phone} onChange={(e) => {
+                                setInfo({ ...userInfo, phone: e.target.value })
+                            }} />
                     </FormGridChild>
-                    <FormGridChild item xs={4}>
-                        <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
-                            {isEdit ? "수정" : "가입"}
-                        </Button>
-                    </FormGridChild>
-                    <FormGridChild item xs={4}>
-                        <Linkto to="/login"><Button disableElevation disableRipple sx={WhiteButton}>
-                            취소
-                        </Button></Linkto>
-                    </FormGridChild>
-                    <FormGridChild item xs={4}>
-                        <Button onClick={onSubmit} sx={WhiteButton}>사진 제출</Button>
-                    </FormGridChild>
+                    <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
+                        {isEdit ? "수정" : "가입"}
+                    </Button>
+                    <Linkto to="/login"><Button disableElevation disableRipple sx={WhiteButton}>
+                        취소
+                    </Button></Linkto>
+                    <Button onClick={onSubmit} sx={WhiteButton}>사진 제출</Button>
                 </Grid>
             </Form>
         </>
