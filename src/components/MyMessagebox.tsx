@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
-import {MyMessage} from "./MyMessage";
-import {GroupType} from "../types/PostDto";
-import {getMyNoteRoom} from "../api/NoteRoom";
-import {Typography} from "@mui/material";
-import {normalTypography} from "./styled/Text";
+import React, { useEffect, useState } from "react";
+import { MyMessage } from "./MyMessage";
+import { GroupType } from "../types/PostDto";
+import { getMyNoteRoom } from "../api/NoteRoom";
+import { Typography } from "@mui/material";
+import { normalTypography } from "./styled/Text";
 
 interface NoteInfo {
     postId: number;
@@ -52,7 +52,7 @@ export const MyMessagebox: React.FC = () => {
         })
     }, [])
     return (
-        <div>
+        <div style={{width:"100%"}}>
             {
                 noteRooms.length === 0 ?
                     <Typography sx={normalTypography} color={"lightgrey"}>
@@ -62,6 +62,6 @@ export const MyMessagebox: React.FC = () => {
                                    isGroup={value.groupType === GroupType.ORGANIZATION}
                                    msgLinkTo={`/mypage/message/${value.noteRoomId}`}/>)
             }
-        </div>
+                </div>
     )
 }
