@@ -156,7 +156,7 @@ export const OrderContents: React.FC = () => {
 export const OrderProducts: React.FC<OrderProductsProps> = ({items}) => {
     return (<div style={{display: "flex", flexDirection: "column", width: "100%", alignItems: "center", margin:"10px"}}>
             {items.map((item, idx) =>
-                <OrderProductsList name={item.name} quantity={item.quantity} price={item.price}/>
+                <OrderProductsList name={item.name} quantity={item.quantity} price={item.quantity*item.price}/>
             )}
         </div>
     )

@@ -35,20 +35,23 @@ interface CartItems {
 }
 
 
+
 export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
     
-    const [count, setCount] = useState<number>(1);
+    const [count, setCount] = useState<number>(props.food.quantity);
 
     const navigate = useNavigate();
     
     const handleDecrement = () => {
         if (count > 0) {
             setCount(count - 1);
+            props.food.quantity--;
         }
     };
 
     const handleIncrement = () => {
         setCount(count + 1);
+        props.food.quantity++;
     };
     return (
         <Button disableRipple style={menuCard} onClick={() => {
