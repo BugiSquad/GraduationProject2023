@@ -18,7 +18,6 @@ export const SimpleHeader: React.FC<SimpleHeaderParam>
             <Typography variant={"h6"} fontWeight={'bold'}>
                 <Button onClick={handleGoBack} disableElevation sx={{justifyContent: "flex-start"}}>
                     <ArrowBackIosNewIcon sx={{color: '#FE724C'}}/></Button> {param.pageHeaderName}</Typography>
-
             </div>
         )
     }

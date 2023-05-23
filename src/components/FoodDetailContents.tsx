@@ -9,7 +9,7 @@ import {CartItem} from "../types/CartItem";
 import {useNavigate} from "react-router-dom";
 import {ReviewBar} from "./ReviewBar";
 import {ReviewList} from "./ReviwList";
-import { StorageType, getFoodsWith, removeFoodFromStorage, saveFoodToStorage } from "../store/LocalStorage";
+import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} from "../store/LocalStorage";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
@@ -56,7 +56,8 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food }) 
               disableElevation
               disableRipple
               sx={{
-                color: liked ? 'pink' : 'black',
+                  translate: "0 0.5vh 0",
+                  color: liked ? 'pink' : 'black',
               }}
               onClick={(event) => {
                 event.stopPropagation();

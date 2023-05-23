@@ -22,6 +22,7 @@ import {getFoodsWith, StorageType} from "../store/LocalStorage";
 import {checkNotificationSupported, checkPermission} from "../api/Notification";
 import {RequestPermission} from "../components/RequestPermission";
 
+
 const foods: MenuItem[] = data
 
 export const MainPage: React.FC = () => {
@@ -153,7 +154,7 @@ const FavoriteMenusCard: React.FC<FavoriteMenusCardProps> = (props) => {
                     color={"text.secondary"}
                     gutterBottom>더 보기</Typography></Link>
             </div>
-            <div style={{flexWrap: "nowrap", transform: "-0.5rem, 0, 0"}}>
+            <div style={{flexWrap: "nowrap", transform: "-0.3rem, 0, 0"}}>
                 <FoodCardSlider foods={props.items}/>
             </div>
         </>

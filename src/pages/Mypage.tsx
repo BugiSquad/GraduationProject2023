@@ -10,7 +10,7 @@ import {OrangeButton} from "../components/styled/Buttons";
 import {removeMyInfo} from "../api/Member";
 import {getMyToken} from "../api/Common";
 import {useNavigate} from "react-router-dom";
-import { LikedMenuContents } from "../components/LikedMenuContents";
+import {LikedMenuContents} from "../components/LikedMenuContents";
 
 
 export const Mypage: React.FC = () => {
@@ -18,6 +18,7 @@ export const Mypage: React.FC = () => {
 
     const handleLogout = () => {
         removeMyInfo();
+        navigate("/app")
     };
     if (getMyToken() === "")
         return (
@@ -61,9 +62,9 @@ export const Mypage: React.FC = () => {
                 추후에 구현하는 것으로 변경
                 <MypageCards title="나의 모임" content={<MyMeetings />} link="/mypage/mymeetingsdetail" />*/}
                 <MypageCards title="나의 쪽지함" content={<MyMessagebox/>} link="/mypage/mymessagedetail"/>
-                <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents />} link="/likedmenu"/>
+                <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents flag={true}/>} link="/likedmenu"/>
                 <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
-                            onClick={handleLogout}>로그아웃하기 </Button>
+                        onClick={handleLogout}>로그아웃하기 </Button>
             </SimpleTemplate>
         )
 }
