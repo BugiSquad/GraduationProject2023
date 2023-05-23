@@ -7,15 +7,21 @@ self.addEventListener('activate', function (event) {
 });
 
 self.addEventListener('push', function (event) {
-    const data = event.data.json(); // 푸시 메시지의 데이터를 추출
+    const data = JSON.parse(event.data.text()); // 푸시 메시지의 데이터를 추출
+    const obj = ({
+        "title": data.title,
+        "orderId": data.orderId,
+        "itemName": data.itemName
+    });
     const options = {
-        body: `${JSON.stringify(data)}`, // 푸시 메시지 내용
+        title: `${"음식이 완성되었습니다."}`, // 푸시 메시지 내용
+        body: `${obj.itemName}`, // 푸시 메시지 내용
         // icon: 'icon.png', // 알림 아이콘 URL
         // 기타 옵션들...
     };
 
     event.waitUntil(
-        self.registration.showNotification("빈 제목", options)
+        self.registration.showNotification(obj.title, options)
     );
 })
 
