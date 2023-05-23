@@ -3,6 +3,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import {styled} from '@mui/material/styles';
 import {autocompleteClasses} from '@mui/material/Autocomplete';
+import { Typography } from '@mui/material';
 
 export interface InterestOptionType {
   label: string;
@@ -71,8 +72,8 @@ export const InterestFilter: React.FC<InterestFilterProps> = ({selectedInterests
   console.log({ selectedInterests });
   return (
     <Root>
-      <div  {...getRootProps()}>
-        관심사를 골라주세요!
+      <div  {...getRootProps()} style={{width:"100%"}}>
+        <Typography fontWeight={'bold'}>🔍관심사를 골라주세요! </Typography>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
           {selectedInterests.map((option: InterestOptionType, index: number) => (
               <StyledTag label={option.label}  {...getTagProps({index})} key={index}/>

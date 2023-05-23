@@ -31,7 +31,7 @@ export interface UserInfoFrameProps {
     isEdit: Boolean;
 }
 
-const Departments = [
+export const Departments = [
     { label: '한국어문학부' },
     { label: '역사문화학부' },
     { label: '영어영문학부' },
@@ -43,7 +43,7 @@ const Departments = [
     { label: '전자정보공학과' },
 ]
 
-interface UserInfo {
+export interface UserInfo {
     nickname: string,
     password: string,
     studentId: number,
