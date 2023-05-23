@@ -137,9 +137,6 @@ export const OrderContents: React.FC = () => {
                     </Typography>
                 </Box>
             </Modal>
-            <Button disableElevation disableRipple sx={WhiteButton}>
-                예약 주문
-            </Button>
         </div>
     </>
 
@@ -213,15 +210,33 @@ export const PayMethod: React.FC<PayMethodProp> = ({ method, setMethod }) => {
             justifyContent: 'space-between',
         }}>
             {payment.map((item, idx) => {
+                const isSelected = item.type === method; // 현재 선택된 버튼인지 확인
+
                 return (
-                    <Button disableElevation
+                    <Button
+                        disableRipple
+                        disableElevation
                         onClick={() => onClick(item.type)}
-                        sx={{ borderRadius: '3rem', maxWidth: '100px', maxHeight: '30px', paddingRight: "10px" }}>
-                        <img src={item.src}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }}
-                            alt={item.type} />
+                        sx={{
+                            borderRadius: '3rem',
+                            maxWidth: '100px',
+                            maxHeight: '30px',
+                            paddingRight: "10px",
+                            border: isSelected ? '2px solid blue' : 'none', // 선택된 버튼에 테두리 적용
+                        }}
+                    >
+                        <img
+                            src={item.src}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                borderRadius: '1rem',
+                            }}
+                            alt={item.type}
+                        />
                     </Button>
-                )
+                );
             })}
         </div>
     )
