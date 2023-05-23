@@ -7,6 +7,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import {getNoticeFromRemote, NoticeInformation} from "../api/Notice";
 import {getVoteItemsFromRemote, takeANewMenuVote, VoteItem} from "../api/Vote";
 import { normalCard } from "../components/styled/Cards";
+import { PageCards } from "../components/PageCards";
 
 export const CommunityPage: React.FC = () => {
     return (
@@ -30,9 +31,9 @@ const Content: React.FC = () => {
         })
     }, [])
     return (<div style={{paddingLeft: '0.5rem', paddingRight: '0.5rem'}}>
-        <BoardCard title={"공지사항"}
-                   content={<NoticeMain noticeItems={noticeItems}></NoticeMain>} link={""}/>
-        <BoardCard title={"투표"} content={<VoteMain items={voteItems}></VoteMain>} link={""}/>
+        <PageCards title={"공지사항"}
+                   content={<NoticeMain noticeItems={noticeItems}></NoticeMain>} />
+        <PageCards title={"투표"} content={<VoteMain items={voteItems}></VoteMain>} />
     </div>)
 }
 
