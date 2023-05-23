@@ -3,28 +3,28 @@ export enum Permission {
 }
 
 export const checkPermission = () => {
+    if (!checkNotificationSupported()) return false;
     return Notification.permission === Permission.GRANTED
 }
 
 export const checkNotificationSupported = () => {
-    return "Notification" in window
+    return typeof Notification !== 'undefined';
 }
 
 export function requestPermission() {
-    if (checkNotificationSupported() && !checkPermission()) { // 브라우저에서 Notification API를 지원하는 경우
+    if (!checkNotificationSupported()) return false;
+    if (!checkPermission()) { // 브라우저에서 Notification API를 지원하는 경우
         return Notification.requestPermission().then((permission) => {
             alert("good" + permission)
             new Notification("알림이 도착했습니다!");
-            return new Promise<boolean>(() => true);
+            return true;
         }).catch((error) => {
             console.error("error" + error)
-            return new Promise<boolean>(() => false);
+            return false;
         });
     } else {
-        console.error("이 브라우저는 푸시알림을 지원하지 않습니다.")
-        return new Promise<boolean>(() => false);
+        return true;
     }
-
 }
 
 export function registerWorker() {
@@ -35,17 +35,14 @@ export function registerWorker() {
 }
 
 export function subscribePushService() {
-    return registerWorker().then(res => {
-        res.pushManager.subscribe({
+    return registerWorker().then(async res => {
+        const subscription = await res.pushManager.subscribe({
                 applicationServerKey: getServiceKey(),
                 userVisibleOnly: true,
             }
-        ).then((res) => {
-                console.log(res)
-                alert("서비스 등록 성공했습니다.")
-                alert(JSON.stringify(res.toJSON()))
-            }
-        ).catch((err) => alert("서비스 등록 실패했습니다."))
+        );
+        alert(JSON.stringify(subscription.toJSON()))
+        return subscription;
     })
 }
 

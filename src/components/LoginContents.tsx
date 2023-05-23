@@ -29,7 +29,6 @@ export const LoginContents: React.FC = () => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 
@@ -48,20 +47,21 @@ export const LoginContents: React.FC = () => {
     };
 
     const handleLogin = () => {
-        requestMemberSignIn({email: email, password: password}).then((res) => {
-            let info = {accessToken: res.data.data} as MyInfo
-            if (info.accessToken != '') {
-                console.log("logged in.");
-                setIsLoggedIn(true);
-                navigate("/app");
-            } else {
-                // alert("부적절한 접근입니다. 다시 시도해주세요.");
-                setOpen(true)
-            }
-            setMyInfo(info)
-            let storedInfo = getMyInfo()
-            console.log(`로그인 했습니다. ${JSON.stringify(storedInfo)} `)
-        }).catch(err => {
+        requestMemberSignIn({email: email, password: password}).then(
+            (res) => {
+                let info = {accessToken: res.data.data} as MyInfo
+                if (info.accessToken !== '') {
+                    console.log("logged in.");
+                    setIsLoggedIn(true);
+                    navigate("/app");
+                } else {
+                    // alert("부적절한 접근입니다. 다시 시도해주세요.");
+                    setOpen(true)
+                }
+                setMyInfo(info)
+                let storedInfo = getMyInfo()
+                console.log(`로그인 했습니다. ${JSON.stringify(storedInfo)} `)
+            }).catch(err => {
             console.error(err)
             setOpen(true)
         })
