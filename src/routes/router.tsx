@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
     ...routes,
     {
         path: "/",
-        element: <APITest/>,
+        element: <App/>,
         errorElement: <ErrorPage/>,
     },
     {
