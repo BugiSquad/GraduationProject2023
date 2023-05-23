@@ -1,9 +1,9 @@
 import React from 'react';
 import {getFoodsWith, StorageType} from '../store/LocalStorage';
 import {CartItem as Item} from '../types/CartItem';
-import {CartItem} from './Cart';
 import {Typography} from "@mui/material";
 import {normalTypography} from "./styled/Text";
+import {CartItemMenu} from "./Cart";
 
 
 export const LikedMenuContents: React.FC<{ flag: boolean }> = (props) => {
@@ -18,7 +18,7 @@ export const LikedMenuContents: React.FC<{ flag: boolean }> = (props) => {
     return (
         <div style={{display: "flex", width: "100%", flexDirection: "column"}}>
             {likedFoods.map((food: Item, index: number) => (
-                <CartItem key={index} food={food}/>
+                <CartItemMenu key={index} food={food}/>
             ))}
         </div>
     );
