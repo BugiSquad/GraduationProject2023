@@ -4,6 +4,7 @@ import {MenuItem} from "../types/MenuItem";
 import {useAppSelector} from "../store/hooks";
 import {useNavigate} from "react-router-dom";
 import {OrangeButton} from "./styled/Buttons";
+import { CartItem } from "../types/CartItem";
 
 export const CartPriceDetail: React.FC = () => {
     const cart = useAppSelector((state) => state.cart)
@@ -34,9 +35,9 @@ export const CartPriceDetail: React.FC = () => {
         </div>)
 }
 
-function getTotalPriceOf(cartItem: MenuItem[]) {
+function getTotalPriceOf(cartItem: CartItem[]) {
     const price = cartItem.map((item) => {
-        return item.price
+        return item.price*item.quantity
     })
     return price.reduce((acc, value) => {
         return acc + value

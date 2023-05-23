@@ -79,19 +79,13 @@ export const OrderContents: React.FC = () => {
         navigate('/mypage');
     }
     return (<>
-        <Card sx={{
-            minWidth: 200,
-            maxWidth: 1000,
-            padding: '15px 1',
-            margin: '10px',
-        }}>
 
 
-            <PageCards title="주문상품" content={<OrderProducts items={items} />} />
-            <PageCards title="주문자 정보" content={<OrderInfo />} />
-            <PageCards title="결제수단" content={<PayMethod method={method} setMethod={setMethod} />} />
 
-        </Card>
+        <PageCards title="주문상품" content={<OrderProducts items={items} />} />
+        <PageCards title="주문자 정보" content={<OrderInfo />} />
+        <PageCards title="결제수단" content={<PayMethod method={method} setMethod={setMethod} />} />
+
         <div style={{ display: "flex", flexDirection: 'row', justifyContent: "center" }}>
             <Button disableElevation disableRipple onClick={handleOpen} sx={OrangeButton}>
                 바로 주문
@@ -174,7 +168,7 @@ export const OrderProducts: React.FC<OrderProductsProps> = ({ items }) => {
         {items.map((item, idx) =>
             <OrderProductsList name={item.name} quantity={item.quantity} price={item.quantity * item.price} />,
         )}
-            <Typography fontWeight={'bold'}>결제 금액 : {totalPrice}원</Typography>
+        <Typography fontWeight={'bold'}>결제 금액 : {totalPrice}원</Typography>
     </div>
     )
 }
