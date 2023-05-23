@@ -11,7 +11,7 @@ export const CartPriceDetail: React.FC = () => {
     return (
         <div>
             {cart.item.length > 0 ? <Card sx={{padding: "10px", margin: "10px"}}>
-                <Button sx={OrangeButton} style={{borderRadius: "0.3rem", padding: "10px", width: "300px"}}
+                <Button disableElevation sx={OrangeButton} style={{borderRadius: "0.3rem", padding: "10px", width: "300px"}}
                         onClick={() => {
                             navigate("/order")
                         }}

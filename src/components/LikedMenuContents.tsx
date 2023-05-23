@@ -5,6 +5,7 @@ import {CartItem} from './Cart';
 import {Typography} from "@mui/material";
 import {normalTypography} from "./styled/Text";
 
+
 export const LikedMenuContents: React.FC<{ flag: boolean }> = (props) => {
     let likedFoods: Item[] = getFoodsWith(StorageType.FAVORITE);
     if (props.flag && likedFoods.length > 3) likedFoods = likedFoods.slice(0, 3);

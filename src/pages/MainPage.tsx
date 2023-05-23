@@ -19,31 +19,55 @@ import Banner2 from '../images/banner2.png';
 import Banner3 from '../images/banner3.png';
 import {getPopularMenuFromRemote} from "../api/Favor";
 import {getFoodsWith, StorageType} from "../store/LocalStorage";
+import {checkNotificationSupported, checkPermission} from "../api/Notification";
+import {RequestPermission} from "../components/RequestPermission";
+
 
 const foods: MenuItem[] = data
 
 export const MainPage: React.FC = () => {
     const [monthFavorite, setMonthFavorite] = useState<MenuItem[]>([])
     const recently_viewed = getFoodsWith(StorageType.RECENTLY_VIEWED)
+    const [perm, setPerm] = useState<boolean>(false);
     useEffect(() => {
+        async function setupNotification() {
+            setPerm(checkPermission)
+        }
+
         getPopularMenuFromRemote().then((res) => {
             const data = res.data.data
             setMonthFavorite(data.map((item: any) => {
-                return { ...item, id: item.menuId }
+                return {...item, id: item.menuId}
             }))
         })
+        setupNotification().then()
     }, [])
+    if (perm || !checkNotificationSupported())
+        return (
+            <>
+                <MainCarousel></MainCarousel>
+                <MainCategories></MainCategories>
+                <br/>
+                <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"}
+                                   items={monthFavorite}></FavoriteMenusCard>
+                <br/> <br/>
+                <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
+                                   items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
+                <br/>
+            </>
+        )
     return (
         <>
             <MainCarousel></MainCarousel>
             <MainCategories></MainCategories>
-            <br />
-            <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"} items={monthFavorite}></FavoriteMenusCard>
-            <br /> <br />
+            <br/>
+            <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"}
+                               items={monthFavorite}></FavoriteMenusCard>
+            <br/> <br/>
             <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
-                items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
-            <br />
-
+                               items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
+            <br/>
+            <RequestPermission></RequestPermission>
         </>
     )
 }
@@ -56,11 +80,11 @@ const MainCarousel: React.FC = () => {
             paddingRight: "0.5rem",
         }}>
             <Paper elevation={0}><img src={Banner1}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
+                                      style={{width: '100%', height: '100%', objectFit: 'cover'}}/></Paper>
             <Paper elevation={0}><img src={Banner2}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
+                                      style={{width: '100%', height: '100%', objectFit: 'cover'}}/></Paper>
             <Paper elevation={0}><img src={Banner3}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
+                                      style={{width: '100%', height: '100%', objectFit: 'cover'}}/></Paper>
         </Carousel>
     )
 }

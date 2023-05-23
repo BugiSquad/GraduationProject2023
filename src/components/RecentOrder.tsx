@@ -2,6 +2,7 @@ import React from "react";
 import {Card, Typography} from "@mui/material";
 import {OrderList} from "../types/Order";
 import {useNavigate} from "react-router-dom";
+import { normalCard } from "./styled/Cards";
 
 
 export const RecentOrder: React.FC<OrderList> = (detail: OrderList) => {
@@ -13,17 +14,7 @@ export const RecentOrder: React.FC<OrderList> = (detail: OrderList) => {
     };
 
     return (<>
-        <Card sx={{
-            paddingLeft: '10px',
-            paddingRight: '10px',
-            marginTop:"7px",
-            display: "flex",
-            flex: "1",
-            justifyContent: "space-between",
-            alignItems: "center",
-            minWidth: 280,
-            maxWidth: 400
-        }}>
+        <Card sx={normalCard}>
             <Typography variant={"subtitle2"} fontWeight='bold'>{detail.ordersId}</Typography>
             <Typography
                 variant={"subtitle2"}>{detail.paymentDto.detail != null ? detail.paymentDto.detail : ""}</Typography>

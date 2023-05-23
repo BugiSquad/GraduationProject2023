@@ -7,6 +7,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import {getNoticeFromRemote, NoticeInformation} from "../api/Notice";
 import {getVoteItemsFromRemote, takeANewMenuVote, VoteItem} from "../api/Vote";
 import {OrangeButton} from "../components/styled/Buttons";
+import { normalCard } from "../components/styled/Cards";
+
 
 export const CommunityPage: React.FC = () => {
     return (
@@ -59,16 +61,7 @@ const NoticeItem: React.FC<NoticeItemProps> = (props) => {
     const day = String(date.getDate()).padStart(2, '0');
     const formattedDate = `${year}년 ${month}월 ${day}일`;
     return (
-        <Card sx={{
-            display: "flex",
-            margin: "20px",
-            flex: "1",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-            minWidth: 280,
-            maxWidth: 400
-        }}>
+        <Card sx={normalCard}>
             <Typography variant={"subtitle2"} fontWeight='bold'>{props.info.informationId}</Typography>
             <Typography
                 variant={"subtitle2"}>{props.info.title}</Typography>
