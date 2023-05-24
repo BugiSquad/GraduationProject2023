@@ -228,7 +228,7 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({ userprofilePic, is
                     </FormGridChild>
                     <FormGridChild item xs={12}>
                         <Typography variant="body1" sx={{ fontWeight: 'bold', }}>학과＊</Typography>
-                        <Autocomplete
+                        <Autocomplete 
                             disablePortal
                             options={Departments}
                             onChange={(e, v) => {
