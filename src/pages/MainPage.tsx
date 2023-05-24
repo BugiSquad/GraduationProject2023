@@ -3,8 +3,8 @@ import FoodCardSlider from "../components/FoodCardSlider";
 import { MenuItem } from "../types/MenuItem";
 import '../App.css'
 
-import { Paper, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button, Paper, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 
 import data from '../data/SampleFood.json'
@@ -21,6 +21,7 @@ import { getPopularMenuFromRemote } from "../api/Favor";
 import { getFoodsWith, StorageType } from "../store/LocalStorage";
 import { checkNotificationSupported, checkPermission } from "../api/Notification";
 import { RequestPermission } from "../components/RequestPermission";
+import { OrangeButton, WhiteButton } from '../components/styled/Buttons';
 
 
 const foods: MenuItem[] = data
@@ -74,18 +75,47 @@ export const MainPage: React.FC = () => {
 
 
 const MainCarousel: React.FC = () => {
+    const navigate = useNavigate();
     return (
-        <Carousel navButtonsAlwaysInvisible sx={{
-            paddingLeft: "0.5rem",
-            paddingRight: "0.5rem",
-        }}>
-            <Paper elevation={0}><img src={Banner1}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
-            <Paper elevation={0}><img src={Banner2}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
-            <Paper elevation={0}><img src={Banner3}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
-        </Carousel>
+        <div style={{ position: 'relative' }}>
+            <Link to={'/matching'}>
+                <Carousel
+                    navButtonsAlwaysInvisible
+                    sx={{
+                        paddingLeft: '0.5rem',
+                        paddingRight: '0.5rem',
+                        position: 'relative',
+                    }}
+
+                >
+                    <Paper elevation={0}>
+                        <img src={Banner1} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </Paper>
+                    <Paper elevation={0}>
+                        <img src={Banner2} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </Paper>
+                    <Paper elevation={0}>
+                        <img src={Banner3} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </Paper>
+                </Carousel>
+            </Link>
+            <Button
+                sx={WhiteButton}
+                style={{
+                    position: 'absolute',
+                    top: '0%',
+                    left: '63%',
+                    zIndex: 2,
+                    borderRadius: "0.3rem",
+                    boxShadow: "none"
+                }}
+                onClick={() => { navigate('/matching') }}
+            >
+                매칭 바로가기</Button>
+        </div>
+
+
+
     )
 }
 const MainCategories: React.FC = () => {
