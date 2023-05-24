@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
 import { MenuItem } from "../types/MenuItem";
 import '../App.css'
+import '../components/styled/BannerText.css'
 
 import { Button, Paper, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
@@ -21,7 +22,8 @@ import { getPopularMenuFromRemote } from "../api/Favor";
 import { getFoodsWith, StorageType } from "../store/LocalStorage";
 import { checkNotificationSupported, checkPermission } from "../api/Notification";
 import { RequestPermission } from "../components/RequestPermission";
-import { OrangeButton, WhiteButton } from '../components/styled/Buttons';
+import { WhiteButton } from '../components/styled/Buttons';
+import { normalTypography } from '../components/styled/Text';
 
 
 const foods: MenuItem[] = data
@@ -46,30 +48,41 @@ export const MainPage: React.FC = () => {
     if (perm || !checkNotificationSupported())
         return (
             <>
-                <MainCarousel></MainCarousel>
-                <MainCategories></MainCategories>
+                <BannerText />
+                <MainCarousel />
+                <MainCategories />
                 <br />
                 <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"}
-                    items={monthFavorite}></FavoriteMenusCard>
+                    items={monthFavorite} />
                 <br /> <br />
                 <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
-                    items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
+                    items={recently_viewed.length === 0 ? foods : recently_viewed} />
                 <br />
             </>
         )
     return (
         <>
-            <MainCarousel></MainCarousel>
-            <MainCategories></MainCategories>
+            <BannerText />
+            <MainCarousel />
+            <MainCategories />
             <br />
             <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"}
-                items={monthFavorite}></FavoriteMenusCard>
+                items={monthFavorite} />
             <br /> <br />
             <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
-                items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
+                items={recently_viewed.length === 0 ? foods : recently_viewed} />
             <br />
-            <RequestPermission></RequestPermission>
+            <RequestPermission />
         </>
+    )
+}
+
+const BannerText: React.FC = () => {
+    return (
+        <div id="text-container">
+            <Typography id="animated-text" sx={normalTypography} style={{ margin: "0px" }} fontSize="13px">배너를 터치해서 매칭 기능을 사용해보세요!</Typography>
+        </div>
+
     )
 }
 
