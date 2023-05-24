@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import FoodCardSlider from "../components/FoodCardSlider";
 import { MenuItem } from "../types/MenuItem";
 import '../App.css'
+import '../components/styled/BannerText.css'
 
-import { Paper, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button, Paper, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 
 import data from '../data/SampleFood.json'
@@ -21,6 +22,8 @@ import { getPopularMenuFromRemote } from "../api/Favor";
 import { getFoodsWith, StorageType } from "../store/LocalStorage";
 import { checkNotificationSupported, checkPermission } from "../api/Notification";
 import { RequestPermission } from "../components/RequestPermission";
+import { WhiteButton } from '../components/styled/Buttons';
+import { normalTypography } from '../components/styled/Text';
 
 
 const foods: MenuItem[] = data
@@ -45,47 +48,87 @@ export const MainPage: React.FC = () => {
     if (perm || !checkNotificationSupported())
         return (
             <>
-                <MainCarousel></MainCarousel>
-                <MainCategories></MainCategories>
+                <BannerText />
+                <MainCarousel />
+                <MainCategories />
                 <br />
                 <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"}
-                    items={monthFavorite}></FavoriteMenusCard>
+                    items={monthFavorite} />
                 <br /> <br />
                 <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
-                    items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
+                    items={recently_viewed.length === 0 ? foods : recently_viewed} />
                 <br />
             </>
         )
     return (
         <>
-            <MainCarousel></MainCarousel>
-            <MainCategories></MainCategories>
+            <BannerText />
+            <MainCarousel />
+            <MainCategories />
             <br />
             <FavoriteMenusCard title={"이번 달 인기 메뉴"} link={"/thisweekpopular"}
-                items={monthFavorite}></FavoriteMenusCard>
+                items={monthFavorite} />
             <br /> <br />
             <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
-                items={recently_viewed.length === 0 ? foods : recently_viewed}></FavoriteMenusCard>
+                items={recently_viewed.length === 0 ? foods : recently_viewed} />
             <br />
-            <RequestPermission></RequestPermission>
+            <RequestPermission />
         </>
+    )
+}
+
+const BannerText: React.FC = () => {
+    return (
+        <div id="text-container">
+            <Typography id="animated-text" sx={normalTypography} style={{ margin: "0px" }} fontSize="13px">배너를 터치해서 매칭 기능을 사용해보세요!</Typography>
+        </div>
+
     )
 }
 
 
 const MainCarousel: React.FC = () => {
+    const navigate = useNavigate();
     return (
-        <Carousel navButtonsAlwaysInvisible sx={{
-            paddingLeft: "0.5rem",
-            paddingRight: "0.5rem",
-        }}>
-            <Paper elevation={0}><img src={Banner1}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
-            <Paper elevation={0}><img src={Banner2}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
-            <Paper elevation={0}><img src={Banner3}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></Paper>
-        </Carousel>
+        <div style={{ position: 'relative' }}>
+            <Link to={'/matching'}>
+                <Carousel
+                    navButtonsAlwaysInvisible
+                    sx={{
+                        paddingLeft: '0.5rem',
+                        paddingRight: '0.5rem',
+                        position: 'relative',
+                    }}
+
+                >
+                    <Paper elevation={0}>
+                        <img src={Banner1} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </Paper>
+                    <Paper elevation={0}>
+                        <img src={Banner2} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </Paper>
+                    <Paper elevation={0}>
+                        <img src={Banner3} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </Paper>
+                </Carousel>
+            </Link>
+            <Button
+                sx={WhiteButton}
+                style={{
+                    position: 'absolute',
+                    top: '0%',
+                    left: '63%',
+                    zIndex: 2,
+                    borderRadius: "0.3rem",
+                    boxShadow: "none"
+                }}
+                onClick={() => { navigate('/matching') }}
+            >
+                매칭 바로가기</Button>
+        </div>
+
+
+
     )
 }
 const MainCategories: React.FC = () => {

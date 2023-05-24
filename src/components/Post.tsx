@@ -1,5 +1,6 @@
 import React from "react";
 import {Avatar, Card, Chip, PopperPlacementType, Typography} from "@mui/material";
+import { normalCard } from "./styled/Cards";
 
 export interface PostDetail {
     title: string;
@@ -12,14 +13,16 @@ export interface PostDetail {
 
 export const Post: React.FC<PostDetail> = (detail: PostDetail) => {
     if (detail.minutesLeftUntilMeal < 0) return <></>
+    const truncatedTitle = detail.title.length > 5 ? detail.title.slice(0, 10) + "..." : detail.title;
     return (<>
         <Card id={detail.index + ""}
-              sx={{display: "flex", margin: "10px", flex: "1", justifyContent: "space-between", alignItems: "center",}}
+              sx={normalCard}
+              style={{marginLeft:"0px", marginRight:"0px"}}
               onClick={(event) => {
                   detail.onClick(event, "auto");
               }}>
             <Avatar src={detail.memberProfileUrl == null ? "" : detail.memberProfileUrl}/>
-            <Typography variant={"body2"}>{detail.title}</Typography>
+            <Typography variant={"body2"}>{truncatedTitle}</Typography>
             {detail.interest.map((interest, idx) => <Chip key={idx} label={`#${interest}`}></Chip>)}
             <Typography variant={"subtitle2"}>{getTimeFrom(detail.minutesLeftUntilMeal)} 후</Typography>
         </Card> </>)
