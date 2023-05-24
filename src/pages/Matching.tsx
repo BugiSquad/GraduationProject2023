@@ -59,7 +59,6 @@ const Content: React.FC = () => {
             </div>
             <div style={{width:"100%"}}>
                 <Posts/>
-                 
             </div>
         </div>
     </>)
