@@ -37,7 +37,7 @@ export const Mypage: React.FC = () => {
                         alignContent: "center",
                         marginRight: "10px",
                     }}>
-                        <Typography variant={"caption"}> 로그인하여 더 많은 기능과 옵션을 이용해보세요.</Typography>
+                        <Typography variant={"caption"} fontWeight="bold" color={'grey'}> 로그인하여 더 많은 기능과 옵션을 이용해보세요.</Typography>
                         <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
                                 onClick={() => navigate('/login')}>로그인하기</Button>
                     </div>
@@ -58,9 +58,6 @@ export const Mypage: React.FC = () => {
 
                 <MypageCards title="최근 주문 내역" content={<RecentOrders/>} link="/mypage/recentorderdetail"/>
                 <MypageCards title="최근 만남" content={<RecentMeets/>} link="/mypage/recentmeetdetail"/>
-                {/*
-                추후에 구현하는 것으로 변경
-                <MypageCards title="나의 모임" content={<MyMeetings />} link="/mypage/mymeetingsdetail" />*/}
                 <MypageCards title="나의 쪽지함" content={<MyMessagebox/>} link="/mypage/mymessagedetail"/>
                 <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents flag={true}/>} link="/likedmenu"/>
                 <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
