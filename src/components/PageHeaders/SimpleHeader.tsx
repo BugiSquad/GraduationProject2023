@@ -3,6 +3,7 @@ import {SimpleHeaderParam} from "../../types/PageHeaderParam";
 import {Button, Typography} from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import {handleGoBack} from "../../pages/Detail/MyMessageDetail";
+import { resetScrollPosition } from "../../pages/MainPage";
 
 export const SimpleHeader: React.FC<SimpleHeaderParam>
     = (param: SimpleHeaderParam) => {

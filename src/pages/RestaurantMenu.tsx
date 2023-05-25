@@ -5,10 +5,11 @@ import {MenuItem} from "../types/MenuItem";
 import {useDispatch} from "react-redux";
 import {addMenu, removeMenu} from "../store/menuRepository";
 import {SimpleTemplate} from "./PageTemplate";
-import MenuCardSlider from "../components/MenuCardSlider";
+import MenuCardSlider, { CustomGrid } from "../components/MenuCardSlider";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import {RadioBarItem} from "../components/RadioBar";
 import {useParams} from "react-router-dom";
+import FoodCard from "../components/FoodCard";
 
 
 export const RestaurantMenu: React.FC = () => {
@@ -69,7 +70,7 @@ const MenuBody: React.FC<{ category: MenuCategory }> = (props) => {
         })
     }
 
-    return (<div style={{paddingLeft: "1rem",}}>
+    return (<div style={{width:"100%"}}>
         <RadioBarItem setIndex={setIdx} index={idx} names={names}/>
         <MenuCardSlider foods={[...menus]}></MenuCardSlider>
     </div>)

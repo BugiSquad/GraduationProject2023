@@ -32,12 +32,12 @@ export const MenuList: React.FC = () => {
     })
 
     return (
-        <>
+        <div style={{width:"100%"}}>
             <RadioBarItem setIndex={setIdx} index={idx} names={names}/>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                 <Component items={menus}></Component>
             </div>
-        </>
+        </div>
     )
 }
 const Component: React.FC<{ items: MenuItem[] }> = (menus) => {

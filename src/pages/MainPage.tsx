@@ -91,7 +91,7 @@ const MainCarousel: React.FC = () => {
     const navigate = useNavigate();
     return (
         <div style={{ position: 'relative' }}>
-            <Link to={'/matching'}>
+            <Link onClick={resetScrollPosition} to={'/matching'}>
                 <Carousel
                     navButtonsAlwaysInvisible
                     sx={{
@@ -154,13 +154,13 @@ const MainCategories: React.FC = () => {
                 paddingRight: "0.5rem",
                 paddingBottom: "0.5rem"
             }}>
-                <Link style={{ textDecoration: "none", color: "black" }} to={"/menu/noodle"}><MainCategory category={"면류"}
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/noodle"}><MainCategory category={"면류"}
                     img={noodleImage} /></Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to={"/menu/stew"}><MainCategory category={"찌개류"}
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/stew"}><MainCategory category={"찌개류"}
                     img={soupImage} /></Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to={"/menu/korean_food"}> <MainCategory
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/korean_food"}> <MainCategory
                     category={"한식"} img={mixedRiceImage} /></Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to={"/menu/japan_food"}> <MainCategory
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/japan_food"}> <MainCategory
                     category={"일식"} img={bowlRiceImage} /></Link>
             </div>
         </>
@@ -203,3 +203,11 @@ const FavoriteMenusCard: React.FC<FavoriteMenusCardProps> = (props) => {
         </>
     )
 }
+
+
+
+
+export const resetScrollPosition=()=> {
+    window.scrollTo(0, 0);
+  }
+  
