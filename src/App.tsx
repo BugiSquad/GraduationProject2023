@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './App.css'
-import {PageTemplate} from "./pages/PageTemplate";
-import {MainPage} from "./pages/MainPage";
-
+import { PageTemplate } from "./pages/PageTemplate";
+import { MainPage } from "./pages/MainPage";
 
 function App() {
     useEffect(() => {
@@ -10,7 +9,7 @@ function App() {
     }, [])
     return (
         <>
-            <PageTemplate param={{variant: "MainPage", pageHeaderName: "", showBackButton: false}}>
+           <PageTemplate param={{variant: "MainPage", pageHeaderName: "", showBackButton: false}}>
                 <MainPage/>
             </PageTemplate>
         </>
