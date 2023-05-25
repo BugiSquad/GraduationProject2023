@@ -18,6 +18,7 @@ const FoodCard: React.FC<MenuItem> = ({id, name, price, imageUrl, description}, 
             borderRadius: "14px",
             marginLeft: '0.5rem',
             marginRight: '0.5rem',
+            marginBottom:"0.5rem"
         }} key={key}>
             <CardMedia component={"img"} height={140} image={imageUrl} title={name}/>
             <CardContent>

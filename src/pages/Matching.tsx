@@ -59,21 +59,6 @@ const Content: React.FC = () => {
             </div>
             <div style={{width:"100%"}}>
                 <Posts/>
-                <Post title={"안녕하세요. 밥 한번 같이 먹어요"} memberProfileUrl={""} minutesLeftUntilMeal={0} index={0} interest={[]} onClick={function (event: React.MouseEvent<HTMLDivElement, MouseEvent>, newPlacement: Placement): void {
-                    throw new Error("Function not implemented.");
-                } } />
-                <Post title={"안녕하세요. 밥 한번 같이 먹어요"} memberProfileUrl={""} minutesLeftUntilMeal={0} index={0} interest={[]} onClick={function (event: React.MouseEvent<HTMLDivElement, MouseEvent>, newPlacement: Placement): void {
-                    throw new Error("Function not implemented.");
-                } } />
-                <Post title={"안녕하세요. 밥 한번 같이 먹어요"} memberProfileUrl={""} minutesLeftUntilMeal={0} index={0} interest={[]} onClick={function (event: React.MouseEvent<HTMLDivElement, MouseEvent>, newPlacement: Placement): void {
-                    throw new Error("Function not implemented.");
-                } } />
-                <Post title={"안녕하세요. 밥 한번 같이 먹어요"} memberProfileUrl={""} minutesLeftUntilMeal={0} index={0} interest={[]} onClick={function (event: React.MouseEvent<HTMLDivElement, MouseEvent>, newPlacement: Placement): void {
-                    throw new Error("Function not implemented.");
-                } } />
-                <Post title={"안녕하세요. 밥 한번 같이 먹어요"} memberProfileUrl={""} minutesLeftUntilMeal={0} index={0} interest={[]} onClick={function (event: React.MouseEvent<HTMLDivElement, MouseEvent>, newPlacement: Placement): void {
-                    throw new Error("Function not implemented.");
-                } } />
             </div>
         </div>
     </>)

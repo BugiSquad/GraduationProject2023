@@ -9,6 +9,7 @@ import {RestaurantMenu} from "@mui/icons-material";
 import HomeIcon from '@mui/icons-material/Home';
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import { resetScrollPosition } from "../pages/MainPage";
 
 
 interface BottomNavigationGroupProps {
@@ -25,22 +26,30 @@ export const BottomNavigationGroup: React.FC<BottomNavigationGroupProps> = ({tab
             case BottomNavigationTab.APP:
                 dispatch(toAPP())
                 navigate("/app");
+                resetScrollPosition();
                 break;
             case BottomNavigationTab.COMMUNITY:
                 dispatch(toCommunity())
                 navigate("/community");
+                resetScrollPosition();
                 break;
             case BottomNavigationTab.MENU:
                 dispatch(toMenu())
                 navigate("/menu")
+                resetScrollPosition();
+
                 break;
             case BottomNavigationTab.MATCHING:
                 dispatch(toMatching())
                 navigate("/matching")
+                resetScrollPosition();
+
                 break;
             case BottomNavigationTab.MYPAGE:
                 dispatch(toMyPage())
                 navigate("/mypage")
+                resetScrollPosition();
+
                 break;
         }
 
