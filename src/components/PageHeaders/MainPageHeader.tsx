@@ -34,7 +34,7 @@ export const MainPageHeader: React.FC<PageHeaderParam>
                     <ShoppingCartIcon onClick={() => navigate("/cart")}></ShoppingCartIcon>
                 </Badge>
                 <Link to={"/app"} onClick={() => {
-                }}>            <img src={minilogo} style={{ paddingTop: "10px", width: '18%', objectFit: 'cover' }} />
+                }}><img src={minilogo} style={{ paddingTop: "10px", width: '18%', objectFit: 'cover' }} />
                     <img src={logo} style={{ paddingTop: "10px", width: '50%', height: '50%', objectFit: 'cover' }} /></Link>
                 <div style={{ display: "inline-block", whiteSpace: "nowrap" }}>
                     {(getMyToken() !== "") ? <Link to={"/mypage"} onClick={() => {

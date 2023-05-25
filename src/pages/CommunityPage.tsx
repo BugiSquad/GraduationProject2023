@@ -1,12 +1,12 @@
-import {SimpleTemplate} from "./PageTemplate";
-import {BottomNavigationTab} from "../types/PageHeaderParam";
-import React, {useEffect, useState} from "react";
-import {BoardCard} from "../components/BoardCard";
-import {Alert, Button, Card, FormControlLabel, Grid, Paper, Radio, RadioGroup, Snackbar, Typography} from "@mui/material";
+import { SimpleTemplate } from "./PageTemplate";
+import { BottomNavigationTab } from "../types/PageHeaderParam";
+import React, { useEffect, useState } from "react";
+import { BoardCard } from "../components/BoardCard";
+import { Alert, Button, Card, FormControlLabel, Grid, Paper, Radio, RadioGroup, Snackbar, Typography } from "@mui/material";
 import LinearProgress from '@mui/material/LinearProgress';
-import {getNoticeFromRemote, NoticeInformation} from "../api/Notice";
-import {getVoteItemsFromRemote, takeANewMenuVote, VoteItem} from "../api/Vote";
-import {OrangeButton} from "../components/styled/Buttons";
+import { getNoticeFromRemote, NoticeInformation } from "../api/Notice";
+import { getVoteItemsFromRemote, takeANewMenuVote, VoteItem } from "../api/Vote";
+import { OrangeButton } from "../components/styled/Buttons";
 import { normalCard } from "../components/styled/Cards";
 import { PageCards } from "../components/PageCards";
 import matnam from '../images/matnam.png';
@@ -15,7 +15,7 @@ import { Logo } from "./MainPage";
 
 export const CommunityPage: React.FC = () => {
     return (
-        <SimpleTemplate param={{pageHeaderName: "커뮤니티", tab: BottomNavigationTab.COMMUNITY}}>
+        <SimpleTemplate param={{ pageHeaderName: "커뮤니티", tab: BottomNavigationTab.COMMUNITY }}>
             <Content></Content>
         </SimpleTemplate>
     )
@@ -34,9 +34,9 @@ const Content: React.FC = () => {
             setVoteItems(content)
         })
     }, [])
-    return (<div style={{paddingLeft: '0.5rem', paddingRight: '0.5rem'}}>
+    return (<div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
         <PageCards title={"공지사항"}
-                   content={<NoticeMain noticeItems={noticeItems}></NoticeMain>} />
+            content={<NoticeMain noticeItems={noticeItems}></NoticeMain>} />
         <PageCards title={"투표"} content={<VoteMain items={voteItems}></VoteMain>} />
         <Logo />
     </div>)
@@ -49,7 +49,7 @@ interface NoticeMainProps {
 
 const NoticeMain: React.FC<NoticeMainProps> = (props) => {
     return (
-        <div style={{display: "flex", flexDirection: "column", width: "100%"}}>{props.noticeItems.map((item, idx) =>
+        <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>{props.noticeItems.map((item, idx) =>
             <NoticeItem key={idx} info={item}></NoticeItem>)}</div>
     )
 }
@@ -70,7 +70,7 @@ const NoticeItem: React.FC<NoticeItemProps> = (props) => {
             <Typography
                 variant={"subtitle2"}>{props.info.title}</Typography>
             <Typography variant={"subtitle2"} fontWeight='bold'
-                        style={{color: "#FE724C"}}>{formattedDate}</Typography>
+                style={{ color: "#FE724C" }}>{formattedDate}</Typography>
         </Card>
     )
 }
@@ -94,18 +94,18 @@ const VoteMain: React.FC<{ items: VoteItem[] }> = (props) => {
     if (flag) return (
         <>
             <VoteResult pollAnswers={pollAnswers}></VoteResult>
-            <Snackbar anchorOrigin={{vertical: "bottom", horizontal: "center"}} open={open} autoHideDuration={2000}
-                      onClose={handleClose}>
-                <Alert severity="error" sx={{width: '100%'}}> {errorMsg} </Alert>
+            <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "center" }} open={open} autoHideDuration={2000}
+                onClose={handleClose}>
+                <Alert severity="error" sx={{ width: '100%' }}> {errorMsg} </Alert>
             </Snackbar>
         </>
     )
     else return (<>
         <VoteButtons pollAnswers={pollAnswers} setState={setFlag} setMsg={setErrorMsg}
-                     setOpenErr={setOpen}></VoteButtons>
-        <Snackbar anchorOrigin={{vertical: "bottom", horizontal: "center"}} open={open} autoHideDuration={2000}
-                  onClose={handleClose}>
-            <Alert severity="error" sx={{width: '100%'}}> {errorMsg} </Alert>
+            setOpenErr={setOpen}></VoteButtons>
+        <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "center" }} open={open} autoHideDuration={2000}
+            onClose={handleClose}>
+            <Alert severity="error" sx={{ width: '100%' }}> {errorMsg} </Alert>
         </Snackbar>
     </>)
 }
@@ -114,7 +114,7 @@ const VoteResult: React.FC<{ pollAnswers: VoteItem[] }> = (prop) => {
     let totalCount = 0
     prop.pollAnswers.forEach((answer) => totalCount += answer.votes)
     return (
-        <Grid container style={{width: "100%", alignItems: "center"}}>
+        <Grid container style={{ width: "100%", alignItems: "center" }}>
             {prop.pollAnswers.map((item, idx) => {
                 return (
                     <>
@@ -122,8 +122,8 @@ const VoteResult: React.FC<{ pollAnswers: VoteItem[] }> = (prop) => {
                             <Typography variant={"subtitle2"}>{item.name}</Typography>
                         </Grid>
                         <Grid item xs={9}>
-                            <LinearProgress sx={{width: "90%"}} variant={"determinate"}
-                                            value={item.votes / totalCount * 100}/>
+                            <LinearProgress sx={{ width: "90%" }} variant={"determinate"}
+                                value={item.votes / totalCount * 100} />
                         </Grid>
                         <Grid item xs={1}><span>{item.votes}표</span></Grid>
                     </>
@@ -163,7 +163,7 @@ const VoteButtons: React.FC<{
         <form onSubmit={handleSubmit}>
             <RadioGroup onChange={handleRadioChange}>
                 {props.pollAnswers.map((item, idx) => {
-                    return (<FormControlLabel key={idx} value={item.newMenuId} control={<Radio/>} label={item.name}/>)
+                    return (<FormControlLabel key={idx} value={item.newMenuId} control={<Radio />} label={item.name} />)
                 })}
             </RadioGroup>
             <Button type={"submit"} sx={OrangeButton}>투표하기</Button>
