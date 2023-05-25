@@ -99,7 +99,6 @@ const MainCarousel: React.FC = () => {
                         paddingRight: '0.5rem',
                         position: 'relative',
                     }}
-
                 >
                     <Paper elevation={0}>
                         <img src={Banner1} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -207,7 +206,6 @@ const FavoriteMenusCard: React.FC<FavoriteMenusCardProps> = (props) => {
 
 
 
-export const resetScrollPosition=()=> {
+export const resetScrollPosition = () => {
     window.scrollTo(0, 0);
-  }
-  
+}
