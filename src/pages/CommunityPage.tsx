@@ -2,13 +2,15 @@ import {SimpleTemplate} from "./PageTemplate";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import React, {useEffect, useState} from "react";
 import {BoardCard} from "../components/BoardCard";
-import {Alert, Button, Card, FormControlLabel, Grid, Radio, RadioGroup, Snackbar, Typography} from "@mui/material";
+import {Alert, Button, Card, FormControlLabel, Grid, Paper, Radio, RadioGroup, Snackbar, Typography} from "@mui/material";
 import LinearProgress from '@mui/material/LinearProgress';
 import {getNoticeFromRemote, NoticeInformation} from "../api/Notice";
 import {getVoteItemsFromRemote, takeANewMenuVote, VoteItem} from "../api/Vote";
 import {OrangeButton} from "../components/styled/Buttons";
 import { normalCard } from "../components/styled/Cards";
 import { PageCards } from "../components/PageCards";
+import matnam from '../images/matnam.png';
+import { Logo } from "./MainPage";
 
 
 export const CommunityPage: React.FC = () => {
@@ -36,6 +38,7 @@ const Content: React.FC = () => {
         <PageCards title={"공지사항"}
                    content={<NoticeMain noticeItems={noticeItems}></NoticeMain>} />
         <PageCards title={"투표"} content={<VoteMain items={voteItems}></VoteMain>} />
+        <Logo />
     </div>)
 }
 

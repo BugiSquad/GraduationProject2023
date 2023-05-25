@@ -24,7 +24,7 @@ import { checkNotificationSupported, checkPermission } from "../api/Notification
 import { RequestPermission } from "../components/RequestPermission";
 import { WhiteButton } from '../components/styled/Buttons';
 import { normalTypography } from '../components/styled/Text';
-
+import matnam from '../images/matnam.png';
 
 const foods: MenuItem[] = data
 
@@ -57,7 +57,8 @@ export const MainPage: React.FC = () => {
                 <br /> <br />
                 <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
                     items={recently_viewed.length === 0 ? foods : recently_viewed} />
-                <br />
+                <Logo />
+
             </>
         )
     return (
@@ -71,9 +72,17 @@ export const MainPage: React.FC = () => {
             <br /> <br />
             <FavoriteMenusCard title={"최근에 선택한 메뉴"} link={"/recentmenu"}
                 items={recently_viewed.length === 0 ? foods : recently_viewed} />
-            <br />
+            <Logo />
             <RequestPermission />
         </>
+    )
+}
+
+export const Logo: React.FC = () => {
+    return (
+        <Paper elevation={0}>
+            <img src={matnam} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </Paper>
     )
 }
 
