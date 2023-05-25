@@ -4,13 +4,14 @@ import {FaStar} from "react-icons/fa";
 import {MenuItem} from "../types/MenuItem";
 import 'react-swipeable-list/dist/styles.css';
 import {useNavigate} from "react-router-dom";
+import { resetScrollPosition } from "../pages/MainPage";
 
 const FoodCard: React.FC<MenuItem> = ({id, name, price, imageUrl, description}, key: number) => {
     //처음에는 하드코딩된 에셋 사용 추후에 객체를 받아서 동적으로 렌더링
     const navigate = useNavigate()
 
     return <>
-        <Card onClick={() => navigate(`/fooddetail/${id}`)} sx={{
+        <Card onClick={() => {navigate(`/fooddetail/${id}`); resetScrollPosition();}} sx={{
             display: 'inline-block',
             position: "relative",
             flex: "0 0 auto",
