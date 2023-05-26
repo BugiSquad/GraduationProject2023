@@ -14,6 +14,7 @@ import { CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentTy
 import { createOrder } from "../api/Order";
 import { OrangeButton, WhiteButton } from "./styled/Buttons";
 import { normalCard } from "./styled/Cards"
+import { Cart } from "../store/cart"
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -54,6 +55,8 @@ export const OrderContents: React.FC = () => {
     const items = useAppSelector(state => state.cart.item);
     const [method, setMethod] = useState<PaymentType>(PaymentType.NONE);
     const [open, setOpen] = React.useState(false);
+    const cart = useAppSelector((state) => state.cart)
+
     const handleOpen = async () => {
         setOpen(true);
         const res = await createDummyPaymentDetail(method)
@@ -75,7 +78,8 @@ export const OrderContents: React.FC = () => {
             .catch((err) => console.error(err))
     }
     const handleClose = () => {
-        setOpen(false)
+        setOpen(false);
+        Cart.actions.clear();
         navigate('/mypage');
     }
     return (<>
