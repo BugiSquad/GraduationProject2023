@@ -8,11 +8,10 @@ import Box from '@mui/joy/Box';
 import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
 import Typography_joy from '@mui/joy/Typography';
-import { MenuItem } from "../types/MenuItem";
 
 
 
-export const ReviewContent: React.FC<MenuItem> = (props) => {
+export const ReviewContent: React.FC = () => {
     const { ordersInfo } = useParams();
     const blue = {
         100: '#DAECFF',
@@ -65,10 +64,9 @@ export const ReviewContent: React.FC<MenuItem> = (props) => {
       `,
     );
 
-    const [value, setValue] = React.useState<number | null>(2);
+    const [value, setValue] = React.useState<number | null>(5);
     const [text, setText] = React.useState('');
-    const [foodRating, setFoodRating] = React.useState<{ [foodId: string]: number }>({});
-
+    
     const addEmoji = (emoji: string) => () => setText(`${text}${emoji}`);
 
 
@@ -79,18 +77,16 @@ export const ReviewContent: React.FC<MenuItem> = (props) => {
 
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: "10px", fontSize: "20px", width: "100%" }}>
                     <Typography>별점을 매겨주세요.</Typography>
+                    <div style={{display:"flex", flexDirection:"row", alignItems: "center"}}>
                     <Rating
                         name="simple-controlled"
-                        value={foodRating[props.id] || null}
+                        value={value}
                         onChange={(event, newValue) => {
-                            if (newValue !== null) {
-                                setFoodRating((prevFoodRating) => ({
-                                    ...prevFoodRating,
-                                    [props.id]: newValue,
-                                }));
-                            }
+                            setValue(newValue);
                         }}
                     />
+                    <Box sx={{border:3, borderRadius:"0.5rem", padding:"3px", color:"#FE724C"}}><Typography fontWeight={'bold'} color={"black"}>{value === null ? 0 : value}점</Typography></Box>
+                    </div>
                 </div>
             </div>
 
@@ -127,7 +123,7 @@ export const ReviewContent: React.FC<MenuItem> = (props) => {
                     }
                     sx={{ width: "100%" }}
                 />
-                <div style={{ display: "contents" }}>
+                <div style={{display:"contents"}}>
                     <Button sx={OrangeButton} style={{ width: "100%", borderRadius: "0.3rem" }}>등록</Button>
                     <Button sx={WhiteButton} style={{ width: "100%", borderRadius: "0.3rem" }}>취소</Button>
                 </div>

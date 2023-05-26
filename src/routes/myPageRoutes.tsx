@@ -4,6 +4,7 @@ import {Signup} from "../pages/Signup";
 import {Mypage} from "../pages/Mypage";
 import {Login} from "../pages/Login";
 import {RecentMeetInfo, recentMeetInfoLoader} from "../pages/RecentMeetInfo";
+import { Review } from "../pages/Review";
 
 export const MyPageRoutes = [
     {
@@ -23,7 +24,13 @@ export const MyPageRoutes = [
         element: <RecentMeetInfo/>,
         loader: recentMeetInfoLoader,
         errorElement: <ErrorPage/>,
-    }, {
+        
+    }, 
+    {
+        path: "/review",
+        element: <Review/>,
+        errorElement: <ErrorPage/>,
+    },{
         path: "/mypage",
         element: <Mypage/>,
         errorElement: <ErrorPage/>,
