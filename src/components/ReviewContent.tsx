@@ -8,7 +8,6 @@ import Box from '@mui/joy/Box';
 import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
 import Typography_joy from '@mui/joy/Typography';
-
 import {MenuItem} from "../types/MenuItem";
 import {ReviewDto} from "../types/CartItem";
 import {getApiURL, getHeader} from "../api/Common";
@@ -69,8 +68,9 @@ const StyledTextarea = styled(TextareaAutosize)(
 export const ReviewContent: React.FC<{ menuItem: MenuItem }> = (props) => {
     const {ordersInfo} = useParams();
 
-    const [value, setValue] = React.useState<number | null>(5);
+    const [value, setValue] = React.useState<number | null>(2);
     const [text, setText] = React.useState('');
+    const [foodRating, setFoodRating] = React.useState<{ [foodId: string]: number }>({});
 
     const onSubmit = () => {
         let review = {
@@ -98,7 +98,6 @@ export const ReviewStars: React.FC<{
     menuId: number
 }> = (props) => {
     return (
-
 
         <div style={{
             display: "flex",
