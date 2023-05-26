@@ -10,7 +10,7 @@ export const Review: React.FC = () => {
         <div className="App container">
             <SimpleTemplate param={{ pageHeaderName: "리뷰 작성", tab: BottomNavigationTab.MENU }}>
 
-                <ReviewContent/>
+                <ReviewContent menuItem={props}/>
             </SimpleTemplate>
         </div>
     )

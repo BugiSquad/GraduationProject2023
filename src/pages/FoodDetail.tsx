@@ -2,17 +2,19 @@ import {FoodDetailContents} from "../components/FoodDetailContents"
 import {SimpleTemplate} from "./PageTemplate"
 import {getMenuById} from "../api/Menu";
 import {useLoaderData} from "react-router-dom";
-import {CartItem} from "../types/CartItem";
+import {CartItem, ReviewList} from "../types/CartItem";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
 import {saveFoodToStorage, StorageType} from "../store/LocalStorage";
 
 export const FoodDetail: React.FC = () => {
-    const loaderData = useLoaderData() as CartItem
+    const loaderData = useLoaderData()
+    const reviews = (loaderData as ReviewList).reviewList
+    const cartItem = loaderData as CartItem
     if (loaderData === undefined || loaderData == null) return (<div>로딩중</div>)
-    saveFoodToStorage(StorageType.RECENTLY_VIEWED, loaderData)
+    saveFoodToStorage(StorageType.RECENTLY_VIEWED, cartItem)
     return (
         <SimpleTemplate param={{pageHeaderName: "음식 상세", tab: BottomNavigationTab.MENU}}>
-            <FoodDetailContents food={{...loaderData}}/>
+            <FoodDetailContents food={{...cartItem}} reviews={reviews}/>
         </SimpleTemplate>
     )
 }
