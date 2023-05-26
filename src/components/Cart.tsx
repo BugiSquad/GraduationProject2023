@@ -65,7 +65,7 @@ export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
                     <Typography sx={{paddingRight: '5px'}} color={'black'} fontSize={15}
                                 fontWeight={'bold'}>{props.food.price}원</Typography>
                     <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
-                        <FaStar style={{color: "orange"}}/> 5.0 (10)
+                        <FaStar style={{color: "orange"}}/> {props.food.avgStarRatio} ({props.food.rateCounts})
                     </Typography>
                 </div>
             </div>
