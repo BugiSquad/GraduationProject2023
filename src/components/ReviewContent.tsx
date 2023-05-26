@@ -66,7 +66,7 @@ export const ReviewContent: React.FC = () => {
 
     const [value, setValue] = React.useState<number | null>(5);
     const [text, setText] = React.useState('');
-    
+
     const addEmoji = (emoji: string) => () => setText(`${text}${emoji}`);
 
 
@@ -77,15 +77,15 @@ export const ReviewContent: React.FC = () => {
 
                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: "10px", fontSize: "20px", width: "100%" }}>
                     <Typography>별점을 매겨주세요.</Typography>
-                    <div style={{display:"flex", flexDirection:"row", alignItems: "center"}}>
-                    <Rating
-                        name="simple-controlled"
-                        value={value}
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
-                        }}
-                    />
-                    <Box sx={{border:3, borderRadius:"0.5rem", padding:"3px", color:"#FE724C"}}><Typography fontWeight={'bold'} color={"black"}>{value === null ? 0 : value}점</Typography></Box>
+                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                        <Rating
+                            name="simple-controlled"
+                            value={value}
+                            onChange={(event, newValue) => {
+                                setValue(newValue);
+                            }}
+                        />
+                        <Box sx={{ border: 3, borderRadius: "0.5rem", padding: "3px", color: "#FE724C" }}><Typography fontWeight={'bold'} color={"black"}>{value === null ? 0 : value}점</Typography></Box>
                     </div>
                 </div>
             </div>
@@ -105,14 +105,15 @@ export const ReviewContent: React.FC = () => {
 
                     startDecorator={
                         <Box sx={{ display: 'flex', gap: 0.5 }}>
+                            <IconButton variant="outlined" color="neutral" onClick={addEmoji('🖤')}>
+                                🖤
+                            </IconButton>
                             <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
                                 👍
                             </IconButton>
-                            <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
-                                🏖
-                            </IconButton>
-                            <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
-                                😍
+
+                            <IconButton variant="outlined" color="neutral" onClick={addEmoji('🔥')}>
+                                🔥
                             </IconButton>
                         </Box>
                     }
@@ -123,7 +124,7 @@ export const ReviewContent: React.FC = () => {
                     }
                     sx={{ width: "100%" }}
                 />
-                <div style={{display:"contents"}}>
+                <div style={{ display: "contents" }}>
                     <Button sx={OrangeButton} style={{ width: "100%", borderRadius: "0.3rem" }}>등록</Button>
                     <Button sx={WhiteButton} style={{ width: "100%", borderRadius: "0.3rem" }}>취소</Button>
                 </div>
