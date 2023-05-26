@@ -5,13 +5,17 @@ import {MenuItem} from "../types/MenuItem";
 import 'react-swipeable-list/dist/styles.css';
 import {useNavigate} from "react-router-dom";
 import { resetScrollPosition } from "../pages/MainPage";
+import {CartItem} from "../types/CartItem";
 
-const FoodCard: React.FC<MenuItem> = ({id, name, price, imageUrl, description}, key: number) => {
+
+
+
+const FoodCard: React.FC<MenuItem & CartItem> = (props, key: number) => {
     //처음에는 하드코딩된 에셋 사용 추후에 객체를 받아서 동적으로 렌더링
     const navigate = useNavigate()
 
     return <>
-        <Card onClick={() => {navigate(`/fooddetail/${id}`); resetScrollPosition();}} sx={{
+        <Card onClick={() => {navigate(`/fooddetail/${props.id}`); resetScrollPosition();}} sx={{
             display: 'inline-block',
             position: "relative",
             flex: "0 0 auto",
@@ -21,20 +25,20 @@ const FoodCard: React.FC<MenuItem> = ({id, name, price, imageUrl, description}, 
             marginRight: '0.5rem',
             marginBottom:"0.5rem"
         }} key={key}>
-            <CardMedia component={"img"} height={140} image={imageUrl} title={name}/>
+            <CardMedia component={"img"} height={140} image={props.imageUrl} title={props.name}/>
             <CardContent>
                 <Typography gutterBottom variant="h6" fontWeight={"bold"} component="div">
-                    {name}
+                    {props.name}
                 </Typography>
                 <Typography gutterBottom variant="body1" fontWeight={"bold"} component="div">
-                    {price}원
+                    {props.price}원
                 </Typography>
                 <Typography style={{paddingTop: "0.5rem", paddingBottom: "0.5rem"}} gutterBottom variant="body2"
                             color="text.secondary">
-                    {description}
+                    {props.description}
                 </Typography>
                 <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
-                    <FaStar style={{color: "orange"}}/> 5.0 (10)
+                    <FaStar style={{color: "orange"}}/> {props.avgStarRatio} ({props.rateCounts})
                 </Typography>
             </CardContent>
         </Card>
