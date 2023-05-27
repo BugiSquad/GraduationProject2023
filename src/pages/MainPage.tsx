@@ -22,7 +22,7 @@ import { getPopularMenuFromRemote } from "../api/Favor";
 import { getFoodsWith, StorageType } from "../store/LocalStorage";
 import { checkNotificationSupported, checkPermission } from "../api/Notification";
 import { RequestPermission } from "../components/RequestPermission";
-import { WhiteButton } from '../components/styled/Buttons';
+import { OrangeButton, WhiteButton } from '../components/styled/Buttons';
 import { normalTypography } from '../components/styled/Text';
 import matnam from '../images/matnam.png';
 
@@ -63,6 +63,7 @@ export const MainPage: React.FC = () => {
         )
     return (
         <>
+
             <BannerText />
             <MainCarousel />
             <MainCategories />
