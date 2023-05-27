@@ -53,7 +53,6 @@ export const LoginContents: React.FC = () => {
                     console.log("logged in.");
                     navigate("/app");
                 } else {
-                    // alert("부적절한 접근입니다. 다시 시도해주세요.");
                     setOpen(true)
                 }
                 setMyInfo(info)
@@ -96,15 +95,15 @@ export const LoginContents: React.FC = () => {
                 <Button
                     onClick={handleLogin}
                     sx={OrangeButton}
-                    style={{ borderRadius: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)" }}>
+                    style={{ borderRadius: "0.5rem", boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)" ,margin:"0px"}}>
                     로그인
                 </Button>
                 <Button
                     component={RouterLink}
                     to="/signup"
                     sx={WhiteButton}
-                    style={{ borderRadius: "0.5rem", boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)" }}
-                >
+                    style={{ borderRadius: "0.5rem", boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",margin:"0px" }}
+                    >
                     회원가입 하러가기
                 </Button>
 
