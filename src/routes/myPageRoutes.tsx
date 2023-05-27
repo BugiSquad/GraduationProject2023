@@ -26,7 +26,7 @@ export const MyPageRoutes = [
         errorElement: <ErrorPage />,
 
     },
-    , {
+    {
         path: "/mypage",
         element: <Mypage />,
         errorElement: <ErrorPage />,

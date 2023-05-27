@@ -6,6 +6,7 @@ import 'react-swipeable-list/dist/styles.css';
 import {useNavigate} from "react-router-dom";
 import { resetScrollPosition } from "../pages/MainPage";
 import {CartItem} from "../types/CartItem";
+import shadows from "@mui/material/styles/shadows";
 
 
 
@@ -23,7 +24,8 @@ const FoodCard: React.FC<MenuItem & CartItem> = (props, key: number) => {
             borderRadius: "14px",
             marginLeft: '0.5rem',
             marginRight: '0.5rem',
-            marginBottom:"0.5rem"
+            marginBottom:"0.5rem",
+            boxShadow:"0px 5px 5px rgba(0, 0,0, 0.3)"
         }} key={key}>
             <CardMedia component={"img"} height={140} image={props.imageUrl} title={props.name}/>
             <CardContent>
