@@ -23,4 +23,6 @@ export interface ReviewDto {
     rating: number;
     text: string;
     title: string;
+
 }
+
