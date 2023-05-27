@@ -55,4 +55,3 @@ const Component: React.FC<{ items: (MenuItem | CartItem)[] }> = (menus) => {
         </>
     )
 }
-
