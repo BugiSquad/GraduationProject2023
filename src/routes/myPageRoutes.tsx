@@ -6,6 +6,7 @@ import { Login } from "../pages/Login";
 import { RecentMeetInfo, recentMeetInfoLoader } from "../pages/RecentMeetInfo";
 import { Review } from "../pages/Review";
 
+
 export const MyPageRoutes = [
     {
         path: "/mypage/editmyinfo",
@@ -27,6 +28,7 @@ export const MyPageRoutes = [
 
     },
     , {
+
         path: "/mypage",
         element: <Mypage />,
         errorElement: <ErrorPage />,
