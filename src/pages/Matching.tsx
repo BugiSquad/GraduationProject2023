@@ -47,10 +47,10 @@ const Content: React.FC = () => {
                     <Typography fontSize={"20px"} fontWeight={"bold"}>🍽️ 같이 먹어요!</Typography>
                 </div>
                 <div style={{display: "inherit", alignItems: "center"}}>
-                    <OrangeCircleButton sx={{background: "#FE724C"}} onClick={toggleDrawer(true, 'add')}>
+                    <OrangeCircleButton sx={{background: "#FE724C", margin:"3px"}} onClick={toggleDrawer(true, 'add')}>
                         <AddIcon style={{color: "white"}}/>
                     </OrangeCircleButton>
-                    <OrangeCircleButton sx={{background: "#FE724C"}} onClick={toggleDrawer(true, 'filter')}>
+                    <OrangeCircleButton sx={{background: "#FE724C", margin:"3px"}} onClick={toggleDrawer(true, 'filter')}>
                         <FilterAlt style={{color: "white"}}/>
                     </OrangeCircleButton>
                     <AddDrawer/>
