@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {SimpleTemplate} from "./PageTemplate";
 import {Button, Typography} from "@mui/material";
 import {RecentOrders} from "../components/RecentOrders";
@@ -11,11 +11,24 @@ import {removeMyInfo} from "../api/Member";
 import {getMyToken} from "../api/Common";
 import {useNavigate} from "react-router-dom";
 import {LikedMenuContents} from "../components/LikedMenuContents";
+import {OrderList, toOrderStatus} from "../types/Order";
+import {getOrderList} from "../api/Order";
 
 
 export const Mypage: React.FC = () => {
     const navigate = useNavigate();
 
+    const [list, setList] = useState<OrderList[]>([]);
+
+    useEffect(() => {
+        getOrderList().then((res) => {
+            const data = res.data.data.map(
+                (item: OrderList) => ({...item, ordersType: toOrderStatus(item.ordersType)})
+            )
+            setList(data)
+        }).catch((err) => console.warn(err))
+    }, [])
+    const len = list.length
     const handleLogout = () => {
         removeMyInfo();
         navigate("/app")
@@ -37,7 +50,8 @@ export const Mypage: React.FC = () => {
                         alignContent: "center",
                         marginRight: "10px",
                     }}>
-                        <Typography variant={"caption"} fontWeight="bold" color={'grey'}> 로그인하여 더 많은 기능과 옵션을 이용해보세요.</Typography>
+                        <Typography variant={"caption"} fontWeight="bold" color={'grey'}> 로그인하여 더 많은 기능과 옵션을
+                            이용해보세요.</Typography>
                         <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
                                 onClick={() => navigate('/login')}>로그인하기</Button>
                     </div>
@@ -56,7 +70,9 @@ export const Mypage: React.FC = () => {
                     <a href="/mypage/editmyinfo" style={{color: 'black'}}>내 정보 수정</a>
                 </div>
 
-                <MypageCards title="최근 주문 내역" content={<RecentOrders/>} link="/mypage/recentorderdetail"/>
+                <MypageCards title="최근 주문 내역"
+                             content={<RecentOrders list={len > 5 ? list.slice(len - 5, len) : list}/>}
+                             link="/mypage/recentorderdetail"/>
                 <MypageCards title="최근 만남" content={<RecentMeets/>} link="/mypage/recentmeetdetail"/>
                 <MypageCards title="나의 쪽지함" content={<MyMessagebox/>} link="/mypage/mymessagedetail"/>
                 <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents flag={true}/>} link="/likedmenu"/>
