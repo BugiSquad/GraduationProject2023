@@ -16,6 +16,11 @@ export interface ReviewItem {
     rating: number;
     text: string;
     title: string;
+    memberCompactDto: MemberCompactDto;
+}
+
+export interface MemberCompactDto {
+    name: string;
 }
 
 export interface ReviewDto {

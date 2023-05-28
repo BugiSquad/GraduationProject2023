@@ -1,22 +1,21 @@
-import { Box, Button, FormControlLabel, Link, Modal, Paper, Radio, RadioGroup, Typography } from "@mui/material"
-import { FaStar } from "react-icons/fa"
-import { useState } from "react";
+import {Box, Button, FormControlLabel, Link, Modal, Paper, Radio, RadioGroup, Typography} from "@mui/material"
+import {FaStar} from "react-icons/fa"
+import React, {useState} from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { MdAddCircleOutline, MdRemoveCircleOutline } from 'react-icons/md';
-import { useAppDispatch } from "../store/hooks";
-import { add } from "../store/cart";
-import { CartItem, ReviewItem } from "../types/CartItem";
-import { useNavigate } from "react-router-dom";
-import { ReviewBar } from "./ReviewBar";
-import { ReviewList } from "./ReviwList";
-import { getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType } from "../store/LocalStorage";
+import {MdAddCircleOutline, MdRemoveCircleOutline} from 'react-icons/md';
+import {useAppDispatch} from "../store/hooks";
+import {add} from "../store/cart";
+import {CartItem, ReviewItem} from "../types/CartItem";
+import {useNavigate} from "react-router-dom";
+import {ReviewBar} from "./ReviewBar";
+import {ReviewList} from "./ReviwList";
+import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} from "../store/LocalStorage";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import axios from "axios";
-import { getMyToken } from "../api/Common";
-import { ReviewContent } from "./ReviewContent";
-import React from "react";
-import { WhiteButton } from "./styled/Buttons";
+import {getMyToken} from "../api/Common";
+import {ReviewContent} from "./ReviewContent";
+import {WhiteButton} from "./styled/Buttons";
 
 
 interface FoodDetailContentsProps {
@@ -274,8 +273,8 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
             <div className="ReviewList"
                 style={{ display: 'flex', flexDirection: "column", alignItems: "flex-start", paddingTop: "20px" }}>
                 {reviews.map((item, idx) => {
-                    return (<ReviewList userId={"user01"} dayBefore={"18일 전"} rating={item.rating}
-                        contents={item.text} />)
+                    return (<ReviewList userId={item.memberCompactDto.name} dayBefore={"18일 전"} rating={item.rating}
+                                        contents={item.text}/>)
                 })}
             </div>
             <div
