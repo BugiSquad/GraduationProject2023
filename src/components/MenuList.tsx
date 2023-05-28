@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {getMenusByCategory, toMenuArray} from "../api/Menu";
 import {addMenu} from "../store/menuRepository";
 import FoodCard from "./FoodCard";
-import { CartItem } from "../types/CartItem";
+import {CartItem} from "../types/CartItem";
 
 
 export const MenuList: React.FC = () => {
@@ -48,8 +48,10 @@ const Component: React.FC<{ items: (MenuItem | CartItem)[] }> = (menus) => {
                         const cartItem = item as CartItem; // 형식 변환
 
                 return <FoodCard id={item.id} name={item.name}
-                price={item.price} imageUrl={item.imageUrl}
-                description={item.description} starRatio={cartItem.starRatio} avgStarRatio={cartItem.avgStarRatio} rateCounts={cartItem.rateCounts} quantity={cartItem.quantity}/>
+                                 price={item.price} imageUrl={item.imageUrl}
+                                 description={item.description} starRatio={cartItem.starRatio}
+                                 totalRating={cartItem.totalRating} rateCounts={cartItem.rateCounts}
+                                 quantity={cartItem.quantity}/>
 
             })}
         </>

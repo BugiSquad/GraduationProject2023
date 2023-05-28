@@ -1,9 +1,9 @@
 import React from 'react';
-import { Grid } from '@mui/material';
-import { styled } from '@mui/system';
+import {Grid} from '@mui/material';
+import {styled} from '@mui/system';
 import FoodCard from "./FoodCard";
-import { MenuItem } from "../types/MenuItem";
-import { CartItem } from '../types/CartItem';
+import {MenuItem} from "../types/MenuItem";
+import {CartItem} from '../types/CartItem';
 
 interface FoodCardSliderItems {
     foods: MenuItem[];
@@ -29,7 +29,7 @@ const MenuCardSlider: React.FC<FoodCardSliderItems> = ({ foods }) => {
                             price={food.price}
                             imageUrl={food.imageUrl}
                             description={food.description}
-                            avgStarRatio={cartItem.avgStarRatio}
+                            totalRating={cartItem.totalRating}
                             rateCounts={cartItem.rateCounts}
                             quantity={cartItem.quantity}
                             key={idx} starRatio={cartItem.starRatio} />

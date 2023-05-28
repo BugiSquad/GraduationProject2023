@@ -4,11 +4,8 @@ import {FaStar} from "react-icons/fa";
 import {MenuItem} from "../types/MenuItem";
 import 'react-swipeable-list/dist/styles.css';
 import {useNavigate} from "react-router-dom";
-import { resetScrollPosition } from "../pages/MainPage";
+import {resetScrollPosition} from "../pages/MainPage";
 import {CartItem} from "../types/CartItem";
-import shadows from "@mui/material/styles/shadows";
-
-
 
 
 const FoodCard: React.FC<MenuItem & CartItem> = (props, key: number) => {
@@ -40,7 +37,7 @@ const FoodCard: React.FC<MenuItem & CartItem> = (props, key: number) => {
                     {props.description}
                 </Typography>
                 <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
-                    <FaStar style={{color: "orange"}}/> {props.avgStarRatio} ({props.rateCounts})
+                    <FaStar style={{color: "orange"}}/> {props.totalRating} ({props.rateCounts})
                 </Typography>
             </CardContent>
         </Card>

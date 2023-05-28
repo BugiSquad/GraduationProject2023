@@ -29,7 +29,8 @@ export const Cart = createSlice(
                 let flag = false
                 state.item.forEach((e) => {
                     if (e.id === action.payload.id) {
-                        e.quantity++
+                        console.log(action.payload.quantity)
+                        e.quantity += action.payload.quantity
                         flag = true
                     }
                 })

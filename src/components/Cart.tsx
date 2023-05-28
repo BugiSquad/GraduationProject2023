@@ -10,9 +10,8 @@ import {CartItem as Item} from "../types/CartItem";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} from "../store/LocalStorage";
-import { menuCard } from "./styled/Cards";
-import { MdAddCircleOutline, MdRemoveCircleOutline } from "react-icons/md";
-import { count } from "console";
+import {menuCard} from "./styled/Cards";
+import {MdAddCircleOutline, MdRemoveCircleOutline} from "react-icons/md";
 
 
 export const CartItemList: FC<CartItems> = (cart) => {
@@ -65,7 +64,7 @@ export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
                     <Typography sx={{paddingRight: '5px'}} color={'black'} fontSize={15}
                                 fontWeight={'bold'}>{props.food.price}원</Typography>
                     <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
-                        <FaStar style={{color: "orange"}}/> {props.food.avgStarRatio} ({props.food.rateCounts})
+                        <FaStar style={{color: "orange"}}/> {props.food.totalRating} ({props.food.rateCounts})
                     </Typography>
                 </div>
             </div>
