@@ -71,7 +71,7 @@ export const PostPopper: FC<PostPopperProps>
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <Avatar sx={{ width: "25vw", height: "25vw", top: "40px", boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)" }} src={postItem.memberProfileUrl} />
                             <Paper sx={{
-                                 width: "90vw", // 너비를 줄여서 텍스트가 넘침 방지
+                                 width: "90vw", 
                                  backgroundColor: '#ff8b6b', 
                                  borderRadius: '1.5rem', 
                                  boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)", 
