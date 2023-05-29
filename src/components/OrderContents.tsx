@@ -1,20 +1,20 @@
-import { Box, Button, Card, Modal, TextField, Typography } from "@mui/material"
-import { PageCards } from "./PageCards"
+import {Box, Button, Modal, TextField, Typography} from "@mui/material"
+import {PageCards} from "./PageCards"
 import naverpayImg from '../images/logo_naverpay.png'
 import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
-import { OrderProductsList } from "./OrderProductsList"
+import {OrderProductsList} from "./OrderProductsList"
 import completeImg from '../images/complete.png'
 
-import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { useAppSelector } from "../store/hooks";
-import { CartItem } from "../types/CartItem";
-import { CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentType } from "../types/Order";
-import { createOrder } from "../api/Order";
-import { OrangeButton, WhiteButton } from "./styled/Buttons";
-import { normalCard } from "./styled/Cards"
-import { Cart } from "../store/cart"
+import React, {useEffect, useState} from "react"
+import {useNavigate} from "react-router-dom"
+import {useAppSelector} from "../store/hooks";
+import {CartItem} from "../types/CartItem";
+import {CreateOrderDto, CreatePaymentDetailDto, OrderItem, OrderType, PaymentType} from "../types/Order";
+import {createOrder} from "../api/Order";
+import {OrangeButton, WhiteButton} from "./styled/Buttons";
+import {Cart} from "../store/cart"
+import {useDispatch} from "react-redux";
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -55,11 +55,13 @@ export const OrderContents: React.FC = () => {
     const items = useAppSelector(state => state.cart.item);
     const [method, setMethod] = useState<PaymentType>(PaymentType.NONE);
     const [open, setOpen] = React.useState(false);
+    const dispatcher = useDispatch()
     const cart = useAppSelector((state) => state.cart)
 
     const handleOpen = async () => {
         setOpen(true);
-        Cart.actions.clear();
+
+        dispatcher(Cart.actions.clear());
         const res = await createDummyPaymentDetail(method)
         console.log(res);
         const myOrder: CreateOrderDto = {
