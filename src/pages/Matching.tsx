@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Typography} from "@mui/material";
 import {FilterAlt} from "@mui/icons-material";
 import {SimpleTemplate} from "./PageTemplate";
@@ -9,9 +9,6 @@ import {AddDrawer, FilterDrawer} from "../components/Drawers";
 import AddIcon from '@mui/icons-material/Add';
 import {OrangeCircleButton} from "../components/styled/Buttons";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
-import { Post } from "../components/Post";
-import { Placement } from "@popperjs/core";
-
 
 export const Matching: React.FC = () => {
     return (
@@ -21,6 +18,7 @@ export const Matching: React.FC = () => {
 }
 
 const Content: React.FC = () => {
+    const [queryString, setQueryString] = useState<string>("")
     const dispatch = useAppDispatch()
     const toggleDrawer = (open: boolean, name: String) =>
         (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -54,11 +52,11 @@ const Content: React.FC = () => {
                         <FilterAlt style={{color: "white"}}/>
                     </OrangeCircleButton>
                     <AddDrawer/>
-                    <FilterDrawer/>
+                    <FilterDrawer setQueryString={setQueryString}/>
                 </div>
             </div>
             <div style={{width:"100%"}}>
-                <Posts/>
+                <Posts queryString={queryString}/>
             </div>
         </div>
     </>)

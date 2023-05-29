@@ -11,7 +11,7 @@ import {OrangeButton} from "./styled/Buttons";
 import {DrawerGrid, DrawerGridChild} from "./styled/DrawerGrid";
 import {useAppDispatch} from "../store/hooks";
 import {closeDrawer} from "../store/matching/drawer";
-import { normalTypography } from "./styled/Text";
+import {normalTypography} from "./styled/Text";
 
 interface FormProps {
     time: Dayjs;
@@ -69,6 +69,7 @@ export const Write: React.FC = () => {
             })
         };
     }
+
 
     console.log(props.time)
 

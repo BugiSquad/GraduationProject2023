@@ -1,49 +1,65 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './styled/CheckBox.css';
-import { Typography } from '@mui/material';
+import {Typography} from '@mui/material';
+import {Gender} from '../types/MemberDto';
 
-export const GenderFilter: React.FC = () => {
-    const [selectedGender, setSelectedGender] = useState<string>('');
+interface GenderFilterProps {
+    selectedGender: Gender[];
+    setSelectedGender: React.Dispatch<React.SetStateAction<Gender[]>>;
+}
 
-  const handleGenderCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = event.target;
+export const GenderFilter: React.FC<GenderFilterProps> = (props) => {
+    const [checked, setChecked] = useState<boolean>(props.selectedGender.length === 0);
 
-    if (value === '상관없음' && checked) {
-      setSelectedGender('');
-    } else if (checked) {
-      setSelectedGender(value);
-    } else {
-      setSelectedGender('');
-    }
-  };
+    const handleGenderCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {value, checked} = event.target;
 
-  return (
-    <><Typography fontWeight={'bold'}>🔍성별을 골라주세요!</Typography><div className="check-box">
-          <label>
-              <input
-                  type="checkbox"
-                  value="남자"
-                  checked={selectedGender.includes('남자')}
-                  onChange={handleGenderCheckboxChange} />
-              남자
-          </label>
-          <label>
-              <input
-                  type="checkbox"
-                  value="여자"
-                  checked={selectedGender.includes('여자')}
-                  onChange={handleGenderCheckboxChange} />
-              여자
-          </label>
-          
-          <label>
-              <input
-                  type="checkbox"
-                  value="상관없음"
-                  checked={selectedGender.length === 0 || selectedGender.includes('상관없음')}
-                  onChange={handleGenderCheckboxChange} />
-              상관없음
-          </label>
-      </div></>
-  );
+        if (value === Gender.NONE) {
+            if (checked) {
+                props.setSelectedGender([])
+            }
+            setChecked(!checked)
+        } else {
+            if (props.selectedGender.includes(value as Gender)) {
+                let newSelected = props.selectedGender.filter(i => i !== value as Gender)
+                props.setSelectedGender(newSelected)
+                setChecked(newSelected.length === 0)
+            } else {
+                props.setSelectedGender([...props.selectedGender, value as Gender])
+                setChecked(false)
+            }
+        }
+    };
+
+    return (
+        <><Typography fontWeight={'bold'}>🔍성별을 골라주세요!</Typography>
+            <div className="check-box">
+                <label>
+                    <input
+                        type="checkbox"
+                        value={Gender.MALE}
+                        checked={props.selectedGender.includes(Gender.MALE)}
+                        onChange={handleGenderCheckboxChange}/>
+                    남자
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        value={Gender.FEMALE}
+                        checked={props.selectedGender.includes(Gender.FEMALE)}
+                        onChange={handleGenderCheckboxChange}/>
+                    여자
+                </label>
+
+                <label>
+                    <input
+                        type="checkbox"
+                        value={Gender.NONE}
+                        checked={checked}
+                        onChange={handleGenderCheckboxChange}/>
+                    상관없음
+                </label>
+            </div>
+        </>
+    );
 };
