@@ -76,7 +76,7 @@ export const Mypage: React.FC = () => {
                 <MypageCards title="최근 만남" content={<RecentMeets/>} link="/mypage/recentmeetdetail"/>
                 <MypageCards title="나의 쪽지함" content={<MyMessagebox/>} link="/mypage/mymessagedetail"/>
                 <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents flag={true}/>} link="/likedmenu"/>
-                <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
+                <Button sx={{...OrangeButton, width: "100%", borderRadius: "0.3rem", margin:"0px"}} 
                         onClick={handleLogout}>로그아웃하기 </Button>
             </SimpleTemplate>
         )

@@ -11,6 +11,7 @@ import {OrangeButton} from "./styled/Buttons";
 import {DrawerGrid, DrawerGridChild} from "./styled/DrawerGrid";
 import {useAppDispatch} from "../store/hooks";
 import {closeDrawer} from "../store/matching/drawer";
+import { normalTypography } from "./styled/Text";
 
 interface FormProps {
     time: Dayjs;
@@ -29,8 +30,10 @@ export const Write: React.FC = () => {
         label: "제목", value: props.title,
         variant: "outlined" as "outlined",
         onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-            setProps({...props, title: event.target.value == null ? "" : event.target.value})
-        }
+            const inputValue = event.target.value;
+            if (inputValue.length <= 10) {
+              setProps({ ...props, title: inputValue });
+            }        }
     }), [props]);
 
     const bodyProps = useMemo(() => ({
@@ -77,8 +80,10 @@ export const Write: React.FC = () => {
             <Typography variant={"h6"} fontWeight={"bold"}>글 작성</Typography>
             <DrawerGrid container rowSpacing={1}>
                 <Form onSubmit={onSubmit()}>
+                <Typography sx={{...normalTypography, padding:"0px"}} fontSize={13} color={"#FE724C"}>*제목은 10글자까지 입력할 수 있습니다.</Typography>
+
                     <DrawerGridChild item xs={12}>
-                        <TextField {...titleProps}/>
+                        <TextField {...titleProps}  inputProps={{ maxLength: 10 }}/>
                     </DrawerGridChild>
                     <DrawerGridChild item xs={12}>
                         <div style={{display: "flex", flexDirection: "row"}}>

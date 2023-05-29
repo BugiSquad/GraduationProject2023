@@ -59,6 +59,7 @@ export const OrderContents: React.FC = () => {
 
     const handleOpen = async () => {
         setOpen(true);
+        Cart.actions.clear();
         const res = await createDummyPaymentDetail(method)
         console.log(res);
         const myOrder: CreateOrderDto = {
@@ -79,7 +80,6 @@ export const OrderContents: React.FC = () => {
     }
     const handleClose = () => {
         setOpen(false)
-        Cart.actions.clear();
         navigate('/mypage');
     }
     return (<>
@@ -100,17 +100,32 @@ export const OrderContents: React.FC = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
+                <Box  sx={{
+                        ...style,
+                        backgroundColor: '#FE724C',
+                        borderRadius: '1rem',
+                        padding: '1rem',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        maxWidth: '80%',
+                        maxHeight: '80%',
+                        overflow: 'auto',
+                        borderColor: "#FE724C",
+                        boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
+                    }}>
+                <Typography
+                        id="modal-modal-title"
+                        variant="h5"
+                        component="h1"
+                        fontWeight="bold"
+                        color="white"
+                        mb={2}
+                    >
                         주문이 완료되었습니다.
                     </Typography>
-                    <img src={completeImg} style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        borderRadius: '1rem',
-                        paddingTop: "20px"
-                    }} />
+                    
                     <div style={{ display: 'flex', flexDirection: "column", justifyContent: "space-between" }}>
                         <div style={{
                             display: 'flex',
@@ -137,8 +152,11 @@ export const OrderContents: React.FC = () => {
                         </div>
 
                     </div>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <Button sx={{ ...WhiteButton, width: "50%" }} onClick={() => { navigate("/mypage/recentorderdetail") }}>주문상세</Button>
+                        <Button sx={{ ...WhiteButton, width: "50%" }} onClick={handleClose}>닫기</Button>
+                    </div>
                 </Box>
             </Modal>
         </div>

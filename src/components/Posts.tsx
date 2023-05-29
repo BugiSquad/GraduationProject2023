@@ -39,14 +39,14 @@ export const Posts: React.FC = () => {
             />
             {posts.map((postItem, idx) => {
                 // console.log(postItem);
-                return (<Post key={idx} title={`${postItem.title}`}
+                return (<><Post key={idx} title={`${postItem.title}`}
                               memberProfileUrl={`${postItem.memberProfileUrl == null ? "" : postItem.memberProfileUrl}`}
                               minutesLeftUntilMeal={Number(postItem.minutesLeftUntilMeal)}
                               interest={postItem.interest}
                               onClick={(event, newPlacement) => {
                                   handleClick(event, newPlacement, postItem)
                               }} index={idx}
-                />)
+                /></>)
             })}
         </div>
     )

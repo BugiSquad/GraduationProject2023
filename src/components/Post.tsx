@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Card, Chip, PopperPlacementType, Typography} from "@mui/material";
+import { Avatar, Card, Chip, PopperPlacementType, Typography } from "@mui/material";
 import { normalCard } from "./styled/Cards";
 
 export interface PostDetail {
@@ -13,17 +13,17 @@ export interface PostDetail {
 
 export const Post: React.FC<PostDetail> = (detail: PostDetail) => {
     if (detail.minutesLeftUntilMeal < 0) return <></>
-    const truncatedTitle = detail.title.length > 5 ? detail.title.slice(0, 10) + "..." : detail.title;
     return (<>
         <Card id={detail.index + ""}
-              sx={normalCard}
-              style={{marginLeft:"0px", marginRight:"0px"}}
-              onClick={(event) => {
-                  detail.onClick(event, "auto");
-              }}>
-            <Avatar src={detail.memberProfileUrl == null ? "" : detail.memberProfileUrl}/>
-            <Typography variant={"body2"}>{truncatedTitle}</Typography>
-            {detail.interest.map((interest, idx) => <Chip key={idx} label={`#${interest}`}></Chip>)}
+            sx={{ ...normalCard,marginLeft: "0px", marginRight: "0px" }}
+            onClick={(event) => {
+                detail.onClick(event, "auto");
+            }}>
+            <Avatar src={detail.memberProfileUrl == null ? "" : detail.memberProfileUrl} />
+            <Typography variant={"body2"} fontSize={13} fontWeight={'bold'}>{detail.title}</Typography>
+            {/* {detail.interest.map((interest, idx) => <Chip key={idx} label={`#${interest}`}></Chip>)} */}
+            {[detail.interest[0], ...(detail.interest.length > 1 ? [`+${detail.interest.length - 1}`] : [])].map((interest, idx) => (
+                <Chip key={idx} label={interest} />))}
             <Typography variant={"subtitle2"}>{getTimeFrom(detail.minutesLeftUntilMeal)} 후</Typography>
         </Card> </>)
 }
