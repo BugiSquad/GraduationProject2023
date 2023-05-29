@@ -69,7 +69,7 @@ export const InterestFilter: React.FC<InterestFilterProps> = ({selectedInterests
     },
   });
 
-  console.log({ selectedInterests });
+  // console.log({ selectedInterests });
   return (
     <Root>
       <div  {...getRootProps()} style={{width:"100%"}}>

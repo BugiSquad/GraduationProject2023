@@ -69,9 +69,7 @@ export const Write: React.FC = () => {
             })
         };
     }
-
-
-    console.log(props.time)
+    // console.log(props.time)
 
     return (
         <Card id={"createMatch"} sx={{
