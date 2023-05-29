@@ -5,6 +5,7 @@ import { SimpleTemplate } from "./PageTemplate";
 import { OrderList } from "../types/Order";
 import { Typography } from "@mui/material";
 
+
 export const MenuHistory: React.FC = () => {
     const [list, setList] = useState<OrderList[]>([]);
     return (
@@ -34,6 +35,7 @@ export const MenuHistoryContent: React.FC<{ list: OrderList[] }> = (props) => {
         ))
       ) : (
         <Typography>no item</Typography>
+
       )}
     </div>
   );
