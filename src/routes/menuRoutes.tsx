@@ -3,6 +3,7 @@ import {ErrorPage} from "../error-page";
 import {WeekPopMenu} from "../pages/WeekPopMenu";
 import {RecentMenu} from "../pages/RecentMenu";
 import { LikedMenu } from "../pages/LikedMenu";
+import { MenuHistory } from "../pages/MenuHistory";
 
 export const MenuRoutes = [
     {
@@ -26,6 +27,11 @@ export const MenuRoutes = [
     {
         path: "/likedmenu",
         element: <LikedMenu/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/menuhistory/:ordersId",
+        element: <MenuHistory />,
         errorElement: <ErrorPage/>,
     },
 ]

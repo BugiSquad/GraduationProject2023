@@ -1,18 +1,20 @@
-import React, {useEffect, useState} from "react";
-import {SimpleTemplate} from "./PageTemplate";
-import {Button, Typography} from "@mui/material";
-import {RecentOrders} from "../components/RecentOrders";
-import {MypageCards} from "../components/MypageCards";
-import {RecentMeets} from "../components/RecentMeets";
-import {MyMessagebox} from "../components/MyMessagebox";
-import {BottomNavigationTab} from "../types/PageHeaderParam";
-import {OrangeButton} from "../components/styled/Buttons";
-import {removeMyInfo} from "../api/Member";
-import {getMyToken} from "../api/Common";
-import {useNavigate} from "react-router-dom";
-import {LikedMenuContents} from "../components/LikedMenuContents";
-import {OrderList, toOrderStatus} from "../types/Order";
-import {getOrderList} from "../api/Order";
+import React, { useEffect, useState } from "react";
+import { SimpleTemplate } from "./PageTemplate";
+import { Button, Typography } from "@mui/material";
+import { RecentOrders } from "../components/RecentOrders";
+import { MypageCards } from "../components/MypageCards";
+import { RecentMeets } from "../components/RecentMeets";
+import { MyMessagebox } from "../components/MyMessagebox";
+import { BottomNavigationTab } from "../types/PageHeaderParam";
+import { OrangeButton } from "../components/styled/Buttons";
+import { removeMyInfo } from "../api/Member";
+import { getMyToken } from "../api/Common";
+import { useNavigate } from "react-router-dom";
+import { LikedMenuContents } from "../components/LikedMenuContents";
+import { OrderList, toOrderStatus } from "../types/Order";
+import { getOrderList } from "../api/Order";
+import { UserInfo } from "../components/UserInfoFrame";
+import { normalTypography } from "../components/styled/Text";
 
 
 export const Mypage: React.FC = () => {
@@ -23,7 +25,7 @@ export const Mypage: React.FC = () => {
     useEffect(() => {
         getOrderList().then((res) => {
             const data = res.data.data.map(
-                (item: OrderList) => ({...item, ordersType: toOrderStatus(item.ordersType)})
+                (item: OrderList) => ({ ...item, ordersType: toOrderStatus(item.ordersType) })
             )
             setList(data)
         }).catch((err) => console.warn(err))
@@ -33,9 +35,10 @@ export const Mypage: React.FC = () => {
         removeMyInfo();
         navigate("/app")
     };
+    const [userInfo, setInfo] = React.useState({} as UserInfo);
     if (getMyToken() === "")
         return (
-            <SimpleTemplate param={{pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE}}>
+            <SimpleTemplate param={{ pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE }}>
                 <div style={{
                     display: "flex",
                     height: "60vh",
@@ -52,32 +55,32 @@ export const Mypage: React.FC = () => {
                     }}>
                         <Typography variant={"caption"} fontWeight="bold" color={'grey'}> 로그인하여 더 많은 기능과 옵션을
                             이용해보세요.</Typography>
-                        <Button sx={OrangeButton} style={{width: "100%", borderRadius: "0.3rem"}}
-                                onClick={() => navigate('/login')}>로그인하기</Button>
+                        <Button sx={OrangeButton} style={{ width: "100%", borderRadius: "0.3rem" }}
+                            onClick={() => navigate('/login')}>로그인하기</Button>
                     </div>
                 </div>
             </SimpleTemplate>)
     else
         return (
-            <SimpleTemplate param={{pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE}}>
+            <SimpleTemplate param={{ pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE }}>
                 <div style={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     marginRight: "10px"
                 }}>
-                    <div></div>
-                    <a href="/mypage/editmyinfo" style={{color: 'black'}}>내 정보 수정</a>
-                </div>
+                <Typography sx={{...normalTypography}} fontSize={20}>{userInfo.nickname}님, 반갑습니다.</Typography>
+                    <a href="/mypage/editmyinfo" style={{ color: 'black' }}>내 정보 수정</a>
 
+                </div>
                 <MypageCards title="최근 주문 내역"
-                             content={<RecentOrders list={len > 5 ? list.slice(len - 5, len) : list}/>}
-                             link="/mypage/recentorderdetail"/>
-                <MypageCards title="최근 만남" content={<RecentMeets/>} link="/mypage/recentmeetdetail"/>
-                <MypageCards title="나의 쪽지함" content={<MyMessagebox/>} link="/mypage/mymessagedetail"/>
-                <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents flag={true}/>} link="/likedmenu"/>
-                <Button sx={{...OrangeButton, width: "100%", borderRadius: "0.3rem", margin:"0px"}} 
-                        onClick={handleLogout}>로그아웃하기 </Button>
+                    content={<RecentOrders list={len > 5 ? list.slice(len - 5, len) : list} />}
+                    link="/mypage/recentorderdetail" />
+                <MypageCards title="최근 만남" content={<RecentMeets />} link="/mypage/recentmeetdetail" />
+                <MypageCards title="나의 쪽지함" content={<MyMessagebox />} link="/mypage/mymessagedetail" />
+                <MypageCards title="내가 찜한 메뉴" content={<LikedMenuContents flag={true} />} link="/likedmenu" />
+                <Button sx={{ ...OrangeButton, width: "100%", borderRadius: "0.3rem", margin: "0px" }}
+                    onClick={handleLogout}>로그아웃하기 </Button>
             </SimpleTemplate>
         )
 }
