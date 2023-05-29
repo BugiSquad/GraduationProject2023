@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { BottomNavigationTab } from "../types/PageHeaderParam";
 import { SimpleTemplate } from "./PageTemplate";
-import { getMenuById } from "../api/Menu";
 import { OrderList } from "../types/Order";
 import { Typography } from "@mui/material";
-import { RecentOrder } from "../components/RecentOrder";
+
 
 export const MenuHistory: React.FC = () => {
     const [list, setList] = useState<OrderList[]>([]);
@@ -35,7 +34,8 @@ export const MenuHistoryContent: React.FC<{ list: OrderList[] }> = (props) => {
           </React.Fragment>
         ))
       ) : (
-        <Typography>sry</Typography>
+        <Typography>no item</Typography>
+
       )}
     </div>
   );

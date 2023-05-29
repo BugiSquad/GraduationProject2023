@@ -69,7 +69,8 @@ export const Mypage: React.FC = () => {
                     justifyContent: "space-between",
                     marginRight: "10px"
                 }}>
-                <Typography sx={{...normalTypography}} fontSize={20}>{userInfo.nickname}님, 반갑습니다.</Typography>
+                <Typography sx={{...normalTypography, padding:"0px"}} color="#FE724C" fontSize={20} >{userInfo.nickname}님, 반갑습니다.</Typography>
+
                     <a href="/mypage/editmyinfo" style={{ color: 'black' }}>내 정보 수정</a>
 
                 </div>
