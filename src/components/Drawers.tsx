@@ -5,7 +5,11 @@ import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matchin
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {Write} from "./Write";
 
-export const FilterDrawer: React.FC = () => {
+interface FilterProps {
+    setQueryString: React.Dispatch<React.SetStateAction<string>>
+}
+
+export const FilterDrawer: React.FC<FilterProps> = (props) => {
     const isFilterOpen = useAppSelector(state => state.matchOptions.filter)
     const dispatch = useAppDispatch()
     const toggleDrawer = (open: boolean, name: String) =>
@@ -28,7 +32,7 @@ export const FilterDrawer: React.FC = () => {
                 setState: toggleDrawer,
                 state: isFilterOpen
             }}>
-            <Filter/>
+            <Filter setQueryString={props.setQueryString}/>
         </DrawerContainer>
     </>)
 }

@@ -5,7 +5,11 @@ import {PostItem} from "../types/PostItem";
 import {PostPopper} from "./PostPopper";
 import {Post} from "./Post";
 
-export const Posts: React.FC = () => {
+interface PostsProps {
+    queryString: string
+}
+
+export const Posts: React.FC<PostsProps> = (props) => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
     const [open, setOpen] = React.useState(false);
     const [placement, setPlacement] = React.useState<PopperPlacementType>("auto");
@@ -15,12 +19,11 @@ export const Posts: React.FC = () => {
     const [selected, setSelected] = useState<PostItem>({} as PostItem)
 
     useEffect(() => {
-        getPosts().then(res => {
+        getPosts(props.queryString).then(res => {
             const data = res.data.data.content.map((item: PostItem) => item);
             setPosts(data)
-            // console.log(data)
         })
-    }, [])
+    }, [props.queryString])
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType, selected: PostItem) => {
         setAnchorEl(event.currentTarget);
@@ -37,16 +40,16 @@ export const Posts: React.FC = () => {
                         }} placement={placement}
                         postItem={selected}
             />
-            {posts.map((postItem, idx) => {
+            {posts.sort((a, b) => Number(a.minutesLeftUntilMeal) - Number(b.minutesLeftUntilMeal)).map((postItem, idx) => {
                 // console.log(postItem);
-                return (<Post key={idx} title={`${postItem.title}`}
-                              memberProfileUrl={`${postItem.memberProfileUrl == null ? "" : postItem.memberProfileUrl}`}
-                              minutesLeftUntilMeal={Number(postItem.minutesLeftUntilMeal)}
-                              interest={postItem.interest}
-                              onClick={(event, newPlacement) => {
-                                  handleClick(event, newPlacement, postItem)
-                              }} index={idx}
-                />)
+                return (<><Post key={idx} title={`${postItem.title}`}
+                                memberProfileUrl={`${postItem.memberProfileUrl == null ? "" : postItem.memberProfileUrl}`}
+                                minutesLeftUntilMeal={Number(postItem.minutesLeftUntilMeal)}
+                                interest={postItem.interest}
+                                onClick={(event, newPlacement) => {
+                                    handleClick(event, newPlacement, postItem)
+                                }} index={idx}
+                /></>)
             })}
         </div>
     )

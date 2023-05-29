@@ -1,4 +1,4 @@
-import {Box, Button, FormControlLabel, Link, Modal, Paper, Radio, RadioGroup, Typography} from "@mui/material"
+import {Box, Button, Link, Modal, Paper, Typography} from "@mui/material"
 import {FaStar} from "react-icons/fa"
 import React, {useState} from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -15,7 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import axios from "axios";
 import {getMyToken} from "../api/Common";
 import {ReviewContent} from "./ReviewContent";
-import {WhiteButton} from "./styled/Buttons";
+import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
 
 interface FoodDetailContentsProps {
@@ -161,24 +161,24 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                     <Typography align={'left'} fontSize={'15px'} fontWeight={'bold'}
                                 color={'#858992'}>{food.description}</Typography>
                 </div>
-                <div style={{display: "flex", alignContent: "flex-start", paddingTop: '10px'}}>
-                    <Typography fontSize={'18px'} fontWeight={'bold'}>포장여부</Typography>
-                </div>
-                <div style={{display: "flex", justifyContent: "space-between", paddingTop: '10px'}}>
-                    <div style={{alignContent: "flex-start", flexDirection: 'column', paddingTop: "13px"}}>
-                        <Typography fontSize={'15px'}>포장</Typography>
-                        <Typography sx={{paddingTop: "13px"}} fontSize={'15px'}>매장</Typography>
-                    </div>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        name="radio-buttons-group"
-                    >
-                        <FormControlLabel value="togo" control={<Radio size='small'/>} label="-1000 ₩"
-                                          labelPlacement="start"/>
-                        <FormControlLabel value="here" control={<Radio size='small'/>} label="0 ₩"
-                                          labelPlacement="start"/>
-                    </RadioGroup>
-                </div>
+                {/*<div style={{display: "flex", alignContent: "flex-start", paddingTop: '10px'}}>*/}
+                {/*    <Typography fontSize={'18px'} fontWeight={'bold'}>포장여부</Typography>*/}
+                {/*</div>*/}
+                {/*<div style={{display: "flex", justifyContent: "space-between", paddingTop: '10px'}}>*/}
+                {/*    <div style={{alignContent: "flex-start", flexDirection: 'column', paddingTop: "13px"}}>*/}
+                {/*        <Typography fontSize={'15px'}>포장</Typography>*/}
+                {/*        <Typography sx={{paddingTop: "13px"}} fontSize={'15px'}>매장</Typography>*/}
+                {/*    </div>*/}
+                {/*    <RadioGroup*/}
+                {/*        aria-labelledby="demo-radio-buttons-group-label"*/}
+                {/*        name="radio-buttons-group"*/}
+                {/*    >*/}
+                {/*        <FormControlLabel value="togo" control={<Radio size='small'/>} label="-1000 ₩"*/}
+                {/*                          labelPlacement="start"/>*/}
+                {/*        <FormControlLabel value="here" control={<Radio size='small'/>} label="0 ₩"*/}
+                {/*                          labelPlacement="start"/>*/}
+                {/*    </RadioGroup>*/}
+                {/*</div>*/}
                 <Button disableElevation disableRipple sx={{
                     paddingLeft: '10px',
                     paddingRight: '10px',
@@ -210,7 +210,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                         sx={{
                             ...style,
 
-                            backgroundColor: '#FE724C',
+                            backgroundColor: '#ff8b6b',
                             borderRadius: '1rem',
                             padding: '1rem',
                             position: 'absolute',
@@ -220,7 +220,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                             maxWidth: '80%',
                             maxHeight: '80%',
                             overflow: 'auto',
-                            borderColor: "#FE724C",
+                            borderColor: "#ff8b6b",
                             boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)"
                         }}
                     >
@@ -228,9 +228,9 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                             id="modal-modal-title"
                             component="h1"
                             fontWeight="bold"
-                            color="white"
                             fontSize="22px"
                             mb={2}
+                            color="White"
                         >
                             메뉴가 장바구니에 담겼습니다. </Typography>
                         <div
@@ -242,19 +242,19 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                                 paddingRight: '30px',
                             }}
                         >
-                            <Typography fontSize={14} fontWeight="bold" color="white">
+                            <Typography fontSize={14} fontWeight="bold"color="White" >
                                 - {food.name}
                             </Typography>
-                            <Typography fontSize={14} fontWeight="bold" color="white">
+                            <Typography fontSize={14} fontWeight="bold"color="White" >
                                 {count} 개
                             </Typography>
 
                         </div>
-                        <Typography sx={{mt: 2}} fontSize={17} fontWeight="bold" color="white">
+                        <Typography sx={{mt: 2}} fontSize={17} fontWeight="bold" color="White">
                             장바구니로 이동할까요?
                         </Typography>
                         <div style={{display: "flex", flexDirection: "row"}}>
-                            <Button sx={{...WhiteButton, width: "50%"}} onClick={() => {
+                            <Button sx={{...OrangeButton, width: "50%"}} onClick={() => {
                                 navigate('/cart')
                             }}>네!</Button>
                             <Button sx={{...WhiteButton, width: "50%"}} onClick={handleClose}>더 담을래요.</Button>
