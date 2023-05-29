@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import { Avatar, Button, Fade, Paper, Popper, PopperPlacementType, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { joinNoteRoom } from "../api/NoteRoom";
-import { getTimeFrom } from "./Post";
-import { PostItem } from "../types/PostItem";
-import { OrangeButton, WhiteButton } from "./styled/Buttons";
+import React, {FC} from "react";
+import {Avatar, Button, Fade, Paper, Popper, PopperPlacementType, Typography} from "@mui/material";
+import {useNavigate} from "react-router-dom";
+import {joinNoteRoom} from "../api/NoteRoom";
+import {getTimeFrom} from "./Post";
+import {PostItem} from "../types/PostItem";
+import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
 interface PostPopperProps {
     anchorEl: HTMLDivElement | null,
@@ -71,14 +71,13 @@ export const PostPopper: FC<PostPopperProps>
                         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <Avatar sx={{ width: "25vw", height: "25vw", top: "40px", boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)" }} src={postItem.memberProfileUrl} />
                             <Paper sx={{
-                                 width: "90vw", // 너비를 줄여서 텍스트가 넘침 방지
-                                 backgroundColor: '#ff8b6b', 
-                                 borderRadius: '1.5rem', 
-                                 boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)", 
-                                 padding:"1rem", 
-                                 marginLeft:"2rem", 
-                                 marginRight:"2rem", 
-                                 marginBottom:"10rem"
+                                width: "90vw", // 너비를 줄여서 텍스트가 넘침 방지
+                                borderRadius: '1.5rem',
+                                boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)",
+                                padding: "1rem",
+                                marginLeft: "2rem",
+                                marginRight: "2rem",
+                                marginBottom: "10rem"
                             }}>
                                 <div style={{
                                     flexDirection: "column",

@@ -3,7 +3,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import {styled} from '@mui/material/styles';
 import {autocompleteClasses} from '@mui/material/Autocomplete';
-import { Typography } from '@mui/material';
+import {Typography} from '@mui/material';
 
 export interface InterestOptionType {
   label: string;
@@ -11,7 +11,7 @@ export interface InterestOptionType {
 }
 
 const Interests = [
-  {key: 'pbug', label: '배그'},
+  {key: 'pubg', label: '배그'},
   {key: 'lol', label: '롤'},
   {key: 'celebrity', label: '연예인'},
   {key: 'coffee', label: '커피'},
@@ -69,7 +69,7 @@ export const InterestFilter: React.FC<InterestFilterProps> = ({selectedInterests
     },
   });
 
-  console.log({ selectedInterests });
+  // console.log({ selectedInterests });
   return (
     <Root>
       <div  {...getRootProps()} style={{width:"100%"}}>

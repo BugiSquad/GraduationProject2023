@@ -16,8 +16,8 @@ interface PostCondition {
 /**
  * API 서버에서 게시글 목록을 가져옵니다
  */
-export function getPosts() {
-    return axios.get(getApiURL() + `/match/post`, getHeader())
+export function getPosts(queryString: string) {
+    return axios.get(getApiURL() + `/match/post${queryString}`, getHeader())
 }
 
 /**

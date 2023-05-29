@@ -1,4 +1,4 @@
-import {Box, Button, FormControlLabel, Link, Modal, Paper, Radio, RadioGroup, Typography} from "@mui/material"
+import {Box, Button, Link, Modal, Paper, Typography} from "@mui/material"
 import {FaStar} from "react-icons/fa"
 import React, {useState} from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -161,24 +161,24 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                     <Typography align={'left'} fontSize={'15px'} fontWeight={'bold'}
                                 color={'#858992'}>{food.description}</Typography>
                 </div>
-                <div style={{display: "flex", alignContent: "flex-start", paddingTop: '10px'}}>
-                    <Typography fontSize={'18px'} fontWeight={'bold'}>포장여부</Typography>
-                </div>
-                <div style={{display: "flex", justifyContent: "space-between", paddingTop: '10px'}}>
-                    <div style={{alignContent: "flex-start", flexDirection: 'column', paddingTop: "13px"}}>
-                        <Typography fontSize={'15px'}>포장</Typography>
-                        <Typography sx={{paddingTop: "13px"}} fontSize={'15px'}>매장</Typography>
-                    </div>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        name="radio-buttons-group"
-                    >
-                        <FormControlLabel value="togo" control={<Radio size='small'/>} label="-1000 ₩"
-                                          labelPlacement="start"/>
-                        <FormControlLabel value="here" control={<Radio size='small'/>} label="0 ₩"
-                                          labelPlacement="start"/>
-                    </RadioGroup>
-                </div>
+                {/*<div style={{display: "flex", alignContent: "flex-start", paddingTop: '10px'}}>*/}
+                {/*    <Typography fontSize={'18px'} fontWeight={'bold'}>포장여부</Typography>*/}
+                {/*</div>*/}
+                {/*<div style={{display: "flex", justifyContent: "space-between", paddingTop: '10px'}}>*/}
+                {/*    <div style={{alignContent: "flex-start", flexDirection: 'column', paddingTop: "13px"}}>*/}
+                {/*        <Typography fontSize={'15px'}>포장</Typography>*/}
+                {/*        <Typography sx={{paddingTop: "13px"}} fontSize={'15px'}>매장</Typography>*/}
+                {/*    </div>*/}
+                {/*    <RadioGroup*/}
+                {/*        aria-labelledby="demo-radio-buttons-group-label"*/}
+                {/*        name="radio-buttons-group"*/}
+                {/*    >*/}
+                {/*        <FormControlLabel value="togo" control={<Radio size='small'/>} label="-1000 ₩"*/}
+                {/*                          labelPlacement="start"/>*/}
+                {/*        <FormControlLabel value="here" control={<Radio size='small'/>} label="0 ₩"*/}
+                {/*                          labelPlacement="start"/>*/}
+                {/*    </RadioGroup>*/}
+                {/*</div>*/}
                 <Button disableElevation disableRipple sx={{
                     paddingLeft: '10px',
                     paddingRight: '10px',
