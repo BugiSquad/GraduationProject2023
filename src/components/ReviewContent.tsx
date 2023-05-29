@@ -1,4 +1,4 @@
-import {Button, Rating, Typography} from "@mui/material";
+import {Button, Modal, Rating, Typography} from "@mui/material";
 import {useParams} from "react-router-dom";
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import {styled} from '@mui/system';
@@ -12,6 +12,7 @@ import {MenuItem} from "../types/MenuItem";
 import {ReviewDto} from "../types/CartItem";
 import {getApiURL, getHeader} from "../api/Common";
 import axios from "axios";
+import { count } from "console";
 
 const blue = {
     100: '#DAECFF',
@@ -65,6 +66,18 @@ const StyledTextarea = styled(TextareaAutosize)(
       `,
 );
 
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
 export const ReviewContent: React.FC<{ menuItem: MenuItem }> = (props) => {
     const {ordersInfo} = useParams();
 
@@ -80,6 +93,7 @@ export const ReviewContent: React.FC<{ menuItem: MenuItem }> = (props) => {
             title: "EmptyTitle"
         } as ReviewDto
         axios.post(`${getApiURL()}/review`, review, getHeader());
+
     }
 
     return (
@@ -130,6 +144,16 @@ export const ReviewTextArea: React.FC<{
     onSubmit: () => void
 }> = (props) => {
     const addEmoji = (emoji: string) => () => props.setText(`${props.text}${emoji}`);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = async () => {
+        setOpen(true);
+
+    }
+    const handleClose = () => {
+        setOpen(false);
+        window.location.reload();
+    }
     return (<div style={{display: "flex", flexDirection: "column", alignItems: "center", width: "100%"}}>
         <Textarea
             placeholder="리뷰를 작성해주세요."
@@ -142,11 +166,11 @@ export const ReviewTextArea: React.FC<{
                     <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
                         👍
                     </IconButton>
-                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
-                        🏖
+                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('💛')}>
+                        💛
                     </IconButton>
-                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
-                        😍
+                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('🔥')}>
+                        🔥
                     </IconButton>
                 </Box>
             }
@@ -158,9 +182,48 @@ export const ReviewTextArea: React.FC<{
             sx={{width: "100%"}}
         />
         <div style={{display: "contents"}}>
-            <Button sx={OrangeButton} onClick={props.onSubmit}
+            <Button sx={OrangeButton} onClick={()=>{props.onSubmit(); handleOpen();}}
                     style={{width: "100%", borderRadius: "0.3rem"}}>등록</Button>
             <Button sx={WhiteButton} style={{width: "100%", borderRadius: "0.3rem"}}>취소</Button>
         </div>
+        <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box
+                        sx={{
+                            ...style,
+
+                            backgroundColor: '#ff8b6b',
+                            borderRadius: '1rem',
+                            padding: '1rem',
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            maxWidth: '80%',
+                            maxHeight: '80%',
+                            overflow: 'auto',
+                            borderColor: "#ff8b6b",
+                            boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)"
+                        }}
+                    >
+                        <Typography
+                            id="modal-modal-title"
+                            component="h1"
+                            fontWeight="bold"
+                            fontSize="22px"
+                            mb={2}
+                            color="White"
+                        >
+                            리뷰가 정상적으로 <br />등록되었습니다. </Typography>
+
+                        <div style={{display: "flex", flexDirection: "row"}}>
+                            <Button sx={{...WhiteButton, width: "50%"}} onClick={handleClose}>닫기</Button>
+                        </div>
+                    </Box>
+                </Modal>
     </div>)
 }
