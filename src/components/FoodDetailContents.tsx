@@ -87,6 +87,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
         setOpen(false);
     }
 
+    const formattedPrice = food.price.toLocaleString(); 
 
     return (<>
 
@@ -129,7 +130,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                     flexDirection: "row",
                     paddingTop: '10px'
                 }}>
-                    <Typography fontSize={'24px'} fontWeight={'bold'} color={'#FE724C'}>{food.price}</Typography>
+                    <Typography fontSize={'24px'} fontWeight={'bold'} color={'#FE724C'}>{formattedPrice}원</Typography>
                     <Box display="flex">
                         <Button disableElevation
                                 style={{minWidth: 'unset', borderRadius: '50%', color: '#FE724C'}}
