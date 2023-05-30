@@ -17,6 +17,12 @@ import {getMyToken} from "../api/Common";
 import {ReviewContent} from "./ReviewContent";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
 
+function scrollToBottom() {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth' // 부드러운 스크롤링 효과를 위해 'smooth' 옵션을 추가합니다.
+    });
+  }
 
 interface FoodDetailContentsProps {
     food: CartItem;
@@ -122,7 +128,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({food, rev
                 <div style={{display: "flex", alignContent: "flex-start", fontSize: '14px'}}>
                     <FaStar
                         style={{color: "orange"}}/> {food.totalRating === 0 ? 5.0 : food.totalRating.toFixed(2)} {`(${reviews.length})`}
-                    <Link color={'#FE724C'} sx={{fontSize: '14px', paddingLeft: '10px'}}> 리뷰 보기</Link>
+<Link color={'#FE724C'} sx={{fontSize: '14px', paddingLeft: '10px'}} onClick={scrollToBottom}>리뷰 보기</Link>
                 </div>
                 <div style={{
                     display: "flex",
