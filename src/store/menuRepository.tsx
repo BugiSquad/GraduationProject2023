@@ -16,7 +16,6 @@ export const MenuRepository = createSlice({
     name: 'menu',
     initialState: {
         [MenuCategory.STEW]: Array.of<MenuItem>(),
-        [MenuCategory.RICE]: Array.of<MenuItem>(),
         [MenuCategory.NOODLE]: Array.of<MenuItem>(),
         [MenuCategory.CHINA_FOOD]: Array.of<MenuItem>(),
         [MenuCategory.JAPAN_FOOD]: Array.of<MenuItem>(),
