@@ -1,6 +1,6 @@
 import {MemberDto} from "../types/MemberDto";
 import axios from "axios";
-import {getApiURL} from "./Common";
+import {getApiURL, getMyToken} from "./Common";
 import {MyInfo} from "../types/MyInfo";
 
 /**
@@ -45,4 +45,8 @@ export function getMyInfo(): MyInfo {
  */
 export function removeMyInfo() {
     localStorage.removeItem("myInfo");
+}
+
+export const getMemberInfo = () => {
+    return axios.get(`${getApiURL()}/member`, {headers: {accessToken: getMyToken()}})
 }
