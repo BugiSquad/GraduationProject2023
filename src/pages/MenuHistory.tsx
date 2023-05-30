@@ -5,11 +5,12 @@ import { SimpleTemplate } from "./PageTemplate";
 import { OrderList } from "../types/Order";
 import { Typography } from "@mui/material";
 import { getOrderList } from "../api/Order";
+import { PageCards } from "../components/PageCards";
+import { normalTypography } from "../components/styled/Text";
 
 
 export const MenuHistory: React.FC = () => {
   const history = useLoaderData() as OrderList
-  console.log(history)
   return (
 
 
@@ -24,9 +25,11 @@ export const MenuHistory: React.FC = () => {
 export const MenuHistoryContent: React.FC<{ list: OrderList }> = (props) => {
   return (
     <div style={{ width: "100%" }}>
-      <Typography>{props.list.ordersId}</Typography>
-      <Typography>{props.list.paymentDto.detail}</Typography>
-      <Typography>{props.list.ordersType}</Typography>
+      <PageCards title={"주문 번호"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.ordersId}</Typography>} />
+      <PageCards title={"주문 메뉴"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.paymentDto.detail}</Typography>} />
+      <PageCards title={"결제수단"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.paymentDto.paymentType}</Typography>} />
+      <PageCards title={"합계 금액"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.totalPrice.toLocaleString()}원</Typography>} />
+      <PageCards title={"주문 정보"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.paymentDto.confirmNum}</Typography>} />
     </div>
   );
 };
@@ -36,6 +39,5 @@ export async function menuHistoryLoader({ params }) {
   let id = Number(params.ordersId)
   const history = await getOrderList();
   const data = history.data.data as OrderList[]
-  console.log(data)
   return { ...data.filter((item: OrderList) => item.ordersId === id)[0] }
 }

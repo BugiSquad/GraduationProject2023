@@ -95,8 +95,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
     }
 
     const formattedPrice = food.price.toLocaleString();
-    const formattedPriceTotal = (food.price*count).toLocaleString();
-
+    const formattedPriceTotal = (food.price * count).toLocaleString();
 
     return (<>
 
@@ -190,7 +189,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
             {/*                          labelPlacement="start"/>*/}
             {/*    </RadioGroup>*/}
             {/*</div>*/}
-            <Typography sx={{...normalTypography, backgroundColor:"ButtonShadow"}}>총 가격 : {formattedPriceTotal}원</Typography>
+            <Typography sx={{ ...normalTypography, backgroundColor: "ButtonShadow" }}>총 가격 : {formattedPriceTotal}원</Typography>
             <Button disableElevation disableRipple sx={{
                 paddingLeft: '10px',
                 paddingRight: '10px',
