@@ -20,7 +20,9 @@ export const MenuRepository = createSlice({
         [MenuCategory.NOODLE]: Array.of<MenuItem>(),
         [MenuCategory.CHINA_FOOD]: Array.of<MenuItem>(),
         [MenuCategory.JAPAN_FOOD]: Array.of<MenuItem>(),
-        [MenuCategory.KOREAN_FOOD]: Array.of<MenuItem>(),
+        [MenuCategory.FRIED_RICE]: Array.of<MenuItem>(),
+        [MenuCategory.BIBIMBAP]: Array.of<MenuItem>(),
+        [MenuCategory.CURRY]: Array.of<MenuItem>(),
         [MenuCategory.WESTERN_FOOD]: Array.of<MenuItem>(),
     },
     reducers: {

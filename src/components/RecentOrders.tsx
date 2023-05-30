@@ -6,7 +6,6 @@ import {normalTypography} from "./styled/Text";
 
 
 export const RecentOrders: React.FC<{ list: OrderList[] }> = (props) => {
-
     return (<div style={{width: "100%"}}>
         {props.list.length > 0 ?
             <div style={{width: "100%"}}>
