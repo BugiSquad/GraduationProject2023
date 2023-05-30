@@ -5,6 +5,7 @@ import { Mypage } from "../pages/Mypage";
 import { Login } from "../pages/Login";
 import { RecentMeetInfo, recentMeetInfoLoader } from "../pages/RecentMeetInfo";
 import { Review } from "../pages/Review";
+import { MenuHistory, menuHistoryLoader } from "../pages/MenuHistory";
 
 
 export const MyPageRoutes = [
@@ -26,6 +27,12 @@ export const MyPageRoutes = [
         loader: recentMeetInfoLoader,
         errorElement: <ErrorPage />,
 
+    },
+    {
+        path: "/menuhistory/:ordersId",
+        element: <MenuHistory />,
+        loader: menuHistoryLoader,
+        errorElement: <ErrorPage/>,
     },
 
 
