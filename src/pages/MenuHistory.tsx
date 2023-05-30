@@ -1,42 +1,43 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { BottomNavigationTab } from "../types/PageHeaderParam";
 import { SimpleTemplate } from "./PageTemplate";
 import { OrderList } from "../types/Order";
 import { Typography } from "@mui/material";
+import { getOrderList } from "../api/Order";
+import { PageCards } from "../components/PageCards";
+import { normalTypography } from "../components/styled/Text";
 
 
 export const MenuHistory: React.FC = () => {
-    const [list, setList] = useState<OrderList[]>([]);
-    return (
-
-
-        <div className="App container" style={{ display: "flex" }}>
-            <SimpleTemplate param={{ pageHeaderName: "메뉴 히스토리", tab: BottomNavigationTab.MYPAGE }}>
-                <MenuHistoryContent list={list} />
-            </SimpleTemplate>
-        </div>
-    );
-};
-
-export const MenuHistoryContent: React.FC<{ list: OrderList[] }> = (props) => {
-
-  const { ordersId } = useParams();
-  const filteredList = props.list.filter((item) => item.ordersId === Number(ordersId));
-
+  const history = useLoaderData() as OrderList
   return (
-    <div style={{ width: "100%" }}>
-      {filteredList.length > 0 ? (
-        filteredList.map((item) => (
-          <React.Fragment key={item.ordersId}>
-            <Typography>{item.paymentDto.detail}</Typography>
-            <Typography>{item.ordersType}</Typography>
-          </React.Fragment>
-        ))
-      ) : (
-        <Typography>no item</Typography>
 
-      )}
+
+    <div className="App container" style={{ display: "flex" }}>
+      <SimpleTemplate param={{ pageHeaderName: "메뉴 히스토리", tab: BottomNavigationTab.MYPAGE }}>
+        <MenuHistoryContent list={history} />
+      </SimpleTemplate>
     </div>
   );
 };
+
+export const MenuHistoryContent: React.FC<{ list: OrderList }> = (props) => {
+  return (
+    <div style={{ width: "100%" }}>
+      <PageCards title={"주문 번호"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.ordersId}</Typography>} />
+      <PageCards title={"주문 메뉴"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.paymentDto.detail}</Typography>} />
+      <PageCards title={"결제수단"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.paymentDto.paymentType}</Typography>} />
+      <PageCards title={"합계 금액"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.totalPrice.toLocaleString()}원</Typography>} />
+      <PageCards title={"주문 정보"} content={<Typography sx={{...normalTypography}} fontSize={20}>{props.list.paymentDto.confirmNum}</Typography>} />
+    </div>
+  );
+};
+
+// @ts-ignore
+export async function menuHistoryLoader({ params }) {
+  let id = Number(params.ordersId)
+  const history = await getOrderList();
+  const data = history.data.data as OrderList[]
+  return { ...data.filter((item: OrderList) => item.ordersId === id)[0] }
+}

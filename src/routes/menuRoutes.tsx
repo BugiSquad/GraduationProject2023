@@ -29,9 +29,5 @@ export const MenuRoutes = [
         element: <LikedMenu/>,
         errorElement: <ErrorPage/>,
     },
-    {
-        path: "/menuhistory/:ordersId",
-        element: <MenuHistory />,
-        errorElement: <ErrorPage/>,
-    },
+
 ]

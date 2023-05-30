@@ -13,8 +13,9 @@ import { useNavigate } from "react-router-dom";
 import { LikedMenuContents } from "../components/LikedMenuContents";
 import { OrderList, toOrderStatus } from "../types/Order";
 import { getOrderList } from "../api/Order";
-import { UserInfo } from "../components/UserInfoFrame";
 import { normalTypography } from "../components/styled/Text";
+import { UserInfo } from "../types/UserInfo";
+
 
 
 export const Mypage: React.FC = () => {
@@ -69,7 +70,7 @@ export const Mypage: React.FC = () => {
                     justifyContent: "space-between",
                     marginRight: "10px"
                 }}>
-                <Typography sx={{...normalTypography, padding:"0px"}} color="#FE724C" fontSize={20} >{userInfo.nickname}님, 반갑습니다.</Typography>
+                <Typography sx={{...normalTypography, padding:"0px"}} color="#FE724C" fontSize={20} >{userInfo.name}님, 반갑습니다.</Typography>
 
                     <a href="/mypage/editmyinfo" style={{ color: 'black' }}>내 정보 수정</a>
 
