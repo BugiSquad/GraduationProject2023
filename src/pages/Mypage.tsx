@@ -7,14 +7,13 @@ import { RecentMeets } from "../components/RecentMeets";
 import { MyMessagebox } from "../components/MyMessagebox";
 import { BottomNavigationTab } from "../types/PageHeaderParam";
 import { OrangeButton } from "../components/styled/Buttons";
-import { removeMyInfo } from "../api/Member";
+import { getMemberInfo, removeMyInfo } from "../api/Member";
 import { getMyToken } from "../api/Common";
 import { useNavigate } from "react-router-dom";
 import { LikedMenuContents } from "../components/LikedMenuContents";
 import { OrderList, toOrderStatus } from "../types/Order";
 import { getOrderList } from "../api/Order";
 import { normalTypography } from "../components/styled/Text";
-import { UserInfo } from "../types/UserInfo";
 
 
 
@@ -22,21 +21,48 @@ export const Mypage: React.FC = () => {
     const navigate = useNavigate();
 
     const [list, setList] = useState<OrderList[]>([]);
+    const [name, setName] = useState<String>('');
+
+
 
     useEffect(() => {
-        getOrderList().then((res) => {
-            const data = res.data.data.map(
-                (item: OrderList) => ({ ...item, ordersType: toOrderStatus(item.ordersType) })
-            )
-            setList(data)
-        }).catch((err) => console.warn(err))
-    }, [])
+        const fetchData = async () => {
+          try {
+            const res = await getOrderList();
+            const data = res.data.data.map((item: OrderList) => ({
+              ...item,
+              ordersType: toOrderStatus(item.ordersType),
+            }));
+            setList(data);
+          } catch (error) {
+            console.warn(error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const memberInfo = await getMemberInfo();
+            setName(memberInfo.data.name);
+          } catch (error) {
+            console.warn(error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+
     const len = list.length
     const handleLogout = () => {
         removeMyInfo();
         navigate("/app")
     };
-    const [userInfo, setInfo] = React.useState({} as UserInfo);
+
+ 
     if (getMyToken() === "")
         return (
             <SimpleTemplate param={{ pageHeaderName: "마이페이지", tab: BottomNavigationTab.MYPAGE }}>
@@ -68,12 +94,11 @@ export const Mypage: React.FC = () => {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    marginRight: "10px"
+                    marginRight: "10px",
+                    alignItems:"center"
                 }}>
-                <Typography sx={{...normalTypography, padding:"0px"}} color="#FE724C" fontSize={20} >{userInfo.name}님, 반갑습니다.</Typography>
-
-                    <a href="/mypage/editmyinfo" style={{ color: 'black' }}>내 정보 수정</a>
-
+                <Typography sx={{...normalTypography, padding:"0px"}} color="#FE724C" fontSize={20} >{name}님, 반갑습니다.</Typography>
+                <a href="/mypage/viewmyinfo" style={{ color: 'black' }}>내 정보 보기</a>
                 </div>
                 <MypageCards title="최근 주문 내역"
                     content={<RecentOrders list={len > 5 ? list.slice(len - 5, len) : list} />}

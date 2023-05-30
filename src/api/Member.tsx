@@ -55,6 +55,7 @@ export function removeMyInfo() {
     localStorage.removeItem("myInfo");
 }
 
-export const getMemberInfo = () => {
-    return axios.get(`${getApiURL()}/member`, {headers: {accessToken: getMyToken()}})
+export const getMemberInfo = async () => {
+    const res = await axios.get(`${getApiURL()}/member`, {headers: {accessToken: getMyToken()}})
+    return res.data;
 }

@@ -6,12 +6,17 @@ import { Login } from "../pages/Login";
 import { RecentMeetInfo, recentMeetInfoLoader } from "../pages/RecentMeetInfo";
 import { Review } from "../pages/Review";
 import { MenuHistory, menuHistoryLoader } from "../pages/MenuHistory";
+import { ViewMyInfo } from "../pages/ViewMyInfo";
 
 
 export const MyPageRoutes = [
     {
         path: "/mypage/editmyinfo",
         element: <EditMyInfo />,
+        errorElement: <ErrorPage />,
+    }, {
+        path: "/mypage/viewmyinfo",
+        element: <ViewMyInfo />,
         errorElement: <ErrorPage />,
     }, {
         path: "/signup",
