@@ -20,6 +20,14 @@ export function requestMemberSignIn(info: SignInInfo) {
     return axios.post(`${getApiURL()}/member/signIn?email=${info.email}&password=${info.password}`)
 }
 
+export function uploadImageToRemote(formData: FormData) {
+    return axios.post(`${getApiURL()}/s3`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+
 /**
  * 로컬 스토리지에 사용자 정보를 저장합니다.
  * @param info 사용자 정보

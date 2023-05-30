@@ -1,7 +1,10 @@
 export enum MenuCategory {
-    STEW = "STEW", NOODLE = "NOODLE", RICE = "RICE", JAPAN_FOOD = "JAPAN_FOOD",
-    CHINA_FOOD = "CHINA_FOOD", KOREAN_FOOD = "KOREAN_FOOD", WESTERN_FOOD = "WESTERN_FOOD"
+    STEW = "STEW", NOODLE = "NOODLE", JAPAN_FOOD = "JAPAN_FOOD",
+    CHINA_FOOD = "CHINA_FOOD", WESTERN_FOOD = "WESTERN_FOOD"
+    , FRIED_RICE = "FRIED_RICE", BIBIMBAP = "BIBIMBAP", CURRY = "CURRY",
 }
+
+// STEW, NOODLE, FRIED_RICE, BIBIMBAP, CURRY, JAPAN_FOOD, CHINA_FOOD, WESTERN_FOOD
 export function toLocalizedName(category: string): string {
     switch (category) {
         case "STEW":
@@ -14,10 +17,14 @@ export function toLocalizedName(category: string): string {
             return "일식"
         case "CHINA_FOOD":
             return "중식"
-        case "KOREAN_FOOD":
-            return "한식"
         case "WESTERN_FOOD":
             return "양식"
+        case "FRIED_RICE":
+            return "볶음밥"
+        case "BIBIMBAP":
+            return "비빔밥"
+        case "CURRY":
+            return "카레"
         default:
             throw new Error("unknown category")
     }
