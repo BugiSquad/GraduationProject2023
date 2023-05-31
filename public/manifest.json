@@ -1,9 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "한성맛남",
+  "name": "한성맛남 : 혼밥러 탈출을 위한 매칭 & 키오스크 서비스",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "icon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
