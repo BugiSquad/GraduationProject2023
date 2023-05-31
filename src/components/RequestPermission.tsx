@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Grid, Typography} from "@mui/material";
-import {registerWorker, requestPermission} from "../api/Notification";
+import {requestPermission, subscribePushService} from "../api/Notification";
 import {getMyInfo} from "../api/Member";
 
 export const RequestPermission: React.FC = () => {
@@ -15,7 +15,7 @@ export const RequestPermission: React.FC = () => {
         const res = await requestPermission();
         console.log(res)
         if (res) {
-            const worker = await registerWorker();
+            const worker = await subscribePushService();
         }
     }
 

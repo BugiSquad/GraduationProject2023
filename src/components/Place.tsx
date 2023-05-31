@@ -55,7 +55,7 @@ export const Place: React.FC<Props> = ({
             </Button>
         ))}
         <Input placeholder={"직접입력"} value={textField} onChange={(event) => handleInput(event.target.value)}></Input>
-        {selectedPlaceName && <div>Selected place: {selectedPlaceName}</div>}
+        {/*{selectedPlaceName && <div>Selected place: {selectedPlaceName}</div>}*/}
     </>)
 }
 
