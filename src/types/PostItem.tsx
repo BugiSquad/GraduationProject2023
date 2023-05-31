@@ -6,4 +6,5 @@ export interface PostItem {
     memberProfileUrl: string;
     minutesLeftUntilMeal: string;
     yearOfEnter: number;
+    memberId: number;
 }

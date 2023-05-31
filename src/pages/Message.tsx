@@ -8,6 +8,7 @@ import {Link, useParams} from "react-router-dom";
 import {useAppSelector} from "../store/hooks";
 import {getNotesWith, sendNoteToRoom} from "../api/NoteRoom";
 import {NoteMessage} from "../types/NoteMessage";
+import {getMyInfoFromRemote} from "../api/Member";
 
 
 function MessageContent(message: NoteMessage) {
@@ -63,13 +64,14 @@ export const Message: React.FC = () => {
     const [messageList, setMessageList] = useState<NoteMessage[]>([]);
     const [messageInput, setMessageInput] = useState<string>("");
     const [roomName, setRoomName] = useState("Empty Name")
+    const [myID, setMyID] = useState<number>(-100);
+    const [flag, setFlag] = useState<boolean>(false);
     const navIdx = useAppSelector((state) => state.navIdx)
     const param = useParams()
     const roomId = param.id
     const getMessage = () => {
         getNotesWith(Number(roomId)).then((res: any) => {
             setRoomName(res.data.data.groupTitle)
-            console.log(res.data.data)
             const data = res.data.data
             let messages = data.notes.map((message: NoteMessage) => {
                 console.log(message.name)
@@ -79,14 +81,28 @@ export const Message: React.FC = () => {
         })
     }
     useEffect(() => {
-        getMessage()
-        const interval = setInterval(() => {
+            getMyInfoFromRemote().then((res) => {
+                const id = res.data.data.memberId
+                setMyID(id)
+                const room = res.data.data.groupList
+                    .filter((item: any) => {
+                        console.log(`${item.noteRoom} --- ${roomId}`)
+                        return item.noteRoom.noteRoom_id === Number(roomId)
+                    })
+                if (room[0].noteRoom.post.memberCompactDto.memberId === id) {
+                    setFlag(true)
+                }
+                console.log(room.noteRoom_id)
+            })
             getMessage()
-        }, 1000);
-        return () => {
-            clearInterval(interval); // 컴포넌트가 언마운트될 때 interval을 정리합니다.
-        };
-    }, [])
+            const interval = setInterval(() => {
+                getMessage()
+            }, 1000);
+            return () => {
+                clearInterval(interval); // 컴포넌트가 언마운트될 때 interval을 정리합니다.
+            };
+        }, []
+    )
     const handleSendButtonClick = () => {
         if (messageInput.trim() === "") {
             return;
@@ -108,11 +124,13 @@ export const Message: React.FC = () => {
             }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>
                     <Button onClick={handleGoBack} disableElevation sx={{color: '#FE724C'}}>
-                        <ArrowBackIosNewIcon/></Button> {"같이 밥 먹어요"}</Typography>
+                        <ArrowBackIosNewIcon/></Button> {roomName}</Typography>
                 <div style={{display: "inherit", alignItems: "center", paddingRight: "10px"}}>
-                    <Link
-                        to={`/mypage/message/makeappointment/${roomId}`}><IconButton><HandshakeIcon/></IconButton></Link>
+                    {flag ?
+                        <Link
+                            to={`/mypage/message/makeappointment/${roomId}`}><IconButton><HandshakeIcon/></IconButton></Link> : <></>}
                 </div>
+
             </div>
 
             <Card sx={{
