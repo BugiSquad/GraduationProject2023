@@ -4,7 +4,6 @@ import naverpayImg from '../images/logo_naverpay.png'
 import kakaopayImg from '../images/logo_kakaopay.png'
 import creditcardImg from '../images/logo_creditcard.png'
 import {OrderProductsList} from "./OrderProductsList"
-import completeImg from '../images/complete.png'
 
 import React, {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom"
@@ -264,53 +263,4 @@ export const PayMethod: React.FC<PayMethodProp> = ({ method, setMethod }) => {
             })}
         </div>
     )
-}
-
-const OnComplete: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onClose }) => {
-
-    return (<Modal
-        open={isOpen}
-        onClose={onClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-    >
-        <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h5" component="h1" fontWeight={'bold'}>
-                주문이 완료되었습니다.
-            </Typography>
-            <img src={completeImg} style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '1rem',
-                paddingTop: "20px"
-            }} />
-            <div style={{ display: 'flex', flexDirection: "column", justifyContent: "space-between" }}>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingTop: "20px",
-                    paddingLeft: "30px",
-                    paddingRight: "30px"
-                }}>
-                    <Typography fontSize={14} fontWeight={'bold'}>주문 번호</Typography>
-                    <Typography fontSize={14} fontWeight={'bold'}>012345678910</Typography>
-                </div>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingLeft: "30px",
-                    paddingRight: "30px"
-                }}>
-                    <Typography fontSize={14} fontWeight={'bold'}>주문 일시</Typography>
-                    <Typography fontSize={14} fontWeight={'bold'}>2023-05-04 00:00:00</Typography>
-                </div>
-
-            </div>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            </Typography>
-        </Box>
-    </Modal>)
 }

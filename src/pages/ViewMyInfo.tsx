@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SimpleTemplate } from "./PageTemplate";
 import { BottomNavigationTab } from "../types/PageHeaderParam";
-import { Avatar, Button, Card, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
+import { Avatar, Button, Card, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import { getMemberInfo } from "../api/Member";
 import { OrangeButton } from "../components/styled/Buttons";
 import { useNavigate } from "react-router-dom";
@@ -20,10 +20,10 @@ const ViewMyInfoContent: React.FC = () => {
     const navigate = useNavigate();
     const [name, setName] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
-    const [studentId, setStudentId] = useState<number>();
+    const [studentId, setStudentId] = useState<number>(0);
     const [email, setEmail] = useState<string>('');
     const [profileUrl, setProfileUrl] = useState<string>('');
-    const [grade, setGrade] = useState<number>();
+    const [grade, setGrade] = useState<number>(0);
     const [gender, setGender] = useState<string>('');
     const [department, setDepartment] = useState<string>('');
 
