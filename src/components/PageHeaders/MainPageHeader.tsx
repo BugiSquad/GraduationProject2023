@@ -3,6 +3,8 @@ import { Avatar, Badge } from "@mui/material";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../../images/logo.png';
+import logo2 from '../../images/logo2.png';
+
 import minilogo from '../../images/minilogo.png';
 
 import { getMyToken } from "../../api/Common";
@@ -34,8 +36,10 @@ export const MainPageHeader: React.FC<PageHeaderParam>
                     <ShoppingCartIcon onClick={() => navigate("/cart")}></ShoppingCartIcon>
                 </Badge>
                 <Link to={"/app"} onClick={() => {
-                }}><img src={minilogo} style={{ paddingTop: "10px", width: '18%', objectFit: 'cover' }} />
-                    <img src={logo} style={{ paddingTop: "10px", width: '50%', height: '50%', objectFit: 'cover' }} /></Link>
+                }}><img src={minilogo} style={{ paddingTop: "10px", width: '25%', objectFit: 'cover' }} />
+                    {/* <img src={logo} style={{ paddingTop: "10px", width: '50%', height: '50%', objectFit: 'cover' }} /> */}
+                    <img src={logo2} style={{ paddingTop: "10px", width: '40%', height: '40%', objectFit: 'cover' }} />
+                    </Link>
                 <div style={{ display: "inline-block", whiteSpace: "nowrap" }}>
                     {(getMyToken() !== "") ? <Link to={"/mypage"} onClick={() => {
                     }}><Avatar src={profilePic}></Avatar></Link> :
