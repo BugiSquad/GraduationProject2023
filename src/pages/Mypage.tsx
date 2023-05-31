@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { SimpleTemplate } from "./PageTemplate";
-import { Button, Typography } from "@mui/material";
-import { RecentOrders } from "../components/RecentOrders";
-import { MypageCards } from "../components/MypageCards";
-import { RecentMeets } from "../components/RecentMeets";
-import { MyMessagebox } from "../components/MyMessagebox";
-import { BottomNavigationTab } from "../types/PageHeaderParam";
-import { OrangeButton } from "../components/styled/Buttons";
-import { getMemberInfo, removeMyInfo } from "../api/Member";
-import { getMyToken } from "../api/Common";
-import { useNavigate } from "react-router-dom";
-import { LikedMenuContents } from "../components/LikedMenuContents";
-import { OrderList, toOrderStatus } from "../types/Order";
-import { getOrderList } from "../api/Order";
-import { normalTypography } from "../components/styled/Text";
-
+import React, {useEffect, useState} from "react";
+import {SimpleTemplate} from "./PageTemplate";
+import {Button, Typography} from "@mui/material";
+import {RecentOrders} from "../components/RecentOrders";
+import {MypageCards} from "../components/MypageCards";
+import {RecentMeets} from "../components/RecentMeets";
+import {MyMessagebox} from "../components/MyMessagebox";
+import {BottomNavigationTab} from "../types/PageHeaderParam";
+import {OrangeButton} from "../components/styled/Buttons";
+import {getMemberInfo, removeMyInfo} from "../api/Member";
+import {getMyToken} from "../api/Common";
+import {useNavigate} from "react-router-dom";
+import {LikedMenuContents} from "../components/LikedMenuContents";
+import {OrderList, toOrderStatus} from "../types/Order";
+import {getOrderList} from "../api/Order";
+import {normalTypography} from "../components/styled/Text";
 
 
 export const Mypage: React.FC = () => {
@@ -46,7 +45,8 @@ export const Mypage: React.FC = () => {
         const fetchData = async () => {
           try {
             const memberInfo = await getMemberInfo();
-            setName(memberInfo.data.name);
+            console.log(memberInfo)
+              setName(memberInfo.data.name);
           } catch (error) {
             console.warn(error);
           }

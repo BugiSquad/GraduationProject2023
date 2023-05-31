@@ -22,7 +22,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import {FormGridChild} from "./styled/FormGrid";
 import {InterestFilter, InterestOptionType} from "./InterestFilter";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
-import {requestMemberSignUp, uploadImageToRemote} from "../api/Member";
+import {checkEmailInUse, checkNicknameInUse, requestMemberSignUp, uploadImageToRemote} from "../api/Member";
 import {Gender, Interest, MemberType} from "../types/MemberDto";
 
 
@@ -65,6 +65,11 @@ export interface UserInfo {
     interests: InterestOptionType[],
 }
 
+type Validation = {
+    email: boolean;
+    nickname: boolean;
+
+}
 
 export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isEdit}) => {
     const [profilePic, setProfilePic] = useState<string | null>(
@@ -75,6 +80,7 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
     const [gender, setGender] = useState<Gender>(Gender.NONE)
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [interests, setInterests] = useState<InterestOptionType[]>([])
+    const [validation, setValidation] = useState<Validation>({email: false, nickname: false});
     const navigate = useNavigate()
     const handleProfilePicChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
@@ -97,7 +103,28 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault();
 
-    const onSubmit = () => {
+    function validateForm(userInfo: UserInfo) {
+        if (userInfo.email === "") {
+            alert("이메일을 입력하세요")
+            return false;
+        }
+        if (userInfo.nickname === "") {
+            alert("닉네임을 입력하세요")
+            return false;
+        }
+        if (userInfo.studentId == null) {
+            alert("학번을 입력하세요")
+            return false;
+        }
+        if (userInfo.department === "") {
+            alert("학과를 선택하세요")
+            return false;
+        }
+        return true
+
+    }
+
+    const onSubmit = async () => {
         userInfo.interests = interests
         let member = {
             ...userInfo,
@@ -106,6 +133,33 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
             memberType: MemberType.STUDENT,
             interestPostDto: new Interest(interests),
         }
+
+        if (!validateForm(userInfo)) {
+            return;
+        }
+        try {
+            const email = await checkEmailInUse(userInfo.email)
+            console.log(email)
+            if (email.status >= 400) {
+                alert("이미 사용중인 이메일입니다.")
+                return
+            }
+        } catch (e) {
+            alert("이미 사용중인 이메일입니다.")
+            return
+        }
+        try {
+            const nickname = await checkNicknameInUse(userInfo.nickname)
+            console.log(nickname)
+            if (nickname.status >= 400) {
+                alert("이미 사용중인 닉네임입니다.")
+                return
+            }
+        } catch (e) {
+            alert("이미 사용중인 닉네임입니다.")
+            return
+        }
+
         if (file == null) {
             requestMemberSignUp({
                 ...member,
@@ -160,8 +214,8 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                     </Link>
                 </div>
 
-                <Grid container spacing={2}>
-                    <FormGridChild item xs={6}>
+                <Grid container spacing={1}>
+                    <FormGridChild item xs={12}>
                         <Typography fontSize={'15px'} sx={{
                             fontWeight: 'bold',
                             minWidth: "40px",
@@ -170,13 +224,6 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                                    variant="standard" value={userInfo.email} onChange={(event) => {
                             setInfo({...userInfo, email: event.target.value})
                         }} color="warning"/>
-                    </FormGridChild>
-                    <FormGridChild item xs={4}>
-                        {isEdit ? false :
-                            <Button disableElevation disableRipple sx={OrangeButton}>
-                                중복확인
-                            </Button>
-                        }
                     </FormGridChild>
                     <FormGridChild item xs={5}>
                         <Typography variant="body1" sx={{fontWeight: 'bold',}}>닉네임</Typography>
@@ -197,8 +244,8 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                                    }}
                         />
                     </FormGridChild>
-                    <FormGridChild item xs={12}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>새 비밀번호＊</Typography>
+                    <FormGridChild item xs={5}>
+                        <Typography variant="body1" sx={{fontWeight: 'bold',}}>비밀번호＊</Typography>
                         <FormControl variant="standard">
                             <Input required
                                    type={showPassword ? 'text' : 'password'}
@@ -219,8 +266,8 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                             />
                         </FormControl>
                     </FormGridChild>
-                    <FormGridChild item xs={12}>
-                        <Typography variant="body1" sx={{fontWeight: 'bold'}}>새 비밀번호
+                    <FormGridChild item xs={5}>
+                        <Typography variant="body1" sx={{fontWeight: 'bold'}}>비밀번호
                             확인＊</Typography>
                         <FormControl variant="standard">
                             <Input required
@@ -245,6 +292,7 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                         </FormControl>
                     </FormGridChild>
                     <FormGridChild item xs={12}>
+                        <Typography variant="body1" sx={{fontWeight: "bold",}}>학과＊</Typography>
                         <SelectDepartment
                             onChange={(e: React.SyntheticEvent<Element, Event>, v: { label: string } | null) => {
                                 if (v == null) return;
@@ -254,35 +302,38 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                         )}/>
                     </FormGridChild>
                     <FormGridChild item xs={12}>
-                        <SelectGender onChange={(event, value) => {
+                        <SelectGender value={gender} onChange={(event, value) => {
                             setGender(value as Gender)
                         }}/>
                     </FormGridChild>
-                    <FormGridChild item xs={5}>
+                    <FormGridChild item xs={10}>
                         <InterestFilter setSelectedInterests={setInterests} selectedInterests={interests}/>
                     </FormGridChild>
-                    <FormGridChild item xs={12}>
+                    <FormGridChild item xs={10}>
                         <InputPhoneNumber userInfo={userInfo} onChange={(e) => {
                             setInfo({...userInfo, phone: e.target.value})
                         }}/>
                     </FormGridChild>
-                    <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
-                        {isEdit ? "수정" : "가입"}
-                    </Button>
-                    <Linkto to="/login"><Button disableElevation disableRipple sx={WhiteButton}>
-                        취소
-                    </Button></Linkto>
-                    <Button onClick={onSubmit} sx={WhiteButton}>사진 제출</Button>
+                    <FormGridChild item xs={5}>
+                        <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
+                            {isEdit ? "수정" : "가입"}
+                        </Button>
+                    </FormGridChild>
+                    <FormGridChild item xs={5}>
+                        <Linkto to="/login"><Button disableElevation disableRipple sx={WhiteButton}>
+                            취소
+                        </Button></Linkto>
+                    </FormGridChild>
                 </Grid>
             </Form>
         </>
     )
 }
 
-function SelectGender(props: { onChange: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void }) {
+function SelectGender(props: { value: Gender, onChange: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void }) {
     return <>
         <Typography variant="body1" sx={{fontWeight: "bold",}}>성별＊</Typography>
-        <RadioGroup sx={{display: "flex", flexDirection: "row"}} onChange={props.onChange}>
+        <RadioGroup value={props.value} sx={{display: "flex", flexDirection: "row"}} onChange={props.onChange}>
             <FormControlLabel value={`${Gender.MALE}`} control={<Radio/>} label="남성"/>
             <FormControlLabel value={`${Gender.FEMALE}`} control={<Radio/>} label="여성"/>
             <FormControlLabel value={`${Gender.NONE}`} control={<Radio/>} label="제 3의 성"/>
@@ -295,7 +346,7 @@ function InputPhoneNumber(props: {
     onChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
 }) {
     return <>
-        <Typography variant="body1" sx={{fontWeight: "bold", minWidth: "40px"}}>전화번호＊</Typography>
+        <Typography variant="body1" sx={{fontWeight: "bold", minWidth: "40px"}}>전화번호</Typography>
         <TextField required sx={{minWidth: "265px", paddingRight: "20px"}} variant="standard"
                    color="warning" value={props.userInfo.phone} onChange={props.onChange}/>
     </>;
@@ -305,15 +356,14 @@ function SelectDepartment(props: {
     onChange: (e: React.SyntheticEvent<Element, Event>, v: ({ label: string } | null)) => void,
     renderInput: (params: AutocompleteRenderInputParams) => JSX.Element
 }) {
-    return <>
-        <Typography variant="body1" sx={{fontWeight: "bold",}}>학과＊</Typography>
+    return <div style={{width: "100%"}}>
         <Autocomplete
             disablePortal
             options={Departments}
             onChange={props.onChange}
             renderInput={props.renderInput}
         />
-    </>;
+    </div>;
 }
 
 function createFormWithImage(file: File) {

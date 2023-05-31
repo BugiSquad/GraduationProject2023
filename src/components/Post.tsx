@@ -12,7 +12,6 @@ export interface PostDetail {
 }
 
 export const Post: React.FC<PostDetail> = (detail: PostDetail) => {
-    console.log(detail.interest)
     if (detail.minutesLeftUntilMeal < 0) return <></>
     return (<>
         <Card id={detail.index + ""}
@@ -34,7 +33,6 @@ const sx = {
     margin: "3px"
 }
 export const HobbyChips: React.FC<{ interest: string[] }> = (props) => {
-    console.log(props.interest.length)
     if (props.interest.length === 0) return (<></>)
     else if (props.interest.length === 1) return (<Chip sx={sx} label={props.interest[0]}/>)
     else

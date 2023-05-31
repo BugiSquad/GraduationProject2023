@@ -4,9 +4,10 @@ import {getPosts} from "../api/Post";
 import {PostItem} from "../types/PostItem";
 import {PostPopper} from "./PostPopper";
 import {Post} from "./Post";
+import {getMyInfoFromRemote} from "../api/Member";
 
 interface PostsProps {
-    queryString: string
+    queryString: string;
 }
 
 export const Posts: React.FC<PostsProps> = (props) => {
@@ -19,11 +20,25 @@ export const Posts: React.FC<PostsProps> = (props) => {
     const [selected, setSelected] = useState<PostItem>({} as PostItem)
 
     useEffect(() => {
-        getPosts(props.queryString).then(res => {
-            const data = res.data.data.content.map((item: PostItem) => item);
-            setPosts(data)
-        })
-    }, [props.queryString])
+        async function getData() {
+            const data = await getPosts(props.queryString)//.then(res => {
+            const me = await getMyInfoFromRemote();
+            const myID = me.data.data.memberId
+            const myRooms = me.data.data.groupList.map((item: any) => item.noteRoom.post.post_id);
+            const myPosts = data.data.data.content
+                .map((item: PostItem) => item)
+                .filter((item: PostItem) => {
+                    console.log(item)
+                    console.log(myID)
+                    return item.memberId !== myID
+                }).filter((item: PostItem) =>
+                    !myRooms.includes(item.postId)
+                )
+            setPosts(myPosts)
+        }
+
+        getData()
+    }, [])
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>, newPlacement: PopperPlacementType, selected: PostItem) => {
         setAnchorEl(event.currentTarget);

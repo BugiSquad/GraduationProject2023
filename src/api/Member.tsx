@@ -59,3 +59,32 @@ export const getMemberInfo = async () => {
     const res = await axios.get(`${getApiURL()}/member`, {headers: {accessToken: getMyToken()}})
     return res.data;
 }
+export const getMyInfoFromRemote = () => {
+    return axios.get(`${getApiURL()}/member`, {headers: {accessToken: getMyToken()}})
+}
+
+/**
+ * @param email 중복을 확인할 이메일
+ * <b>반환 값</b>
+ * <ul>
+ *     <li> 200 : 사용 가능한 이메일 </li>
+ *     <li> 400 : 이미 사용 중 일 때</li>
+ * </ul>
+ *
+ */
+export function checkEmailInUse(email: string) {
+    return axios.post(`${getApiURL()}/member/checkEmail?email=${email}`)
+}
+
+/**
+ * @param email 중복을 확인할 이름
+ * <b>반환 값</b>
+ * <ul>
+ *     <li> 200 : 사용 가능한 이름 </li>
+ *     <li> 400 : 이미 사용 중 일 때</li>
+ * </ul>
+ *
+ */
+export function checkNicknameInUse(nickname: string) {
+    return axios.post(`${getApiURL()}/member/checkName?name=${nickname}`)
+}
