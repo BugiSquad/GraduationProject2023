@@ -55,6 +55,7 @@ export const Place: React.FC<Props> = ({
             </Button>
         ))}
         <Input sx={{paddingTop:"20px"}} placeholder={"직접입력"} value={textField} onChange={(event) => handleInput(event.target.value)}></Input>
+
     </>)
 }
 

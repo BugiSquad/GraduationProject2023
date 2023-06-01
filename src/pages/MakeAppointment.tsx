@@ -80,8 +80,8 @@ export const MakeAppointment: React.FC = () => {
                         <AccessTimeIcon/>날짜 설정
                     </Button>
                     <Button disableElevation disableRipple
-                            style={{color: 'black', fontWeight: 'bold', marginRight: "10px"}}><AccessAlarmIcon/>알림
-                        추가</Button>
+                            style={{color: 'black', fontWeight: 'bold', marginRight: "10px"}}><AccessAlarmIcon/>시간
+                        설정</Button>
                 </div>
                 <div style={{
                     display: "flex",
@@ -124,6 +124,7 @@ export const MakeAppointment: React.FC = () => {
             </Button>
 </div>
             
+
         </SimpleTemplate>)
 }
 
@@ -146,12 +147,18 @@ const MemberCheckBoxGroup: React.FC<MembersProps> = ({members, checked, setCheck
             const lastMessage = member.lastMessage == null ? " " : member.lastMessage
             return (
                 <Card sx={{display: "flex", flexDirection: "row"}}>
-                    <Avatar src={url}/>
-                    <div>
+                    <Avatar sx={{flex: 1}} src={url}/>
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        justifyContent: "flex-start",
+                        flex: 3
+                    }}>
                         <Typography variant={"h6"}>{member.name}</Typography>
                         <Typography variant={"h6"}>{lastMessage}</Typography>
                     </div>
-                    <Checkbox checked={!!checked[idx]} id={String(idx)} onChange={onChecked}/>
+                    <Checkbox sx={{flex: 1}} checked={!!checked[idx]} id={String(idx)} onChange={onChecked}/>
                 </Card>
             )
         })}
