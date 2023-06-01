@@ -1,5 +1,5 @@
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import React, {FC, ReactNode} from "react";
+import {FC, ReactNode} from "react";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 
 

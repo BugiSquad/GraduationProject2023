@@ -12,7 +12,6 @@ import {MenuItem} from "../types/MenuItem";
 import {ReviewDto} from "../types/CartItem";
 import {getApiURL, getHeader} from "../api/Common";
 import axios from "axios";
-import { count } from "console";
 import { modalBox } from "./styled/Text";
 
 const blue = {
@@ -81,8 +80,6 @@ const style = {
 
 export const ReviewContent: React.FC<{ menuItem: MenuItem }> = (props) => {
     const {ordersInfo} = useParams();
-
-    const [value, setValue] = React.useState<number | null>(2);
     const [text, setText] = React.useState('');
     const [foodRating, setFoodRating] = React.useState<{ [foodId: string]: number }>({});
 

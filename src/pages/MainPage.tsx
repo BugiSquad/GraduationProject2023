@@ -7,16 +7,15 @@ import '../components/styled/BannerText.css'
 import { Button, Paper, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-
 import data from '../data/SampleFood.json'
 import noodleImage from '../images/foodCategory/noodles.png';
 import soupImage from '../images/foodCategory/soup.png';
-import bowlRiceImage from '../images/foodCategory/bowl-rice.png';
 import mixedRiceImage from '../images/foodCategory/mixed-rice.png';
 import curryImage from '../images/foodCategory/curry.png';
 import westernfoodImage from '../images/foodCategory/western_food.png';
-import friedriceImage from '../images/foodCategory/fried_rice.png';
 import chinafoodImage from '../images/foodCategory/china_food.png';
+import japanfoodImage from '../images/foodCategory/japan_food.png';
+import omuriceImage from '../images/foodCategory/omurice.png';
 
 import { MainCategory } from '../components/MainCategory';
 import Carousel from 'react-material-ui-carousel';
@@ -27,7 +26,7 @@ import { getPopularMenuFromRemote } from "../api/Favor";
 import { getFoodsWith, StorageType } from "../store/LocalStorage";
 import { checkNotificationSupported, checkPermission } from "../api/Notification";
 import { RequestPermission } from "../components/RequestPermission";
-import { OrangeButton, WhiteButton } from '../components/styled/Buttons';
+import { WhiteButton } from '../components/styled/Buttons';
 import { normalTypography } from '../components/styled/Text';
 import matnam from '../images/matnam.png';
 
@@ -176,13 +175,13 @@ const MainCategories: React.FC = () => {
                 <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/noodle"}><MainCategory 
                     category={"면류"} img={noodleImage} /></Link>
                 <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/japan_food"}> <MainCategory
-                    category={"일식"} img={bowlRiceImage} /></Link>
+                    category={"일식"} img={japanfoodImage} /></Link>
                 <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/china_food"}> <MainCategory
                     category={"중식"} img={chinafoodImage} /></Link>
                 <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/western_food"}> <MainCategory
                     category={"양식"} img={westernfoodImage} /></Link>
                 <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/fried_rice"}> <MainCategory
-                    category={"오므라이스"} img={friedriceImage} /></Link>
+                    category={"오므라이스"} img={omuriceImage} /></Link>
                 <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/bibimbap"}> <MainCategory
                     category={"비빔밥"} img={mixedRiceImage} /></Link>
                 <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/curry"}> <MainCategory

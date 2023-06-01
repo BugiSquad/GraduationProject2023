@@ -1,9 +1,9 @@
 import React from "react";
-import {DrawerContainer, DrawerType} from "./DrawerContainer";
-import {Filter} from "./Filter";
-import {closeDrawer, closeFilter, openDrawer, openFilter} from "../store/matching/drawer";
-import {useAppDispatch, useAppSelector} from "../store/hooks";
-import {Write} from "./Write";
+import { DrawerContainer, DrawerType } from "./DrawerContainer";
+import { Filter } from "./Filter";
+import { closeDrawer, closeFilter, openDrawer, openFilter } from "../store/matching/drawer";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { Write } from "./Write";
 
 interface FilterProps {
     setQueryString: React.Dispatch<React.SetStateAction<string>>
@@ -32,7 +32,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
                 setState: toggleDrawer,
                 state: isFilterOpen
             }}>
-            <Filter setQueryString={props.setQueryString}/>
+            <Filter setQueryString={props.setQueryString} />
         </DrawerContainer>
     </>)
 }
@@ -60,7 +60,7 @@ export const AddDrawer: React.FC = () => {
                 setState: toggleDrawer,
                 state: isAddOpen
             }}>
-            <Write/>
+            <Write />
         </DrawerContainer>
     </>)
 }
