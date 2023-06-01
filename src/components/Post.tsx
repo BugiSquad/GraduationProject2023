@@ -44,7 +44,7 @@ export const HobbyChips: React.FC<{ interest: string[] }> = (props) => {
 export const getTimeFrom = (minutesLeftUntilMeal: number): string => {
     const hours = Math.floor(minutesLeftUntilMeal / 60)
     const minutes = minutesLeftUntilMeal % 60
-    if (hours >= 24) return `${hours / 24}일`
-    if (hours >= 1) return `${hours}시간`
-    else return `${minutes}분`
+    if (hours >= 24) return `${Math.floor(hours / 24)}일`
+    if (hours >= 1) return `${Math.floor(hours)}시간`
+    else return `${Math.floor(minutes)}분`
 }

@@ -1,15 +1,16 @@
 import { Box, Button, Link, Modal, Paper, Snackbar, Typography } from "@mui/material"
 import { FaStar } from "react-icons/fa"
 import React, { useState } from "react";
+
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { MdAddCircleOutline, MdRemoveCircleOutline } from 'react-icons/md';
-import { useAppDispatch } from "../store/hooks";
-import { add } from "../store/cart";
-import { CartItem, ReviewItem } from "../types/CartItem";
-import { useNavigate } from "react-router-dom";
-import { ReviewBar } from "./ReviewBar";
-import { ReviewList } from "./ReviwList";
-import { getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType } from "../store/LocalStorage";
+import {MdAddCircleOutline, MdRemoveCircleOutline} from 'react-icons/md';
+import {useAppDispatch} from "../store/hooks";
+import {add} from "../store/cart";
+import {CartItem, ReviewItem} from "../types/CartItem";
+import {useNavigate} from "react-router-dom";
+import {ReviewBar} from "./ReviewBar";
+import {ReviewList} from "./ReviwList";
+import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} from "../store/LocalStorage";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import axios from "axios";
@@ -174,13 +175,14 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
                 <Typography fontSize={'28px'}
                     sx={{ paddingTop: "10px", fontWeight: "bold" }}> {food.name}</Typography>
             </div>
-            <div style={{ display: "flex", alignContent: "flex-start" }}>
+            <div style={{display: "flex", alignContent: "flex-start"}}>
                 <Typography fontSize={'12px'} color={'#3EA1FC'}> 평균 소요시간 8분</Typography>
             </div>
-            <div style={{ display: "flex", alignContent: "flex-start", alignItems: "center", fontSize: '14px' }}>
+            <div style={{display: "flex", alignContent: "flex-start", alignItems: "center", fontSize: '14px'}}>
                 <FaStar
-                    style={{ color: "orange" }} /> {food.totalRating === 0 ? 5.0 : food.totalRating.toFixed(2)}점 {`(${reviews.length})`}
-                <Link color={'#FE724C'} sx={{ fontSize: '14px', paddingLeft: '10px' }} onClick={scrollToBottom}>리뷰 보기</Link>
+                    style={{color: "orange"}}/> {food.totalRating === 0 || food.totalRating === undefined ? 5.0 : food.totalRating.toFixed(2)}점 {`(${reviews.length})`}
+                <Link color={'#FE724C'} sx={{fontSize: '14px', paddingLeft: '10px'}} onClick={scrollToBottom}>리뷰
+                    보기</Link>
             </div>
             <div style={{
                 display: "flex",
@@ -188,7 +190,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
                 flexDirection: "row",
                 paddingTop: '10px'
             }}>
-                <Typography fontSize={'24px'} fontWeight={'bold'} >{formattedPrice}원</Typography>
+                <Typography fontSize={'24px'} fontWeight={'bold'}>{formattedPrice}원</Typography>
                 <Box display="flex" alignItems="center" justifyContent="center">
                     <Typography sx={{ ...normalTypography, padding: "0px", margin: "0px" }}>✔️수량</Typography>
                     <Button disableElevation
