@@ -45,7 +45,7 @@ export const RecentMeets: React.FC = () => {
             {meetingInfo.length === 0 ? <Typography sx={normalTypography} color={"lightgrey"}>최근 만남이
                 없습니다.</Typography> : meetingInfo.map(
                 (meeting, idx) =>
-                    <Link key={idx} to={`/mypage/recentmeetinfo/${meeting.promiseId}`}><RecentMeet
+                    <Link style={{textDecoration:"none"}} key={idx} to={`/mypage/recentmeetinfo/${meeting.promiseId}`}><RecentMeet
                         meetingInfo={meeting}></RecentMeet></Link>)
             }
             

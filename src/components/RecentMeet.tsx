@@ -14,9 +14,9 @@ export const RecentMeet: React.FC<RecentMeetProps> = (detail) => {
     const day = String(date.getDate()).padStart(2, '0');
     const formattedDate = `${year}년 ${month}월 ${day}일`;
     return (<>
-        <Card sx={normalCard}>
+        <Card sx={{...normalCard, backgroundColor:"#fca992",borderRadius:"2rem", padding:"13px"}}>
             <Avatar src={detail.meetingInfo.memberMeetingDto[0].profileUrl}/>
-            <Typography variant={"body2"}>{`${detail.meetingInfo.memberMeetingDto[0].name} 와의 약속`}</Typography>
+            <Typography variant={"body2"} fontWeight={'bold'}>{`${detail.meetingInfo.memberMeetingDto[0].name} 과(와)의 약속`}</Typography>
             <Typography variant={"subtitle2"}>{formattedDate}</Typography>
         </Card> </>)
 }

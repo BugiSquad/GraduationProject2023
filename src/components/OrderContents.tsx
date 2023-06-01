@@ -14,6 +14,7 @@ import {createOrder} from "../api/Order";
 import {OrangeButton, WhiteButton} from "./styled/Buttons";
 import {Cart} from "../store/cart"
 import {useDispatch} from "react-redux";
+import { modalBox } from "./styled/Text"
 
 interface OrderProductsProps {
     items: CartItem[];
@@ -101,21 +102,7 @@ export const OrderContents: React.FC = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box  sx={{
-                        ...style,
-                        backgroundColor: '#FE724C',
-                        borderRadius: '1rem',
-                        padding: '1rem',
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        maxWidth: '80%',
-                        maxHeight: '80%',
-                        overflow: 'auto',
-                        borderColor: "#FE724C",
-                        boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)"
-                    }}>
+                <Box  sx={modalBox}>
                 <Typography
                         id="modal-modal-title"
                         variant="h5"
