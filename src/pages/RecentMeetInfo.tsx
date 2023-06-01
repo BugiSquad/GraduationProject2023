@@ -25,7 +25,7 @@ const Content: React.FC = () => {
 
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", paddingTop:"40px" }}>
+        <div style={{ display: "flex", flexDirection: "column", paddingTop:"20px" }}>
 
             <Card sx={{ minHeight: "600px", flexDirection: "column", marginBottom: "1rem", backgroundColor: "white", color: "black", padding: "24px",borderRadius: "1rem", boxShadow: "0px 5px 5px rgba(0, 0, 0, 0.3)" }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
