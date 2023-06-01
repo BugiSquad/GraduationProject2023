@@ -5,13 +5,14 @@ import {FaStar} from "react-icons/fa";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useNavigate} from 'react-router-dom';
 import {useAppDispatch} from "../store/hooks";
-import {remove} from "../store/cart";
+import {remove, update} from "../store/cart";
 import {CartItem as Item} from "../types/CartItem";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} from "../store/LocalStorage";
 import {menuCard} from "./styled/Cards";
 import {MdAddCircleOutline, MdRemoveCircleOutline} from "react-icons/md";
+import {useDispatch} from "react-redux";
 
 
 export const CartItemList: FC<CartItems> = (cart) => {
@@ -21,7 +22,7 @@ export const CartItemList: FC<CartItems> = (cart) => {
             return (
                 <SwipeableListItem
                     trailingActions={
-                        trailingActions(() => dispatch(remove(item.id)))
+                        trailingActions(() => dispatch(remove(item)))
                     } key={idx}>
                     <CartItemCart key={idx} food={item}/>
                 </SwipeableListItem>)
@@ -34,23 +35,26 @@ interface CartItems {
 }
 
 
-
 export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
-    
     const [count, setCount] = useState<number>(props.food.quantity);
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    
+
     const handleDecrement = () => {
-        if (count > 0) {
+        if (count > 1) {
             setCount(count - 1);
-            props.food.quantity--;
+            const food = {...props.food, quantity: props.food.quantity - 1};
+            dispatch(update(food))
+        } else {
+            dispatch(remove(props.food))
         }
+
     };
 
     const handleIncrement = () => {
         setCount(count + 1);
-        props.food.quantity++;
+        const food = {...props.food, quantity: props.food.quantity + 1};
+        dispatch(update(food))
     };
     return (
         <Button disableRipple style={menuCard} onClick={() => {
@@ -64,40 +68,41 @@ export const CartItemCart: FC<{ food: Item, key: number }> = (props) => {
                     <Typography sx={{paddingRight: '5px'}} color={'black'} fontSize={15}
                                 fontWeight={'bold'}>{props.food.price}원</Typography>
                     <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
-                        <FaStar style={{color: "orange"}}/> {props.food.totalRating} ({props.food.rateCounts})
+                        <FaStar
+                            style={{color: "orange"}}/> {props.food.totalRating === 0 || props.food.totalRating === undefined ? 5.0 : props.food.totalRating.toFixed(2)}점
                     </Typography>
                 </div>
             </div>
             <Box display="flex">
-                    <Button disableElevation
-                        style={{ minWidth: 'unset', borderRadius: '50%', color: '#FE724C' }}
+                <Button disableElevation
+                        style={{minWidth: 'unset', borderRadius: '50%', color: '#FE724C'}}
                         onClick={(event) => {
                             event.stopPropagation(); // 이벤트 전파 중지
                             handleDecrement(); // 내부 버튼 이벤트 핸들러 실행
                         }}
-                        startIcon={<MdRemoveCircleOutline />}
-                    />
-                    <Box
-                        component="span"
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontWeight: 'bold',
-                        }}
-                    >
-                        {count}
-                    </Box>
-                    <Button disableElevation
-                        style={{ minWidth: 'unset', borderRadius: '50%', color: '#FE724C' }}
+                        startIcon={<MdRemoveCircleOutline/>}
+                />
+                <Box
+                    component="span"
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontWeight: 'bold',
+                    }}
+                >
+                    {count}
+                </Box>
+                <Button disableElevation
+                        style={{minWidth: 'unset', borderRadius: '50%', color: '#FE724C'}}
                         onClick={(event) => {
                             event.stopPropagation(); // 이벤트 전파 중지
                             handleIncrement(); // 내부 버튼 이벤트 핸들러 실행
                         }}
-                        startIcon={<MdAddCircleOutline />}
-                    />
-                </Box>
-            
+                        startIcon={<MdAddCircleOutline/>}
+                />
+            </Box>
+
         </Button>
     )
 }
@@ -117,7 +122,7 @@ export const CartItemMenu: FC<{ food: Item, key: number }> = (props) => {
         console.log(localStorage.getItem("favorite"))
         setLiked(!liked);
     };
-    
+
     return (
         <Button disableRipple style={menuCard} onClick={() => {
             navigate(`/fooddetail/${props.food.id}`)
@@ -134,7 +139,7 @@ export const CartItemMenu: FC<{ food: Item, key: number }> = (props) => {
                     </Typography>
                 </div>
             </div>
-            
+
             <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
                 <Button
                     disableElevation disableRipple
