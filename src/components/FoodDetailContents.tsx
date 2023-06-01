@@ -1,6 +1,7 @@
-import {Box, Button, Link, Modal, Paper, Typography} from "@mui/material"
-import {FaStar} from "react-icons/fa"
-import React, {useState} from "react";
+import { Box, Button, Link, Modal, Paper, Snackbar, Typography } from "@mui/material"
+import { FaStar } from "react-icons/fa"
+import React, { useState } from "react";
+
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import {MdAddCircleOutline, MdRemoveCircleOutline} from 'react-icons/md';
 import {useAppDispatch} from "../store/hooks";
@@ -13,10 +14,12 @@ import {getFoodsWith, removeFoodFromStorage, saveFoodToStorage, StorageType} fro
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import axios from "axios";
-import {getMyToken} from "../api/Common";
-import {ReviewContent} from "./ReviewContent";
-import {OrangeButton, WhiteButton} from "./styled/Buttons";
-import {modalBox, normalTypography} from "./styled/Text";
+import { getMyToken } from "../api/Common";
+import { ReviewContent } from "./ReviewContent";
+import { OrangeButton, WhiteButton } from "./styled/Buttons";
+import { modalBox, normalTypography } from "./styled/Text";
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 function scrollToBottom() {
     window.scrollTo({
@@ -60,6 +63,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
     const handleIncrement = () => {
         setCount(count + 1);
     };
+
     const dispatch = useAppDispatch()
 
     const handleClick = () => {
@@ -70,6 +74,46 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
         }
         setLiked(!liked);
     };
+
+    const [open, setOpen] = React.useState(false);
+    const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+    const handleClickLike = () => {
+        if (liked == false)
+            setOpenSnackbar(true);
+    };
+
+    const handleCloseLike = (event: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
+
+    const clickSnackBarCancle = (event: React.SyntheticEvent | Event, reason?: string) => {
+        removeFoodFromStorage(StorageType.FAVORITE, food);
+        handleCloseLike(event, reason);
+        setLiked(false);
+    }
+
+
+    const action = (
+        <React.Fragment>
+            <Button disableElevation color="warning" size="small" onClick={clickSnackBarCancle}>
+                <Typography fontWeight={'bold'} fontSize="15px">되돌리기</Typography>
+            </Button>
+            <IconButton
+                disableFocusRipple
+                size="small"
+                aria-label="close"
+                onClick={handleCloseLike}
+            >
+                <CloseIcon fontSize="large" />
+            </IconButton>
+        </React.Fragment>
+    );
+    const snackMessage = `${food.name}을 찜했습니다!`;
+
     const rateArray = [
         { rate: 1, ratio: 0, counts: 0 },
         { rate: 2, ratio: 0, counts: 0 },
@@ -84,7 +128,6 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
     })
 
     axios.defaults.withCredentials = true
-    const [open, setOpen] = React.useState(false);
 
     const handleOpen = async () => {
         setOpen(true);
@@ -114,10 +157,18 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
                         onClick={(event) => {
                             event.stopPropagation();
                             handleClick();
+                            handleClickLike();
                         }}
                     >
                         {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                     </Button>
+                    <Snackbar
+                        open={openSnackbar}
+                        autoHideDuration={6000}
+                        onClose={handleCloseLike}
+                        message={snackMessage}
+                        action={action}
+                    />
                 </Box>
             </Paper>
             <div style={{ display: "flex", alignContent: "flex-start" }}>
@@ -172,24 +223,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
                 <Typography align={'left'} fontSize={'15px'} fontWeight={'bold'}
                     color={'#858992'}>{food.description}</Typography>
             </div>
-            {/*<div style={{display: "flex", alignContent: "flex-start", paddingTop: '10px'}}>*/}
-            {/*    <Typography fontSize={'18px'} fontWeight={'bold'}>포장여부</Typography>*/}
-            {/*</div>*/}
-            {/*<div style={{display: "flex", justifyContent: "space-between", paddingTop: '10px'}}>*/}
-            {/*    <div style={{alignContent: "flex-start", flexDirection: 'column', paddingTop: "13px"}}>*/}
-            {/*        <Typography fontSize={'15px'}>포장</Typography>*/}
-            {/*        <Typography sx={{paddingTop: "13px"}} fontSize={'15px'}>매장</Typography>*/}
-            {/*    </div>*/}
-            {/*    <RadioGroup*/}
-            {/*        aria-labelledby="demo-radio-buttons-group-label"*/}
-            {/*        name="radio-buttons-group"*/}
-            {/*    >*/}
-            {/*        <FormControlLabel value="togo" control={<Radio size='small'/>} label="-1000 ₩"*/}
-            {/*                          labelPlacement="start"/>*/}
-            {/*        <FormControlLabel value="here" control={<Radio size='small'/>} label="0 ₩"*/}
-            {/*                          labelPlacement="start"/>*/}
-            {/*    </RadioGroup>*/}
-            {/*</div>*/}
+
             <Typography sx={{ ...normalTypography, backgroundColor: "ButtonShadow" }}>총 가격 : {formattedPriceTotal}원</Typography>
             <Button disableElevation disableRipple sx={{
                 paddingLeft: '10px',
@@ -220,7 +254,7 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
             >
                 <Box
                     sx={
-                    modalBox}
+                        modalBox}
                 >
                     <Typography
                         id="modal-modal-title"

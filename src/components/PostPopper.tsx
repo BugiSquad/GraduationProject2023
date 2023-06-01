@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import {FC} from "react";
 import {Avatar, Button, Chip, Fade, Paper, Popper, PopperPlacementType, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {joinNoteRoom} from "../api/NoteRoom";
