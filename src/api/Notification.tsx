@@ -15,8 +15,6 @@ export function requestPermission() {
     if (!checkNotificationSupported()) return false;
     if (!checkPermission()) { // 브라우저에서 Notification API를 지원하는 경우
         return Notification.requestPermission().then((permission) => {
-            alert("good" + permission)
-            new Notification("알림이 도착했습니다!");
             return true;
         }).catch((error) => {
             console.error("error" + error)
