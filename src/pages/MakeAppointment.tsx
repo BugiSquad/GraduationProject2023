@@ -75,37 +75,32 @@ export const MakeAppointment: React.FC = () => {
 
     return (
         <SimpleTemplate param={{ pageHeaderName: "약속잡기", tab: BottomNavigationTab.COMMUNITY }}>
-            <div style={{ display: "flex", flexDirection: "row", marginLeft: "10px", marginTop: "20px" }}>
+            <div style={{ display: "flex", flexDirection: "row", marginLeft: "10px", marginTop: "10px" }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>언제 볼래요?</Typography>
             </div>
             <Card sx={{
                 padding: '10px 5',
                 marginTop: '10px',
+                marginLeft: "30px",
+                marginRight: "30px",
                 borderRadius: '15px',
-                border: '2px solid orange',
+                border: '2px solid #FE724C',
             }}>
-                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: "5px" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", marginTop: "10px" }}>
                     <Button disableElevation disableRipple
-                        style={{ color: 'black', fontWeight: 'bold', marginLeft: "60px" }}>
+                        style={{ color: 'black', fontWeight: 'bold' }}>
                         <AccessTimeIcon />날짜 설정
                     </Button>
-                    <Button disableElevation disableRipple
-                        style={{ color: 'black', fontWeight: 'bold', marginRight: "10px" }}><AccessAlarmIcon />시간
-                        설정</Button>
-                </div>
-                <div style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    marginBottom: "5px",
-                    justifyContent: "space-between"
-                }}>
                     <div style={{ margin: "10px", }}>
                         <DatePicker
                             locale={ko}
                             selected={selectedDate}
                             onChange={handleChange}
                             dateFormat="yyyy년 MM월 dd일" /></div>
-                    <div style={{ margin: "10px", maxInlineSize: "110px" }}>
+                    <Button disableElevation disableRipple
+                        style={{ color: 'black', fontWeight: 'bold', marginTop: "10px" }}><AccessAlarmIcon />시간
+                        설정</Button>
+                    <div style={{ margin: "10px", marginBottom: "20px" }}>
                         <DatePicker
                             selected={selectedTime}
                             onChange={(date) => setSelectedTime(date)}
@@ -118,14 +113,18 @@ export const MakeAppointment: React.FC = () => {
                     </div>
                 </div>
 
+
             </Card>
+            <div style={{ display: "flex", flexDirection: "row", marginLeft: "10px", marginTop: "20px" }}>
+                <Typography variant={"h6"} fontWeight={'bold'}>누구랑 볼래요?</Typography>
+            </div>
             <MemberCheckBoxGroup members={members} checked={checked} setChecked={setChecked} />
             <div style={{ display: "flex", flexDirection: "row", marginLeft: "10px", marginTop: "20px" }}>
                 <Typography variant={"h6"} fontWeight={'bold'}>어디서 볼래요?</Typography>
             </div>
             <Places setSelectedIdx={setSelectedIdx} setSelectedPlaceName={setSelectedPlace} selectedIdx={selectedIdx}
                 selectedPlaceName={selectedPlace} />
-            <div style={{ display: "flex", flexDirection: "row", paddingTop: "30px" }}>
+            <div style={{ display: "flex", flexDirection: "row", marginTop: "15px" }}>
                 <Button disableElevation disableRipple sx={{ ...OrangeButton }} onClick={onSubmit}>
                     약속잡기
                 </Button>
@@ -150,13 +149,13 @@ export const MakeAppointment: React.FC = () => {
                             color="white"
                         >
                             약속을 잡았어요! </Typography>
-                        <div style={{ display: "flex",  flexDirection:"column", marginLeft:"20px" }}>
-                            <Typography color="white" sx={{ ...normalTypography, padding:"0px", margin:"0" }}>약속 날짜 - {selectedDate?.toLocaleDateString()}</Typography>
-                            <Typography color="white" sx={{ ...normalTypography, padding:"0px", margin:"0" }}>약속 시간 - {selectedTime?.toLocaleTimeString()}</Typography>
-                            <Typography color="white" sx={{ ...normalTypography, padding:"0px", margin:"0" }}>약속 장소 - {selectedPlace}</Typography>
+                        <div style={{ display: "flex", flexDirection: "column", marginLeft: "20px" }}>
+                            <Typography color="white" sx={{ ...normalTypography, padding: "0px", margin: "0" }}>약속 날짜 - {selectedDate?.toLocaleDateString()}</Typography>
+                            <Typography color="white" sx={{ ...normalTypography, padding: "0px", margin: "0" }}>약속 시간 - {selectedTime?.toLocaleTimeString()}</Typography>
+                            <Typography color="white" sx={{ ...normalTypography, padding: "0px", margin: "0" }}>약속 장소 - {selectedPlace}</Typography>
                         </div>
 
-                        <div style={{display:"flex", justifyContent:"center",  marginTop:"20px" }}>
+                        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
                             <Button sx={{ ...WhiteButton, margin: "0px", maxWidth: "50%" }} onClick={handleClose}>닫기</Button>
                         </div>
                     </Box>
@@ -185,19 +184,23 @@ const MemberCheckBoxGroup: React.FC<MembersProps> = ({ members, checked, setChec
             const url = member.profileUrl == null ? "" : member.profileUrl
             const lastMessage = member.lastMessage == null ? " " : member.lastMessage
             return (
-                <Card sx={{ display: "flex", flexDirection: "row" }}>
-                    <Avatar sx={{ flex: 1 }} src={url} />
+                <Card sx={{
+                    display: "flex", flexDirection: "row", marginTop: "20px", borderRadius: "1rem", backgroundColor: "#ff8b6b", marginLeft: "30px",
+                    marginRight: "30px",
+                }}>
+                    <Avatar sx={{ margin: "10px" }} src={url} />
                     <div style={{
                         display: "flex",
+                        padding: "10px",
                         flexDirection: "column",
                         alignItems: "flex-start",
                         justifyContent: "flex-start",
                         flex: 3
                     }}>
-                        <Typography variant={"h6"}>{member.name}</Typography>
+                        <Typography variant={"h6"} fontWeight={'bold'}>{member.name}</Typography>
                         <Typography variant={"h6"}>{lastMessage}</Typography>
                     </div>
-                    <Checkbox sx={{ flex: 1 }} checked={!!checked[idx]} id={String(idx)} onChange={onChecked} />
+                    <Checkbox checked={!!checked[idx]} id={String(idx)} onChange={onChecked} />
                 </Card>
             )
         })}
