@@ -314,17 +314,18 @@ export const UserInfoFrame: React.FC<UserInfoFrameProps> = ({userprofilePic, isE
                             setInfo({...userInfo, phone: e.target.value})
                         }}/>
                     </FormGridChild>
-                    <FormGridChild item xs={5}>
-                        <Button type={"submit"} disableElevation disableRipple sx={OrangeButton}>
+                </Grid>
+                <div style={{display:"flex", flexDirection:"row"}}>
+                    <Button type={"submit"} disableElevation disableRipple sx={{...OrangeButton}}>
                             {isEdit ? "수정" : "가입"}
                         </Button>
-                    </FormGridChild>
-                    <FormGridChild item xs={5}>
-                        <Linkto to="/login"><Button disableElevation disableRipple sx={WhiteButton}>
+                  
+                        {isEdit ? <Linkto to="/mypage"><Button disableElevation disableRipple sx={{...WhiteButton}}>
                             취소
-                        </Button></Linkto>
-                    </FormGridChild>
-                </Grid>
+                        </Button></Linkto> :<Linkto to="/login"><Button disableElevation disableRipple sx={{...WhiteButton}}>
+                            취소
+                        </Button></Linkto>}
+                    </div>
             </Form>
         </>
     )
@@ -336,7 +337,7 @@ function SelectGender(props: { value: Gender, onChange: (event: React.ChangeEven
         <RadioGroup value={props.value} sx={{display: "flex", flexDirection: "row"}} onChange={props.onChange}>
             <FormControlLabel value={`${Gender.MALE}`} control={<Radio/>} label="남성"/>
             <FormControlLabel value={`${Gender.FEMALE}`} control={<Radio/>} label="여성"/>
-            <FormControlLabel value={`${Gender.NONE}`} control={<Radio/>} label="제 3의 성"/>
+            <FormControlLabel value={`${Gender.NONE}`} control={<Radio/>} label="기타"/>
         </RadioGroup>
     </>;
 }

@@ -41,7 +41,7 @@ export const Place: React.FC<Props> = ({
                         minWidth: 100,
                         minHeight: 40,
                         padding: "10px 5",
-                        marginTop: "10px",
+                        marginTop: "20px",
                         borderRadius: "25px",
                         backgroundColor: selectedIdx === idx ? place.bgColor : "#F4F4F4",
                     }}
@@ -54,8 +54,8 @@ export const Place: React.FC<Props> = ({
                 </Card>
             </Button>
         ))}
-        <Input placeholder={"직접입력"} value={textField} onChange={(event) => handleInput(event.target.value)}></Input>
-        {/*{selectedPlaceName && <div>Selected place: {selectedPlaceName}</div>}*/}
+        <Input sx={{paddingTop:"20px"}} placeholder={"직접입력"} value={textField} onChange={(event) => handleInput(event.target.value)}></Input>
+
     </>)
 }
 

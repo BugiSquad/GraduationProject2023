@@ -13,6 +13,11 @@ import noodleImage from '../images/foodCategory/noodles.png';
 import soupImage from '../images/foodCategory/soup.png';
 import bowlRiceImage from '../images/foodCategory/bowl-rice.png';
 import mixedRiceImage from '../images/foodCategory/mixed-rice.png';
+import curryImage from '../images/foodCategory/curry.png';
+import westernfoodImage from '../images/foodCategory/western_food.png';
+import friedriceImage from '../images/foodCategory/fried_rice.png';
+import chinafoodImage from '../images/foodCategory/china_food.png';
+
 import { MainCategory } from '../components/MainCategory';
 import Carousel from 'react-material-ui-carousel';
 import Banner1 from '../images/banner1.png';
@@ -161,16 +166,27 @@ const MainCategories: React.FC = () => {
                 justifyContent: 'space-between',
                 paddingLeft: "0.5rem",
                 paddingRight: "0.5rem",
-                paddingBottom: "0.5rem"
+                paddingBottom: "0.5rem",
+                overflowX: 'scroll',
+                scrollSnapType: 'x'
             }}>
-                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/noodle"}><MainCategory category={"면류"}
-                    img={noodleImage} /></Link>
-                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/stew"}><MainCategory category={"찌개류"}
-                    img={soupImage} /></Link>
-                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/korean_food"}> <MainCategory
-                    category={"한식"} img={mixedRiceImage} /></Link>
-                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black" }} to={"/menu/japan_food"}> <MainCategory
+
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/stew"}><MainCategory 
+                    category={"찌개류"} img={soupImage} /></Link>
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/noodle"}><MainCategory 
+                    category={"면류"} img={noodleImage} /></Link>
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/japan_food"}> <MainCategory
                     category={"일식"} img={bowlRiceImage} /></Link>
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/china_food"}> <MainCategory
+                    category={"중식"} img={chinafoodImage} /></Link>
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/western_food"}> <MainCategory
+                    category={"양식"} img={westernfoodImage} /></Link>
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/fried_rice"}> <MainCategory
+                    category={"오므라이스"} img={friedriceImage} /></Link>
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/bibimbap"}> <MainCategory
+                    category={"비빔밥"} img={mixedRiceImage} /></Link>
+                <Link onClick={resetScrollPosition} style={{ textDecoration: "none", color: "black", minWidth: "100px" }} to={"/menu/curry"}> <MainCategory
+                    category={"카레"} img={curryImage} /></Link>
             </div>
         </>
     )

@@ -20,7 +20,7 @@ export function toLocalizedName(category: string): string {
         case "WESTERN_FOOD":
             return "양식"
         case "FRIED_RICE":
-            return "볶음밥"
+            return "오므라이스"
         case "BIBIMBAP":
             return "비빔밥"
         case "CURRY":
