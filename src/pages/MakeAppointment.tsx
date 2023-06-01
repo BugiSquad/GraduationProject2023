@@ -13,6 +13,8 @@ import {PostRoomMember} from "../types/PostRoomMember";
 import {PromiseInfo} from "../types/PromiseInfo";
 import {makePromise} from "../api/Promise";
 import {BottomNavigationTab} from "../types/PageHeaderParam";
+import { OrangeButton, WhiteButton } from "../components/styled/Buttons";
+import { handleGoBack } from "./Detail/MyMessageDetail";
 
 export const MakeAppointment: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -113,33 +115,15 @@ export const MakeAppointment: React.FC = () => {
             </div>
             <Places setSelectedIdx={setSelectedIdx} setSelectedPlaceName={setSelectedPlace} selectedIdx={selectedIdx}
                     selectedPlaceName={selectedPlace}/>
-
-            <Button disableElevation disableRipple sx={{paddingLeft: "80px"}} onClick={onSubmit}>
-                <Typography sx={{
-                    minWidth: "70px",
-                    height: "40px",
-                    backgroundColor: '#FE724C',
-                    color: "white",
-                    fontWeight: "bold",
-                    fontSize: "14px",
-                    borderRadius: "1rem",
-                    padding: "0.5rem",
-                    boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
-                }}>약속잡기</Typography>
+<div style={{display:"flex", flexDirection:"row", paddingTop:"30px"}}>
+<Button disableElevation disableRipple sx={{...OrangeButton}} onClick={onSubmit}>
+                약속잡기
             </Button>
-            <Button disableElevation disableRipple sx={{paddingRight: "80px"}}>
-                <Typography sx={{
-                    minWidth: "70px",
-                    height: "40px",
-                    backgroundColor: 'white',
-                    color: "#FE724C",
-                    fontWeight: "bold",
-                    fontSize: "14px",
-                    borderRadius: "1rem",
-                    padding: "0.5rem",
-                    boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.3)"
-                }}>취소</Typography>
+            <Button disableElevation disableRipple sx={{...WhiteButton}} onClick={()=>{handleGoBack()}}>
+               취소
             </Button>
+</div>
+            
         </SimpleTemplate>)
 }
 
