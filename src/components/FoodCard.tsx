@@ -37,7 +37,8 @@ const FoodCard: React.FC<MenuItem & CartItem> = (props, key: number) => {
                     {props.description}
                 </Typography>
                 <Typography gutterBottom variant="body2" fontWeight={"bold"} color="text.secondary">
-                    <FaStar style={{color: "orange"}}/> {props.totalRating} ({props.rateCounts})
+                    <FaStar
+                        style={{color: "orange"}}/>{props.totalRating === 0 || props.totalRating === undefined ? 5.0 : props.totalRating.toFixed(2)}점
                 </Typography>
             </CardContent>
         </Card>
