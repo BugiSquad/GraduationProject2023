@@ -16,7 +16,7 @@ import axios from "axios";
 import { getMyToken } from "../api/Common";
 import { ReviewContent } from "./ReviewContent";
 import { OrangeButton, WhiteButton } from "./styled/Buttons";
-import { normalTypography } from "./styled/Text";
+import { modalBox, normalTypography } from "./styled/Text";
 
 function scrollToBottom() {
     window.scrollTo({
@@ -218,22 +218,8 @@ export const FoodDetailContents: React.FC<FoodDetailContentsProps> = ({ food, re
                 aria-describedby="modal-modal-description"
             >
                 <Box
-                    sx={{
-                        ...style,
-
-                        backgroundColor: '#ff8b6b',
-                        borderRadius: '1rem',
-                        padding: '1rem',
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        maxWidth: '80%',
-                        maxHeight: '80%',
-                        overflow: 'auto',
-                        borderColor: "#ff8b6b",
-                        boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)"
-                    }}
+                    sx={
+                    modalBox}
                 >
                     <Typography
                         id="modal-modal-title"

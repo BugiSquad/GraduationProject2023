@@ -13,6 +13,7 @@ import {ReviewDto} from "../types/CartItem";
 import {getApiURL, getHeader} from "../api/Common";
 import axios from "axios";
 import { count } from "console";
+import { modalBox } from "./styled/Text";
 
 const blue = {
     100: '#DAECFF',
@@ -193,22 +194,7 @@ export const ReviewTextArea: React.FC<{
                     aria-describedby="modal-modal-description"
                 >
                     <Box
-                        sx={{
-                            ...style,
-
-                            backgroundColor: '#ff8b6b',
-                            borderRadius: '1rem',
-                            padding: '1rem',
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            maxWidth: '80%',
-                            maxHeight: '80%',
-                            overflow: 'auto',
-                            borderColor: "#ff8b6b",
-                            boxShadow: "3px 5px 5px rgba(0, 0, 0, 0.3)"
-                        }}
+                        sx={modalBox}
                     >
                         <Typography
                             id="modal-modal-title"
