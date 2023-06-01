@@ -13,10 +13,7 @@ export const RequestPermission: React.FC = () => {
     async function subscribe() {
         alert("푸시서비스 구독1")
         const res = await requestPermission();
-        console.log(res)
-        if (res) {
-            const worker = await subscribePushService();
-        }
+        setTimeout(() => subscribePushService(), 1000)
     }
 
     console.log("RequestPermission");

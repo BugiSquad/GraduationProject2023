@@ -16,7 +16,7 @@ self.addEventListener('push', function (event) {
     const options = {
         title: `${"음식이 완성되었습니다."}`, // 푸시 메시지 내용
         body: `${obj.itemName}`, // 푸시 메시지 내용
-        // icon: 'icon.png', // 알림 아이콘 URL
+        icon: 'matnam.png', // 알림 아이콘 URL
         // 기타 옵션들...
     };
 
