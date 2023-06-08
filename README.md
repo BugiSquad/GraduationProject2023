@@ -6,11 +6,11 @@
 
 ### 포스터
 
-![포스터](https://github.com/BugiSquad/HaksikMatnam_Frontend/blob/master/src/images/Poster.jpg?raw=true)
+<img src="https://github.com/BugiSquad/HaksikMatnam_Frontend/blob/master/src/images/Poster.jpg?raw=true" width="75%" height="75%"/>
 
 ### 실행화면
 
-![메인화면](https://github.com/BugiSquad/HaksikMatnam_Frontend/blob/master/src/images/MainPage.png?raw=true)
+<img src="https://github.com/BugiSquad/HaksikMatnam_Frontend/blob/master/src/images/MainPage.png?raw=true" width="75%" height="75%"/>
 
 ## 사용가능한 명령어
 
