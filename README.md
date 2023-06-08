@@ -1,49 +1,60 @@
-# Getting Started with Create React App
+# 한성맛남 프론트엔드 프로젝트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2023년 한성대학교 컴퓨터공학부 캡스톤 4팀 부기스쿼드의 프론트엔드 프로젝트입니다.
 
-## Available Scripts
+## 디자인
+
+### 포스터
+
+![포스터](https://github.com/BugiSquad/HaksikMatnam_Frontend/blob/master/src/images/Poster.jpg?raw=true)
+
+### 실행화면
+
+![메인화면](https://github.com/BugiSquad/HaksikMatnam_Frontend/blob/master/src/images/MainPage.png?raw=true)
+
+## 사용가능한 명령어
 
 In the project directory, you can run:
 
+### `npm install --force`
+
+리액트 버전으로 인한 의존성 issue로 인해 일부 라이브러리는 강제로 설치해야 사용가능합니다
+따라서 --force 옵션을 주셔야 정상적으로 프로젝트를 설치할 수 있습니다.
+
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+프로젝트를 개발자 모드로 실행합니다.\
+[http://localhost:3000](http://localhost:3000) 를 열어 브라우저에서 확인하실 수 있습니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 사용한 라이브러리
 
-### `npm test`
+다음은 프로젝트에 사용한 패키지 목록입니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### UI패키지
 
-### `npm run build`
+[@emotion/react](https://www.npmjs.com/package/@emotion/react)  
+[@emotion/styled](https://www.npmjs.com/package/@emotion/styled)  
+[@mui/icons-material](https://www.npmjs.com/package/@mui/icons-material)  
+[@mui/joy](https://www.npmjs.com/package/@mui/joy)  
+[@mui/material](https://www.npmjs.com/package/@mui/material)  
+[@mui/styles](https://www.npmjs.com/package/@mui/styles)  
+[@mui/x-date-pickers](https://www.npmjs.com/package/@mui/x-date-pickers)  
+[react-bootstrap](https://www.npmjs.com/package/react-bootstrap)  
+[react-material-ui-carousel](https://www.npmjs.com/package/react-material-ui-carousel)  
+[react-swipeable-list](https://www.npmjs.com/package/react-swipeable-list)  
+[tss-react](https://www.npmjs.com/package/tss-react)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 상태관리 패키지
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[@reduxjs/toolkit](https://www.npmjs.com/package/@reduxjs/toolkit)  
+[react-redux](https://www.npmjs.com/package/react-redux)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 유틸리티 패키지
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-## About project structure
-https://blog.webdevsimplified.com/2022-07/react-folder-structure/ case 3 was used;
+[@fontsource/public-sans](https://www.npmjs.com/package/@fontsource/public-sans)  
+[axios](https://www.npmjs.com/package/axios)  
+[dayjs](https://www.npmjs.com/package/dayjs)  
+[localforage](https://www.npmjs.com/package/localforage)  
+[react-icons](https://www.npmjs.com/package/react-icons)  
+[web-push](https://www.npmjs.com/package/web-push)  
+[web-vitals](https://www.npmjs.com/package/web-vitals)
